@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@color/filter_bg_color">
 
-        <com.ajb.anjubao.intelligent.view.SyncHorizontalScrollView
+        <com.ajb.merchants.view.SyncHorizontalScrollView
             android:id="@+id/mHsv"
             android:layout_width="fill_parent"
             android:layout_height="40dip"
@@ -41,7 +41,7 @@
                     android:scaleType="matrix"
                     android:visibility="gone" />
             </RelativeLayout>
-        </com.ajb.anjubao.intelligent.view.SyncHorizontalScrollView>
+        </com.ajb.merchants.view.SyncHorizontalScrollView>
 
         <ImageView
             android:id="@+id/iv_nav_left"
@@ -130,7 +130,7 @@
                 android:textSize="30.0dip"
                 android:visibility="invisible" />
 
-            <com.ajb.anjubao.intelligent.view.SideBar
+            <com.ajb.merchants.view.SideBar
                 android:id="@+id/sidebar"
                 android:layout_width="30.0dip"
                 android:layout_height="match_parent"

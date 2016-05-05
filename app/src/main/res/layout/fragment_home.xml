@@ -11,7 +11,7 @@
         style="@style/layout_allFilled_style"
         android:orientation="vertical">
 
-        <com.ajb.anjubao.intelligent.view.ScaleFrameLayout
+        <com.ajb.merchants.view.ScaleFrameLayout
             android:id="@+id/packimage_iv"
             style="@style/layout_widthfilled_style"
             android:background="@color/whiteGray"
@@ -23,13 +23,13 @@
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </com.ajb.anjubao.intelligent.view.ScaleFrameLayout>
+        </com.ajb.merchants.view.ScaleFrameLayout>
 
         <RelativeLayout
             style="@style/layout_allFilled_style"
             android:layout_weight="1">
 
-            <com.ajb.anjubao.intelligent.view.SquareFrameLayout
+            <com.ajb.merchants.view.SquareFrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true">
@@ -139,7 +139,7 @@
                     </FrameLayout>
 
                 </RelativeLayout>
-            </com.ajb.anjubao.intelligent.view.SquareFrameLayout>
+            </com.ajb.merchants.view.SquareFrameLayout>
 
 
         </RelativeLayout>

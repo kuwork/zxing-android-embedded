@@ -14,7 +14,7 @@
             style="@style/layout_widthfilled_style"
             android:orientation="vertical">
 
-            <com.ajb.anjubao.intelligent.view.MyListView
+            <com.ajb.merchants.view.MyListView
                 android:id="@+id/setting_listview"
                 style="@style/layout_widthfilled_style"
                 android:layout_weight="1"

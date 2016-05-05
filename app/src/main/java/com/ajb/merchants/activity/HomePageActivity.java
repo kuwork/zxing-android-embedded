@@ -47,11 +47,7 @@ import com.ajb.merchants.adapter.MenuItemAdapter;
 import com.ajb.merchants.adapter.SortAdapter;
 import com.ajb.merchants.adapter.SortDistrictAdapter;
 import com.ajb.merchants.fragment.BaseFragment;
-import com.ajb.merchants.fragment.FindCarPayFragment;
 import com.ajb.merchants.fragment.HomeFragment;
-import com.ajb.merchants.fragment.MapSearchFragment;
-import com.ajb.merchants.fragment.MapViewFragment;
-import com.ajb.merchants.fragment.ParkListFragment;
 import com.ajb.merchants.interfaces.OnCameraListener;
 import com.ajb.merchants.interfaces.OnLocateListener;
 import com.ajb.merchants.interfaces.OnSearchListener;
@@ -144,9 +140,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     View menuPay;
     private PopupWindow share_popWindow;
     private Fragment mContent;
-    private MapViewFragment map;
     private FragmentManager manager;
-    private MapSearchFragment mapSearch;
     private boolean hasPayNews = true;
     private int currentPic;
     private List<AdInfo> dataList;
@@ -155,12 +149,10 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private View contentView;   //拍照popwindow的view
     private PopupWindow carLocationPop;
     private HomeFragment home;
-    private FindCarPayFragment findCar;
     private MyLocationData locData;//定位结果
     private LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
     private String homeName;
-    private ParkListFragment parkListFragment;
     private LinearLayout rg_nav_content;
     private ImageView iv_nav_indicator;
     private int indicatorWidth = 0;
@@ -179,11 +171,11 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             sharedFileUtils.putString(SharedFileUtils.HOME_NAME, homeName);
         }
         initMain();
-        if (initDirs()) {
-            initNavi();
-        }
+//        if (initDirs()) {
+//            initNavi();
+//        }
 //        initSharePopWindow();
-        createPhotoFileDir();
+//        createPhotoFileDir();
         getLocalSlideBanner();
         initLeftMenu();
         updateAccountInfo(getAccountInfo());
@@ -244,10 +236,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private void initMain() {
         if (homeName.equals(HomeFragment.class.getSimpleName())) {
             initHome();
-        } else if (homeName.equals(MapViewFragment.class.getSimpleName())) {
-            initMap();
-        } else if (homeName.equals(FindCarPayFragment.class.getSimpleName())) {
-            initFindCar();
         }
     }
 
@@ -309,9 +297,9 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                         boolean isDelete = CarLocation.deleteCarLocationBitmap(getBaseContext());
                         if (isDelete) {
                             showToast("删除成功");
-                            if (mContent instanceof MapViewFragment) {
-                                ((MapViewFragment) mContent).isCarLocationPicExist();
-                            }
+//                            if (mContent instanceof MapViewFragment) {
+//                                ((MapViewFragment) mContent).isCarLocationPicExist();
+//                            }
                         }
                         carLocationPop.dismiss();
                         break;
@@ -441,11 +429,11 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             /* 结束OutputStream */
             bos.close();
             showToast("照片保存成功");
-            if (mContent instanceof MapViewFragment) {
-                if (((MapViewFragment) mContent).isCarLocationPicExist()) {
-                    onShowPhoto();
-                }
-            }
+//            if (mContent instanceof MapViewFragment) {
+//                if (((MapViewFragment) mContent).isCarLocationPicExist()) {
+//                    onShowPhoto();
+//                }
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             showToast("照片保存失败");
@@ -568,128 +556,13 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-    public void initMap() {
-        if (map == null) {
-            map = MapViewFragment.newInstance();
-        }
-        if (locData != null) {
-            map.setLocData(locData);
-        }
-        switchContent(mContent, map);
-        initTitle(getString(R.string.nav_menu_title_1006));
-        initHeaderDivider(true);
-        if (hasPayNews) {
-            initMenuClick(R.drawable.actionbar_scan, R.string.action_shoot, HomePageActivity.this,
-                    R.drawable.actionbar_pay_news, R.string.action_pay, HomePageActivity.this);
-        } else {
-            initMenuClick(R.drawable.actionbar_scan, R.string.action_shoot, HomePageActivity.this,
-                    R.drawable.actionbar_pay_news, R.string.action_pay, HomePageActivity.this);
-        }
-        if (homeName.equals(MapViewFragment.class.getSimpleName())) {
-            initDrawer();
-            initBackClick(R.drawable.actionbar_menu, HomePageActivity.this);
-        } else {
-            initBackClick(R.drawable.actionbar_goback, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    initMain();
-                }
-            });
-        }
-
-
-    }
-
-    public void initMapSearch() {
-        if (mapSearch == null) {
-            mapSearch = MapSearchFragment.newInstance();
-        }
-        switchContent(mContent, mapSearch);
-        initTitle("搜索");
-        initHeaderDivider(true);
-        initBackClick(R.drawable.actionbar_close, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initMap();
-            }
-        });
-        initMenuClick(R.id.NO_ICON, "", null, R.id.NO_ICON, "", null);
-    }
-
     /**
      * 预约分享
      */
     public void goParkingSearch() {
-        if (locData != null) {
-            initParkingList(locData);
-        } else {
-            showToast("定位中,请稍后..");
-            getRunnableMap().put(Constant.REQ_CENTER_LOCATION, new Runnable() {
-                @Override
-                public void run() {
-                    getRunnableMap().remove(Constant.REQ_CENTER_LOCATION);
-                    initParkingList(locData);
-                }
-            });
-        }
+
     }
 
-
-    public void initParkingList(MyLocationData locData) {
-        if (parkListFragment == null) {
-            parkListFragment = ParkListFragment.newInstance();
-            Bundle bundle = new Bundle();
-            bundle.putDouble(Constant.KEY_LATITUDE, locData.latitude);
-            bundle.putDouble(Constant.KEY_LONGITUDE, locData.longitude);
-            parkListFragment.setArguments(bundle);
-        }
-        String from = mContent.getClass().getName();
-        switchContent(mContent, parkListFragment);
-        initTitle("附近车场");
-        initHeaderDivider(true);
-        if (MapViewFragment.class.getName().equals(from)) {
-            initBackClick(R.drawable.actionbar_close, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    initMap();
-                }
-            });
-        } else {
-            initBackClick(R.drawable.actionbar_goback, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    initMain();
-                }
-            });
-        }
-        initMenuClick(R.id.NO_ICON, null, null, R.drawable.actionbar_filter, getString(R.string.action_filter), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initPopupWindows(findViewById(R.id.toolbar));
-            }
-        });
-    }
-
-    public void initFindCar() {
-        if (findCar == null) {
-            findCar = FindCarPayFragment.newInstance();
-        }
-        switchContent(mContent, findCar);
-        initTitle("找车缴费");
-        initMenuClick(R.drawable.actionbar_scan, getString(R.string.action_shoot), this,
-                R.drawable.actionbar_map, getString(R.string.action_map), this);
-        if (homeName.equals(FindCarPayFragment.class.getSimpleName())) {
-            initDrawer();
-            initBackClick(R.drawable.actionbar_menu, this);
-        } else {
-            initBackClick(R.drawable.actionbar_goback, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    initMain();
-                }
-            });
-        }
-    }
 
     private void initDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -748,27 +621,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                                     dimissOkCancelAlertDialog();
                                 }
                             });
-                } else if (mContent instanceof FindCarPayFragment) {
-                    initMain();
-                    return true;
-                } else if (mContent instanceof MapViewFragment) {
-                    initMain();
-                    return true;
-                } else if (mContent instanceof MapSearchFragment) {
-                    initMap();
-                    return true;
-                } else if (mContent instanceof ParkListFragment) {
-                    String from = ((ParkListFragment) mContent).getFrom();
-                    if (!TextUtils.isEmpty(from)) {
-                        if (MapViewFragment.class.getName().equals(from)) {
-                            initMap();
-                            return true;
-                        } else if (HomeFragment.class.getName().equals(from)) {
-                            initMain();
-                            return true;
-                        }
-                    }
-                    return false;
                 } else {
 
                 }
@@ -800,13 +652,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.headerMenu3:
-                if (mContent instanceof FindCarPayFragment) {
-                    initMap();
-                } else if (mContent instanceof ParkListFragment) {
-                    showToast("显示动态筛选菜单");
-                } else {
-                    initFindCar();
-                }
+                showToast("显示动态筛选菜单");
                 break;
         }
     }
@@ -835,13 +681,13 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onListClick(MyLocationData locData) {
-        initParkingList(locData);
+
     }
 
     @Override
     public void onSearchBarClick() {
         if (toolbar != null) {
-            initMapSearch();
+//            initMapSearch();
         }
     }
 
@@ -850,10 +696,10 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         if (result == null) {
             return;
         }
-        initMap();
-        if (mContent instanceof MapViewFragment) {
-            ((MapViewFragment) mContent).showSearchResult(result);
-        }
+//        initMap();
+//        if (mContent instanceof MapViewFragment) {
+//            ((MapViewFragment) mContent).showSearchResult(result);
+//        }
     }
 
     @OnClick(R.id.account_header)
@@ -1208,15 +1054,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 //            transaction.setCustomAnimations(X
 //                    android.R.anim.fade_in, R.anim.fade_out);
             if (from != null) {
-                if (from instanceof ParkListFragment) {
-                    transaction.remove(from);
-                } else {
-                    transaction.hide(from);
-                }
-            }
-            //处理特殊的页面
-            if (to instanceof ParkListFragment) {
-                ((ParkListFragment) to).setFrom(from.getClass().getName());
+                transaction.hide(from);
             }
             if (!to.isAdded()) {    // 先判断是否被add过
                 transaction.add(R.id.contentLayout, to).commit(); // 隐藏当前的fragment，add下一个到Activity中

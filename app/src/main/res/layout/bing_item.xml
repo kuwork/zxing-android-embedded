@@ -73,7 +73,7 @@
 
     </LinearLayout>
 
-    <com.ajb.anjubao.intelligent.view.SlideSwitch
+    <com.ajb.merchants.view.SlideSwitch
         android:id="@+id/carnum_state_switch"
         android:layout_width="50dp"
         android:layout_height="25dp"
