@@ -1,0 +1,14 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425465782 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/activity_myburse">
+        <!-- TextView Examples:
+        <burse_balance text="@string/string_resource" />
+        <burse_balance text="Text literal" textSize="14sp" /> -->
+        <burse_balance />
+    </_content>
+</screen>

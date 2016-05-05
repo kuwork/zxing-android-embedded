@@ -1,0 +1,18 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425466013 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/pay_no_need">
+        <!-- ImageView Examples:
+        <tip_img src="@drawable/image_resource" />
+        <tip_img src="relative_path/image.jpg" /> -->
+        <tip_img />
+        <!-- TextView Examples:
+        <tv_no_need_pay text="@string/string_resource" />
+        <tv_no_need_pay text="Text literal" textSize="14sp" /> -->
+        <tv_no_need_pay />
+    </_content>
+</screen>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/nav_menu_01"
+            android:icon="@mipmap/ic_nav_car"
+            android:title="@string/nav_menu_title_1001" />
+        <item
+            android:id="@+id/nav_menu_02"
+            android:icon="@mipmap/ic_nav_share"
+            android:title="@string/nav_menu_title_1002" />
+        <item
+            android:id="@+id/nav_menu_03"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/nav_menu_title_2001" />
+        <item
+            android:id="@+id/nav_menu_04"
+            android:icon="@mipmap/share_reward"
+            android:title="@string/nav_menu_title_3001" />
+        <item
+            android:id="@+id/nav_menu_05"
+            android:icon="@mipmap/share_reward"
+            android:title="@string/nav_menu_title_2002" />
+        <item
+            android:id="@+id/nav_menu_06"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="@string/nav_menu_title_9001" />
+        <item
+            android:id="@+id/nav_menu_07"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/nav_menu_title_9002" />
+    </group>
+
+</menu>

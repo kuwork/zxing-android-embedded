@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/parking_item_line_number_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/line_number"
+            style="@style/item_tv_forth_style"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:ems="3"
+            android:gravity="center"
+            android:singleLine="false"
+            android:text="10000" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/layout_Margin_5"
+            android:layout_marginRight="@dimen/layout_Margin_5"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/line_2_style"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/list_linenumber_bg" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/parking_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/layout_Margin_10"
+            android:layout_marginRight="@dimen/layout_Margin_5"
+            android:layout_marginTop="@dimen/layout_Margin_10"
+            android:layout_toLeftOf="@+id/check_box"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/parkName_tv"
+                    style="@style/item_tv_style"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:text="广东省安居宝"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_Margin_5"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/item_tv_third_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="车牌：" />
+
+                    <TextView
+                        android:id="@+id/carno_tv"
+                        style="@style/item_tv_third_style"
+                        android:layout_marginLeft="@dimen/layout_Margin_5"
+                        android:text="粤A12345"
+                        android:textColor="#ff8c00" />
+
+                    <TextView
+                        style="@style/item_tv_third_style"
+                        android:layout_alignParentRight="true"
+                        android:text="(" />
+
+                    <TextView
+                        android:id="@+id/style_tv"
+                        style="@style/item_tv_third_style"
+                        android:layout_alignParentRight="true"
+                        android:text="月租卡"
+                        android:textColor="#ff8c00" />
+
+                    <TextView
+                        style="@style/item_tv_third_style"
+                        android:layout_alignParentRight="true"
+                        android:text=")" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/parking_item_null_parking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/item_tv_third_style"
+                        android:text="进场：" />
+
+                    <TextView
+                        android:id="@+id/intime_tv"
+                        style="@style/item_tv_third_style"
+                        android:layout_marginLeft="@dimen/layout_Margin_5"
+                        android:text="2015-06-08 12:45:53"
+                        android:textColor="#ff8c00" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/parking_item_null_parking2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/parking_item_unit"
+                        style="@style/item_tv_third_style"
+                        android:text="离场：" />
+
+                    <TextView
+                        android:id="@+id/outtime_tv"
+                        style="@style/item_tv_third_style"
+                        android:layout_marginLeft="@dimen/layout_Margin_5"
+                        android:text="2015-06-08 12:45:53"
+                        android:textColor="#ff8c00" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/parking_item_null_parking3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/item_tv_third_style"
+                        android:text="价格：" />
+
+                    <TextView
+                        android:id="@+id/money_tv"
+                        style="@style/item_tv_third_style"
+                        android:layout_marginLeft="@dimen/layout_Margin_5"
+                        android:text=""
+                        android:textColor="#ff8c00" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/check_box"
+            style="@style/item_img_style"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/layout_Margin_10"
+            android:background="@drawable/delete_checkbox"
+            android:button="@null"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/setting"
+            style="@style/item_tv_style"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/layout_Margin_10"
+            android:background="@drawable/btn_hollow_selector_order"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="设置"
+            android:textColor="@drawable/btn_hollow_textcolor_selector_order"
+            android:textSize="@dimen/text_size_14"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/line"
+            style="@style/line_style"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+</LinearLayout>

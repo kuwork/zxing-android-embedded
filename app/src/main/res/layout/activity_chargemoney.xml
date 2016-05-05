@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/login_bar"
+        layout="@layout/header_btn_layout" />
+
+    <TextView
+        style="@style/line_style"
+        android:layout_marginTop="@dimen/layout_Margin_10" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_updatepasswd"
+        style="@style/item_layout"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical">
+
+        <ImageView
+            style="@style/item_img_style"
+            android:src="@mipmap/ic_account" />
+
+        <TextView
+            style="@style/item_tv_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="帐号："
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/ed_phone"
+            style="@style/item_tv_style"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:hint="@string/tip_charge_account"
+            android:inputType="number"
+            android:text="" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/line_style"
+        android:layout_marginBottom="@dimen/layout_Margin_10" />
+
+    <TextView style="@style/line_style" />
+
+    <LinearLayout
+        android:id="@+id/layout_updatepasswd2"
+        style="@style/item_layout"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/layout_Margin_10">
+
+        <TextView
+            style="@style/item_tv_style"
+            android:layout_height="@dimen/layout_Margin_20"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="@dimen/layout_Margin_10"
+            android:text="请选择金额" />
+
+        <com.ajb.anjubao.intelligent.view.MyGridView
+            android:id="@+id/chargeGridView"
+            style="@style/grid_style"
+            android:gravity="center"
+            android:numColumns="4" />
+
+    </LinearLayout>
+
+    <TextView style="@style/line_style" />
+
+
+    <LinearLayout
+        style="@style/item_layout"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/layout_Margin_5"
+        android:paddingLeft="@dimen/layout_Margin_10"
+        android:paddingRight="@dimen/layout_Margin_10"
+        android:paddingTop="@dimen/layout_Margin_5"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/ed_otmoney"
+            style="@style/item_ed_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="其他金额"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            style="@style/item_tv_style"
+            android:layout_marginLeft="@dimen/layout_Margin_10"
+            android:text="元" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/line_style"
+        android:layout_marginTop="@dimen/layout_Margin_10" />
+
+    <Button
+        android:id="@+id/charge_btn"
+        style="@style/btn_style"
+        android:text="立即充值" />
+
+</LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scaleImageViewAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".activity.PaySuccessActivity">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <ScrollView
+        style="@style/layout_allFilled_style"
+        android:layout_marginLeft="@dimen/layout_Margin_5"
+        android:layout_marginRight="@dimen/layout_Margin_5"
+        android:layout_marginTop="@dimen/layout_Margin_5"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white_radio">
+
+        <LinearLayout
+            style="@style/layout_allFilled_style"
+            android:layout_marginLeft="@dimen/layout_Margin_25"
+            android:layout_marginRight="@dimen/layout_Margin_25"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_Margin_15">
+
+            <include
+                android:id="@+id/in_pay_success"
+                layout="@layout/pay_success" />
+
+            <com.ajb.anjubao.intelligent.view.MyListView
+                android:id="@+id/pay_detail_lv"
+                style="@style/layout_allFilled_style"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                tools:showIn="@layout/pay_listview_detail_item" />
+
+            <View
+                style="@style/line_style"
+                android:layout_marginTop="11dp" />
+
+            <TextView
+                android:id="@+id/time_money_tip"
+                style="@style/item_tv_third_style"
+                android:layout_marginTop="@dimen/layout_Margin_10" />
+
+            <TextView
+                android:id="@+id/feedback_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/layout_Margin_25"
+                android:background="@drawable/btn_stroke_selector"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:paddingLeft="@dimen/layout_Margin_10"
+                android:paddingRight="@dimen/layout_Margin_10"
+                android:text="对此账单有疑问？"
+                android:textColor="@color/item_tv_color_02"
+                android:textSize="@dimen/text_size_14" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/share_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/layout_Margin_5"
+        android:background="@drawable/btn_oval_selector"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/item_img_style"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="0dp"
+            android:src="@mipmap/ic_nav_share" />
+
+        <TextView
+            style="@style/item_tv_forth_style"
+            android:layout_marginTop="3dp"
+            android:text="优惠券"
+            android:textColor="@color/pay_share_red" />
+    </LinearLayout>
+
+    <com.ajb.anjubao.intelligent.view.ScaleFrameLayout
+        android:id="@+id/banner_layout"
+        style="@style/layout_widthfilled_style"
+        android:visibility="gone"
+        scaleImageViewAttr:expectH="260"
+        scaleImageViewAttr:expectW="720">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pop_banner_viewpager"
+            style="@style/layout_widthfilled_style" />
+
+        <LinearLayout
+            android:id="@+id/popup_banner_circle_groups"
+            style="@style/layout_widthfilled_style"
+            android:layout_alignBottom="@id/pop_banner_viewpager"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/layout_Margin_5" />
+
+        <LinearLayout
+            android:id="@+id/close_layout"
+            style="@style/mapview_float_btn_style"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right|top"
+            android:padding="0dp">
+
+            <ImageView
+                android:id="@+id/img_camera"
+                style="@style/layout_allWraped_style"
+                android:layout_margin="3dp"
+                android:src="@drawable/actionbar_close" />
+        </LinearLayout>
+    </com.ajb.anjubao.intelligent.view.ScaleFrameLayout>
+
+</LinearLayout>

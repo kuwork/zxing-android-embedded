@@ -1,0 +1,19 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425465791 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/activity_pay">
+        <!-- ImageView Examples:
+        <nav_pic src="@drawable/image_resource" />
+        <nav_pic src="relative_path/image.jpg" /> -->
+        <nav_pic />
+        <!-- TextView Examples:
+        <time_money_tip text="@string/string_resource" />
+        <time_money_tip text="Text literal" textSize="14sp" /> -->
+        <time_money_tip />
+        <feedback_btn />
+    </_content>
+</screen>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
+    style="@style/layout_allFilled_style"
+    android:background="@color/bg_color_black"
+    android:fitsSystemWindows="true">
+
+
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        android:id="@+id/car_location_pic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside" />
+
+
+    <LinearLayout
+        android:id="@+id/close_btn"
+        android:visibility="gone"
+        style="@style/mapview_float_btn_style"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            style="@style/layout_allWraped_style"
+            android:layout_margin="3dp"
+            android:src="@drawable/actionbar_close" />
+    </LinearLayout>
+</RelativeLayout>

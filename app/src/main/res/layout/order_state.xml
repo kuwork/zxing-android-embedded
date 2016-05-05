@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="20dip"
+    android:paddingTop="20dip">
+
+    <LinearLayout
+        style="@style/layout_allWraped_style"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_order"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/order_icon" />
+
+        <TextView
+            android:id="@+id/tv_order"
+            style="@style/layout_allWraped_style"
+            android:layout_centerHorizontal="true"
+            android:text="预定成功"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_order_time"
+            style="@style/item_tv_forth_style"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:maxEms="5"
+            android:minLines="2"
+            android:singleLine="false" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="40px"
+        android:layout_height="40px"
+        android:background="@mipmap/arrow" />
+
+    <LinearLayout
+        android:id="@+id/middlelayout"
+        style="@style/layout_allWraped_style"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_arrive"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/arrive_park" />
+
+        <TextView
+            android:id="@+id/tv_order2"
+            style="@style/layout_allWraped_style"
+            android:layout_centerHorizontal="true"
+            android:text="到达车场"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_arrive_time"
+            style="@style/item_tv_forth_style"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:maxEms="5"
+            android:minLines="2"
+            android:singleLine="false" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_arrow2"
+        android:layout_width="40px"
+        android:layout_height="40px"
+        android:background="@mipmap/arrow" />
+
+    <LinearLayout
+        style="@style/layout_allWraped_style"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_leave"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/leave_park" />
+
+        <TextView
+            android:id="@+id/tv_order3"
+            style="@style/layout_allWraped_style"
+            android:layout_centerHorizontal="true"
+            android:text="离开车场"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_leave_time"
+            style="@style/item_tv_forth_style"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:maxEms="5"
+            android:minLines="2"
+            android:singleLine="false" />
+    </LinearLayout>
+
+</LinearLayout>

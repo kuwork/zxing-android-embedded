@@ -1,0 +1,22 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425465726 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/activity_appeal">
+        <!-- ImageView Examples:
+        <imageView1 src="@drawable/image_resource" />
+        <imageView1 src="relative_path/image.jpg" /> -->
+        <imageView1 />
+        <!-- TextView Examples:
+        <activity_appeal_frame_num text="@string/string_resource" />
+        <activity_appeal_frame_num text="Text literal" textSize="14sp" /> -->
+        <activity_appeal_frame_num />
+        <activity_appeal_frame_num_img />
+        <imageView2 />
+        <activity_appeal_car_num />
+        <activity_appeal_car_num_img />
+    </_content>
+</screen>

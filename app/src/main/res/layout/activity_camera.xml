@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true">
+
+        <SurfaceView
+            android:id="@+id/preview_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+
+        <!--     <ImageView -->
+        <com.zxing.view.ViewfinderView
+            android:id="@+id/viewfinder_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_scan_tip"
+                style="@style/item_tv_style"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="10dp"
+                android:text="@string/tip_capture"
+                android:textColor="@color/white" />
+
+            <CheckBox
+                android:id="@+id/btnFlash"
+                style="@style/flash_btn_style"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:maxEms="4" />
+
+            <TextView
+                android:id="@+id/tv_flash"
+                style="@style/item_tv_style"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="10dp"
+                android:text="开灯"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/header_btn_layout" />
+
+    <View
+        android:id="@+id/empty_view"
+        style="@style/layout_allFilled_style"
+        android:layout_below="@+id/title_bar" />
+</RelativeLayout>

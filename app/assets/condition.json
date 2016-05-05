@@ -1,0 +1,102 @@
+[
+  {
+    "conditionCode": "parkingLoc",
+    "conditionName": "区域",
+    "conditionList": null,
+    "groupBy": "cityCode",
+    "orderBy": "cityName",
+    "conditionListUrl": "city.json"
+  },
+  {
+    "conditionCode": "parkingPrice",
+    "conditionName": "车位价格",
+    "orderBy": "dataCode",
+    "groupBy": null,
+    "conditionListUrl": null,
+    "conditionList": [
+      {
+        "dataCode": "00",
+        "dataValue": "",
+        "dataName": "不限"
+      },
+      {
+        "dataCode": "01",
+        "dataValue": "asc",
+        "dataName": "价格递增"
+      },
+      {
+        "dataCode": "02",
+        "dataValue": "desc",
+        "dataName": "价格递减"
+      }
+    ]
+  },
+  {
+    "conditionCode": "parkingNum",
+    "conditionName": "车位数量",
+    "conditionList": [
+      {
+        "dataCode": "00",
+        "dataValue": "",
+        "dataName": "不限"
+      },
+      {
+        "dataCode": "01",
+        "dataValue": "asc",
+        "dataName": "数量递增"
+      },
+      {
+        "dataCode": "02",
+        "dataValue": "desc",
+        "dataName": "数量递减"
+      }
+    ]
+  },
+  {
+    "conditionCode": "parkingDis",
+    "conditionName": "车场距离",
+    "conditionList": [
+      {
+        "dataCode": "00",
+        "dataValue": "",
+        "dataName": "不限"
+      },
+      {
+        "dataCode": "01",
+        "dataValue": "asc",
+        "dataName": "距离由远到近"
+      },
+      {
+        "dataCode": "02",
+        "dataValue": "desc",
+        "dataName": "距离由近到远"
+      }
+    ]
+  },
+  {
+    "conditionCode": "parkingDis",
+    "conditionName": "车场类型",
+    "conditionList": [
+      {
+        "dataCode": "00",
+        "dataValue": "",
+        "dataName": "不限"
+      },
+      {
+        "dataCode": "01",
+        "dataValue": "member",
+        "dataName": "会员"
+      },
+      {
+        "dataCode": "02",
+        "dataValue": "order",
+        "dataName": "可预约"
+      },
+      {
+        "dataCode": "03",
+        "dataValue": "coupon",
+        "dataName": "活动优惠"
+      }
+    ]
+  }
+]

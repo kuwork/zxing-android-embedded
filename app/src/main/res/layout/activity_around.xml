@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scaleImageViewAttr="http://schemas.android.com/apk/res-auto"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <ScrollView
+        android:id="@+id/around_scrollview"
+        style="@style/layout_allFilled_style">
+
+        <LinearLayout
+            style="@style/layout_widthfilled_style"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/layout_img_parent"
+                style="@style/layout_widthfilled_style">
+
+                <com.ajb.anjubao.intelligent.view.ScaleImageView
+                    android:id="@+id/packimage_iv"
+                    style="@style/layout_widthfilled_style"
+                    android:scaleType="centerCrop"
+                    scaleImageViewAttr:expectH="9"
+                    scaleImageViewAttr:expectW="16" />
+
+                <TextView
+                    android:id="@+id/packname_tv"
+                    style="@style/item_tv_style"
+                    android:layout_width="match_parent"
+                    android:layout_alignBottom="@id/packimage_iv"
+                    android:background="@drawable/around_half_transparent"
+                    android:padding="@dimen/layout_Margin_10"
+                    android:text="安居宝停车场"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/detailLayout"
+                style="@style/item_layout"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/layout_Margin_5"
+                android:paddingRight="@dimen/layout_Margin_5">
+
+                <LinearLayout
+                    style="@style/layout_widthfilled_style"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/item_img_style"
+                        android:layout_margin="0dp"
+                        android:src="@mipmap/address" />
+
+                    <TextView
+                        android:id="@+id/address_tv"
+                        style="@style/item_tv_third_style"
+                        android:layout_gravity="center"
+                        android:maxLines="2"
+                        android:singleLine="false"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/navigation_btn"
+                    style="@style/layout_allWraped_style"
+                    android:layout_gravity="center_vertical"
+                    android:clickable="true"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        style="@style/item_img_style"
+                        android:layout_margin="0dp"
+                        android:src="@mipmap/map" />
+
+                    <TextView
+                        style="@style/item_tv_third_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:singleLine="false"
+                        android:text="地图导航"
+                        android:textColor="#26aaf4" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView style="@style/line_style" />
+
+            <LinearLayout
+                style="@style/item_layout"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/layout_Margin_10">
+
+                <LinearLayout
+                    android:id="@+id/callpohne_ly"
+                    style="@style/item_layout"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        style="@style/item_img_style"
+                        android:layout_margin="0dp"
+                        android:src="@mipmap/phone" />
+
+                    <TextView
+                        android:id="@+id/phoneno_tv"
+                        style="@style/item_tv_third_style"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:textColor="#15AEA9" />
+                </LinearLayout>
+
+                <View
+                    style="@style/line_2_style"
+                    android:layout_gravity="center" />
+
+                <LinearLayout
+                    android:id="@+id/charge_ll"
+                    style="@style/layout_widthfilled_style"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/item_img_style"
+                        android:layout_margin="0dp"
+                        android:src="@mipmap/money" />
+
+                    <TextView
+                        android:id="@+id/money_tv"
+                        style="@style/item_tv_third_style"
+                        android:layout_gravity="right|center_vertical"
+                        android:text="收费规则"
+                        android:textColor="@color/btn_color_normal" />
+
+                    <TextView
+                        android:id="@+id/activity_choose_parking_number"
+                        style="@style/item_tv_style"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:textColor="#ff8d06" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView style="@style/line_style" />
+
+            <LinearLayout
+                android:id="@+id/around_listview"
+                style="@style/layout_allFilled_style"
+                android:divider="@null"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

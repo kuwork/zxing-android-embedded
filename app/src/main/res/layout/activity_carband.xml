@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/showcard"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <LinearLayout
+        style="@style/layout_widthfilled_style"
+        android:layout_marginBottom="@dimen/layout_Margin_20"
+        android:layout_marginTop="@dimen/layout_Margin_15"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/carno_sample" />
+
+        <TextView
+            style="@style/item_tv_third_style"
+            android:layout_marginTop="@dimen/layout_Margin_5"
+            android:gravity="center_horizontal"
+            android:text="车牌号码参考案列如上"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        style="@style/item_layout"
+        android:layout_marginLeft="@dimen/layout_Margin_10"
+        android:layout_marginRight="@dimen/layout_Margin_10"
+        android:background="@drawable/bg_case"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/btn_code"
+            style="@style/btn_style"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:background="@null"
+            android:gravity="center"
+            android:minEms="4"
+            android:text="粤"
+            android:textColor="@color/btn_color_normal" />
+
+        <TextView
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#999999" />
+
+        <EditText
+            android:id="@+id/ed_code"
+            style="@style/item_tv_style"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="left"
+            android:hint="请输入真实有效车牌号码"
+            android:inputType="textCapSentences"
+            android:maxLength="6" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_sure"
+        style="@style/btn_style"
+        android:text="确定" />
+
+</LinearLayout>

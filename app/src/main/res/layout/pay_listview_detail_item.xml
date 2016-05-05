@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp">
+
+    <TextView
+        android:id="@+id/text_tv"
+        style="@style/item_tv_third_style"
+        android:minWidth="72dp"
+        android:text="车辆入场时间"
+        android:textColor="@color/btn_color_disable" />
+
+    <TextView
+        android:id="@+id/text_value"
+        style="@style/item_tv_third_style"
+        android:layout_marginLeft="@dimen/layout_Margin_15"
+        android:text="abc"
+        android:textColor="@color/item_tv_color_03" />
+
+</LinearLayout>

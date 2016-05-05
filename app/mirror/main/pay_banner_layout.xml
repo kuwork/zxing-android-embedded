@@ -1,0 +1,22 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425466004 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/pay_banner_layout">
+        <pop_banner_viewpager>
+            <!-- Add pages to your ViewPager here like so:
+            <_page title="page title" icon="@drawable/my_icon"/>
+            <_page layout="@layout/my_page_layout">
+                <my_image_view src="@drawable/my_image"/>
+            </_page>
+            -->
+        </pop_banner_viewpager>
+        <!-- ImageView Examples:
+        <img_camera src="@drawable/image_resource" />
+        <img_camera src="relative_path/image.jpg" /> -->
+        <img_camera />
+    </_content>
+</screen>

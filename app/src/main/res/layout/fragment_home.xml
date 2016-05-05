@@ -1,0 +1,157 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:scaleImageViewAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ajb.anjubao.intelligent.fragment.HomeFragment"
+    tools:ignore="MissingPrefix">
+
+    <LinearLayout
+        style="@style/layout_allFilled_style"
+        android:orientation="vertical">
+
+        <com.ajb.anjubao.intelligent.view.ScaleFrameLayout
+            android:id="@+id/packimage_iv"
+            style="@style/layout_widthfilled_style"
+            android:background="@color/whiteGray"
+            android:scaleType="centerCrop"
+            scaleImageViewAttr:expectH="260"
+            scaleImageViewAttr:expectW="720">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.ajb.anjubao.intelligent.view.ScaleFrameLayout>
+
+        <RelativeLayout
+            style="@style/layout_allFilled_style"
+            android:layout_weight="1">
+
+            <com.ajb.anjubao.intelligent.view.SquareFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/layout_Margin_20">
+
+
+                    <FrameLayout
+                        android:id="@+id/mainMenuLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_weight="1">
+
+                                <ImageButton
+                                    android:id="@+id/homeBtn01"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/btn_homeonclick_01" />
+
+                                <ImageButton
+                                    android:id="@+id/homeBtn02"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/btn_homeonclick_02" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1">
+
+                                <ImageButton
+                                    android:id="@+id/homeBtn03"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/btn_homeonclick_03" />
+
+                                <ImageButton
+                                    android:id="@+id/homeBtn04"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/btn_homeonclick_04" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="10" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="9">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"></LinearLayout>
+
+                                <ImageButton
+                                    android:id="@+id/homeBtn05"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_centerInParent="true"
+                                    android:layout_weight="9"
+                                    android:background="@drawable/btn_homeonclick_05" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="10"></LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="10" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                </RelativeLayout>
+            </com.ajb.anjubao.intelligent.view.SquareFrameLayout>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/copyright"
+            style="@style/item_tv_third_style"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/layout_Margin_10"
+            android:gravity="center"
+            android:text="广东安居宝智能控制系统有限公司" />
+    </LinearLayout>
+
+</FrameLayout>

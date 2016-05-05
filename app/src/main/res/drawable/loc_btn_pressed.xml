@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <gradient
+        android:gradientRadius="@dimen/loc_btn_gradientRadius"
+        android:startColor="@color/loc_btn_color_pressed"
+        android:endColor="@color/loc_btn_color_pressed"
+        android:type="radial"
+        android:useLevel="false" />
+
+
+    <size
+        android:width="34dp"
+        android:height="34dp" />
+
+    <stroke
+        android:width="0dp"
+        android:color="@color/loc_btn_color_normal" />
+
+    <corners
+        android:bottomLeftRadius="@dimen/loc_btn_corner_radius"
+        android:bottomRightRadius="@dimen/loc_btn_corner_radius"
+        android:topLeftRadius="@dimen/loc_btn_corner_radius"
+        android:topRightRadius="@dimen/loc_btn_corner_radius" />
+
+    <padding
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp" />
+
+</shape>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dottedLineViewAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".activity.PayQuestionDetailActivity">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <TextView
+        android:id="@+id/question_list_detail_name"
+        style="@style/item_tv_second_style"
+        android:layout_gravity="left"
+        android:layout_marginLeft="@dimen/layout_Margin_15"
+        android:layout_marginRight="@dimen/layout_Margin_15"
+        android:layout_marginTop="@dimen/layout_Margin_10"
+        android:text="停车费用问题" />
+
+    <View
+        style="@style/layout_widthfilled_style"
+        android:layout_height="20dp"
+        android:layout_marginLeft="@dimen/layout_Margin_15"
+        android:layout_marginRight="@dimen/layout_Margin_15"
+        android:background="@drawable/dotline_divider"
+        android:layerType="software" />
+
+    <ScrollView
+        style="@style/layout_allFilled_style"
+        android:layout_marginBottom="@dimen/layout_Margin_15"
+        android:layout_marginLeft="@dimen/layout_Margin_15"
+        android:layout_marginRight="@dimen/layout_Margin_15"
+        android:layout_weight="1">
+
+        <LinearLayout
+            style="@style/layout_allFilled_style"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/question_list_detail_content"
+                style="@style/item_tv_second_style"
+                android:layout_gravity="left"
+                android:singleLine="false"
+                android:text="\u3000\u3000你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的你局的的"
+                android:textColor="@color/item_tv_color_03" />
+
+            <EditText
+                android:id="@+id/ed_another_words"
+                style="@style/layout_widthfilled_style"
+                android:layout_marginTop="@dimen/layout_Margin_15"
+                android:background="@drawable/btn_stroke_selector"
+                android:gravity="left|top"
+                android:hint="请在此填写反馈内容"
+                android:minHeight="88dp"
+                android:padding="@dimen/layout_Margin_10"
+                android:textColor="@color/item_tv_color_01"
+                android:textColorHint="@color/item_tv_color_02"
+                android:textSize="@dimen/text_size_16" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        style="@style/layout_widthfilled_style"
+        android:layout_gravity="bottom"
+        android:background="@color/white_btn_color"
+        android:orientation="vertical">
+
+        <View style="@style/line_style" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/btn_style"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/layout_Margin_10"
+            android:text="提交" />
+    </LinearLayout>
+</LinearLayout>

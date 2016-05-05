@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_allFilled_style">
+
+    <ImageView
+        android:id="@+id/pop_home_banner_img"
+        style="@style/layout_allFilled_style"
+        android:scaleType="centerCrop" />
+
+</LinearLayout>

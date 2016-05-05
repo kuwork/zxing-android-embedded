@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".activity.PayFeedBackActivity">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <ScrollView
+        style="@style/layout_allFilled_style"
+        android:layout_marginBottom="@dimen/layout_Margin_10"
+        android:layout_marginLeft="@dimen/layout_Margin_15"
+        android:layout_marginRight="@dimen/layout_Margin_15"
+        android:layout_marginTop="@dimen/layout_Margin_10"
+        android:layout_weight="1">
+
+        <LinearLayout
+            style="@style/layout_allFilled_style"
+            android:orientation="vertical">
+
+            <com.ajb.anjubao.intelligent.view.MyListView
+                android:id="@+id/pay_feedback_listview"
+                style="@style/layout_widthfilled_style"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:listSelector="@color/transparent" />
+
+            <EditText
+                android:id="@+id/ed_another_words"
+                style="@style/layout_widthfilled_style"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/btn_stroke_selector"
+                android:gravity="left|top"
+                android:hint="@string/tip_another_words"
+                android:minHeight="88dp"
+                android:padding="@dimen/layout_Margin_10"
+                android:textColor="@color/item_tv_color_01"
+                android:textColorHint="@color/item_tv_color_02"
+                android:textSize="@dimen/text_size_16" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        style="@style/layout_widthfilled_style"
+        android:layout_gravity="bottom"
+        android:background="@color/white_btn_color"
+        android:orientation="vertical">
+
+        <View style="@style/line_style" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            style="@style/btn_style"
+            android:layout_width="match_parent"
+            android:text="提交" />
+    </LinearLayout>
+
+</LinearLayout>

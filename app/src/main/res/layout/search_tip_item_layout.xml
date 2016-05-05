@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    style="@style/item_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp" >
+
+    <TextView
+        android:id="@+id/search_tip_title"
+        style="@style/item_tv_style"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/layout_Margin_5"
+        android:gravity="center_vertical"
+        android:text="" />
+
+</RelativeLayout>

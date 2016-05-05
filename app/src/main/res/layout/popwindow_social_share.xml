@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:background="@color/pop_half_transparent">
+
+    <LinearLayout
+        android:id="@+id/space"
+        style="@style/layout_allFilled_style"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" />
+
+    <LinearLayout
+        style="@style/layout_widthfilled_style"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/share_wechat"
+            style="@style/share_popwindow_ll">
+
+            <ImageView
+                style="@style/account_img_style"
+                android:src="@drawable/skyblue_logo_wechat_checked" />
+
+            <TextView
+                style="@style/item_tv_second_style"
+                android:text="分享到微信"
+                android:textColor="@color/item_tv_color_03" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/share_wechat_moment"
+            style="@style/share_popwindow_ll">
+
+            <ImageView
+                style="@style/account_img_style"
+                android:src="@drawable/skyblue_logo_wechatmoments_checked" />
+
+            <TextView
+                style="@style/item_tv_second_style"
+                android:text="分享到朋友圈"
+                android:textColor="@color/item_tv_color_03" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/share_sms"
+            style="@style/share_popwindow_ll">
+
+            <ImageView
+                style="@style/account_img_style"
+                android:src="@drawable/skyblue_logo_shortmessage_checked" />
+
+            <TextView
+                style="@style/item_tv_second_style"
+                android:text="短信分享"
+                android:textColor="@color/item_tv_color_03" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/modules/Android-PullToRefresh/Android-PullToRefresh.iml" filepath="$PROJECT_DIR$/modules/Android-PullToRefresh/Android-PullToRefresh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/ShareSDK/ShareSDK.iml" filepath="$PROJECT_DIR$/modules/ShareSDK/ShareSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/modules.iml" filepath="$PROJECT_DIR$/modules/modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/xUtils/xUtils.iml" filepath="$PROJECT_DIR$/modules/xUtils/xUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ztb_merchants.iml" filepath="$PROJECT_DIR$/ztb_merchants.iml" />
+    </modules>
+  </component>
+</project>

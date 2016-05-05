@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tip_capture">请将扫描框对准停车卡上的二维码</string>
+</resources>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    tools:context="com.ajb.anjubao.intelligent.activity.FeedBackActivity">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/header_btn_layout" />
+
+    <TextView
+        android:id="@+id/feedback_tip"
+        style="@style/item_tv_style"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="@dimen/layout_Margin_20"
+        android:layout_marginTop="@dimen/layout_Margin_10"
+        android:text="您对我们还满意吗？" />
+
+    <LinearLayout
+        android:id="@+id/grade"
+        style="@style/layout_widthfilled_style"
+        android:layout_below="@id/feedback_tip"
+        android:layout_marginLeft="@dimen/layout_Margin_20"
+        android:layout_marginRight="@dimen/layout_Margin_20"
+        android:layout_marginTop="@dimen/layout_Margin_10"
+        android:background="@drawable/register_edittext_normal"
+        android:clickable="true"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/satisfaction_rg"
+            style="@style/layout_allFilled_style"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_Margin_5">
+
+            <RadioButton
+                android:id="@+id/satisfaction1_rb"
+                style="@style/item_tv_style"
+                android:layout_width="match_parent"
+                android:button="@null"
+                android:checked="true"
+                android:drawableRight="@drawable/checkbox_selector"
+                android:padding="@dimen/layout_Margin_5"
+                android:text="非常满意" />
+
+            <RadioButton
+                android:id="@+id/satisfaction2_rb"
+                style="@style/item_tv_style"
+                android:layout_width="match_parent"
+                android:button="@null"
+                android:drawableRight="@drawable/checkbox_selector"
+                android:padding="@dimen/layout_Margin_5"
+                android:text="一般" />
+
+            <RadioButton
+                android:id="@+id/satisfaction3_rb"
+                style="@style/item_tv_style"
+                android:layout_width="match_parent"
+                android:button="@null"
+                android:drawableRight="@drawable/checkbox_selector"
+                android:padding="@dimen/layout_Margin_5"
+                android:text="不满意" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/feedback_tip1"
+        style="@style/item_tv_style"
+        android:layout_below="@id/grade"
+        android:layout_marginLeft="@dimen/layout_Margin_20"
+        android:layout_marginTop="@dimen/layout_Margin_20"
+        android:text="意见描述" />
+
+    <LinearLayout
+        android:id="@+id/warning_ly"
+        style="@style/layout_widthfilled_style"
+        android:layout_below="@id/feedback_tip1"
+        android:layout_marginLeft="@dimen/layout_Margin_20"
+        android:layout_marginRight="@dimen/layout_Margin_20"
+        android:layout_marginTop="@dimen/layout_Margin_10"
+        android:background="@drawable/register_edittext_normal"
+        android:padding="@dimen/layout_Margin_5">
+
+        <EditText
+            android:id="@+id/idea_et"
+            style="@style/item_tv_style"
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:gravity="left|top"
+            android:hint="写点什么..."
+            android:inputType="textMultiLine"
+            android:maxLength="200"
+            android:minLines="6" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <ScrollView style="@style/layout_allFilled_style">
+
+        <LinearLayout
+            style="@style/layout_allFilled_style"
+            android:orientation="vertical">
+
+            <View
+                style="@style/line_style"
+                android:layout_marginTop="@dimen/layout_Margin_10" />
+
+            <include layout="@layout/header_account_layout" />
+
+            <View style="@style/line_style" />
+
+            <com.ajb.anjubao.intelligent.view.MyListView
+                android:id="@+id/listview"
+                style="@style/layout_widthfilled_style"
+                android:layout_marginBottom="@dimen/layout_Margin_10"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:listSelector="?attr/selectableItemBackground" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:background="@color/pop_half_transparent">
+
+    <LinearLayout
+        android:id="@+id/space"
+        style="@style/layout_allFilled_style"
+        android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:orientation="horizontal" />
+
+
+    <LinearLayout
+        style="@style/layout_widthfilled_style"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWindowBackground"
+        android:orientation="vertical">
+
+
+        <View
+            style="@style/line_style"
+            android:layout_height="1dp"
+            android:background="@color/border_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="请选择车牌归属地"
+            android:textColor="@color/btn_color_normal"
+            android:textSize="@dimen/text_size_16" />
+
+        <com.ajb.anjubao.intelligent.view.MyGridView
+            android:id="@+id/gridView"
+            style="@style/layout_widthfilled_style"
+            android:horizontalSpacing="1dp"
+            android:numColumns="9"
+            android:verticalSpacing="1dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mapView_layout"
+    style="@style/layout_allFilled_style">
+
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        style="@style/layout_allFilled_style"
+        android:background="@android:color/transparent"
+        android:clickable="true" />
+
+    <include
+        android:id="@+id/search_bar"
+        layout="@layout/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/layout_Margin_5" />
+
+    <LinearLayout
+        android:id="@+id/list_layout"
+        style="@style/mapview_float_btn_style"
+        android:layout_below="@+id/search_bar">
+
+        <ImageView
+            style="@style/layout_allWraped_style"
+            android:layout_margin="3dp"
+            android:src="@mipmap/ic_subject" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/docenter_layout"
+        style="@style/mapview_float_btn_style"
+        android:layout_below="@+id/list_layout">
+
+        <ImageView
+            style="@style/layout_allWraped_style"
+            android:layout_margin="3dp"
+            android:src="@mipmap/loc_05" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/capture_layout"
+        style="@style/mapview_float_btn_style"
+        android:layout_below="@+id/docenter_layout">
+
+        <ImageView
+            android:id="@+id/img_camera"
+            style="@style/layout_allWraped_style"
+            android:layout_margin="3dp"
+            android:src="@mipmap/camera_before" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gift_layout"
+        style="@style/mapview_float_btn_style"
+        android:layout_below="@+id/capture_layout">
+
+        <ImageView
+            android:id="@+id/img_gift"
+            style="@style/layout_allWraped_style"
+            android:layout_margin="3dp"
+            android:src="@mipmap/ic_nav_share" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/example_layout"
+        style="@style/mapview_float_btn_style"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="false"
+        android:layout_below="@+id/search_bar"
+        android:layout_margin="@dimen/layout_Margin_5">
+
+        <ImageView
+            android:id="@+id/img_example"
+            style="@style/layout_allFilled_style"
+            android:src="@mipmap/example" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imgColorInfo"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/example_layout"
+        android:layout_toRightOf="@+id/example_layout"
+        android:scaleType="fitCenter" />
+
+</RelativeLayout>

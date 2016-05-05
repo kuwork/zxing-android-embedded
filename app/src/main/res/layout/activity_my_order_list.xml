@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/activity_my_order_list"
+        style="@style/layout_allFilled_style"
+        fadeEdgetLength="0dp"
+        android:background="@color/white"
+        android:cacheColorHint="#ffffff"
+        android:divider="@null"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/null_data"
+        style="@style/layout_allFilled_style"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imgError"
+            style="@style/layout_allWraped_style"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/layout_Margin_5"
+            android:src="@mipmap/norecord" />
+
+        <TextView
+            android:id="@+id/tvError"
+            style="@style/item_tv_third_style"
+            android:layout_below="@+id/imgError"
+            android:layout_centerHorizontal="true"
+            android:text="@string/tip_no_order_list" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,71 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425465928 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/filter_layout">
+        <!-- ImageView Examples:
+        <iv_nav_indicator src="@drawable/image_resource" />
+        <iv_nav_indicator src="relative_path/image.jpg" /> -->
+        <iv_nav_indicator />
+        <iv_nav_left />
+        <iv_nav_right />
+        <mListView>
+            <items layout="@android:layout/simple_list_item_1" >
+                <_item>
+                    <text1>Vancouver</text1>
+                </_item>
+                <_item>
+                    <text1>Cairo</text1>
+                </_item>
+                <_item>
+                    <text1>New York</text1>
+                </_item>
+                <_item>
+                    <text1>San Francisco</text1>
+                </_item>
+                <_item>
+                    <text1>Seattle</text1>
+                </_item>
+                <_item>
+                    <text1>Hong Kong</text1>
+                </_item>
+                <_item>
+                    <text1>Tokyo</text1>
+                </_item>
+            </items>
+                </mListView>
+        <!-- TextView Examples:
+        <hover_listview_item text="@string/string_resource" />
+        <hover_listview_item text="Text literal" textSize="14sp" /> -->
+        <hover_listview_item />
+        <pop_city_gridview>
+            <items layout="@android:layout/simple_list_item_1" >
+                <_item>
+                    <text1>Apple</text1>
+                </_item>
+                <_item>
+                    <text1>Orange</text1>
+                </_item>
+                <_item>
+                    <text1>Pear</text1>
+                </_item>
+                <_item>
+                    <text1>Grapefruit</text1>
+                </_item>
+                <_item>
+                    <text1>Banana</text1>
+                </_item>
+                <_item>
+                    <text1>Lemon</text1>
+                </_item>
+                <_item>
+                    <text1>Carrot</text1>
+                </_item>
+            </items>
+                </pop_city_gridview>
+        <dialog />
+    </_content>
+</screen>

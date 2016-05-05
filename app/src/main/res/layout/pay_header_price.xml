@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_widthfilled_style"
+    android:layout_marginBottom="@dimen/layout_Margin_5"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/item_tv_third_style"
+        android:layout_marginTop="@dimen/layout_Margin_20"
+        android:text="@string/tip_should_pay_price" />
+
+    <TextView
+        android:id="@+id/newmoney_tv"
+        style="@style/item_tv_style"
+        android:text="0.00"
+        android:textSize="50dp" />
+
+    <View
+        style="@style/line_style"
+        android:layout_marginTop="@dimen/layout_Margin_10" />
+</LinearLayout>

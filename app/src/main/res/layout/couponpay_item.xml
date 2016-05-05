@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/item_layout"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+
+    <FrameLayout
+        android:id="@+id/imgLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/line_2_style"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:id="@+id/img"
+            style="@style/item_img_style"
+            android:src="@drawable/coupon_del_selector" />
+    </FrameLayout>
+
+    <RelativeLayout style="@style/layout_allFilled_style" >
+
+        <TextView
+            android:id="@+id/line"
+            style="@style/line_style"
+            android:layout_alignLeft="@+id/title"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/item_tv_style"
+            android:layout_centerVertical="true"
+            android:text="我的车辆" />
+    </RelativeLayout>
+
+</LinearLayout>

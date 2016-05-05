@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+ >
+
+        <!-- android:background="@drawable/pic_recharge_bg" -->
+        <!--
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="false"
+            android:layout_marginTop="17.0dip"
+            android:background="@drawable/progress"
+            android:fromDegrees="0"
+            android:repeatCount="-1"
+            android:toDegrees="360" />
+        -->
+
+        <ProgressBar
+            android:id="@+id/ivIcon"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="false"
+            android:layout_marginTop="17.0dip" />
+
+        <TextView
+            android:id="@+id/tvMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivIcon"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25.0dip"
+            android:layout_marginRight="25.0dip"
+            android:layout_marginTop="15.0dip"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="操作正在进行中，请稍候..."
+            android:textColor="@color/c_black"
+            android:textSize="16.0sp" />
+
+        <LinearLayout
+            android:id="@+id/layoutBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvMsg"
+            android:layout_marginBottom="5.0dip"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginTop="20.0dip"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/layout_Margin_10" >
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

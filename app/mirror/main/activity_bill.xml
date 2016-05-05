@@ -1,0 +1,22 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425465740 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/activity_bill">
+        <!-- ImageView Examples:
+        <im_car src="@drawable/image_resource" />
+        <im_car src="relative_path/image.jpg" /> -->
+        <im_car />
+        <!-- TextView Examples:
+        <activity_bill_totalFee text="@string/string_resource" />
+        <activity_bill_totalFee text="Text literal" textSize="14sp" /> -->
+        <activity_bill_totalFee />
+        <activity_bill_title />
+        <activity_bill_id />
+        <activity_bill_createTime />
+        <activity_bill_tradeState />
+    </_content>
+</screen>

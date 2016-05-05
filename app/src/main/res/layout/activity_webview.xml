@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/login_bar"
+        layout="@layout/header_btn_layout" />
+
+    <FrameLayout style="@style/layout_allFilled_style">
+
+        <com.ajb.anjubao.intelligent.view.MySwipeRefreshLayout
+            android:id="@+id/swipeLayout"
+            style="@style/layout_allFilled_style">
+
+            <com.ajb.anjubao.intelligent.view.CustomWebView
+                android:id="@+id/webview"
+                style="@style/layout_allFilled_style" />
+        </com.ajb.anjubao.intelligent.view.MySwipeRefreshLayout>
+
+        <include
+            android:id="@+id/rl_network"
+            layout="@layout/error_layout"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>

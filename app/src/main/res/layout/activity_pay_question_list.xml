@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".activity.PayQuestionListActivity">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <LinearLayout
+        style="@style/layout_widthfilled_style"
+        android:layout_marginBottom="@dimen/layout_Margin_10"
+        android:layout_marginLeft="@dimen/layout_Margin_15"
+        android:layout_marginRight="@dimen/layout_Margin_15"
+        android:layout_marginTop="@dimen/layout_Margin_10">
+
+        <TextView
+            style="@style/item_tv_third_style"
+            android:text="缴费时间:" />
+
+        <TextView
+            android:id="@+id/question_list_pay_time"
+            style="@style/item_tv_third_style"
+            android:layout_marginLeft="@dimen/layout_Margin_5" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/pay_question_list"
+        style="@style/layout_allFilled_style"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:listSelector="@color/transparentColor"
+        tools:showIn="@layout/pay_question_list_item" />
+
+</LinearLayout>

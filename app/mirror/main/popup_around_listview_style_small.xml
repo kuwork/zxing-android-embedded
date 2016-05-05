@@ -1,0 +1,15 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425466133 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/popup_around_listview_style_small">
+        <!-- TextView Examples:
+        <pop_around_lv_text text="@string/string_resource" />
+        <pop_around_lv_text text="Text literal" textSize="14sp" /> -->
+        <pop_around_lv_text />
+        <pop_around_lv_number />
+    </_content>
+</screen>

@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWindowBackground"
+    android:orientation="vertical"
+    tools:context="com.ajb.anjubao.intelligent.fragment.MapSearchFragment">
+
+    <LinearLayout
+        style="@style/item_layout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/item_layout"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/layout_Margin_10"
+            android:paddingRight="@dimen/layout_Margin_10">
+
+            <AutoCompleteTextView
+                android:id="@+id/key"
+                style="@style/item_tv_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="0dp"
+                android:layout_toLeftOf="@+id/btn_sure"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="请输入目的地或者车场名字"
+                android:popupBackground="@drawable/alertdialog_bg_top"
+                android:textColor="@color/item_tv_color_01"
+                android:textColorHint="@color/item_tv_color_02" />
+
+            <LinearLayout
+                android:id="@+id/btnSearch"
+                style="@style/item_layout"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignBottom="@+id/key"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    style="@style/item_img_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/actionbar_search" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/line_style"
+            android:background="@color/colorAccent" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/item_tv_third_style"
+        android:layout_margin="@dimen/layout_Margin_10"
+        android:text="搜索历史" />
+
+    <ListView
+        android:id="@+id/lvSearchHistory"
+        style="@style/history_list_style"
+        tools:listitem="@layout/history_item" />
+
+
+</LinearLayout>

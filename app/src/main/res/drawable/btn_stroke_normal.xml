@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <gradient
+        android:angle="45"
+        android:endColor="@color/coupon_bg"
+        android:startColor="@color/coupon_bg" />
+
+    <solid android:color="@color/coupon_bg" />
+
+    <stroke
+        android:width="0.5dp"
+        android:color="@color/line_color" />
+
+    <corners
+        android:bottomLeftRadius="@dimen/btn_corner_radius"
+        android:bottomRightRadius="@dimen/btn_corner_radius"
+        android:topLeftRadius="@dimen/btn_corner_radius"
+        android:topRightRadius="@dimen/btn_corner_radius" />
+
+    <padding
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp" />
+
+</shape>

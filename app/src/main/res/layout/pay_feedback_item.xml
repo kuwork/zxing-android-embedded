@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_widthfilled_style"
+    android:orientation="vertical"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp"
+    tools:context=".activity.PayFeedBackActivity">
+
+    <RelativeLayout
+        android:id="@+id/item_bg"
+        style="@style/layout_widthfilled_style"
+        android:background="@drawable/btn_stroke_normal">
+
+        <TextView
+            android:id="@+id/text_tv"
+            style="@style/item_tv_second_style"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_toLeftOf="@+id/select_ib"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/layout_Margin_10"
+            android:text="停车费用不对"
+            android:textColor="@color/item_tv_color_03" />
+
+        <ImageView
+            android:id="@+id/select_ib"
+            android:layout_width="@dimen/layout_Margin_15"
+            android:layout_height="@dimen/layout_Margin_15"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/layout_Margin_10"
+            android:src="@mipmap/pay_success_small"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

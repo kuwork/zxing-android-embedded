@@ -1,0 +1,18 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425466017 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/pay_success">
+        <!-- ImageView Examples:
+        <pay_success_pic src="@drawable/image_resource" />
+        <pay_success_pic src="relative_path/image.jpg" /> -->
+        <pay_success_pic />
+        <!-- TextView Examples:
+        <tv_pay_success text="@string/string_resource" />
+        <tv_pay_success text="Text literal" textSize="14sp" /> -->
+        <tv_pay_success />
+    </_content>
+</screen>

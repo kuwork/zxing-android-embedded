@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    tools:context="com.ajb.anjubao.intelligent.activity.AboutActivity">
+
+    <include
+        android:id="@+id/about_header_layout"
+        layout="@layout/header_btn_layout" />
+
+    <ScrollView
+        style="@style/layout_allFilled_style"
+        android:layout_below="@id/about_header_layout">
+
+        <LinearLayout
+            style="@style/layout_allFilled_style"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ic_slogan"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/currentVer"
+                style="@style/item_tv_style"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/layout_Margin_10"
+                android:gravity="center_horizontal"
+                android:text="掌停宝 1.0.0" />
+
+            <LinearLayout
+                style="@style/layout_widthfilled_style"
+                android:layout_marginBottom="@dimen/layout_Margin_10"
+                android:layout_marginLeft="@dimen/layout_Margin_10"
+                android:layout_marginRight="@dimen/layout_Margin_10"
+                android:layout_marginTop="@dimen/layout_Margin_20"
+                android:background="@drawable/layout_border"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/service_term"
+                    style="@style/item_layout">
+
+                    <TextView
+                        style="@style/item_tv_style"
+                        android:layout_width="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:layout_toLeftOf="@+id/arrow3"
+                        android:text="停车服务协议" />
+
+                    <ImageView
+                        android:id="@+id/arrow3"
+                        style="@style/setting_img_style" />
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/line_style"
+                    android:layout_marginLeft="@dimen/layout_Margin_10"
+                    android:layout_marginRight="@dimen/layout_Margin_10" />
+
+                <RelativeLayout
+                    android:id="@+id/comprehend_ajb"
+                    style="@style/item_layout">
+
+                    <TextView
+                        style="@style/item_tv_style"
+                        android:layout_width="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:layout_toLeftOf="@+id/arrow4"
+                        android:text="了解安居宝" />
+
+                    <ImageView
+                        android:id="@+id/arrow4"
+                        style="@style/setting_img_style" />
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/line_style"
+                    android:layout_marginLeft="@dimen/layout_Margin_10"
+                    android:layout_marginRight="@dimen/layout_Margin_10" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_soft_guide"
+                    style="@style/item_layout">
+
+                    <TextView
+                        style="@style/item_tv_style"
+                        android:layout_width="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:layout_toLeftOf="@+id/arrow5"
+                        android:text="功能介绍" />
+
+                    <ImageView
+                        android:id="@+id/arrow5"
+                        style="@style/setting_img_style" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layout_widthfilled_style"
+                android:layout_marginTop="@dimen/layout_Margin_20"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/item_tv_style"
+                    android:text="客服电话：" />
+
+                <TextView
+                    android:id="@+id/callno_tv"
+                    style="@style/item_tv_style"
+                    android:text="020-32361256"
+                    android:textColor="@color/blue" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

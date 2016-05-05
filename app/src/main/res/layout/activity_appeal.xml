@@ -1,0 +1,237 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/appeal"
+    style="@style/layout_allFilled_style"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/login_bar"
+        layout="@layout/header_btn_layout" />
+
+    <RelativeLayout style="@style/layout_allFilled_style">
+
+        <Button
+            android:id="@+id/ok_btn"
+            style="@style/btn_style"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="确认申诉" />
+
+        <ScrollView
+            android:id="@+id/contentlayout"
+            style="@style/layout_allFilled_style"
+            android:layout_above="@+id/ok_btn"
+            android:layout_alignParentTop="true">
+
+            <LinearLayout
+                style="@style/item_layout"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/item_layout"
+                    android:layout_marginLeft="@dimen/layout_Margin_10"
+                    android:layout_marginRight="@dimen/layout_Margin_10"
+                    android:layout_marginTop="@dimen/layout_Margin_10"
+                    android:background="@drawable/bg_case"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/item_tv_style"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:layout_weight="1"
+                        android:text="申诉原因" />
+
+                    <TextView
+                        style="@style/item_tv_style"
+                        android:layout_marginRight="@dimen/layout_Margin_10"
+                        android:text="车辆已被绑定"
+                        android:textColor="#ff6634" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/item_layout"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/layout_Margin_10"
+                    android:background="@drawable/bg_case"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/item_tv_style"
+                        android:layout_height="50dp"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:layout_marginRight="@dimen/layout_Margin_10"
+                        android:gravity="center"
+                        android:text="请拍下以下证明相片" />
+
+                    <View
+                        style="@style/line_style"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:layout_marginRight="@dimen/layout_Margin_10" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"
+                        android:layout_marginLeft="@dimen/layout_Margin_10"
+                        android:layout_marginRight="@dimen/layout_Margin_10"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:id="@+id/activity_appeal_frame_num_layout"
+                            style="@style/layout_widthfilled_style"
+                            android:layout_margin="@dimen/layout_Margin_10"
+                            android:layout_weight="1"
+                            android:background="#f9f9f9">
+
+                            <ImageView
+                                android:id="@+id/imageView1"
+                                style="@style/account_img_style"
+                                android:layout_centerHorizontal="true"
+                                android:src="@mipmap/bg_jia" />
+
+                            <TextView
+                                android:id="@+id/activity_appeal_frame_num"
+                                style="@style/item_tv_style"
+                                android:layout_below="@+id/imageView1"
+                                android:layout_centerHorizontal="true"
+                                android:layout_margin="@dimen/layout_Margin_5"
+                                android:gravity="center"
+                                android:text="车架号码"
+                                android:textColor="@color/line_color" />
+
+                            <ImageView
+                                android:id="@+id/activity_appeal_frame_num_img"
+                                style="@style/layout_allFilled_style"
+                                android:layout_centerHorizontal="true"
+                                android:scaleType="centerCrop" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/activity_appeal_car_num_layout"
+                            style="@style/layout_widthfilled_style"
+                            android:layout_margin="@dimen/layout_Margin_10"
+                            android:layout_weight="1"
+                            android:background="#f9f9f9">
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                style="@style/account_img_style"
+                                android:layout_centerHorizontal="true"
+                                android:src="@mipmap/bg_jia" />
+
+                            <TextView
+                                android:id="@+id/activity_appeal_car_num"
+                                style="@style/item_tv_style"
+                                android:layout_below="@+id/imageView2"
+                                android:layout_centerHorizontal="true"
+                                android:layout_margin="@dimen/layout_Margin_5"
+                                android:gravity="center"
+                                android:text="车牌号码"
+                                android:textColor="@color/line_color" />
+
+                            <ImageView
+                                android:id="@+id/activity_appeal_car_num_img"
+                                style="@style/layout_allFilled_style"
+                                android:layout_centerHorizontal="true"
+                                android:scaleType="centerCrop" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <View style="@style/line_style" />
+
+                    <LinearLayout
+                        android:id="@+id/activity_reserve_parking_car_band"
+                        style="@style/item_layout"
+                        android:background="@null"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn_code"
+                            style="@style/btn_style"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="0dp"
+                            android:background="@drawable/login_btn_blue_selector_nocorner"
+                            android:gravity="center"
+                            android:minEms="4"
+                            android:text="粤" />
+
+                        <EditText
+                            android:id="@+id/ed_code"
+                            style="@style/item_tv_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="0dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginRight="@dimen/layout_Margin_10"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center_vertical"
+                            android:hint="请输入车牌号码"
+                            android:inputType="textCapSentences"
+                            android:maxLength="6" />
+                    </LinearLayout>
+
+                    <View style="@style/line_style" />
+
+                    <LinearLayout
+                        style="@style/item_layout"
+                        android:background="@null"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/item_tv_style"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:minEms="4"
+                            android:text="手机" />
+
+                        <EditText
+                            android:id="@+id/tvPhoneNum"
+                            style="@style/layout_allFilled_style"
+                            android:layout_marginRight="@dimen/layout_Margin_10"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center_vertical"
+                            android:hint="请输入您的手机号码"
+                            android:maxLength="11"
+                            android:phoneNumber="true" />
+                    </LinearLayout>
+
+                    <View style="@style/line_style" />
+
+                    <LinearLayout
+                        style="@style/item_layout"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/item_tv_style"
+                            android:layout_width="80dp"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:minEms="4"
+                            android:text="备注" />
+
+                        <EditText
+                            android:id="@+id/tvRemark"
+                            style="@style/layout_widthfilled_style"
+                            android:layout_marginRight="@dimen/layout_Margin_10"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="right|center_vertical"
+                            android:hint="请输入您的备注"
+                            android:minHeight="50dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</LinearLayout>

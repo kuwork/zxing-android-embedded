@@ -1,0 +1,129 @@
+[
+  {
+    "modularId": 1,
+    "modularCode": "190000",
+    "modularEcode": "LeftMenuCode",
+    "modularValue": "左侧菜单",
+    "modularUrl": "",
+    "pageCode": "Home",
+    "menuList": [
+      {
+        "groupId": 1,
+        "menuCode": "190001",
+        "menuValue": "我的车辆",
+        "operateType": "NATIVE",
+        "title": "我的车场",
+        "type": "NORMAL",
+        "needLogin": true,
+        "linkUrl": "http://www.baidu.com",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_car.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "190002",
+        "menuValue": "我的优惠",
+        "operateType": "NATIVE",
+        "title": "我的优惠券",
+        "type": "NORMAL",
+        "needLogin": true,
+        "linkUrl": "http://www.baidu.com",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_coupon.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "190005",
+        "menuValue": "消费明细",
+        "operateType": "NATIVE",
+        "title": "消费明细",
+        "type": "NORMAL",
+        "needLogin": true,
+        "linkUrl": "http://www.baidu.com",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_record_pay.png"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 2,
+        "menuCode": "190006",
+        "menuValue": "社区服务",
+        "operateType": "WEB",
+        "title": "社区服务",
+        "needLogin": true,
+        "type": "NORMAL",
+        "desc": "车位、锁车",
+        "linkUrl": "/jsp/community_index.html",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_society.png"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 3,
+        "menuCode": "190007",
+        "menuValue": "优惠码",
+        "operateType": "NATIVE",
+        "title": "优惠码",
+        "needLogin": true,
+        "type": "NORMAL",
+        "linkUrl": "http://www.baidu.com",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_coupon_code.png"
+      },
+      {
+        "groupId": 3,
+        "menuCode": "190008",
+        "menuValue": "有奖推荐",
+        "operateType": "WEB",
+        "desc": "分享有奖哦",
+        "needLogin": true,
+        "title": "有奖推荐",
+        "extras": {
+          "key": "value",
+          "key1": "value1"
+        },
+        "type": "NORMAL",
+        "linkUrl": "/jsp/recommend.html",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_share.png"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 4,
+        "menuCode": "200001",
+        "menuValue": "车场室内地图",
+        "operateType": "NATIVE",
+        "title": "车场室内地图",
+        "type": "NORMAL",
+        "needLogin": false,
+        "linkUrl": "http://www.baidu.com",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_member.png"
+      },
+      {
+        "groupId": 4,
+        "menuCode": "190009",
+        "menuValue": "系统设置",
+        "operateType": "NATIVE",
+        "title": "系统设置",
+        "type": "NORMAL",
+        "needLogin": false,
+        "linkUrl": "http://www.baidu.com",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_setting.png"
+      },
+      {
+        "groupId": 4,
+        "menuCode": "190010",
+        "menuValue": "退出掌停宝",
+        "operateType": "NATIVE",
+        "title": "退出掌停宝",
+        "needLogin": false,
+        "type": "NORMAL",
+        "linkUrl": "http://www.baidu.com",
+        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_shutdown.png"
+      }
+    ]
+  }
+]

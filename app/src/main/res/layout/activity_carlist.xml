@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/carlist_title_bar"
+        layout="@layout/header_btn_layout" />
+
+    <FrameLayout
+        style="@style/layout_allFilled_style"
+        android:layout_above="@+id/add_car_btn_ll"
+        android:layout_below="@id/carlist_title_bar">
+
+        <ListView
+            android:id="@+id/lv_car"
+            style="@style/layout_allFilled_style"
+            android:layout_margin="@dimen/layout_Margin_10"
+            android:layout_weight="1"
+            android:cacheColorHint="#00000000"
+            android:divider="#00000000"
+            android:dividerHeight="@dimen/layout_Margin_10"
+            android:listSelector="@android:color/transparent"
+            android:visibility="visible" />
+
+        <include
+            android:id="@+id/no_bindcar"
+            layout="@layout/error_layout"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/add_car_btn_ll"
+        style="@style/layout_widthfilled_style"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/layout_Margin_10">
+
+        <TextView
+            android:id="@+id/tv_tip"
+            style="@style/item_tv_third_style"
+            android:layout_marginBottom="@dimen/layout_Margin_5"
+            android:gravity="center"
+            android:singleLine="false"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/add_car_btn"
+            style="@style/btn_style"
+            android:layout_margin="0dp"
+            android:text="添加车辆" />
+
+    </LinearLayout>
+
+</RelativeLayout>

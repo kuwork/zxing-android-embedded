@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <ScrollView
+        style="@style/layout_allFilled_style"
+        android:layout_marginLeft="@dimen/layout_Margin_5"
+        android:layout_marginRight="@dimen/layout_Margin_5"
+        android:layout_marginTop="@dimen/layout_Margin_5"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white_radio"
+        android:scrollbars="none">
+
+        <LinearLayout
+            style="@style/layout_allFilled_style"
+            android:layout_marginLeft="@dimen/layout_Margin_25"
+            android:layout_marginRight="@dimen/layout_Margin_25"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_Margin_15">
+
+            <FrameLayout style="@style/layout_widthfilled_style">
+
+                <include
+                    android:id="@+id/in_need_pay"
+                    layout="@layout/pay_header_price" />
+
+                <include
+                    android:id="@+id/in_no_need_pay"
+                    layout="@layout/pay_no_need"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <include
+                android:id="@+id/in_coupon_list"
+                layout="@layout/pay_coupon_list"
+                android:visibility="gone" />
+
+            <FrameLayout style="@style/layout_widthfilled_style">
+
+                <com.ajb.anjubao.intelligent.view.MyListView
+                    android:id="@+id/pay_detail_lv"
+                    style="@style/layout_allFilled_style"
+                    android:divider="@null"
+                    android:dividerHeight="0dp"
+                    android:listSelector="@android:color/transparent"
+                    tools:showIn="@layout/pay_listview_detail_item" />
+
+                <ImageView
+                    android:id="@+id/nav_pic"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right|bottom"
+                    android:src="@mipmap/nav_pic"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <View
+                style="@style/line_style"
+                android:layout_marginTop="11dp" />
+
+            <TextView
+                android:id="@+id/time_money_tip"
+                style="@style/item_tv_third_style"
+                android:layout_marginTop="@dimen/layout_Margin_10" />
+
+            <TextView
+                android:id="@+id/feedback_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/layout_Margin_25"
+                android:background="@drawable/btn_stroke_selector"
+                android:gravity="center"
+                android:minWidth="100dp"
+                android:paddingLeft="@dimen/layout_Margin_10"
+                android:paddingRight="@dimen/layout_Margin_10"
+                android:text="错误反馈"
+                android:textColor="@color/item_tv_color_02"
+                android:textSize="@dimen/text_size_14" />
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout style="@style/layout_widthfilled_style">
+
+        <LinearLayout
+            android:id="@+id/pay_btn_layout"
+            style="@style/layout_widthfilled_style"
+            android:layout_gravity="bottom"
+            android:background="@color/white_btn_color"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <View style="@style/line_style" />
+
+            <Button
+                android:id="@+id/btn_onclick_pay"
+                style="@style/btn_style"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/layout_Margin_10"
+                android:enabled="false"
+                android:text="去缴费" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/pay_banner_layout"
+            layout="@layout/pay_banner_layout"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>

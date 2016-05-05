@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"
+    android:useLevel="false" >
+
+    <solid android:color="@color/loc_radiobtn_color" />
+
+    <padding
+        android:bottom="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        android:top="5dp" />
+
+    <solid android:color="@color/loc_radiobtn_color" />
+
+    <stroke
+        android:width="0dp"
+        android:color="@color/loc_radiobtn_color" />
+
+    <size
+        android:height="@dimen/text_size_10"
+        android:width="@dimen/text_size_10" />
+
+</shape>

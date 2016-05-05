@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.ajb.anjubao.intelligent.activity.SettingActivity">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <ScrollView style="@style/layout_widthfilled_style">
+
+        <LinearLayout
+            style="@style/layout_widthfilled_style"
+            android:orientation="vertical">
+
+            <com.ajb.anjubao.intelligent.view.MyListView
+                android:id="@+id/setting_listview"
+                style="@style/layout_widthfilled_style"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:listSelector="?attr/selectableItemBackground" />
+
+            <LinearLayout
+                android:id="@+id/change_account_btn"
+                style="@style/item_layout"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <View style="@style/line_style" />
+
+                <TextView
+                    style="@style/item_tv_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:text="退出登录" />
+
+                <View style="@style/line_style" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

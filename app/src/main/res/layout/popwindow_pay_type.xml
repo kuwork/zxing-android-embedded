@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style" 
+    android:background="@color/pop_half_transparent" >
+
+    <com.ajb.anjubao.intelligent.view.MyGridView
+        android:id="@+id/gv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:cacheColorHint="@android:color/transparent"
+        android:gravity="top|left"
+        android:numColumns="3" />
+
+    <LinearLayout
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/gv"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+</RelativeLayout>

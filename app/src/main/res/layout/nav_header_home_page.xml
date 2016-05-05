@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/account_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/layout_Margin_10"
+    android:paddingLeft="@dimen/layout_Margin_10"
+    android:paddingRight="@dimen/layout_Margin_10"
+    android:paddingTop="@dimen/layout_Margin_10"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <FrameLayout
+        android:id="@+id/imgAvatarLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/layout_Margin_10">
+
+        <ImageView
+            android:id="@+id/imgAvator"
+            style="@style/account_img_style"
+            android:layout_margin="0dp"
+            android:src="@mipmap/user_avatars" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgAvatarLayout"
+        android:layout_alignTop="@+id/imgAvatarLayout"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/imgAvatarLayout"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAccountName"
+            style="@style/item_tv_style"
+            android:layout_gravity="left"
+            android:text="未登录"
+            android:textColor="@color/item_tv_color_02" />
+
+        <LinearLayout
+            android:id="@+id/scoreLayout"
+            style="@style/layout_allWraped_style"
+            android:layout_marginLeft="@dimen/layout_Margin_5"
+            android:layout_marginRight="@dimen/layout_Margin_5"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/layout_Margin_5"
+                android:src="@mipmap/integral" />
+
+            <TextView
+                style="@style/item_tv_third_style"
+                android:layout_marginRight="@dimen/layout_Margin_10"
+                android:text="积分" />
+
+            <TextView
+                android:id="@+id/tvIntegration"
+                style="@style/item_tv_third_style"
+                android:text="0.0"
+                android:textColor="#FCB636" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

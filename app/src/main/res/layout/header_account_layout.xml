@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/white"
+    tools:showIn="@layout/activity_account">
+
+    <LinearLayout
+        style="@style/layout_allWraped_style"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/layout_Margin_5"
+        android:layout_toRightOf="@+id/imgAvator"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAccountName"
+            style="@style/item_tv_title_style"
+            android:layout_gravity="left"
+            android:text="未登录"
+            android:textColor="@color/item_tv_color_02" />
+
+        <LinearLayout
+            android:id="@+id/scoreLayout"
+            style="@style/layout_allWraped_style"
+            android:layout_marginLeft="@dimen/layout_Margin_5"
+            android:layout_marginRight="@dimen/layout_Margin_5"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/layout_Margin_5"
+                android:src="@mipmap/integral" />
+
+            <TextView
+                style="@style/item_tv_third_style"
+                android:layout_marginRight="@dimen/layout_Margin_10"
+                android:text="积分" />
+
+            <TextView
+                android:id="@+id/tvIntegration"
+                style="@style/item_tv_third_style"
+                android:text="0.0"
+                android:textColor="#FCB636" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgAvator"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/layout_Margin_10"
+        android:src="@mipmap/user_avatars" />
+
+    <TextView
+        android:id="@+id/tvRegistration"
+        style="@style/item_tv_forth_style"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/layout_Margin_20"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/selector_sign_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/layout_Margin_10"
+        android:paddingRight="@dimen/layout_Margin_5"
+        android:text="签到赚积分"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+</RelativeLayout>

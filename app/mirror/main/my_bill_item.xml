@@ -1,0 +1,18 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425465960 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/my_bill_item">
+        <!-- TextView Examples:
+        <line_number text="@string/string_resource" />
+        <line_number text="Text literal" textSize="14sp" /> -->
+        <line_number />
+        <my_bill_item_tradeState />
+        <my_bill_item_title />
+        <my_bill_item_createTime />
+        <my_bill_item_totalFee />
+    </_content>
+</screen>

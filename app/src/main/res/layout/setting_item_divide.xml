@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/separetor1"
+        style="@style/line_style"
+        android:visibility="gone" />
+
+    <View xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_Margin_10"
+        android:background="@color/colorWindowBackground" />
+
+    <View
+        android:id="@+id/separetor2"
+        style="@style/line_style"
+        android:visibility="gone" />
+</LinearLayout>

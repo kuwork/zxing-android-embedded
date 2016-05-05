@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/item_layout"
+    android:background="@null"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/layout_Margin_10">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="@dimen/layout_Margin_10"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/drawer_custom_img"
+            style="@style/item_img_style"
+            android:layout_marginBottom="@dimen/layout_Margin_10"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="@dimen/layout_Margin_10"
+            android:layout_marginTop="@dimen/layout_Margin_10"
+            android:src="@drawable/actionbar_map"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setting_content_layout"
+        style="@style/layout_allWraped_style"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/setting_item_name_tv"
+            style="@style/item_tv_style"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/listPreferredItemHeightSmall"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="标题标题标题标题标题标题标题"
+            android:textAppearance="@style/navTextStyle" />
+
+
+        <TextView
+            android:id="@+id/setting_item_desc_tv"
+            style="@style/item_tv_forth_style"
+            android:layout_width="match_parent"
+            android:layout_toLeftOf="@+id/arrow5"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/layout_Margin_10"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/setting_item_dots_img"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/dots_red"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

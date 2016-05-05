@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">掌停宝</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_shoot">扫卡支付</string>
+    <string name="action_pay">找车缴费</string>
+    <string name="action_map">附近车场</string>
+    <string name="action_filter">筛选</string>
+    <!-- 导航菜单-->
+    <string name="nav_menu_title_1001">我的车辆</string>
+    <string name="nav_menu_title_1002">我的优惠</string>
+    <string name="nav_menu_title_1003">预约记录</string>
+    <string name="nav_menu_title_1004">停车记录</string>
+    <string name="nav_menu_title_1005">消费明细</string>
+    <string name="nav_menu_title_1006">附近车场</string>
+    <!--社区服务-->
+    <string name="nav_menu_title_2000">社区服务</string>
+    <string name="nav_menu_title_2001">分享车位</string>
+    <string name="nav_menu_title_2002">月租缴费</string>
+    <!--APP活动-->
+    <string name="nav_menu_title_3000">优惠码</string>
+    <string name="nav_menu_title_3001">有奖推荐</string>
+    <!--APP本地设置-->
+    <string name="nav_menu_title_9001">系统设置</string>
+    <string name="nav_menu_title_9002">退出掌停宝</string>
+    <!--错误信息-->
+    <string name="error_no_carno_binded">未绑定车牌</string>
+    <string name="error_hava_not_login">未登录</string>
+    <string name="error_network_short">网络不给力,请稍后再试</string>
+    <string name="error_network">网络出问题了~请您查看网络设置\n点击屏幕，重新加载</string>
+    <string name="error_no_carno">亲，您暂无绑定车牌哦！</string>
+    <string name="error_no_carpark_nearby">暂无附近车场哦！</string>
+    <string name="error_phone">请检查手机号码格式是否正确</string>
+    <string name="error_try_again">重新获取</string>
+    <string name="error_no_wechat_found">不支持微信支付，请升级到微信5.0至以上的版本</string>
+    <string name="tip_already_checkin">已签到</string>
+    <string name="tip_error_camera">开启摄像头失败，请检查相关权限设置</string>
+    <string name="error_no_more">没有更多数据</string>
+    <string name="tip_no_coupon_used">亲，您还未使用过优惠券哦！</string>
+    <string name="tip_no_coupon_in_use">亲,您暂无优惠券可使用哦！</string>
+    <string name="tip_no_order_list">亲，您暂无预约记录哦！</string>
+    <string name="tip_should_pay_price">应缴停车费(元)</string>
+    <string name="tip_no_need_pay">无需缴费</string>
+    <string name="tip_coupon_info">优 惠 信 息</string>
+    <string name="tip_coupon_business">商家消费优惠</string>
+    <string name="tip_coupon_ztb">掌停宝优惠</string>
+    <string name="tip_pay_success">已成功缴费24.00元，+10积分</string>
+    <string name="tip_another_words">还有其它想说的？</string>
+    <string name="tip_share_success">分享成功</string>
+    <string name="tip_share_error">分享失败</string>
+    <string name="tip_share_cancel">分享取消</string>
+    <string name="goIn"><u>点击查看</u></string>
+    <string name="tip_add_coupon_code">添加优惠码</string>
+    <string name="tip_please_input_coupon_code">请输入优惠码</string>
+    <string name="tip_login_account">请输入您的手机号码</string>
+    <string name="tip_login_code">请输入验证码</string>
+    <string name="tip_login_send_code">获取</string>
+    <string name="tip_login_btn">登录</string>
+    <string name="tip_charge_account">请输入您需要充值的手机账号</string>
+
+</resources>

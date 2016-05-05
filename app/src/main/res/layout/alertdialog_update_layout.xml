@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_margin="20dp"
+    android:background="@drawable/alertdialog_bg_top"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_above="@+id/btnlayoutUpdate"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/dialogTitle"
+            style="@style/item_tv_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/layout_Margin_10"
+            android:layout_marginRight="@dimen/layout_Margin_10"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="版本更新" />
+
+        <TextView style="@style/line_style" />
+    </LinearLayout>
+
+    <ScrollView
+        style="@style/item_layout"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout style="@style/layout_widthfilled_style" >
+
+            <TextView
+                android:id="@+id/dialogContent"
+                style="@style/item_tv_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_Margin_10"
+                android:layout_marginRight="@dimen/layout_Margin_10"
+                android:gravity="left"
+                android:minEms="13"
+                android:singleLine="false"
+                android:text="" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/btnlayoutUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <TextView style="@style/line_style" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/cancel_btn"
+                style="@style/btn_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/alertdialog_cancel_selector"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/cancel_btn_tv"
+                    style="@style/item_tv_style"
+                    android:text="取消" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sure_btn"
+                style="@style/btn_style"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/alertdialog_ok_selector"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/sure_btn_tv"
+                    style="@style/item_tv_style"
+                    android:text="确定"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

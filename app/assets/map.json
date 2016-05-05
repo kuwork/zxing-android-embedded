@@ -1,0 +1,124 @@
+{
+  "id": "",
+  "imgUrl": "",
+  "parkName": "掌厅车场",
+  "grid": 30,
+  "gridWidth": 39,
+  "gridHeight": 51,
+  "mapWidth": 1148,
+  "mapHeight": 1510,
+  "walls": [
+    {
+      "startX": 0,
+      "startY": 0,
+      "w": 30,
+      "h": 7
+    },
+    {
+      "startX": 0,
+      "startY": 7,
+      "w": 6,
+      "h": 3
+    },
+    {
+      "startX": 15,
+      "startY": 9,
+      "w": 10,
+      "h": 1
+    },
+    {
+      "startX": 0,
+      "startY": 10,
+      "w": 25,
+      "h": 23
+    },
+    {
+      "startX": 0,
+      "startY": 33,
+      "w": 15,
+      "h": 3
+    },
+    {
+      "startX": 28,
+      "startY": 9,
+      "w": 11,
+      "h": 19
+    },
+    {
+      "startX": 28,
+      "startY": 28,
+      "w": 1,
+      "h": 8
+    },
+    {
+      "startX": 26,
+      "startY": 35,
+      "w": 4,
+      "h": 1
+    },
+    {
+      "startX": 0,
+      "startY": 42,
+      "w": 39,
+      "h": 9
+    }
+  ],
+  "parkings": [
+    {
+      "startX": 4,
+      "startY": 39,
+      "w": 12,
+      "h": 3
+    },
+    {
+      "startX": 22,
+      "startY": 37,
+      "w": 3,
+      "h": 5
+    },
+    {
+      "startX": 25,
+      "startY": 37,
+      "w": 3,
+      "h": 2
+    },
+    {
+      "startX": 28,
+      "startY": 40,
+      "w": 7,
+      "h": 2
+    },
+    {
+      "startX": 36,
+      "startY": 35,
+      "w": 3,
+      "h": 4
+    }
+  ],
+  "qrcodes": [
+    {
+      "id": "ID-10000-01-01",
+      "startX": 32,
+      "startY": 1,
+      "w": 1,
+      "h": 1
+    },
+    {
+      "id": "ID-10000-01-02",
+      "startX": 3,
+      "startY": 41,
+      "w": 1,
+      "h": 1
+    },
+    {
+      "id": "ID-10000-01-03",
+      "startX": 20,
+      "startY": 41,
+      "w": 1,
+      "h": 1
+    }
+  ]
+}
+
+
+

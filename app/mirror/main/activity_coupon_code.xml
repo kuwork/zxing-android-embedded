@@ -1,0 +1,21 @@
+<!-- [ Mirror metadata ] generatedAt: 1462425465757 -->
+<!-- Generated screen file. Fill the id tags below with content with
+which to populate your previewed layout. For a complete specification
+of sample data, please see http://jimulabs.com/sample-data-specifications/ 
+
+Valid attributes on <screen> tag: theme="@style/someTheme" inEditMode="false" overlay="@drawable/mockup" -->
+<screen>
+    <_content layout="@layout/activity_coupon_code">
+        <!-- ImageView Examples:
+        <imgTip src="@drawable/image_resource" />
+        <imgTip src="relative_path/image.jpg" /> -->
+        <imgTip />
+        <!-- TextView Examples:
+        <msgTip text="@string/string_resource" />
+        <msgTip text="Text literal" textSize="14sp" /> -->
+        <msgTip />
+        <goInTip />
+        <imgShareLogo />
+        <coupon_invite_code />
+    </_content>
+</screen>

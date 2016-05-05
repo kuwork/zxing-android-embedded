@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:layout_marginBottom="@dimen/layout_Margin_10"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/tip_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/layout_Margin_20"
+        android:src="@mipmap/no_need_pay" />
+
+    <TextView
+        android:id="@+id/tv_no_need_pay"
+        style="@style/item_tv_third_style"
+        android:layout_marginBottom="@dimen/layout_Margin_20"
+        android:layout_marginTop="@dimen/layout_Margin_10" />
+
+    <View style="@style/line_style" />
+
+</LinearLayout>
