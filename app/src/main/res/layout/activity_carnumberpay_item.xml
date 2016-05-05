@@ -22,7 +22,7 @@
         android:id="@+id/select_ib"
         style="@style/item_img_style"
         android:layout_gravity="right|center_vertical"
-        android:src="@drawable/right_click"
+        android:src="@mipmap/arrows_right"
         android:visibility="visible" />
 
 </LinearLayout>
