@@ -15,9 +15,7 @@ import android.widget.TextView;
 import com.ajb.merchants.R;
 import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.adapter.MenuItemAdapter;
-import com.ajb.merchants.fragment.FindCarPayFragment;
 import com.ajb.merchants.fragment.HomeFragment;
-import com.ajb.merchants.fragment.MapViewFragment;
 import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.HomePageInfo;
 import com.ajb.merchants.model.MenuInfo;
@@ -175,9 +173,7 @@ public class SettingActivity extends BaseActivity {
         tvTitle.setText("请选择主页");
         ListView listView = (ListView) contentView.findViewById(R.id.listView);
         List<HomePageInfo> list = Arrays.asList(
-                new HomePageInfo("主页菜单", HomeFragment.class.getSimpleName()),
-                new HomePageInfo("附近车场", MapViewFragment.class.getSimpleName()),
-                new HomePageInfo("找车缴费", FindCarPayFragment.class.getSimpleName())
+                new HomePageInfo("主页菜单", HomeFragment.class.getSimpleName())
         );
         if (adapter == null) {
             adapter = new BaseListAdapter<HomePageInfo>(getBaseContext(), list, R.layout.activity_carnumberpay_item, null);

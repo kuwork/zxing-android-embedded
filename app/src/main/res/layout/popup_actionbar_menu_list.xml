@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <com.ajb.anjubao.intelligent.view.AutoWrapcontentListView
+    <com.ajb.merchants.view.AutoWrapcontentListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

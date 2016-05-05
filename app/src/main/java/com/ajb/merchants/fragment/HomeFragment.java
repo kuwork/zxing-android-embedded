@@ -188,10 +188,8 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 ((HomePageActivity) getActivity()).goParkingSearch();
                 break;
             case R.id.homeBtn03:
-                ((HomePageActivity) getActivity()).initFindCar();
                 break;
             case R.id.homeBtn04:
-                ((HomePageActivity) getActivity()).initMap();
                 break;
             case R.id.homeBtn05:
                 ((HomePageActivity) getActivity()).scan();

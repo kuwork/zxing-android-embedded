@@ -28,7 +28,7 @@
             android:textColor="@color/pay_share_red" />
     </LinearLayout>
 
-    <com.ajb.anjubao.intelligent.view.ScaleFrameLayout
+    <com.ajb.merchants.view.ScaleFrameLayout
         android:id="@+id/banner_layout"
         style="@style/layout_widthfilled_style"
         android:visibility="visible"
@@ -62,6 +62,6 @@
                 android:layout_margin="3dp"
                 android:src="@drawable/actionbar_close" />
         </LinearLayout>
-    </com.ajb.anjubao.intelligent.view.ScaleFrameLayout>
+    </com.ajb.merchants.view.ScaleFrameLayout>
 
 </LinearLayout>

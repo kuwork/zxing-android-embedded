@@ -129,7 +129,7 @@ public class BaseListAdapter<T> extends BaseAdapter {
                 }
                 if (img != null) {
                     if (isCheck(info)) {
-                        img.setImageResource(R.drawable.right_click);
+                        img.setImageResource(R.mipmap.arrows_right);
                         img.setVisibility(View.VISIBLE);
                     } else {
                         img.setVisibility(View.GONE);

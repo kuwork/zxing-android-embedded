@@ -31,7 +31,7 @@
                 android:background="@color/white" />
         </LinearLayout>
 
-        <com.ajb.anjubao.intelligent.view.ScaleFrameLayout
+        <com.ajb.merchants.view.ScaleFrameLayout
             style="@style/layout_widthfilled_style"
             android:layout_marginLeft="@dimen/layout_Margin_15"
             android:layout_marginRight="@dimen/layout_Margin_15"
@@ -52,7 +52,7 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/layout_Margin_5" />
 
-        </com.ajb.anjubao.intelligent.view.ScaleFrameLayout>
+        </com.ajb.merchants.view.ScaleFrameLayout>
     </FrameLayout>
 
 </RelativeLayout>

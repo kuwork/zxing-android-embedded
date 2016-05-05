@@ -33,7 +33,7 @@
             android:textColor="@color/btn_color_normal"
             android:textSize="@dimen/text_size_16" />
 
-        <com.ajb.anjubao.intelligent.view.MyGridView
+        <com.ajb.merchants.view.MyGridView
             android:id="@+id/gridView"
             style="@style/layout_widthfilled_style"
             android:horizontalSpacing="1dp"

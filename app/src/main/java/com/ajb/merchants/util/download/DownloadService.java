@@ -23,7 +23,7 @@ public class DownloadService extends Service {
 
     public static DownloadManager getDownloadManager(Context appContext) {
         if (!DownloadService.isServiceRunning(appContext)) {
-            Intent downloadSvr = new Intent("com.ajb.anjubao.intelligent.util.download.DownloadService");
+            Intent downloadSvr = new Intent("com.ajb.merchants.util.download.DownloadService");
             appContext.startService(BaseActivity.getExplicitIntent(appContext, downloadSvr, DownloadService.class.getName()));
         }
         if (DownloadService.DOWNLOAD_MANAGER == null) {

@@ -47,7 +47,7 @@
             android:listSelector="?attr/selectableItemBackground"
             android:paddingTop="0dp" />
 
-        <com.ajb.anjubao.intelligent.view.ScaleImageView
+        <com.ajb.merchants.view.ScaleImageView
             android:id="@+id/home_slide_menu_banner_img"
             style="@style/layout_widthfilled_style"
             android:scaleType="centerCrop"

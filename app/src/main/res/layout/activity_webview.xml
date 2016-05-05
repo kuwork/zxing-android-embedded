@@ -10,14 +10,14 @@
 
     <FrameLayout style="@style/layout_allFilled_style">
 
-        <com.ajb.anjubao.intelligent.view.MySwipeRefreshLayout
+        <com.ajb.merchants.view.MySwipeRefreshLayout
             android:id="@+id/swipeLayout"
             style="@style/layout_allFilled_style">
 
-            <com.ajb.anjubao.intelligent.view.CustomWebView
+            <com.ajb.merchants.view.CustomWebView
                 android:id="@+id/webview"
                 style="@style/layout_allFilled_style" />
-        </com.ajb.anjubao.intelligent.view.MySwipeRefreshLayout>
+        </com.ajb.merchants.view.MySwipeRefreshLayout>
 
         <include
             android:id="@+id/rl_network"
