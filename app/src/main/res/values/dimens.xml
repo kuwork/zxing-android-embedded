@@ -20,11 +20,11 @@
     <dimen name="layout_Margin_30">30.0dip</dimen>
     <!-- 四类字体大小 -->
     <dimen name="text_size_20">20dp</dimen>
-    <dimen name="text_size_18">16dp</dimen>
-    <dimen name="text_size_16">14dp</dimen>
-    <dimen name="text_size_14">12dp</dimen>
-    <dimen name="text_size_12">10dp</dimen>
-    <dimen name="text_size_10">8dp</dimen>
+    <dimen name="text_size_18">18dp</dimen>
+    <dimen name="text_size_16">16dp</dimen>
+    <dimen name="text_size_14">14dp</dimen>
+    <dimen name="text_size_12">12dp</dimen>
+    <dimen name="text_size_10">10dp</dimen>
     <!-- 按钮圆角 -->
     <dimen name="btn_corner_radius">2dp</dimen>
     <!-- 地图按钮圆角 -->

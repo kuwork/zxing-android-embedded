@@ -25,6 +25,9 @@ public class Product implements Serializable {
     }
 
     public String getValue() {
+        if (TextUtils.isEmpty(value)) {
+            return "0.0";
+        }
         return value;
     }
 
