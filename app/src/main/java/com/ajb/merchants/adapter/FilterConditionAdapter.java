@@ -81,9 +81,9 @@ public class FilterConditionAdapter extends BaseAdapter {
 
 
     class ViewHolder {
-        @ViewInject(R.id.text_tv)
+        @ViewInject(R.id.title)
         TextView title;
-        @ViewInject(R.id.text_value)
+        @ViewInject(R.id.desc)
         TextView value;
         @ViewInject(R.id.select_ib)
         ImageView img;

@@ -1,7 +1,10 @@
 package com.ajb.merchants.adapter;
 
 import android.content.Context;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ajb.merchants.R;
+import com.ajb.merchants.model.BalanceLimitInfo;
 import com.ajb.merchants.model.BaseModel;
 import com.ajb.merchants.model.Coupon;
 import com.ajb.merchants.model.HomePageInfo;
@@ -26,7 +30,9 @@ import java.util.List;
 
 public class BaseListAdapter<T> extends BaseAdapter {
 
+
     private final BitmapUtils bitmapUtils;
+    private String typeName;
     private List<T> dataList;
     private Context context;
     private LayoutInflater mInflater;
@@ -46,13 +52,17 @@ public class BaseListAdapter<T> extends BaseAdapter {
     private String checked;
 
     public BaseListAdapter(Context context, List<T> dataList, int res, View.OnClickListener onClickListener) {
-        super();
+        this(context, dataList, res, null, onClickListener);
+    }
+
+    public BaseListAdapter(Context context, List<T> dataList, int res, String typeName, View.OnClickListener onClickListener) {
         if (dataList == null) {
             this.dataList = new ArrayList<T>();
         } else {
             this.dataList = dataList;
         }
         this.context = context;
+        this.typeName = typeName;
         mInflater = LayoutInflater.from(context);
         bitmapUtils = new BitmapUtils(context);
         this.res = res;
@@ -108,14 +118,16 @@ public class BaseListAdapter<T> extends BaseAdapter {
     }
 
     class ViewHolder {
-        @ViewInject(R.id.text_tv)
+        @ViewInject(R.id.title)
         TextView title;
-        @ViewInject(R.id.text_value)
-        TextView value;
+        @ViewInject(R.id.desc)
+        TextView desc;
         @ViewInject(R.id.select_ib)
         ImageView img;
         @ViewInject(R.id.item_bg)
         RelativeLayout bg;
+        @ViewInject(R.id.divider)
+        View divider;
 
 
         public ViewHolder() {
@@ -129,7 +141,7 @@ public class BaseListAdapter<T> extends BaseAdapter {
                 }
                 if (img != null) {
                     if (isCheck(info)) {
-                        img.setImageResource(R.mipmap.arrows_right);
+                        img.setImageResource(R.drawable.actionbar_done);
                         img.setVisibility(View.VISIBLE);
                     } else {
                         img.setVisibility(View.GONE);
@@ -141,18 +153,18 @@ public class BaseListAdapter<T> extends BaseAdapter {
                     title.setText(TextUtils.isEmpty(coupon.getName()) ? ""
                             : coupon.getName());
                 }
-                if (null != value) {
+                if (null != desc) {
                     String unit = coupon.getUnit();
-                    value.setText(TextUtils.isEmpty(coupon.getValue()) ? ""
+                    desc.setText(TextUtils.isEmpty(coupon.getValue()) ? ""
                             : coupon.getValue());
-                    value.append((TextUtils.isEmpty(unit) ? "" : unit));
+                    desc.append((TextUtils.isEmpty(unit) ? "" : unit));
                 }
             } else if (info instanceof Info) {
                 if (title != null) {
                     title.setText(((Info) info).getKey());
                 }
-                if (null != value) {
-                    value.setText(((Info) info).getValue());
+                if (null != desc) {
+                    desc.setText(((Info) info).getValue());
                 }
             } else if (info instanceof BaseModel) {
                 if (null != title) {
@@ -177,10 +189,23 @@ public class BaseListAdapter<T> extends BaseAdapter {
                 if (title != null) {
                     title.setText(((ConditionValue) info).getDataName());
                 }
-            } else if (info instanceof Product) {
+            } else if (info instanceof BalanceLimitInfo) {// R.layout.balance_limit_item
                 if (title != null) {
-                    title.setText(((Product) info).toString());
-                    title.setSelected(isCheck(info));
+                    SpannableStringBuilder ss = new SpannableStringBuilder();
+                    ss.append(((BalanceLimitInfo) info).getValue());
+                    ss.append(((BalanceLimitInfo) info).getUnit());
+                    ss.setSpan(new RelativeSizeSpan(0.5f), ss.length() - ((BalanceLimitInfo) info).getUnit().length(), ss.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                    title.setText(ss);
+                }
+                if (desc != null) {
+                    desc.setText(((BalanceLimitInfo) info).getDesc());
+                }
+                if (divider != null) {
+                    if ((position + 1) % 4 == 0) {
+                        divider.setVisibility(View.GONE);
+                    } else {
+                        divider.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         }

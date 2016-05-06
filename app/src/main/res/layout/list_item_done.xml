@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/text_tv"
+        android:id="@+id/title"
         style="@style/item_tv_style"
         android:layout_gravity="left|center_vertical"
         android:layout_marginLeft="@dimen/layout_Margin_10"
@@ -22,7 +22,7 @@
         android:id="@+id/select_ib"
         style="@style/item_img_style"
         android:layout_gravity="right|center_vertical"
-        android:src="@mipmap/arrows_right"
+        android:src="@drawable/actionbar_done"
         android:visibility="visible" />
 
 </LinearLayout>

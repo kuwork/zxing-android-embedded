@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scaleImageViewAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true">
+
+    <com.ajb.merchants.view.MySwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        style="@style/layout_allFilled_style">
+
+        <ScrollView style="@style/layout_allFilled_style">
+
+            <LinearLayout
+                style="@style/layout_allFilled_style"
+                android:orientation="vertical">
+
+
+                <RelativeLayout style="@style/layout_allFilled_style">
+
+                    <com.ajb.merchants.view.ScaleFrameLayout
+                        android:id="@+id/packimage_iv"
+                        style="@style/layout_widthfilled_style"
+                        android:background="@color/whiteGray"
+                        android:scaleType="centerCrop"
+                        scaleImageViewAttr:expectH="442"
+                        scaleImageViewAttr:expectW="750">
+
+                        <ImageView
+                            style="@style/layout_allFilled_style"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/pc01" />
+
+                    </com.ajb.merchants.view.ScaleFrameLayout>
+
+                    <com.ajb.merchants.view.MyGridView
+                        android:id="@+id/balanceGridView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:background="#a0ffffff"
+                        android:numColumns="4"
+                        tools:listitem="@layout/balance_limit_item" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </com.ajb.merchants.view.MySwipeRefreshLayout>
+
+
+</FrameLayout>

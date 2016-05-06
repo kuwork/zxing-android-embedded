@@ -5,10 +5,10 @@
     android:paddingTop="@dimen/layout_Margin_5">
 
     <TextView
-        android:id="@+id/text_tv"
+        android:id="@+id/title"
         style="@style/item_tv_third_style"
         android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/text_value"
+        android:layout_toLeftOf="@+id/desc"
         android:text="@string/tip_coupon_business"
         android:textColor="@color/coupon_tv_red" />
 

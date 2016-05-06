@@ -5,7 +5,7 @@
     android:paddingTop="4dp">
 
     <TextView
-        android:id="@+id/text_tv"
+        android:id="@+id/title"
         style="@style/item_tv_third_style"
         android:minWidth="72dp"
         android:text="车辆入场时间"

@@ -16,6 +16,7 @@ import com.ajb.merchants.R;
 import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.adapter.MenuItemAdapter;
 import com.ajb.merchants.fragment.HomeFragment;
+import com.ajb.merchants.fragment.MainFragment;
 import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.HomePageInfo;
 import com.ajb.merchants.model.MenuInfo;
@@ -50,8 +51,7 @@ public class SettingActivity extends BaseActivity {
 
     @ViewInject(R.id.setting_listview)
     MyListView menuListView;
-    @ViewInject(R.id.change_account_btn)
-    LinearLayout change_account_btn;
+    @ViewInject(R.id.change_account_btn)   LinearLayout change_account_btn;
     private RequestParams unBindChannelIDParams;
     private Dialog mDialog;
     private View contentView;
@@ -173,10 +173,11 @@ public class SettingActivity extends BaseActivity {
         tvTitle.setText("请选择主页");
         ListView listView = (ListView) contentView.findViewById(R.id.listView);
         List<HomePageInfo> list = Arrays.asList(
+                new HomePageInfo("首页", MainFragment.class.getSimpleName()),
                 new HomePageInfo("主页菜单", HomeFragment.class.getSimpleName())
         );
         if (adapter == null) {
-            adapter = new BaseListAdapter<HomePageInfo>(getBaseContext(), list, R.layout.activity_carnumberpay_item, null);
+            adapter = new BaseListAdapter<HomePageInfo>(getBaseContext(), list, R.layout.list_item_done, null);
             listView.setAdapter(adapter);
         } else {
             adapter.update(list);

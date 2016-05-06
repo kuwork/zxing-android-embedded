@@ -34,7 +34,7 @@
             android:dividerHeight="0.5dp"
             android:listSelector="@null"
             android:minHeight="50dp"
-            tools:listitem="@layout/activity_carnumberpay_item" />
+            tools:listitem="@layout/list_item_done" />
 
         <TextView style="@style/line_style" />
 

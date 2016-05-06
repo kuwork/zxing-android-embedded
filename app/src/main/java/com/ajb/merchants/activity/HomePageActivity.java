@@ -48,6 +48,7 @@ import com.ajb.merchants.adapter.SortAdapter;
 import com.ajb.merchants.adapter.SortDistrictAdapter;
 import com.ajb.merchants.fragment.BaseFragment;
 import com.ajb.merchants.fragment.HomeFragment;
+import com.ajb.merchants.fragment.MainFragment;
 import com.ajb.merchants.interfaces.OnCameraListener;
 import com.ajb.merchants.interfaces.OnLocateListener;
 import com.ajb.merchants.interfaces.OnSearchListener;
@@ -157,6 +158,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private ImageView iv_nav_indicator;
     private int indicatorWidth = 0;
     private FrameLayout mFirstListViewLayout, mSecondListViewLayout;
+    private MainFragment main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,10 +169,10 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         manager = getSupportFragmentManager();
         homeName = sharedFileUtils.getString(SharedFileUtils.HOME_NAME);
         if (TextUtils.isEmpty(homeName)) {
-            homeName = HomeFragment.class.getSimpleName();
+            homeName = MainFragment.class.getSimpleName();
             sharedFileUtils.putString(SharedFileUtils.HOME_NAME, homeName);
         }
-        initMain();
+        initFirst();
 //        if (initDirs()) {
 //            initNavi();
 //        }
@@ -233,9 +235,11 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     /**
      * 主页设置
      */
-    private void initMain() {
+    private void initFirst() {
         if (homeName.equals(HomeFragment.class.getSimpleName())) {
             initHome();
+        } else if (homeName.equals(MainFragment.class.getSimpleName())) {
+            initMain();
         }
     }
 
@@ -535,6 +539,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
         switchContent(mContent, home);
         initTitle(getString(R.string.app_name));
+        initHeaderDivider(false);
         if (hasPayNews) {
             initMenuClick(R.drawable.actionbar_scan, R.string.action_shoot, this,
                     R.drawable.actionbar_pay_news, R.string.action_pay, this);
@@ -542,14 +547,34 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             initMenuClick(R.drawable.actionbar_scan, R.string.action_shoot, this,
                     R.drawable.actionbar_pay_news, R.string.action_pay, this);
         }
-        if (homeName.equals(HomeFragment.class.getSimpleName())) {
+        if (homeName.equals(MainFragment.class.getSimpleName())) {
             initDrawer();
             initBackClick(R.drawable.actionbar_menu, this);
         } else {
             initBackClick(R.drawable.actionbar_goback, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    initMain();
+                    initFirst();
+                }
+            });
+        }
+    }
+
+    private void initMain() {
+        if (main == null) {
+            main = MainFragment.newInstance();
+        }
+        switchContent(mContent, main);
+        initTitle("");
+        initHeaderDivider(false);
+        if (homeName.equals(MainFragment.class.getSimpleName())) {
+            initDrawer();
+            initBackClick(R.drawable.actionbar_menu, this);
+        } else {
+            initBackClick(R.drawable.actionbar_goback, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    initFirst();
                 }
             });
         }
