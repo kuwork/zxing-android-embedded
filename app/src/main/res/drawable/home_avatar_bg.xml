@@ -5,8 +5,8 @@
         <shape android:shape="oval">
             <!-- 大小 -->
             <size
-                android:width="50dp"
-                android:height="50dp" />
+                android:width="90dp"
+                android:height="90dp" />
             <!-- 填充 -->
             <solid android:color="@color/white_percent_10" />
         </shape>
@@ -20,8 +20,8 @@
         <shape android:shape="oval">
             <!-- 大小 -->
             <size
-                android:width="50dp"
-                android:height="50dp" />
+                android:width="90dp"
+                android:height="90dp" />
             <!-- 填充 -->
             <solid android:color="@color/white_percent_15" />
         </shape>

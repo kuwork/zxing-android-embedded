@@ -27,18 +27,52 @@
                         android:scaleType="centerCrop"
                         android:src="@mipmap/default_header_bg" />
 
-                    <RelativeLayout style="@style/layout_allFilled_style">
+                    <LinearLayout
+                        style="@style/layout_allFilled_style"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            style="@style/layout_allFilled_style"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_centerInParent="true">
+
+                                <View
+                                    style="@style/layout_allFilled_style"
+                                    android:background="@drawable/home_avatar_bg" />
+
+                                <com.ajb.merchants.view.RoundedImageView
+                                    android:id="@+id/img_avatar"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/default_avatar" />
+                            </FrameLayout>
+
+                            <TextView
+                                style="@style/item_tv_style"
+                                android:layout_marginTop="@dimen/layout_Margin_5"
+                                android:text="新疆牛肉面店"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
 
                         <com.ajb.merchants.view.MyGridView
                             android:id="@+id/balanceGridView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:background="#a0ffffff"
+                            android:layout_gravity="bottom"
+                            android:background="@color/white_percent_15"
                             android:numColumns="4"
                             android:scrollbars="none"
                             tools:listitem="@layout/balance_limit_item" />
-                    </RelativeLayout>
+                    </LinearLayout>
                 </com.ajb.merchants.view.ScaleFrameLayout>
             </LinearLayout>
 

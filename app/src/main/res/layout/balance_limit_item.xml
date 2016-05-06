@@ -11,6 +11,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="@dimen/layout_Margin_5"
         android:layout_marginTop="@dimen/layout_Margin_5"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="100元"
+            android:textColor="@color/white"
             android:textSize="16dp" />
 
         <TextView
@@ -27,8 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/layout_Margin_5"
+            android:layout_marginTop="2dp"
             android:text="当月已赠金额"
+            android:textColor="@color/white"
             android:textSize="12dp" />
     </LinearLayout>
 
@@ -38,7 +41,7 @@
         android:layout_alignBottom="@+id/contentLayout"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/contentLayout"
-        android:background="@color/white"
+        android:background="@color/white_percent_50"
         android:visibility="visible" />
 
 </RelativeLayout>

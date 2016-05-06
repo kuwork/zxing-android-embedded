@@ -12,6 +12,7 @@
     <color name="white">#ffffff</color>
     <color name="white_percent_10">#1Affffff</color>
     <color name="white_percent_15">#26ffffff</color>
+    <color name="white_percent_50">#80ffffff</color>
     <!-- DrawerLayout 等主题颜色-->
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#141414</color>
@@ -24,7 +25,7 @@
     <!-- 标题栏背景色 -->
     <color name="header_bg_color">#24a7eb</color>
     <!-- 间隔线条颜色 -->
-    <color name="line_color">#E3E4E5</color>
+    <color name="line_color">#E5E5E5</color>
     <!-- 一号字体颜色 -->
     <color name="item_tv_color_01">#333333</color>
     <!-- 其他字体颜色 -->
