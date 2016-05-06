@@ -3,10 +3,10 @@
 
     <gradient
         android:angle="45"
-        android:endColor="@color/coupon_bg"
-        android:startColor="@color/coupon_bg" />
+        android:endColor="@color/white"
+        android:startColor="@color/white" />
 
-    <solid android:color="@color/coupon_bg" />
+    <solid android:color="@color/white" />
 
     <stroke
         android:width="0.5dp"

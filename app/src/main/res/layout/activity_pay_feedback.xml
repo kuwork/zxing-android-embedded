@@ -27,7 +27,7 @@
                 style="@style/layout_widthfilled_style"
                 android:divider="@null"
                 android:dividerHeight="0dp"
-                android:listSelector="@color/transparent" />
+                android:listSelector="@color/transparentColor" />
 
             <EditText
                 android:id="@+id/ed_another_words"
