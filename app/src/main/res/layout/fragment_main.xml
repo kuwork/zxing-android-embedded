@@ -25,7 +25,7 @@
                     <ImageView
                         style="@style/layout_allFilled_style"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/pc01" />
+                        android:src="@mipmap/default_header_bg" />
 
                     <RelativeLayout style="@style/layout_allFilled_style">
 

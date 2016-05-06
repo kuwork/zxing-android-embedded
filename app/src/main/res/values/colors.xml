@@ -10,6 +10,8 @@
     <color name="transparentColor">#00000000</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="white_percent_10">#1Affffff</color>
+    <color name="white_percent_15">#26ffffff</color>
     <!-- DrawerLayout 等主题颜色-->
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#141414</color>
