@@ -10,6 +10,7 @@
 
     <!--主页内容-->
     <include layout="@layout/content_home_page" />
+    <!--<include layout="@layout/fragment_main" />-->
 
     <include layout="@layout/header_btn_layout" />
     <!--<android.support.design.widget.FloatingActionButton-->

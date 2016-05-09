@@ -32,6 +32,9 @@
     </style>
 
     <style name="AppThemeTran.NoActionBar">
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
@@ -49,7 +52,7 @@
         <item name="actionOverflowMenuStyle">@style/OverFlowMenuStyle</item>
         <!-- 菜单项点击selector-->
         <!--<item name="actionBarItemBackground">@drawable/bg_select</item>-->
-        <!--<item name="selectableItemBackground">@drawable/selector_btn</item>-->
+        <item name="selectableItemBackground">@drawable/selector_btn</item>
         <!--Navigation bar color-->
         <item name="android:windowBackground">@color/colorWindowBackground</item>
 
@@ -93,6 +96,18 @@
         <item name="actionMenuTextColor">@color/colorTextColorPrimary</item>
     </style>
 
+    <style name="AppThemeTran.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!--去掉阴影-->
+        <!-- remove shadow below action bar -->
+        <item name="android:elevation">0dp</item>
+        <!-- Support library compatibility -->
+        <item name="elevation">0dp</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="android:textColorPrimary">@color/colorWindowBackground</item>
+        <item name="android:textColorSecondary">@color/colorWindowBackground</item>
+        <item name="actionMenuTextColor">@color/colorTextColorPrimary</item>
+    </style>
+
     <!-- 页面菜单条目 -->
     <style name="item_layout">
         <item name="android:background">@drawable/selector_btn</item>
@@ -111,6 +126,10 @@
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@color/line_color</item>
+    </style>
+
+    <style name="AppThemeTran.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:background">@color/line_color</item>
     </style>
 

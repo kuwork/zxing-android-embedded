@@ -124,7 +124,7 @@ public final class ViewfinderView extends View {
 			// frame.bottom - 1, paint);
 			// canvas.drawRect(frame.left, frame.bottom - 1, frame.right + 1,
 			// frame.bottom + 1, paint);
-			paint.setColor(ContextCompat.getColor(getContext(),R.color.header_bg_color));
+			paint.setColor(ContextCompat.getColor(getContext(),R.color.btn_color_normal));
 			// 画出四个角
 			canvas.drawRect(frame.left - 10, frame.top - 10, frame.left + 20,
 					frame.top, paint);

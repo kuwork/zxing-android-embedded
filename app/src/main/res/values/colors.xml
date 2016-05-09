@@ -22,8 +22,6 @@
     <color name="colorTextColorPrimary">#141414</color>
     <color name="overflowTextColor">#141414</color>
     <color name="colorDrawerArrow">#1E1F21</color>
-    <!-- 标题栏背景色 -->
-    <color name="header_bg_color">#24a7eb</color>
     <!-- 间隔线条颜色 -->
     <color name="line_color">#E5E5E5</color>
     <!-- 一号字体颜色 -->
