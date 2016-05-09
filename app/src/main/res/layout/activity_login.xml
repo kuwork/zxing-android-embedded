@@ -59,7 +59,8 @@
                     android:inputType="number"
                     android:maxLength="11"
                     android:paddingLeft="@dimen/layout_Margin_10"
-                    android:phoneNumber="true" />
+                    android:phoneNumber="true"
+                    android:textColorHint="@color/item_tv_color_04" />
             </LinearLayout>
 
             <LinearLayout
@@ -97,7 +98,8 @@
                     android:hint="@string/tip_login_code"
                     android:inputType="number"
                     android:maxLength="8"
-                    android:paddingLeft="@dimen/layout_Margin_10" />
+                    android:paddingLeft="@dimen/layout_Margin_10"
+                    android:textColorHint="@color/item_tv_color_04" />
             </LinearLayout>
 
             <LinearLayout
