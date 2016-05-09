@@ -23,9 +23,10 @@
                     scaleImageViewAttr:expectW="750">
 
                     <ImageView
+                        android:id="@+id/imgHeaderBanner"
                         style="@style/layout_allFilled_style"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/default_header_bg" />
+                        android:src="@mipmap/header_bg" />
 
                     <LinearLayout
                         style="@style/layout_allFilled_style"

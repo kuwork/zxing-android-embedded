@@ -14,8 +14,8 @@
     <color name="white_percent_15">#26ffffff</color>
     <color name="white_percent_50">#80ffffff</color>
     <!-- DrawerLayout 等主题颜色-->
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#141414</color>
+    <color name="colorPrimary">#FF7800</color>
+    <color name="colorPrimaryDark">#FF7800</color>
     <color name="colorAccent">#F98E28</color>
     <color name="colorControlNormal">#1E1F21</color>
     <color name="colorWindowBackground">#f2f2f2</color>
@@ -31,6 +31,7 @@
     <!-- 其他字体颜色 -->
     <color name="item_tv_color_02">#787878</color>
     <color name="item_tv_color_03">#666666</color>
+    <color name="item_tv_color_04">#B0B0B0</color>
     <!-- 按钮颜色 橙色系 -->
     <color name="btn_color_normal">#FD790C</color>
     <color name="btn_color_pressed">#FEBA70</color>

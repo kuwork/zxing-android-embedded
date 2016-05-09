@@ -29,6 +29,14 @@
         <!-- 状态栏和标题栏颜色-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/colorWindowBackground</item>
+    </style>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+        <!-- customize the color palette -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <!-- 标题颜色-->
         <item name="android:textColorPrimary">@color/colorTextColorPrimary</item>
         <!-- 箭头 -->
@@ -37,16 +45,11 @@
         <!--<item name="actionOverflowButtonStyle">@style/OverFlowButtonStyle</item>-->
         <!-- 溢出菜单文字颜色-->
         <item name="textAppearanceLargePopupMenu">@style/OverflowMenuTextAppearance</item>
-
         <item name="actionOverflowMenuStyle">@style/OverFlowMenuStyle</item>
-
         <!-- 菜单项点击selector-->
         <item name="actionBarItemBackground">@color/colorAccent</item>
-
         <item name="colorControlNormal">@color/colorControlNormal</item>
         <item name="android:textColorSecondary">@color/white</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/colorWindowBackground</item>
     </style>
 
     <!-- 左边的箭头指示-->
@@ -179,9 +182,9 @@
     <style name="item_tv_style" parent="@style/layout_allWraped_style">
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/item_tv_color_01</item>
-        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColorHint">@color/item_tv_color_02</item>
+        <item name="android:textColorHint">@color/item_tv_color_04</item>
     </style>
 
     <style name="item_tv_second_style" parent="@style/layout_allWraped_style">

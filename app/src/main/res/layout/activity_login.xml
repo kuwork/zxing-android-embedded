@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/layout_allFilled_style"
-    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <include
@@ -16,7 +15,6 @@
             style="@style/layout_allFilled_style"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/title_bar"
-            android:background="@color/white"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
@@ -25,72 +23,70 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/layout_Margin_20"
+                android:layout_marginTop="40dp"
                 android:background="@mipmap/ic_launcher" />
-
-            <TextView
-                style="@style/item_tv_style"
-                android:layout_marginTop="20dp"
-                android:text="掌停宝" />
-
-            <TextView
-                style="@style/line_style"
-                android:layout_marginTop="20dp" />
 
             <LinearLayout
                 style="@style/item_layout"
                 android:layout_height="50dp"
+                android:layout_margin="@dimen/layout_Margin_10"
+                android:background="@drawable/radius_bg_white"
                 android:orientation="horizontal">
 
                 <ImageView
                     style="@style/item_img_style"
+                    android:layout_width="@dimen/text_size_18"
+                    android:layout_height="@dimen/text_size_18"
+                    android:layout_marginLeft="@dimen/layout_Margin_15"
+                    android:layout_marginRight="@dimen/layout_Margin_15"
                     android:src="@mipmap/ic_account" />
 
                 <TextView
                     style="@style/line_2_style"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/layout_Margin_5"
-                    android:layout_marginRight="@dimen/layout_Margin_5" />
+                    android:layout_width="@dimen/line_height"
+                    android:layout_height="@dimen/layout_Margin_20"
+                    android:layout_gravity="center" />
 
                 <EditText
-                    android:id="@+id/ed_phone"
+                    android:id="@+id/ed_account"
                     style="@style/item_tv_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:gravity="left|center_vertical"
                     android:hint="@string/tip_login_account"
                     android:inputType="number"
                     android:maxLength="11"
+                    android:paddingLeft="@dimen/layout_Margin_10"
                     android:phoneNumber="true" />
             </LinearLayout>
-
-            <TextView
-                style="@style/line_style"
-                android:layout_marginLeft="@dimen/layout_Margin_10"
-                android:layout_marginRight="@dimen/layout_Margin_10" />
 
             <LinearLayout
                 android:id="@+id/lv_code"
                 style="@style/item_layout"
                 android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/layout_Margin_10"
+                android:layout_marginRight="@dimen/layout_Margin_10"
+                android:background="@drawable/radius_bg_white"
                 android:orientation="horizontal">
 
                 <ImageView
                     style="@style/item_img_style"
+                    android:layout_width="@dimen/text_size_18"
+                    android:layout_height="@dimen/text_size_18"
+                    android:layout_marginLeft="@dimen/layout_Margin_15"
+                    android:layout_marginRight="@dimen/layout_Margin_15"
                     android:src="@mipmap/ic_msg" />
 
                 <TextView
                     style="@style/line_2_style"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/layout_Margin_5"
-                    android:layout_marginRight="@dimen/layout_Margin_5" />
+                    android:layout_width="@dimen/line_height"
+                    android:layout_height="@dimen/layout_Margin_20"
+                    android:layout_gravity="center" />
 
                 <EditText
-                    android:id="@+id/ed_code"
+                    android:id="@+id/ed_password"
                     style="@style/item_tv_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -100,35 +96,38 @@
                     android:gravity="left|center_vertical"
                     android:hint="@string/tip_login_code"
                     android:inputType="number"
-                    android:maxLength="8" />
-
-                <TextView
-                    style="@style/line_2_style"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/layout_Margin_5"
-                    android:layout_marginRight="@dimen/layout_Margin_5" />
-
-                <TextView
-                    android:id="@+id/btn_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="6"
-                    android:gravity="center"
-                    android:text="@string/tip_login_send_code"
-                    android:textColor="#FD790C"
-                    android:textSize="18sp" />
+                    android:maxLength="8"
+                    android:paddingLeft="@dimen/layout_Margin_10" />
             </LinearLayout>
 
-            <TextView
-                style="@style/line_style"
-                android:layout_marginBottom="20dp" />
+            <LinearLayout
+                style="@style/layout_widthfilled_style"
+                android:layout_margin="@dimen/layout_Margin_10"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkbox_consent_agreement"
+                    style="@style/layout_allWraped_style"
+                    android:layout_width="@dimen/layout_Margin_15"
+                    android:layout_height="@dimen/layout_Margin_15"
+                    android:background="@drawable/checkbox_selector"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvAgreement"
+                    style="@style/item_tv_forth_style"
+                    android:layout_marginLeft="@dimen/layout_Margin_5"
+                    android:text="@string/tip_consent_agreement"
+                    android:textColor="@color/item_tv_color_04" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_sure"
                 style="@style/btn_style"
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/layout_Margin_30"
                 android:gravity="center"
                 android:text="@string/tip_login_btn" />
         </LinearLayout>

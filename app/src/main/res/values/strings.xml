@@ -53,10 +53,11 @@
     <string name="goIn"><u>点击查看</u></string>
     <string name="tip_add_coupon_code">添加优惠码</string>
     <string name="tip_please_input_coupon_code">请输入优惠码</string>
-    <string name="tip_login_account">请输入您的手机号码</string>
-    <string name="tip_login_code">请输入验证码</string>
+    <string name="tip_login_account">请输入商户账号</string>
+    <string name="tip_login_code">请输入商户密码</string>
     <string name="tip_login_send_code">获取</string>
     <string name="tip_login_btn">登录</string>
     <string name="tip_charge_account">请输入您需要充值的手机账号</string>
+    <string name="tip_consent_agreement">我已阅读并同意商户服务协议</string>
 
 </resources>
