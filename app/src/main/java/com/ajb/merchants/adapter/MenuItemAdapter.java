@@ -89,213 +89,232 @@ public class MenuItemAdapter<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         T t = mItems.get(position);
-        if (t instanceof LvMenuItem) {
-            LvMenuItem item = (LvMenuItem) t;
-            switch (item.type) {
-                case LvMenuItem.TYPE_NORMAL:
+        MenuInfo item = (MenuInfo) t;
+        if (ModularMenu.CODE_LEFTMENU.equals(modularCode)) {    //侧滑菜单
+            switch (item.getType()) {
+                case MenuInfo.TYPE_NORMAL:
                     if (convertView == null) {
-                        convertView = mInflater.inflate(R.layout.design_drawer_item, parent,
-                                false);
+                        convertView = mInflater.inflate(R.layout.design_drawer_item_custom, parent, false);
                     }
-                    TextView itemView = (TextView) convertView;
-                    itemView.setText(item.name);
-                    Drawable icon = mContext.getResources().getDrawable(item.icon);
-                    setIconColor(icon);
-                    if (icon != null) {
-                        icon.setBounds(0, 0, mIconSize, mIconSize);
-                        TextViewCompat.setCompoundDrawablesRelative(itemView, icon, null, null, null);
+                    TextView itemView = (TextView) convertView.findViewById(R.id.drawer_custom_tv);
+                    TextView itemDesc = (TextView) convertView.findViewById(R.id.drawer_custom_desc_tv);
+                    ImageView imageView = (ImageView) convertView.findViewById(R.id.drawer_custom_img);
+                    if (itemView != null) {
+                        itemView.setText(item.getMenuValue());
                     }
+                    if (imageView != null) {
+                        if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
+                            bitmapUtils.display(imageView, item.getMenuPictureUrl());
+                        } else {
+                            imageView.setImageBitmap(null);
+                        }
+                    }
+                    if (itemDesc != null) {
+                        itemDesc.setText(item.getDesc());
+                        if (isDots(item.getMenuCode())) {
+                            Drawable icon = mContext.getResources().getDrawable(R.drawable.dots_red);
+                            if (icon != null) {
+                                icon.setBounds(0, 0, mDotsSize, mDotsSize);
+                                TextViewCompat.setCompoundDrawablesRelative(itemDesc, null, null, icon, null);
+                            }
+                        } else {
+                            TextViewCompat.setCompoundDrawablesRelative(itemDesc, null, null, null, null);
+                        }
+                    }
+                    break;
 
-                    break;
-                case LvMenuItem.TYPE_NO_ICON:
-                    if (convertView == null) {
-                        convertView = mInflater.inflate(R.layout.design_drawer_item_subheader,
-                                parent, false);
-                    }
-                    TextView subHeader = (TextView) convertView;
-                    subHeader.setText(item.name);
-                    break;
-                case LvMenuItem.TYPE_SEPARATOR:
+                case MenuInfo.TYPE_SEPARATOR:
                     if (convertView == null) {
                         convertView = mInflater.inflate(R.layout.design_drawer_item_separator,
                                 parent, false);
                     }
                     break;
             }
-        } else if (t instanceof MenuInfo) {
-            MenuInfo item = (MenuInfo) t;
-            if (ModularMenu.CODE_LEFTMENU.equals(modularCode)) {    //侧滑菜单
-                switch (item.getType()) {
-                    case MenuInfo.TYPE_NORMAL:
-                        if (convertView == null) {
-                            convertView = mInflater.inflate(R.layout.design_drawer_item_custom, parent, false);
+        } else if (ModularMenu.CODE_SETTING.equals(modularCode) || ModularMenu.CODE_ACCOUNT.equals(modularCode)) {  //设置界面
+
+
+            switch (item.getType()) {
+                case MenuInfo.TYPE_NORMAL:
+                    if (convertView == null) {
+                        if (ModularMenu.CODE_ACCOUNT.equals(modularCode)) {
+                            convertView = mInflater.inflate(R.layout.account_item_custom, parent, false);
+                        } else {
+                            convertView = mInflater.inflate(R.layout.setting_item_custom, parent, false);
                         }
-                        TextView itemView = (TextView) convertView.findViewById(R.id.drawer_custom_tv);
-                        TextView itemDesc = (TextView) convertView.findViewById(R.id.drawer_custom_desc_tv);
-                        ImageView imageView = (ImageView) convertView.findViewById(R.id.drawer_custom_img);
-                        if (itemView != null) {
-                            itemView.setText(item.getMenuValue());
-                        }
-                        if (imageView != null) {
-                            if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
-                                bitmapUtils.display(imageView, item.getMenuPictureUrl());
-                            } else {
-                                imageView.setImageBitmap(null);
-                            }
-                        }
-                        if (itemDesc != null) {
+                    }
+                    TextView itemName = (TextView) convertView.findViewById(R.id.setting_item_name_tv);
+                    TextView itemDesc = (TextView) convertView.findViewById(R.id.setting_item_desc_tv);
+                    ImageView dotsImg = (ImageView) convertView.findViewById(R.id.setting_item_dots_img);
+                    if (itemName != null) {
+                        itemName.setText(item.getTitle());
+                    }
+                    if (itemDesc != null) {
+                        if (TextUtils.isEmpty(item.getDesc())) {
+                            itemDesc.setVisibility(View.GONE);
+                        } else {
                             itemDesc.setText(item.getDesc());
-                            if (isDots(item.getMenuCode())) {
-                                Drawable icon = mContext.getResources().getDrawable(R.drawable.dots_red);
-                                if (icon != null) {
-                                    icon.setBounds(0, 0, mDotsSize, mDotsSize);
-                                    TextViewCompat.setCompoundDrawablesRelative(itemDesc, null, null, icon, null);
-                                }
-                            } else {
-                                TextViewCompat.setCompoundDrawablesRelative(itemDesc, null, null, null, null);
-                            }
+                            itemDesc.setVisibility(View.VISIBLE);
                         }
-                        break;
-
-                    case MenuInfo.TYPE_SEPARATOR:
-                        if (convertView == null) {
-                            convertView = mInflater.inflate(R.layout.design_drawer_item_separator,
-                                    parent, false);
-                        }
-                        break;
-                }
-            } else if (ModularMenu.CODE_SETTING.equals(modularCode) || ModularMenu.CODE_ACCOUNT.equals(modularCode)) {  //设置界面
-
-
-                switch (item.getType()) {
-                    case MenuInfo.TYPE_NORMAL:
-                        if (convertView == null) {
-                            if (ModularMenu.CODE_ACCOUNT.equals(modularCode)) {
-                                convertView = mInflater.inflate(R.layout.account_item_custom, parent, false);
-                            } else {
-                                convertView = mInflater.inflate(R.layout.setting_item_custom, parent, false);
-                            }
-                        }
-                        TextView itemName = (TextView) convertView.findViewById(R.id.setting_item_name_tv);
-                        TextView itemDesc = (TextView) convertView.findViewById(R.id.setting_item_desc_tv);
-                        ImageView dotsImg = (ImageView) convertView.findViewById(R.id.setting_item_dots_img);
-                        if (itemName != null) {
-                            itemName.setText(item.getTitle());
-                        }
-                        if (itemDesc != null) {
-                            if (TextUtils.isEmpty(item.getDesc())) {
-                                itemDesc.setVisibility(View.GONE);
-                            } else {
-                                itemDesc.setText(item.getDesc());
-                                itemDesc.setVisibility(View.VISIBLE);
-                            }
-                        }
-                        if (dotsImg != null) {
-                            if (isDots(item.getMenuCode())) {
-                                dotsImg.setVisibility(View.VISIBLE);
-                            } else {
-                                dotsImg.setVisibility(View.GONE);
-                            }
-                        }
-
-                        ImageView imageView = (ImageView) convertView.findViewById(R.id.drawer_custom_img);
-                        if (imageView != null) {
-                            if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
-                                imageView.setVisibility(View.VISIBLE);
-                                bitmapUtils.display(imageView, item.getMenuPictureUrl());
-                            } else {
-                                imageView.setVisibility(View.GONE);
-                                imageView.setImageBitmap(null);
-                            }
-                        }
-                        break;
-
-                    case MenuInfo.TYPE_SEPARATOR:
-                        if (convertView == null) {
-                            convertView = mInflater.inflate(R.layout.design_drawer_item_separator,
-                                    parent, false);
-                            View view = convertView.findViewById(R.id.separetor);
-                            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-                            params.setMargins(DensityUtil.dp2px(mContext, 10), 0, DensityUtil.dp2px(mContext, 10), 0);
-                            view.setLayoutParams(params);
-                        }
-                        break;
-
-                    case MenuInfo.TYPE_DIVIDE://大分割线
-                        if (convertView == null) {
-                            convertView = mInflater.inflate(R.layout.setting_item_divide,
-                                    parent, false);
-                        }
-                        if (position == 0) {
-                            convertView.findViewById(R.id.separetor1).setVisibility(View.GONE);
-                            convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
-                        } else if (position == getCount() - 1) {
-                            convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
-                            convertView.findViewById(R.id.separetor2).setVisibility(View.GONE);
+                    }
+                    if (dotsImg != null) {
+                        if (isDots(item.getMenuCode())) {
+                            dotsImg.setVisibility(View.VISIBLE);
                         } else {
-                            convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
-                            convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
+                            dotsImg.setVisibility(View.GONE);
                         }
-                        break;
-                }
-            } else if (ModularMenu.CODE_MENU.equals(modularCode)) {//菜单
-                switch (item.getType()) {
-                    case MenuInfo.TYPE_NORMAL:
-                        if (convertView == null) {
-                            convertView = mInflater.inflate(R.layout.menu_list_item, parent, false);
-                        }
-                        TextView itemName = (TextView) convertView.findViewById(R.id.setting_item_name_tv);
-                        TextView itemDesc = (TextView) convertView.findViewById(R.id.setting_item_desc_tv);
-                        ImageView dotsImg = (ImageView) convertView.findViewById(R.id.setting_item_dots_img);
-                        if (itemName != null) {
-                            itemName.setText(item.getTitle());
-                        }
-                        if (itemDesc != null) {
-                            if (TextUtils.isEmpty(item.getDesc())) {
-                                itemDesc.setVisibility(View.GONE);
-                            } else {
-                                itemDesc.setText(item.getDesc());
-                                itemDesc.setVisibility(View.VISIBLE);
-                            }
-                        }
-                        if (dotsImg != null) {
-                            if (isDots(item.getMenuCode())) {
-                                dotsImg.setVisibility(View.VISIBLE);
-                            } else {
-                                dotsImg.setVisibility(View.GONE);
-                            }
-                        }
+                    }
 
-                        break;
-
-                    case MenuInfo.TYPE_SEPARATOR:
-                        if (convertView == null) {
-                            convertView = mInflater.inflate(R.layout.design_drawer_item_separator,
-                                    parent, false);
-                            View view = convertView.findViewById(R.id.separetor);
-                            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
-                            params.setMargins(DensityUtil.dp2px(mContext, 10), 0, DensityUtil.dp2px(mContext, 10), 0);
-                            view.setLayoutParams(params);
-                        }
-                        break;
-
-                    case MenuInfo.TYPE_DIVIDE://大分割线
-                        if (convertView == null) {
-                            convertView = mInflater.inflate(R.layout.setting_item_divide,
-                                    parent, false);
-                        }
-                        if (position == 0) {
-                            convertView.findViewById(R.id.separetor1).setVisibility(View.GONE);
-                            convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
-                        } else if (position == getCount() - 1) {
-                            convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
-                            convertView.findViewById(R.id.separetor2).setVisibility(View.GONE);
+                    ImageView imageView = (ImageView) convertView.findViewById(R.id.drawer_custom_img);
+                    if (imageView != null) {
+                        if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
+                            imageView.setVisibility(View.VISIBLE);
+                            bitmapUtils.display(imageView, item.getMenuPictureUrl());
                         } else {
-                            convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
-                            convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
+                            imageView.setVisibility(View.GONE);
+                            imageView.setImageBitmap(null);
                         }
-                        break;
-                }
+                    }
+                    break;
+
+                case MenuInfo.TYPE_SEPARATOR:
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.design_drawer_item_separator,
+                                parent, false);
+                        View view = convertView.findViewById(R.id.separetor);
+                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+                        params.setMargins(DensityUtil.dp2px(mContext, 10), 0, DensityUtil.dp2px(mContext, 10), 0);
+                        view.setLayoutParams(params);
+                    }
+                    break;
+
+                case MenuInfo.TYPE_DIVIDE://大分割线
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.setting_item_divide,
+                                parent, false);
+                    }
+                    if (position == 0) {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.GONE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
+                    } else if (position == getCount() - 1) {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.GONE);
+                    } else {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
+                    }
+                    break;
+            }
+        } else if (ModularMenu.CODE_MENU.equals(modularCode)) {//菜单
+            switch (item.getType()) {
+                case MenuInfo.TYPE_NORMAL:
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.menu_list_item, parent, false);
+                    }
+                    TextView itemName = (TextView) convertView.findViewById(R.id.setting_item_name_tv);
+                    TextView itemDesc = (TextView) convertView.findViewById(R.id.setting_item_desc_tv);
+                    ImageView dotsImg = (ImageView) convertView.findViewById(R.id.setting_item_dots_img);
+                    if (itemName != null) {
+                        itemName.setText(item.getTitle());
+                    }
+                    if (itemDesc != null) {
+                        if (TextUtils.isEmpty(item.getDesc())) {
+                            itemDesc.setVisibility(View.GONE);
+                        } else {
+                            itemDesc.setText(item.getDesc());
+                            itemDesc.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    if (dotsImg != null) {
+                        if (isDots(item.getMenuCode())) {
+                            dotsImg.setVisibility(View.VISIBLE);
+                        } else {
+                            dotsImg.setVisibility(View.GONE);
+                        }
+                    }
+
+                    break;
+
+                case MenuInfo.TYPE_SEPARATOR:
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.design_drawer_item_separator,
+                                parent, false);
+                        View view = convertView.findViewById(R.id.separetor);
+                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
+                        params.setMargins(DensityUtil.dp2px(mContext, 10), 0, DensityUtil.dp2px(mContext, 10), 0);
+                        view.setLayoutParams(params);
+                    }
+                    break;
+
+                case MenuInfo.TYPE_DIVIDE://大分割线
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.setting_item_divide,
+                                parent, false);
+                    }
+                    if (position == 0) {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.GONE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
+                    } else if (position == getCount() - 1) {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.GONE);
+                    } else {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
+                    }
+                    break;
+            }
+        } else if (ModularMenu.CODE_COUPON.equals(modularCode)) {//优惠方式菜单
+            switch (item.getType()) {
+                case MenuInfo.TYPE_NORMAL:
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.grid_menu_item, parent, false);
+                    }
+                    TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+                    ImageView imgMenu = (ImageView) convertView.findViewById(R.id.imgMenu);
+                    if (tvTitle != null) {
+                        tvTitle.setText(item.getTitle());
+                    }
+                    if (imgMenu != null) {
+                        if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
+                            bitmapUtils.display(imgMenu, item.getMenuPictureUrl());
+                        } else {
+                            imgMenu.setImageBitmap(null);
+                        }
+                    }
+                    break;
+                case MenuInfo.TYPE_SEPARATOR:
+                    break;
+
+                case MenuInfo.TYPE_DIVIDE://大分割线
+                    break;
+            }
+        } else if (ModularMenu.CODE_MAIN_MENU.equals(modularCode)) {//主页功能菜单
+            switch (item.getType()) {
+                case MenuInfo.TYPE_NORMAL:
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.grid_menu_item2, parent, false);
+                    }
+                    TextView tvMenu = (TextView) convertView.findViewById(R.id.tvTitle);
+                    TextView tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
+                    ImageView imgMenu = (ImageView) convertView.findViewById(R.id.imgMenu);
+                    if (tvMenu != null) {
+                        tvMenu.setText(item.getTitle());
+                    }
+                    if (tvDesc != null) {
+                        tvDesc.setText(item.getDesc());
+                    }
+                    if (imgMenu != null) {
+                        if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
+                            bitmapUtils.display(imgMenu, item.getMenuPictureUrl());
+                        } else {
+                            imgMenu.setImageBitmap(null);
+                        }
+                    }
+                    break;
+                case MenuInfo.TYPE_SEPARATOR:
+                    break;
+
+                case MenuInfo.TYPE_DIVIDE://大分割线
+                    break;
             }
         }
         return convertView;
@@ -349,6 +368,16 @@ public class MenuItemAdapter<T> extends BaseAdapter {
         } else {
             mItems = leftMenus;
         }
+        notifyDataSetChanged();
+    }
+
+    public void update(List<T> leftMenus, String modularCode) {
+        if (leftMenus == null) {
+            mItems = new ArrayList<T>();
+        } else {
+            mItems = leftMenus;
+        }
+        this.modularCode = modularCode;
         notifyDataSetChanged();
     }
 

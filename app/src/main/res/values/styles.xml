@@ -164,6 +164,33 @@
         <item name="android:layout_margin">10dp</item>
         <item name="android:layout_gravity">center</item>
     </style>
+    <!--首页菜单-->
+    <style name="grid_menu_icon_style">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_margin">15dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="grid_menu_icon_style2">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="grid_menu_title_style" parent="@style/item_tv_style">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="grid_menu_title_style2" parent="@style/item_tv_style">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="grid_menu_desc_style2" parent="@style/item_tv_style">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">#9F9F9F</item>
+    </style>
     <!-- 没有开启GPS提示窗图标 -->
     <style name="dialog_img_style">
         <item name="android:layout_width">80dp</item>
@@ -327,10 +354,11 @@
 
     <!--Grid样式-->
     <style name="grid_style" parent="@style/layout_widthfilled_style">
-        <item name="android:horizontalSpacing">@dimen/layout_Margin_10</item>
-        <item name="android:verticalSpacing">@dimen/layout_Margin_10</item>
-        <item name="android:layout_marginLeft">@dimen/layout_Margin_10</item>
-        <item name="android:layout_marginRight">@dimen/layout_Margin_10</item>
+        <item name="android:horizontalSpacing">0.5dp</item>
+        <item name="android:verticalSpacing">0.5dp</item>
+        <item name="android:cacheColorHint">@color/transparentColor</item>
+        <item name="android:background">@color/transparentColor</item>
+        <item name="android:listSelector">@color/transparentColor</item>
     </style>
 
 </resources>

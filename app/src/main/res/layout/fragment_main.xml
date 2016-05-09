@@ -75,6 +75,27 @@
                             tools:listitem="@layout/balance_limit_item" />
                     </LinearLayout>
                 </com.ajb.merchants.view.ScaleFrameLayout>
+
+                <com.ajb.merchants.view.MyGridView
+                    android:id="@+id/couponGridView"
+                    style="@style/grid_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_Margin_10"
+                    android:numColumns="3"
+                    android:scrollbars="none"
+                    tools:listitem="@layout/grid_menu_item" />
+
+                <com.ajb.merchants.view.MyGridView
+                    android:id="@+id/menuGridView"
+                    style="@style/grid_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="@dimen/layout_Margin_10"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    tools:listitem="@layout/grid_menu_item2" />
             </LinearLayout>
 
         </ScrollView>

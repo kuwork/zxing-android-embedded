@@ -29,8 +29,8 @@
     <!-- 一号字体颜色 -->
     <color name="item_tv_color_01">#333333</color>
     <!-- 其他字体颜色 -->
-    <color name="item_tv_color_02">#787878</color>
-    <color name="item_tv_color_03">#666666</color>
+    <color name="item_tv_color_02">#666666</color>
+    <color name="item_tv_color_03">#999999</color>
     <color name="item_tv_color_04">#B0B0B0</color>
     <!-- 按钮颜色 橙色系 -->
     <color name="btn_color_normal">#FD790C</color>

@@ -1,0 +1,118 @@
+[
+  {
+    "modularId": 1,
+    "modularCode": "100001",
+    "modularEcode": "CouponMenuCode",
+    "modularValue": "优惠方式",
+    "modularUrl": "",
+    "pageCode": "",
+    "menuList": [
+      {
+        "groupId": 1,
+        "menuCode": "200001",
+        "menuValue": "扫卡优惠",
+        "operateType": "NATIVE",
+        "title": "扫卡优惠",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/2_icon.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "200002",
+        "menuValue": "车牌优惠",
+        "operateType": "NATIVE",
+        "title": "车牌优惠",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/3_icon.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "200003",
+        "menuValue": "卡号优惠",
+        "operateType": "NATIVE",
+        "title": "卡号优惠",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/4_icon.png"
+      }
+    ]
+  },
+  {
+    "modularId": 2,
+    "modularCode": "100002",
+    "modularEcode": "LeftMenuCode",
+    "modularValue": "首页功能菜单",
+    "modularUrl": "",
+    "pageCode": "Home",
+    "menuList": [
+      {
+        "groupId": 1,
+        "menuCode": "200011",
+        "menuValue": "发布优惠",
+        "desc": "向车主发布优惠信息",
+        "operateType": "NATIVE",
+        "title": "发布优惠",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/5_icon.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "200012",
+        "menuValue": "购买优惠",
+        "operateType": "NATIVE",
+        "desc": "向车场在线购买优惠",
+        "title": "购买一会优惠",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/6_icon.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "200013",
+        "menuValue": "回收优惠",
+        "title": "回收优惠",
+        "desc": "回收派发错误优惠",
+        "operateType": "NATIVE",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/7_icon.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "200014",
+        "menuValue": "账号管理",
+        "title": "账号管理",
+        "desc": "子账号分配管理",
+        "operateType": "NATIVE",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/8_icon.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "200015",
+        "menuValue": "查看购买推送信息",
+        "operateType": "NATIVE",
+        "desc": "查看购买、赠送信息",
+        "title": "查看购买推送信息",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/9_icon.png"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "200016",
+        "menuValue": "密码重置",
+        "title": "密码重置",
+        "desc": "重新设置登陆密码",
+        "operateType": "NATIVE",
+        "type": "NORMAL",
+        "needLogin": true,
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/10_icon.png"
+      }
+    ]
+  }
+]
