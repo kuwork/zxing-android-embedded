@@ -2,25 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/account_header"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="175dp"
     android:paddingBottom="@dimen/layout_Margin_10"
-    android:paddingLeft="@dimen/layout_Margin_10"
+    android:paddingLeft="@dimen/layout_Margin_30"
     android:paddingRight="@dimen/layout_Margin_10"
-    android:paddingTop="@dimen/layout_Margin_10"
+    android:paddingTop="62dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
     <FrameLayout
         android:id="@+id/imgAvatarLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginRight="@dimen/layout_Margin_10">
 
-        <ImageView
+        <View
+            style="@style/layout_allFilled_style"
+            android:background="@drawable/home_avatar_black_bg" />
+
+        <com.ajb.merchants.view.RoundedImageView
             android:id="@+id/imgAvator"
-            style="@style/account_img_style"
-            android:layout_margin="0dp"
-            android:src="@mipmap/user_avatars" />
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_avatar" />
     </FrameLayout>
 
     <LinearLayout
@@ -29,6 +36,7 @@
         android:layout_alignBottom="@+id/imgAvatarLayout"
         android:layout_alignTop="@+id/imgAvatarLayout"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/layout_Margin_10"
         android:layout_toRightOf="@+id/imgAvatarLayout"
         android:gravity="center_vertical"
         android:orientation="vertical">
@@ -40,33 +48,11 @@
             android:text="未登录"
             android:textColor="@color/item_tv_color_02" />
 
-        <LinearLayout
-            android:id="@+id/scoreLayout"
-            style="@style/layout_allWraped_style"
-            android:layout_marginLeft="@dimen/layout_Margin_5"
-            android:layout_marginRight="@dimen/layout_Margin_5"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="@dimen/layout_Margin_5"
-                android:src="@mipmap/integral" />
-
-            <TextView
-                style="@style/item_tv_third_style"
-                android:layout_marginRight="@dimen/layout_Margin_10"
-                android:text="积分" />
-
-            <TextView
-                android:id="@+id/tvIntegration"
-                style="@style/item_tv_third_style"
-                android:text="0.0"
-                android:textColor="#FCB636" />
-        </LinearLayout>
-
+        <TextView
+            style="@style/item_tv_third_style"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/layout_Margin_10"
+            android:text="1008610086"
+            android:textColor="@color/item_tv_color_04" />
     </LinearLayout>
-
-
 </RelativeLayout>

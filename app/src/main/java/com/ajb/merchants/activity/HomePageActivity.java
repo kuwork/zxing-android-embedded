@@ -136,8 +136,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     TextView tvAccountName;
     @ViewInject(R.id.home_slide_menu_banner_img)
     ScaleImageView home_slide_menu_banner_img;
-    @ViewInject(R.id.tvIntegration)
-    TextView tvIntegration;
     View menuPay;
     private PopupWindow share_popWindow;
     private Fragment mContent;
@@ -208,9 +206,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         super.updateAccountInfo(info);
         if (info == null) {
             return;
-        }
-        if (tvIntegration != null) {
-            tvIntegration.setText(TextUtils.isEmpty(info.getIntegral()) ? "0.0" : info.getIntegral());
         }
     }
 
@@ -788,7 +783,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         } else {
             tvAccountName.setText(R.string.error_hava_not_login);
             tvAccountName.setTag(null);
-            tvIntegration.setText("0.0");
         }
     }
 

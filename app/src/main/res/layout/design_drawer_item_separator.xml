@@ -5,6 +5,7 @@
 
     <View
         android:id="@+id/separetor"
-        style="@style/line_style" />
+        style="@style/line_style"
+        android:layout_marginLeft="40dp" />
 
 </FrameLayout>

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/listPreferredItemHeightSmall"
+    android:layout_height="57dp"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/drawer_custom_img"
-        style="@style/item_img_style" />
+        style="@style/item_img_style"
+        android:layout_marginLeft="40dp" />
 
     <LinearLayout
         style="@style/layout_widthfilled_style"
@@ -17,13 +18,15 @@
         <TextView
             android:id="@+id/drawer_custom_tv"
             android:layout_width="match_parent"
-            android:layout_height="?attr/listPreferredItemHeightSmall"
+            android:layout_height="57dp"
             android:layout_weight="1"
             android:gravity="center_vertical|start"
             android:maxLines="1"
             android:paddingLeft="?attr/listPreferredItemPaddingLeft"
             android:paddingRight="?attr/listPreferredItemPaddingRight"
-            android:textAppearance="@style/navTextStyle" />
+            android:textAppearance="@style/navTextStyle"
+            android:textColor="@color/item_tv_color_01"
+            android:textSize="@dimen/text_size_16" />
 
         <TextView
             android:id="@+id/drawer_custom_desc_tv"
