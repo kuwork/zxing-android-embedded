@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.widget.TextViewCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,8 +132,6 @@ public class MenuItemAdapter<T> extends BaseAdapter {
                     break;
             }
         } else if (ModularMenu.CODE_SETTING.equals(modularCode) || ModularMenu.CODE_ACCOUNT.equals(modularCode)) {  //设置界面
-
-
             switch (item.getType()) {
                 case MenuInfo.TYPE_NORMAL:
                     if (convertView == null) {
@@ -144,9 +143,18 @@ public class MenuItemAdapter<T> extends BaseAdapter {
                     }
                     TextView itemName = (TextView) convertView.findViewById(R.id.setting_item_name_tv);
                     TextView itemDesc = (TextView) convertView.findViewById(R.id.setting_item_desc_tv);
-                    ImageView dotsImg = (ImageView) convertView.findViewById(R.id.setting_item_dots_img);
+                    ImageView imgDots = (ImageView) convertView.findViewById(R.id.setting_item_dots_img);
+                    ImageView imgItem = (ImageView) convertView.findViewById(R.id.drawer_custom_img);
+                    ImageView imgArrow = (ImageView) convertView.findViewById(R.id.setting_arrow);
                     if (itemName != null) {
                         itemName.setText(item.getTitle());
+                        if (MenuInfo.TO_LOGIN_OUT.equals(item.getMenuCode())) {
+                            itemName.setGravity(Gravity.CENTER);
+                            itemName.setTextSize(TypedValue.COMPLEX_UNIT_PX, mContext.getResources().getDimension(R.dimen.text_size_18));
+                        } else {
+                            itemName.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                            itemName.setTextSize(TypedValue.COMPLEX_UNIT_PX, mContext.getResources().getDimension(R.dimen.text_size_16));
+                        }
                     }
                     if (itemDesc != null) {
                         if (TextUtils.isEmpty(item.getDesc())) {
@@ -156,24 +164,30 @@ public class MenuItemAdapter<T> extends BaseAdapter {
                             itemDesc.setVisibility(View.VISIBLE);
                         }
                     }
-                    if (dotsImg != null) {
+                    if (imgDots != null) {
                         if (isDots(item.getMenuCode())) {
-                            dotsImg.setVisibility(View.VISIBLE);
+                            imgDots.setVisibility(View.VISIBLE);
                         } else {
-                            dotsImg.setVisibility(View.GONE);
+                            imgDots.setVisibility(View.GONE);
+                        }
+                    }
+                    if (imgItem != null) {
+                        if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
+                            imgItem.setVisibility(View.VISIBLE);
+                            bitmapUtils.display(imgItem, item.getMenuPictureUrl());
+                        } else {
+                            imgItem.setVisibility(View.GONE);
+                            imgItem.setImageBitmap(null);
+                        }
+                    }
+                    if (imgArrow != null) {
+                        if (MenuInfo.TO_LOGIN_OUT.equals(item.getMenuCode())) {
+                            imgArrow.setVisibility(View.GONE);
+                        } else {
+                            imgArrow.setVisibility(View.VISIBLE);
                         }
                     }
 
-                    ImageView imageView = (ImageView) convertView.findViewById(R.id.drawer_custom_img);
-                    if (imageView != null) {
-                        if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
-                            imageView.setVisibility(View.VISIBLE);
-                            bitmapUtils.display(imageView, item.getMenuPictureUrl());
-                        } else {
-                            imageView.setVisibility(View.GONE);
-                            imageView.setImageBitmap(null);
-                        }
-                    }
                     break;
 
                 case MenuInfo.TYPE_SEPARATOR:

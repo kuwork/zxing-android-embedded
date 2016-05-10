@@ -51,7 +51,8 @@ public class SettingActivity extends BaseActivity {
 
     @ViewInject(R.id.setting_listview)
     MyListView menuListView;
-    @ViewInject(R.id.change_account_btn)   LinearLayout change_account_btn;
+    @ViewInject(R.id.change_account_btn)
+    LinearLayout change_account_btn;
     private RequestParams unBindChannelIDParams;
     private Dialog mDialog;
     private View contentView;

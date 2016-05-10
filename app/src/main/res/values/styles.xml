@@ -199,14 +199,14 @@
     <style name="item_tv_title_style" parent="@style/layout_allWraped_style">
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/item_tv_color_01</item>
-        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
         <item name="android:singleLine">true</item>
     </style>
 
     <style name="item_tv_style" parent="@style/layout_allWraped_style">
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/item_tv_color_01</item>
-        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColorHint">@color/item_tv_color_02</item>
     </style>
@@ -214,21 +214,21 @@
     <style name="item_tv_second_style" parent="@style/layout_allWraped_style">
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/item_tv_color_02</item>
-        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:singleLine">true</item>
     </style>
 
     <style name="item_tv_third_style" parent="@style/layout_allWraped_style">
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/item_tv_color_02</item>
-        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:singleLine">true</item>
     </style>
 
     <style name="item_tv_forth_style" parent="@style/layout_allWraped_style">
         <item name="android:layout_gravity">center</item>
         <item name="android:textColor">@color/item_tv_color_02</item>
-        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textSize">@dimen/text_size_10</item>
         <item name="android:singleLine">true</item>
     </style>
 

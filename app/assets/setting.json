@@ -9,7 +9,7 @@
     "menuList": [
       {
         "groupId": 1,
-        "menuCode": "200031",
+        "menuCode": "200034",
         "menuValue": "主页设置",
         "title": "主页设置",
         "needLogin": false,
@@ -33,7 +33,7 @@
       },
       {
         "groupId": 2,
-        "menuCode": "200033",
+        "menuCode": "200031",
         "menuValue": "检查更新",
         "title": "检查更新",
         "needLogin": false,
@@ -46,7 +46,7 @@
       },
       {
         "groupId": 2,
-        "menuCode": "200034",
+        "menuCode": "200033",
         "menuValue": "关于",
         "title": "关于",
         "needLogin": false,
