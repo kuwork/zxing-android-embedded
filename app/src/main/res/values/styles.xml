@@ -354,8 +354,8 @@
         <item name="android:horizontalSpacing">0.5dp</item>
         <item name="android:verticalSpacing">0.5dp</item>
         <item name="android:cacheColorHint">@color/transparentColor</item>
-        <item name="android:background">@color/transparentColor</item>
-        <item name="android:listSelector">@color/transparentColor</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:listSelector">?attr/selectableItemBackground</item>
     </style>
 
 </resources>

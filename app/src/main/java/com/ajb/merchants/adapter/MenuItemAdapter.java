@@ -100,7 +100,7 @@ public class MenuItemAdapter<T> extends BaseAdapter {
                     TextView itemDesc = (TextView) convertView.findViewById(R.id.drawer_custom_desc_tv);
                     ImageView imageView = (ImageView) convertView.findViewById(R.id.drawer_custom_img);
                     if (itemView != null) {
-                        itemView.setText(item.getMenuValue());
+                        itemView.setText(item.getTitle());
                     }
                     if (imageView != null) {
                         if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {

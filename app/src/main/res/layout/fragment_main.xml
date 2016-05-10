@@ -91,7 +91,6 @@
                     style="@style/grid_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
                     android:layout_marginTop="@dimen/layout_Margin_10"
                     android:numColumns="2"
                     android:scrollbars="none"

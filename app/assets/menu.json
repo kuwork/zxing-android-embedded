@@ -1,7 +1,7 @@
 [
   {
     "modularId": 1,
-    "modularCode": "190000",
+    "modularCode": "100003",
     "modularEcode": "LeftMenuCode",
     "modularValue": "左侧菜单",
     "modularUrl": "",
@@ -13,14 +13,14 @@
       },
       {
         "groupId": 1,
-        "menuCode": "190001",
+        "menuCode": "200021",
         "menuValue": "赠送记录",
         "operateType": "NATIVE",
-        "title": "我的车场",
+        "title": "赠送记录",
         "type": "NORMAL",
         "needLogin": true,
         "linkUrl": "http://www.baidu.com",
-        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_car.png"
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/11_icon.png"
       },
       {
         "operateType": "NONE",
@@ -28,14 +28,14 @@
       },
       {
         "groupId": 1,
-        "menuCode": "190002",
+        "menuCode": "200022",
         "menuValue": "购买记录",
         "operateType": "NATIVE",
-        "title": "我的优惠券",
+        "title": "购买记录",
         "type": "NORMAL",
         "needLogin": true,
         "linkUrl": "http://www.baidu.com",
-        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_coupon.png"
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/12_icon.png"
       },
       {
         "operateType": "NONE",
@@ -43,14 +43,14 @@
       },
       {
         "groupId": 1,
-        "menuCode": "190005",
+        "menuCode": "200023",
         "menuValue": "回收记录",
         "operateType": "NATIVE",
-        "title": "消费明细",
+        "title": "回收记录",
         "type": "NORMAL",
         "needLogin": true,
         "linkUrl": "http://www.baidu.com",
-        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_record_pay.png"
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/13_icon.png"
       },
       {
         "operateType": "NONE",
@@ -58,14 +58,14 @@
       },
       {
         "groupId": 1,
-        "menuCode": "190009",
+        "menuCode": "200024",
         "menuValue": "设置",
         "operateType": "NATIVE",
-        "title": "系统设置",
+        "title": "设置",
         "type": "NORMAL",
         "needLogin": false,
         "linkUrl": "http://www.baidu.com",
-        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_setting.png"
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/14_icon.png"
       },
       {
         "operateType": "NONE",
@@ -73,14 +73,14 @@
       },
       {
         "groupId": 1,
-        "menuCode": "190010",
+        "menuCode": "200025",
         "menuValue": "退出",
         "operateType": "NATIVE",
-        "title": "退出掌停宝",
+        "title": "退出",
         "needLogin": false,
         "type": "NORMAL",
         "linkUrl": "http://www.baidu.com",
-        "menuPictureUrl": "http://apk.eanpa-gz-manager.com/static/v2/ic_nav_shutdown.png"
+        "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/15_icon.png"
       },
       {
         "operateType": "NONE",

@@ -9,7 +9,8 @@
     <color name="whiteGray">#ffC9CACB</color>
     <color name="transparentColor">#00000000</color>
     <color name="black">#000000</color>
-    <color name="black_percent_5">#0D000000</color>
+    <color name="black_percent_12">#1EC5C5C5</color>
+    <color name="black_percent_20">#33C5C5C5</color>
     <color name="white">#ffffff</color>
     <color name="white_percent_10">#1Affffff</color>
     <color name="white_percent_15">#26ffffff</color>

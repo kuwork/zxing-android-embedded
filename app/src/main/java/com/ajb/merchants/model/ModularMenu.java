@@ -10,12 +10,12 @@ import java.util.List;
  */
 public class ModularMenu implements Serializable {
 
-    public final static String CODE_LEFTMENU = "190000";
     public final static String CODE_SETTING = "180000";
     public final static String CODE_ACCOUNT = "170000";
     public final static String CODE_MENU = "1000";
     public final static String CODE_COUPON = "100001";
     public final static String CODE_MAIN_MENU = "100002";
+    public final static String CODE_LEFTMENU = "100003";
     /**
      * modularId : 1
      * modularCode : 180000
