@@ -59,5 +59,8 @@
     <string name="tip_login_btn">登录</string>
     <string name="tip_charge_account">请输入您需要充值的手机账号</string>
     <string name="tip_consent_agreement">我已阅读并同意商户服务协议</string>
+    <string name="tip_reset_pwd">请输入新密码</string>
+    <string name="tip_reset_pwd_confirm">请确认新密码</string>
+    <string name="tip_reset_phone_verification">请确认手机验证码</string>
 
 </resources>

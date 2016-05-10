@@ -78,7 +78,7 @@
                     android:layout_height="@dimen/text_size_18"
                     android:layout_marginLeft="@dimen/layout_Margin_15"
                     android:layout_marginRight="@dimen/layout_Margin_15"
-                    android:src="@mipmap/ic_msg" />
+                    android:src="@mipmap/ic_password" />
 
                 <TextView
                     style="@style/line_2_style"
