@@ -501,14 +501,14 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                                 startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
                                 return;
                             }
-                            if (MenuInfo.TO_SOCIETYSHARE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-                                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                                    drawer.closeDrawer(GravityCompat.START);
-                                }
-                                openSharePopWindow();
-                            } else {
-                                menuInfo.click(HomePageActivity.this);
-                            }
+//                            if (MenuInfo.TO_SOCIETYSHARE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+//                                if (drawer.isDrawerOpen(GravityCompat.START)) {
+//                                    drawer.closeDrawer(GravityCompat.START);
+//                                }
+//                                openSharePopWindow();
+//                            } else {
+//                                menuInfo.click(HomePageActivity.this);
+//                            }
                         } else {
                             switch (menuInfo.getMenuCode()) {
                                 case MenuInfo.TO_EXIT://退出掌停宝

@@ -1,15 +1,15 @@
 [
   {
     "modularId": 1,
-    "modularCode": "180000",
+    "modularCode": "100004",
     "modularEcode": "SettingCode",
     "modularValue": "设置页面",
     "modularUrl": "",
     "pageCode": "Setting",
     "menuList": [
       {
-        "groupId": 3,
-        "menuCode": "180005",
+        "groupId": 1,
+        "menuCode": "200031",
         "menuValue": "主页设置",
         "title": "主页设置",
         "needLogin": false,
@@ -18,8 +18,22 @@
         "type": "NORMAL"
       },
       {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
         "groupId": 1,
-        "menuCode": "180001",
+        "menuCode": "200032",
+        "menuValue": "清除缓存",
+        "title": "清除缓存",
+        "desc": "将会清除应用数据",
+        "needLogin": false,
+        "operateType": "NATIVE",
+        "type": "NORMAL"
+      },
+      {
+        "groupId": 2,
+        "menuCode": "200033",
         "menuValue": "检查更新",
         "title": "检查更新",
         "needLogin": false,
@@ -31,34 +45,20 @@
         "type": "SEPARATOR"
       },
       {
-        "groupId": 1,
-        "menuCode": "180002",
-        "menuValue": "清除缓存",
-        "title": "清除缓存",
-        "desc": "将会清除应用数据",
+        "groupId": 2,
+        "menuCode": "200034",
+        "menuValue": "关于",
+        "title": "关于",
         "needLogin": false,
         "operateType": "NATIVE",
         "type": "NORMAL"
       },
       {
-        "groupId": 2,
-        "menuCode": "180003",
-        "menuValue": "意见反馈",
-        "title": "意见反馈",
-        "needLogin": false,
-        "operateType": "NATIVE",
-        "type": "NORMAL"
-      },
-      {
-        "operateType": "NONE",
-        "type": "SEPARATOR"
-      },
-      {
-        "groupId": 2,
-        "menuCode": "180004",
-        "menuValue": "关于我们",
-        "title": "关于我们",
-        "needLogin": false,
+        "groupId": 3,
+        "menuCode": "200035",
+        "menuValue": "退出登录",
+        "title": "退出登录",
+        "needLogin": true,
         "operateType": "NATIVE",
         "type": "NORMAL"
       }

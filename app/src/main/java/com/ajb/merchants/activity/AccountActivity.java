@@ -140,8 +140,8 @@ public class AccountActivity extends BaseActivity {
 
     private void updateBalance(String balance) {
         if (menuListView != null && menuListView.getAdapter() != null && menuListView.getCount() > 0) {
-            MenuItemAdapter adapter = (MenuItemAdapter) menuListView.getAdapter();
-            adapter.setMenuDesc(MenuInfo.TO_MYBURSE, TextUtils.isEmpty(balance) ? "" : balance + "元");
+//            MenuItemAdapter adapter = (MenuItemAdapter) menuListView.getAdapter();
+//            adapter.setMenuDesc(MenuInfo.TO_MYBURSE, TextUtils.isEmpty(balance) ? "" : balance + "元");
         }
     }
 

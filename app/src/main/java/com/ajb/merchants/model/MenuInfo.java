@@ -41,30 +41,34 @@ public class MenuInfo implements Serializable {
     /**
      * 侧滑菜单code
      */
-    public static final String TO_CARLIST = "190001";
-    public static final String TO_COUPONLIST = "190002";
-    public static final String TO_MYORDERLIST = "190003";
-    public static final String TO_PRAKINGRECORD = "190004";
-    public static final String TO_MYBILLLIST = "190005";
-    public static final String TO_COUPONCODE = "190007";
-    public static final String TO_SOCIETYSHARE = "190008";
-    public static final String TO_SETTING = "190009";
-    public static final String TO_EXIT = "190010";
-    public static final String TO_SAFEGUARD = "190011";
-    public static final String TO_PRESENTEXP = "190012";
-    public static final String TO_ACCOUNT = "190013";
-    public static final String TO_MYBURSE = "190014";
+    public static final String TO_RECORD_GIVING = "200021";
+    public static final String TO_RECORD_PURCHASE = "200022";
+    public static final String TO_RECORD_RECYLE = "200023";
+    public static final String TO_SETTING = "200024";
+    public static final String TO_EXIT = "200025";
+    /**
+     * 主页功能菜单
+     */
+    public static final String TO_COUPON_PUBLISH = "200011";
+    public static final String TO_COUPON_PURCHASE = "200012";
+    public static final String TO_COUPON_RECYLE = "200013";
+    public static final String TO_ACCOUNT_SETTING = "200014";
+    public static final String TO_MESSAGE = "200015";
+    public static final String TO_PWD_RESET = "200016";
+    /*主页派送优惠*/
+    public static final String TO_COUPON_SCAN = "200001";
+    public static final String TO_COUPON_CAR_NUM = "200002";
+    public static final String TO_COUPON_CARD = "200003";
+
     /**
      * 设置页面code
      */
-    public static final String TO_CHECKUPDATE = "180001";
-    public static final String TO_CLEARCACHE = "180002";
-    public static final String TO_FEEDBACK = "180003";
-    public static final String TO_ABOUTUS = "180004";
-    public static final String TO_PAGESETTING = "180005";
-    //测试ye
-    public static final String TO_INDOOR_NAV = "200001";
 
+    public static final String TO_CHECKUPDATE = "200031";
+    public static final String TO_CLEARCACHE = "200032";
+    public static final String TO_ABOUTUS = "200033";
+    public static final String TO_PAGESETTING = "200034";
+    public static final String TO_LOGIN_OUT = "200035";
 
     public MenuInfo() {
     }
