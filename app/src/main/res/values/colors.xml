@@ -3,24 +3,24 @@
 
     <color name="red">#FF0000</color>
     <color name="yellow">#FFFF00</color>
-    <color name="blue">#0000ff</color>
+    <color name="blue">#0000FF</color>
     <color name="orange">#FFA011</color>
     <color name="bg_gray">#FFE3E3E7</color>
-    <color name="whiteGray">#ffC9CACB</color>
+    <color name="whiteGray">#ffc9cacb</color>
     <color name="transparentColor">#00000000</color>
     <color name="black">#000000</color>
     <color name="black_percent_12">#1EC5C5C5</color>
     <color name="black_percent_20">#33C5C5C5</color>
-    <color name="white">#ffffff</color>
-    <color name="white_percent_10">#1Affffff</color>
-    <color name="white_percent_15">#26ffffff</color>
-    <color name="white_percent_50">#80ffffff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_percent_10">#1AFFFFFF</color>
+    <color name="white_percent_15">#26FFFFFF</color>
+    <color name="white_percent_50">#80FFFFFF</color>
     <!-- DrawerLayout 等主题颜色-->
     <color name="colorPrimary">#FF7800</color>
     <color name="colorPrimaryDark">#FF7800</color>
     <color name="colorAccent">#F98E28</color>
     <color name="colorControlNormal">#1E1F21</color>
-    <color name="colorWindowBackground">#f2f2f2</color>
+    <color name="colorWindowBackground">#F2F2F2</color>
     <color name="colorTextColorPrimary">#141414</color>
     <color name="overflowTextColor">#141414</color>
     <color name="colorDrawerArrow">#1E1F21</color>
@@ -29,12 +29,12 @@
     <!-- 一号字体颜色 -->
     <color name="item_tv_color_01">#333333</color>
     <!-- 其他字体颜色 -->
-    <color name="item_tv_color_02">#666666</color>
-    <color name="item_tv_color_03">#999999</color>
+    <color name="item_tv_color_02">#606060</color>
+    <color name="item_tv_color_03">#9F9F9F</color>
     <color name="item_tv_color_04">#B0B0B0</color>
     <!-- 按钮颜色 橙色系 -->
-    <color name="btn_color_normal">#FD790C</color>
-    <color name="btn_color_pressed">#FEBA70</color>
+    <color name="btn_color_normal">#FF7800</color>
+    <color name="btn_color_pressed">#E56210</color>
     <!-- 地图按钮颜色 黑色系 -->
     <color name="loc_btn_color">#10FFFFFF</color>
     <color name="loc_btn_color_normal">#FFFFFFFF</color>
@@ -44,8 +44,10 @@
     <color name="splash_btn_color_pressed">#CC000000</color>
     <!-- 地图单选按钮颜色 橙色系 -->
     <color name="loc_radiobtn_color">#FB4F28</color>
+    <!-- 按钮默认状态 -->
+    <color name="btn_color_default">#B0B0B0</color>
     <!-- 按钮不可点击 -->
-    <color name="btn_color_disable">#999999</color>
+    <color name="btn_color_disable">#CCCCCC</color>
     <!-- 控件的边框色 -->
     <color name="border_color">#e0e0e0</color>
     <color name="coupon_tv_red">#FC6455</color>
