@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.ajb.merchants.R;
+import com.ajb.merchants.activity.LoginActivity;
 import com.ajb.merchants.activity.MerchantDetailActivity;
 import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.adapter.MenuItemAdapter;
@@ -24,6 +25,7 @@ import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.task.BlurBitmapTask;
 import com.ajb.merchants.util.CommonUtils;
+import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.view.MyGridView;
 import com.ajb.merchants.view.MySwipeRefreshLayout;
 import com.google.gson.Gson;
@@ -188,6 +190,11 @@ public class MainFragment extends BaseFragment {
 
     @OnClick(R.id.imgAvatar)
     public void onAvatarClick(View v) {
+        if (!isLogin()) {
+            showToast("请先登陆");
+            startActivityForResult(new Intent(getActivity(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
+            return;
+        }
         Intent intent = new Intent(getActivity(), MerchantDetailActivity.class);
         startActivity(intent);
     }

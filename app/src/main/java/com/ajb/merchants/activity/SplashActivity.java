@@ -246,6 +246,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
      * 到主页
      */
     private void toHome() {
+        sharedFileUtils.putBoolean(SharedFileUtils.IS_LOGIN, true);
         Intent homeIntent = new Intent(getApplicationContext(), HomePageActivity.class);
         startActivity(homeIntent);
         finish();
