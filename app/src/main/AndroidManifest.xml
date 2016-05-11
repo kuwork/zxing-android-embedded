@@ -338,6 +338,10 @@
         <activity
             android:name=".activity.PopupWindowBannerActivity"
             android:theme="@style/mTransparent_bg" />
+        <activity
+            android:name=".activity.MerchantDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeTran.NoActionBar" />
 
         <service
             android:name=".util.download.DownloadService"
@@ -367,7 +371,6 @@
                 <action android:name="com.ajb.ztb.banner" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

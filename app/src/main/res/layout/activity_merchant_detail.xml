@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scaleImageViewAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.ajb.merchants.activity.MerchantDetailActivity">
+
+    <com.ajb.merchants.view.MySwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        style="@style/layout_allFilled_style">
+
+        <ScrollView
+            style="@style/layout_allFilled_style"
+            android:scrollbars="none">
+
+            <LinearLayout
+                style="@style/layout_allFilled_style"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/layout_allFilled_style"
+                    android:orientation="vertical">
+
+                    <com.ajb.merchants.view.ScaleFrameLayout
+                        android:id="@+id/packimage_iv"
+                        style="@style/layout_widthfilled_style"
+                        android:background="@color/whiteGray"
+                        android:scaleType="centerCrop"
+                        scaleImageViewAttr:expectH="420"
+                        scaleImageViewAttr:expectW="750">
+
+                        <ImageView
+                            android:id="@+id/imgHeaderBanner"
+                            style="@style/layout_allFilled_style"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/header_bg" />
+
+                        <LinearLayout
+                            style="@style/layout_allFilled_style"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                style="@style/layout_widthfilled_style"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:paddingTop="40dp">
+
+                                <FrameLayout
+                                    android:layout_width="90dp"
+                                    android:layout_height="90dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="@dimen/layout_Margin_30">
+
+                                    <View
+                                        style="@style/layout_allFilled_style"
+                                        android:background="@drawable/home_avatar_white_bg" />
+
+                                    <com.ajb.merchants.view.RoundedImageView
+                                        android:id="@+id/img_avatar"
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
+                                        android:layout_centerInParent="true"
+                                        android:layout_gravity="center"
+                                        android:scaleType="centerCrop"
+                                        android:src="@mipmap/default_avatar" />
+                                </FrameLayout>
+
+                                <LinearLayout
+                                    style="@style/layout_widthfilled_style"
+                                    android:layout_marginLeft="@dimen/layout_Margin_15"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        style="@style/item_tv_title_style"
+                                        android:layout_gravity="left"
+                                        android:layout_marginTop="@dimen/layout_Margin_5"
+                                        android:text="账户余额"
+                                        android:textColor="@color/white" />
+
+                                    <TextView
+                                        android:id="@+id/tvPrice"
+                                        style="@style/item_tv_second_style"
+                                        android:layout_gravity="left"
+                                        android:layout_marginTop="@dimen/layout_Margin_5"
+                                        android:singleLine="false"
+                                        android:text="新疆牛肉面店"
+                                        android:textColor="@color/white" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                style="@style/layout_widthfilled_style"
+                                android:background="@color/white_percent_15"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:layout_width="100dp"
+                                    android:layout_height="50dp">
+
+                                    <LinearLayout
+                                        android:id="@+id/contentLayout1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginBottom="@dimen/layout_Margin_5"
+                                        android:layout_marginLeft="@dimen/layout_Margin_15"
+                                        android:layout_marginTop="@dimen/layout_Margin_5"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/title1"
+                                            style="@style/item_tv_style"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:text="无限制"
+                                            android:textColor="@color/white" />
+
+                                        <TextView
+                                            android:id="@+id/desc1"
+                                            style="@style/item_tv_third_style"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/title"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="2dp"
+                                            android:text="当月已赠"
+                                            android:textColor="@color/white" />
+                                    </LinearLayout>
+
+                                    <View
+                                        style="@style/line_2_style"
+                                        android:layout_alignBottom="@+id/contentLayout1"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignTop="@+id/contentLayout1"
+                                        android:layout_marginLeft="@dimen/layout_Margin_15"
+                                        android:background="@color/white_percent_50"
+                                        android:visibility="visible" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1">
+
+                                    <LinearLayout
+                                        android:id="@+id/contentLayout2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginBottom="@dimen/layout_Margin_5"
+                                        android:layout_marginTop="@dimen/layout_Margin_5"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/title2"
+                                            style="@style/item_tv_style"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:text="100元/100元"
+                                            android:textColor="@color/white" />
+
+                                        <TextView
+                                            android:id="@+id/desc2"
+                                            style="@style/item_tv_third_style"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/title"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="2dp"
+                                            android:text="当月已金额"
+                                            android:textColor="@color/white" />
+                                    </LinearLayout>
+
+                                    <View
+                                        style="@style/line_2_style"
+                                        android:layout_alignBottom="@+id/contentLayout2"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignTop="@+id/contentLayout2"
+                                        android:background="@color/white_percent_50"
+                                        android:visibility="visible" />
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginBottom="@dimen/layout_Margin_5"
+                                        android:layout_marginTop="@dimen/layout_Margin_5"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/title3"
+                                            style="@style/item_tv_style"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:text="100元/100元"
+                                            android:textColor="@color/white" />
+
+                                        <TextView
+                                            android:id="@+id/desc3"
+                                            style="@style/item_tv_third_style"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/title"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="2dp"
+                                            android:text="当月赠金额"
+                                            android:textColor="@color/white" />
+                                    </LinearLayout>
+                                </RelativeLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.ajb.merchants.view.ScaleFrameLayout>
+                </LinearLayout>
+
+                <com.ajb.merchants.view.MyListView
+                    android:id="@+id/detailListView"
+                    style="@style/layout_allFilled_style"
+                    android:background="@color/white"
+                    android:divider="@null"
+                    android:dividerHeight="0dp" />
+            </LinearLayout>
+        </ScrollView>
+    </com.ajb.merchants.view.MySwipeRefreshLayout>
+
+    <include layout="@layout/header_btn_layout" />
+
+</FrameLayout>

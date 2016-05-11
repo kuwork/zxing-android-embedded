@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/item_layout"
+    android:background="@null"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/itemImg"
+        style="@style/item_img_style"
+        android:src="@mipmap/address"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        style="@style/item_layout"
+        android:background="@null">
+
+        <TextView
+            android:id="@+id/itemName"
+            style="@style/item_tv_style"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/arrow5"
+            android:text="清除缓存" />
+
+        <TextView
+            android:id="@+id/itemDesc"
+            style="@style/item_tv_second_style"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/itemArrow"
+            android:layout_toRightOf="@+id/itemName"
+            android:gravity="right"
+            android:paddingRight="@dimen/layout_Margin_10"
+            android:text="描述"
+            android:textColor="@color/item_tv_color_03"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/itemArrow"
+            style="@style/setting_img_style" />
+    </RelativeLayout>
+
+</LinearLayout>

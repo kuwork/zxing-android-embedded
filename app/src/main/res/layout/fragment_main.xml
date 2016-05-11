@@ -48,7 +48,7 @@
                                     android:background="@drawable/home_avatar_white_bg" />
 
                                 <com.ajb.merchants.view.RoundedImageView
-                                    android:id="@+id/img_avatar"
+                                    android:id="@+id/imgAvatar"
                                     android:layout_width="70dp"
                                     android:layout_height="70dp"
                                     android:layout_centerInParent="true"

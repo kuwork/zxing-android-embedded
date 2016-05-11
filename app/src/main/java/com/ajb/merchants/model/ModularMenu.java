@@ -16,6 +16,7 @@ public class ModularMenu implements Serializable {
     public final static String CODE_MAIN_MENU = "100002";
     public final static String CODE_LEFTMENU = "100003";
     public final static String CODE_SETTING = "100004";
+    public final static String CODE_MERCHANTS_DETAILS = "000001";
     /**
      * modularId : 1
      * modularCode : 180000

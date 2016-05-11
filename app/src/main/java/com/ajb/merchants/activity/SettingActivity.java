@@ -38,7 +38,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.util.App;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -97,7 +96,7 @@ public class SettingActivity extends BaseActivity {
             for (int i = 0; i < size; i++) {
                 modularMenu = modularMenuList.get(i);
                 if (ModularMenu.CODE_SETTING.equals(modularMenu.getModularCode())) {
-                    MenuItemAdapter<MenuInfo> adapter = new MenuItemAdapter<>(getBaseContext(), dealListData(modularMenu.getMenuList()), modularMenu.getModularCode());
+                    MenuItemAdapter<MenuInfo> adapter = new MenuItemAdapter<>(getBaseContext(), dealMenuGroup(modularMenu.getMenuList()), modularMenu.getModularCode());
                     menuListView.setAdapter(adapter);
                 }
             }
@@ -207,32 +206,6 @@ public class SettingActivity extends BaseActivity {
             popup.showAtLocation(getWindow().getDecorView(),
                     Gravity.CENTER, 0, 0);
         }
-    }
-
-    private List<MenuInfo> dealListData(List<MenuInfo> menuList) {
-        List<MenuInfo> list = new ArrayList<>();
-        int groupId = 0;
-
-        for (int i = 0; i < menuList.size(); i++) {
-            if (MenuInfo.TYPE_NORMAL.equals(menuList.get(i).getType())) {
-                if (groupId != menuList.get(i).getGroupId()) {
-                    MenuInfo menuInfo = new MenuInfo();
-                    menuInfo.setType(MenuInfo.TYPE_DIVIDE);
-                    list.add(menuInfo);
-                    groupId = menuList.get(i).getGroupId();
-                }
-                list.add(menuList.get(i));
-            } else if (MenuInfo.TYPE_SEPARATOR.equals(menuList.get(i).getType())) {
-                list.add(menuList.get(i));
-            }
-
-        }
-        if (list.size() > 0) {
-            MenuInfo menuInfo = new MenuInfo();
-            menuInfo.setType(MenuInfo.TYPE_DIVIDE);
-            list.add(list.size(), menuInfo);
-        }
-        return list;
     }
 
     @Override

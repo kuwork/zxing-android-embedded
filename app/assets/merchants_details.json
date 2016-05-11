@@ -1,0 +1,139 @@
+[
+  {
+    "modularId": 1,
+    "modularCode": "000001",
+    "modularEcode": "MerchantDetailCode",
+    "modularValue": "商家详情页面",
+    "modularUrl": "",
+    "pageCode": "MerchantDetail",
+    "menuList": [
+      {
+        "groupId": 1,
+        "menuCode": "300001",
+        "menuValue": "商铺名称",
+        "title": "商铺名称",
+        "needLogin": true,
+        "desc": "新疆牛肉丸店",
+        "operateType": "NATIVE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_store"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "300002",
+        "menuValue": "商铺号",
+        "title": "商铺号",
+        "needLogin": true,
+        "desc": "D503B",
+        "operateType": "NONE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_merchants_num"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "300003",
+        "menuValue": "地址",
+        "title": "地址",
+        "needLogin": true,
+        "desc": "天河区奥体路818号奥体优托邦3楼",
+        "operateType": "NATIVE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_address"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "300004",
+        "menuValue": "经营范围",
+        "title": "经营范围",
+        "needLogin": true,
+        "desc": "中式烤肉、火锅、拉面",
+        "operateType": "NATIVE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_store_scope"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "300005",
+        "menuValue": "联系人",
+        "title": "联系人",
+        "needLogin": true,
+        "desc": "小明",
+        "operateType": "NATIVE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_contact"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 1,
+        "menuCode": "300006",
+        "menuValue": "联系电话",
+        "title": "联系电话",
+        "needLogin": true,
+        "desc": "15700000000",
+        "operateType": "NATIVE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_call"
+      },
+      {
+        "groupId": 2,
+        "menuCode": "300007",
+        "menuValue": "优惠类型",
+        "title": "优惠类型",
+        "needLogin": true,
+        "desc": "金额、时间",
+        "operateType": "NONE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_gift"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 2,
+        "menuCode": "300008",
+        "menuValue": "派发面值",
+        "title": "派发面值",
+        "needLogin": true,
+        "desc": "自定义",
+        "operateType": "NONE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_coupon"
+      },
+      {
+        "operateType": "NONE",
+        "type": "SEPARATOR"
+      },
+      {
+        "groupId": 2,
+        "menuCode": "300009",
+        "menuValue": "购买方式",
+        "title": "购买方式",
+        "needLogin": true,
+        "desc": "微信支付、支付宝支付",
+        "operateType": "NONE",
+        "type": "NORMAL",
+        "menuPictureUrl": "drawable://R.mipmap.ic_shopping_cart"
+      }
+    ]
+  }
+]

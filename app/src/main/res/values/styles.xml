@@ -301,6 +301,8 @@
     <style name="setting_img_style" parent="@style/layout_allWraped_style">
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">@dimen/text_size_16</item>
+        <item name="android:layout_height">@dimen/text_size_16</item>
         <item name="android:layout_marginBottom">@dimen/layout_Margin_8</item>
         <item name="android:layout_marginRight">@dimen/layout_Margin_10</item>
         <item name="android:layout_marginTop">@dimen/layout_Margin_8</item>

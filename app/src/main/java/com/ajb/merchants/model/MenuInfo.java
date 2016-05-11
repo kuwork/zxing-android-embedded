@@ -36,8 +36,9 @@ public class MenuInfo implements Serializable {
     //大的分割view
     public static final String TYPE_DIVIDE = "DIVIDE";
     //操作类型
-    public static final String TYPE_OPERATE_NATIVE = "NATIVE";
-    public static final String TYPE_OPERATE_WEB = "WEB";
+    public static final String TYPE_OPERATE_NATIVE = "NATIVE";  //本地页面
+    public static final String TYPE_OPERATE_WEB = "WEB";    //网页
+    public static final String TYPE_OPERATE_NONE = "NONE";  //不能打开
     /**
      * 侧滑菜单code
      */

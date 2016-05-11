@@ -3,6 +3,7 @@ package com.ajb.merchants.adapter;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -27,6 +28,7 @@ import com.util.PathManager;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MenuItemAdapter<T> extends BaseAdapter {
 
@@ -35,6 +37,7 @@ public class MenuItemAdapter<T> extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mContext;
     private List<T> mItems;
+    private Map<String, T> mItemsMap;
     private BitmapUtils bitmapUtils;
     private List<String> dotsList;  //红点list，填写MenuInfo中的MenuCode
     private String modularCode; //模块编号
@@ -328,6 +331,76 @@ public class MenuItemAdapter<T> extends BaseAdapter {
                     break;
 
                 case MenuInfo.TYPE_DIVIDE://大分割线
+                    break;
+            }
+        } else if (ModularMenu.CODE_MERCHANTS_DETAILS.equals(modularCode)) {    //商家详情
+            switch (item.getType()) {
+                case MenuInfo.TYPE_NORMAL:
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.listview_item_merchants_details, parent, false);
+                    }
+                    TextView itemName = (TextView) convertView.findViewById(R.id.itemName);
+                    TextView itemDesc = (TextView) convertView.findViewById(R.id.itemDesc);
+                    ImageView itemImg = (ImageView) convertView.findViewById(R.id.itemImg);
+                    ImageView itemArrow = (ImageView) convertView.findViewById(R.id.itemArrow);
+                    if (itemName != null) {
+                        itemName.setText(item.getTitle());
+                    }
+                    if (itemImg != null) {
+                        if (!TextUtils.isEmpty(item.getMenuPictureUrl())) {
+                            bitmapUtils.display(itemImg, item.getMenuPictureUrl());
+                        } else {
+                            itemImg.setImageBitmap(null);
+                        }
+                    }
+                    if (itemDesc != null) {
+                        itemDesc.setText(item.getDesc());
+                        if (isDots(item.getMenuCode())) {
+                            Drawable icon = mContext.getResources().getDrawable(R.drawable.dots_red);
+                            if (icon != null) {
+                                icon.setBounds(0, 0, mDotsSize, mDotsSize);
+                                TextViewCompat.setCompoundDrawablesRelative(itemDesc, null, null, icon, null);
+                            }
+                        } else {
+                            TextViewCompat.setCompoundDrawablesRelative(itemDesc, null, null, null, null);
+                        }
+                        if (MenuInfo.TYPE_OPERATE_NONE.equals(item.getOperateType())) {
+                            itemDesc.setTextColor(ContextCompat.getColor(mContext, R.color.item_tv_color_01));
+                        } else {
+                            itemDesc.setTextColor(ContextCompat.getColor(mContext, R.color.item_tv_color_03));
+                        }
+                    }
+                    if (itemArrow != null) {
+                        if (MenuInfo.TYPE_OPERATE_NONE.equals(item.getOperateType())) {
+                            itemArrow.setVisibility(View.GONE);
+                        } else {
+                            itemArrow.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+
+                case MenuInfo.TYPE_SEPARATOR:
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.design_drawer_item_separator,
+                                parent, false);
+                    }
+                    break;
+
+                case MenuInfo.TYPE_DIVIDE://大分割线
+                    if (convertView == null) {
+                        convertView = mInflater.inflate(R.layout.setting_item_divide,
+                                parent, false);
+                    }
+                    if (position == 0) {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.GONE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
+                    } else if (position == getCount() - 1) {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.GONE);
+                    } else {
+                        convertView.findViewById(R.id.separetor1).setVisibility(View.VISIBLE);
+                        convertView.findViewById(R.id.separetor2).setVisibility(View.VISIBLE);
+                    }
                     break;
             }
         }

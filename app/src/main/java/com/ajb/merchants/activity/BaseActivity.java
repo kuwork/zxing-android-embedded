@@ -1925,5 +1925,35 @@ public class BaseActivity extends AppCompatActivity implements BaiduNaviManager.
         sendBroadcast(intent);
     }
 
+    /**
+     * 模块菜单分组(插入大分隔条)
+     *
+     * @param menuList
+     * @return
+     */
+    protected List<MenuInfo> dealMenuGroup(List<MenuInfo> menuList) {
+        List<MenuInfo> list = new ArrayList<>();
+        int groupId = 0;
+        for (int i = 0; i < menuList.size(); i++) {
+            if (MenuInfo.TYPE_NORMAL.equals(menuList.get(i).getType())) {
+                if (groupId != menuList.get(i).getGroupId()) {
+                    MenuInfo menuInfo = new MenuInfo();
+                    menuInfo.setType(MenuInfo.TYPE_DIVIDE);
+                    list.add(menuInfo);
+                    groupId = menuList.get(i).getGroupId();
+                }
+                list.add(menuList.get(i));
+            } else if (MenuInfo.TYPE_SEPARATOR.equals(menuList.get(i).getType())) {
+                list.add(menuList.get(i));
+            }
+        }
+        if (list.size() > 0) {
+            MenuInfo menuInfo = new MenuInfo();
+            menuInfo.setType(MenuInfo.TYPE_DIVIDE);
+            list.add(list.size(), menuInfo);
+        }
+        return list;
+    }
+
 
 }

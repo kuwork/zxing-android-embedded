@@ -1,6 +1,7 @@
 package com.ajb.merchants.fragment;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.ajb.merchants.R;
+import com.ajb.merchants.activity.MerchantDetailActivity;
 import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.adapter.MenuItemAdapter;
 import com.ajb.merchants.model.BalanceLimitInfo;
@@ -28,6 +30,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import java.util.Arrays;
 import java.util.List;
@@ -208,6 +211,12 @@ public class MainFragment extends BaseFragment {
         } else {
             mainMenuListAdapter.update(mm.getMenuList(), mm.getModularCode());
         }
+    }
+
+    @OnClick(R.id.imgAvatar)
+    public void onAvatarClick(View v) {
+        Intent intent = new Intent(getActivity(), MerchantDetailActivity.class);
+        startActivity(intent);
     }
 
 
