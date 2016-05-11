@@ -336,6 +336,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activity.CouponGivingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.PopupWindowBannerActivity"
             android:theme="@style/mTransparent_bg" />
         <activity

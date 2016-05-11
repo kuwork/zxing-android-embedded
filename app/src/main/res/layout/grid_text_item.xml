@@ -6,11 +6,11 @@
     android:padding="@dimen/layout_Margin_10">
 
     <TextView
-        android:id="@+id/carno_item_title"
-        style="@style/item_tv_second_style"
-        android:duplicateParentState="true"
+        android:id="@+id/title"
+        style="@style/item_tv_style"
         android:singleLine="false"
         android:text="粤"
-        android:textColor="@color/pop_attribution_textview_selector" />
+        android:textColor="@color/pop_attribution_textview_selector"
+        android:textSize="@dimen/text_size_18" />
 
 </LinearLayout>

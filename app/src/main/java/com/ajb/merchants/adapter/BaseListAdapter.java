@@ -30,6 +30,7 @@ import java.util.List;
 
 public class BaseListAdapter<T> extends BaseAdapter {
 
+    public final static String TYPE_CAR_NUM = "CAR_NUM";
 
     private final BitmapUtils bitmapUtils;
     private String typeName;
@@ -90,7 +91,7 @@ public class BaseListAdapter<T> extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public T getItem(int position) {
         return dataList.get(position);
     }
 
@@ -207,6 +208,15 @@ public class BaseListAdapter<T> extends BaseAdapter {
                         divider.setVisibility(View.VISIBLE);
                     }
                 }
+            } else if (info instanceof String) {
+                if (title != null) {
+                    title.setText((String) info);
+                    if (isCheck(info)) {
+                        title.setSelected(true);
+                    } else {
+                        title.setSelected(false);
+                    }
+                }
             }
         }
     }
@@ -220,6 +230,12 @@ public class BaseListAdapter<T> extends BaseAdapter {
             }
         } else if (info instanceof Product) {
             if (info.toString().equals(getChecked())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (info instanceof String) {
+            if (info.equals(getChecked())) {
                 return true;
             } else {
                 return false;

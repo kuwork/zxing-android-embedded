@@ -2,6 +2,7 @@ package com.ajb.merchants.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,17 +20,25 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -42,8 +51,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ajb.merchants.R;
+import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.adapter.FilterConditionAdapter;
 import com.ajb.merchants.adapter.MenuItemAdapter;
+import com.ajb.merchants.adapter.PopupWindowAdapter;
 import com.ajb.merchants.adapter.SortAdapter;
 import com.ajb.merchants.adapter.SortDistrictAdapter;
 import com.ajb.merchants.fragment.BaseFragment;
@@ -56,6 +67,7 @@ import com.ajb.merchants.model.AccountInfo;
 import com.ajb.merchants.model.AdInfo;
 import com.ajb.merchants.model.BaiduShortUrlUtils;
 import com.ajb.merchants.model.BaseResult;
+import com.ajb.merchants.model.CarInParkingBuilder;
 import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.model.ProvinceInfo;
@@ -68,6 +80,7 @@ import com.ajb.merchants.util.CarLocation;
 import com.ajb.merchants.util.CommonUtils;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.SharedFileUtils;
+import com.ajb.merchants.view.MyGridView;
 import com.ajb.merchants.view.ScaleImageView;
 import com.ajb.merchants.view.SideBar;
 import com.ajb.merchants.view.SyncHorizontalScrollView;
@@ -119,7 +132,7 @@ import cn.sharesdk.system.text.ShortMessage;
 import cn.sharesdk.wechat.friends.Wechat;
 import cn.sharesdk.wechat.moments.WechatMoments;
 
-public class HomePageActivity extends BaseActivity implements View.OnClickListener, OnSearchListener, PlatformActionListener, OnCameraListener, OnLocateListener {
+public class HomePageActivity extends BaseActivity implements View.OnClickListener, OnSearchListener, PlatformActionListener, OnCameraListener, OnLocateListener, OnItemClickListener {
     //  @ViewInject(R.id.fab)
     //  FloatingActionButton fab;
     @ViewInject(R.id.drawer_layout)
@@ -157,6 +170,9 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private int indicatorWidth = 0;
     private FrameLayout mFirstListViewLayout, mSecondListViewLayout;
     private MainFragment main;
+    private Dialog carNumInputDialog, cardInputDialog;
+    private View carNoPopupView;
+    private PopupWindow carNoPopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -488,41 +504,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                     menuListView.setAdapter(adapter);
                 }
             }
-            menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    MenuItemAdapter adapter = (MenuItemAdapter) parent.getAdapter();
-                    Object item = adapter.getItem(position);
-                    if (item instanceof MenuInfo) {
-                        MenuInfo menuInfo = ((MenuInfo) item);
-                        if (menuInfo.isNeedLogin()) {
-                            if (!isLogin()) {
-                                showToast("请先登陆");
-                                startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
-                                return;
-                            }
-//                            if (MenuInfo.TO_SOCIETYSHARE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-//                                if (drawer.isDrawerOpen(GravityCompat.START)) {
-//                                    drawer.closeDrawer(GravityCompat.START);
-//                                }
-//                                openSharePopWindow();
-//                            } else {
-//                                menuInfo.click(HomePageActivity.this);
-//                            }
-                        } else {
-                            switch (menuInfo.getMenuCode()) {
-                                case MenuInfo.TO_EXIT://退出掌停宝
-                                    finish();
-                                    break;
-                                default:
-                                    menuInfo.click(HomePageActivity.this);
-                                    break;
-
-                            }
-                        }
-                    }
-                }
-            });
+            menuListView.setOnItemClickListener(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -679,24 +661,19 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 
 
     public void scan() {
-        if (isLogin()) {
-            requestPermission(Constant.PM_CAMERA, Manifest.permission.CAMERA, new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent;
-                    intent = new Intent(getBaseContext(), CaptureActivity.class);
-                    startActivityForResult(intent, Constant.REQ_CODE_SCAN);
-                }
-            }, new Runnable() {
-                @Override
-                public void run() {
-                    showToast("启动失败");
-                }
-            });
-        } else {
-            showToast("请先登陆");
-            startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
-        }
+        requestPermission(Constant.PM_CAMERA, Manifest.permission.CAMERA, new Runnable() {
+            @Override
+            public void run() {
+                Intent intent;
+                intent = new Intent(getBaseContext(), CaptureActivity.class);
+                startActivityForResult(intent, Constant.REQ_CODE_SCAN);
+            }
+        }, new Runnable() {
+            @Override
+            public void run() {
+                showToast("启动失败");
+            }
+        });
     }
 
     @Override
@@ -743,19 +720,15 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 case Constant.REQ_CODE_WECHAT:
                     shareToWechat(inviteCode);
                     break;
-
                 case Constant.REQ_CODE_WECHAT_MOMENT:
                     shareToWechatMoment(inviteCode);
                     break;
-
                 case Constant.REQ_CODE_SMS:
                     shareToSMS(inviteCode);
                     break;
-
                 case Constant.REQ_CODE_CAPTURE:
                     SaveImageFromDiff(file);
                     break;
-
                 case Constant.REQ_CODE_LOGIN:
                     initAccountInfo();
                     break;
@@ -1083,6 +1056,62 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+
+    /**
+     * 菜单处理
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        MenuItemAdapter adapter = (MenuItemAdapter) parent.getAdapter();
+        Object item = adapter.getItem(position);
+        if (item instanceof MenuInfo) {
+            MenuInfo menuInfo = ((MenuInfo) item);
+            if (menuInfo.isNeedLogin()) {
+                if (!isLogin()) {
+                    showToast("请先登陆");
+                    startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
+                    return;
+                }
+                if (MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+                    switch (menuInfo.getMenuCode()) {
+                        case MenuInfo.TO_COUPON_SCAN:
+                            scan();
+                            break;
+                        case MenuInfo.TO_COUPON_CAR_NUM:
+                            showCarNumInputDialog(false);
+                            break;
+                        case MenuInfo.TO_COUPON_CARD:
+                            showCardInputDialog(true);
+                            break;
+                        default:
+                            menuInfo.click(HomePageActivity.this);
+                            break;
+                    }
+                }
+
+            } else {
+                switch (menuInfo.getMenuCode()) {
+                    case MenuInfo.TO_EXIT://退出掌停宝
+                        finish();
+                        break;
+                    case MenuInfo.TO_COUPON_SCAN:
+                        scan();
+                        break;
+                    case MenuInfo.TO_COUPON_CAR_NUM:
+                        showCarNumInputDialog(true);
+                        break;
+                    case MenuInfo.TO_COUPON_CARD:
+                        showCardInputDialog(true);
+                        break;
+                    default:
+                        menuInfo.click(HomePageActivity.this);
+                        break;
+
+                }
+            }
+        }
+    }
+
     /**
      * 定位SDK监听函数
      */
@@ -1285,7 +1314,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                         if (lv != null && c != null) {
                             FilterConditionAdapter adapter = new FilterConditionAdapter(getBaseContext(), c);
                             lv.setAdapter(adapter);
-                            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            lv.setOnItemClickListener(new OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     FilterConditionAdapter adapter = (FilterConditionAdapter) parent.getAdapter();
@@ -1387,7 +1416,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 ListView lv = ((ListView) mFirstListViewLayout.findViewById(R.id.mListView));
                 lv.setAdapter(sortAdapter);
                 initSecondDistrict(currentCity, sortAdapter);//初始化当前城市区域
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                lv.setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         SortAdapter adapter = (SortAdapter) parent.getAdapter();
@@ -1429,7 +1458,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             SortDistrictAdapter sortDistrictAdapter = new SortDistrictAdapter(getBaseContext(), districtList);
             districtGridView.setAdapter(sortDistrictAdapter);
             sortDistrictAdapter.setSelectItem(0);
-            districtGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            districtGridView.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     SortDistrictAdapter adapter = (SortDistrictAdapter) parent.getAdapter();
@@ -1439,5 +1468,287 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void showCarNumInputDialog(boolean canCancel) {
+        String title = getString(R.string.title_coupon_car_num);
+        String okText = getString(R.string.action_search);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText edCarno = null;
+                TextView tvCode = null;
+                switch (v.getId()) {
+                    case R.id.sure_btn:
+                        edCarno = (EditText) v.getTag(R.id.edCarno);
+                        tvCode = (TextView) v.getTag(R.id.tvCode);
+                        if (tvCode == null || edCarno == null) {
+                            return;
+                        }
+                        String province = tvCode.getText().toString().trim();
+                        String carNo = edCarno.getText().toString().trim()
+                                .toUpperCase();
+                        if (TextUtils.isEmpty(province)) {
+                            showToast(getString(R.string.tip_input_car_num_area));
+                            return;
+                        }
+                        if (TextUtils.isEmpty(carNo)) {
+                            showToast(getString(R.string.tip_input_car_num));
+                            return;
+                        }
+                        String carNoStr = province + carNo;
+                        if (!isCarNumberValidated(carNoStr)) {
+                            showToast(getString(R.string.tip_input_car_num_correct));
+                            Animation shake = AnimationUtils.loadAnimation(getBaseContext(),
+                                    R.anim.shake);
+                            ((View) edCarno.getParent()).startAnimation(shake);
+                            return;
+                        }
+                        if (carNumInputDialog != null) {
+                            carNumInputDialog.dismiss();
+                        }
+                        Intent intent = new Intent(getBaseContext(), CouponGivingActivity.class);
+                        intent.putExtra(Constant.KEY_TITLE, getString(R.string.title_coupon_car_num));
+                        CarInParkingBuilder carInParkingBuilder = new CarInParkingBuilder();
+                        carInParkingBuilder.setCarNo(carNoStr);
+                        intent.putExtra(Constant.KEY_CARINPARKING, carInParkingBuilder);
+                        startActivity(intent);
+                        break;
+                    case R.id.cancel_btn:
+                        if (carNumInputDialog != null) {
+                            carNumInputDialog.dismiss();
+                        }
+                        break;
+                    case R.id.tvCode:
+                        edCarno = (EditText) v.getTag(R.id.edCarno);
+                        if (edCarno != null) {
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(edCarno.getWindowToken(), 0);
+                        }
+                        showCarNoPopupWindow((TextView) v);
+                        break;
+                }
+            }
+        };
+        View contentView = getLayoutInflater().inflate(
+                R.layout.alertdialog_carnum_input_layout, null);
+        TextView tvTitle = (TextView) contentView
+                .findViewById(R.id.dialogTitle);
+        tvTitle.setText(title);
+        View submit = contentView.findViewById(R.id.sure_btn);
+        View cancel = contentView.findViewById(R.id.cancel_btn);
+        TextView tvSubmit = (TextView) contentView
+                .findViewById(R.id.sure_btn_tv);
+        TextView tvCode = (TextView) contentView
+                .findViewById(R.id.tvCode);
+        EditText edCarno = (EditText) contentView
+                .findViewById(R.id.edCarno);
+        tvCode.setTag(R.id.edCarno, edCarno);
+        edCarno.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (carNumInputDialog == null) {
+                    return;
+                }
+                EditText edCarno = (EditText) carNumInputDialog.getWindow().getDecorView()
+                        .findViewById(R.id.edCarno);
+                if (edCarno == null) {
+                    return;
+                }
+                edCarno.removeTextChangedListener(this);
+                String str = s.toString().trim().toUpperCase();
+                edCarno.setText(str);
+                edCarno.setSelection(str.length());// 重新设置光标位置
+                edCarno.addTextChangedListener(this);// 重新绑
+            }
+        });
+        submit.setTag(R.id.tvCode, tvCode);
+        submit.setTag(R.id.edCarno, edCarno);
+        if (!TextUtils.isEmpty(title) && tvTitle != null) {
+            tvTitle.setText(title);
+        }
+        if (!TextUtils.isEmpty(okText) && tvSubmit != null) {
+            tvSubmit.setText(okText);
+        }
+        submit.setOnClickListener(listener);
+        cancel.setOnClickListener(listener);
+        tvCode.setOnClickListener(listener);
+        if (carNumInputDialog == null) {
+            carNumInputDialog = new Dialog(this, R.style.Dialog);
+            Window win = carNumInputDialog.getWindow();
+            win.setContentView(contentView);
+            carNumInputDialog.setCancelable(canCancel);
+            carNumInputDialog.show();
+        } else {
+            Window win = carNumInputDialog.getWindow();
+            win.setContentView(contentView);
+            carNumInputDialog.setCancelable(canCancel);
+            if (!carNumInputDialog.isShowing()) {
+                carNumInputDialog.show();
+            }
+        }
+    }
+
+    /**
+     * 卡编号弹窗
+     */
+    protected void showCardInputDialog(boolean canCancel) {
+        String title = getString(R.string.tip_input_card);
+        String okText = getString(R.string.action_search);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText edCard = null;
+                switch (v.getId()) {
+                    case R.id.sure_btn:
+                        edCard = (EditText) v.getTag(R.id.edCard);
+                        String card = edCard.getText().toString().trim()
+                                .toUpperCase();
+                        if (TextUtils.isEmpty(card)) {
+                            showToast(getString(R.string.tip_input_card));
+                            Animation shake = AnimationUtils.loadAnimation(getBaseContext(),
+                                    R.anim.shake);
+                            ((View) edCard.getParent()).startAnimation(shake);
+                            return;
+                        }
+                        if (cardInputDialog != null) {
+                            cardInputDialog.dismiss();
+                        }
+                        Intent intent = new Intent(getBaseContext(), CouponGivingActivity.class);
+                        intent.putExtra(Constant.KEY_TITLE, getString(R.string.title_coupon_card));
+                        CarInParkingBuilder carInParkingBuilder = new CarInParkingBuilder();
+                        carInParkingBuilder.setCarSN(card);
+                        intent.putExtra(Constant.KEY_CARINPARKING, carInParkingBuilder);
+                        startActivity(intent);
+                        break;
+                    case R.id.cancel_btn:
+                        if (cardInputDialog != null) {
+                            cardInputDialog.dismiss();
+                        }
+                        break;
+                    case R.id.tvCode:
+                        edCard = (EditText) v.getTag(R.id.edCarno);
+                        if (edCard != null) {
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(edCard.getWindowToken(), 0);
+                        }
+                        showCarNoPopupWindow((TextView) v);
+                        break;
+                }
+            }
+        };
+        View contentView = getLayoutInflater().inflate(
+                R.layout.alertdialog_card_input_layout, null);
+        TextView tvTitle = (TextView) contentView
+                .findViewById(R.id.dialogTitle);
+        tvTitle.setText(title);
+        View submit = contentView.findViewById(R.id.sure_btn);
+        View cancel = contentView.findViewById(R.id.cancel_btn);
+        TextView tvSubmit = (TextView) contentView
+                .findViewById(R.id.sure_btn_tv);
+        EditText edCard = (EditText) contentView
+                .findViewById(R.id.edCard);
+        submit.setTag(R.id.edCard, edCard);
+        if (!TextUtils.isEmpty(title) && tvTitle != null) {
+            tvTitle.setText(title);
+        }
+        if (!TextUtils.isEmpty(okText) && tvSubmit != null) {
+            tvSubmit.setText(okText);
+        }
+        submit.setOnClickListener(listener);
+        cancel.setOnClickListener(listener);
+        if (cardInputDialog == null) {
+            cardInputDialog = new Dialog(this, R.style.Dialog);
+            Window win = cardInputDialog.getWindow();
+            win.setContentView(contentView);
+            cardInputDialog.setCancelable(canCancel);
+            cardInputDialog.show();
+        } else {
+            Window win = cardInputDialog.getWindow();
+            win.setContentView(contentView);
+            cardInputDialog.setCancelable(canCancel);
+            if (!cardInputDialog.isShowing()) {
+                cardInputDialog.show();
+            }
+        }
+    }
+
+
+    /**
+     * 创建popupWindow菜单
+     */
+    private void showCarNoPopupWindow(TextView textView) {
+        // TODO Auto-generated method stub
+        if (carNoPopupView == null || carNoPopupWindow == null) {
+            carNoPopupView = getLayoutInflater().inflate(R.layout.popmenu, null);
+            /** 初始化PopupWindow */
+            carNoPopupWindow = new PopupWindow(carNoPopupView,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            carNoPopupWindow.setFocusable(true);// 取得焦点
+            carNoPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+            /** 设置PopupWindow弹出和退出时候的动画效果 */
+//        carNoPopupWindow.setAnimationStyle(R.style.animation);
+            /** 网格布局界面 */
+            View.OnClickListener onClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (v.getId()) {
+                        case R.id.space:
+                            carNoPopupWindow.dismiss();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            };
+            MyGridView gridView = (MyGridView) carNoPopupView.findViewById(R.id.gridView);
+            carNoPopupView.findViewById(R.id.space).setOnClickListener(onClickListener);
+            /** 设置网格布局的适配器 */
+            BaseListAdapter<String> adapter = PopupWindowAdapter.getAdapter(getBaseContext());
+            adapter.setChecked(textView.getText().toString());
+            gridView.setAdapter(adapter);
+            /** 设置网格布局的菜单项点击时候的Listener */
+            gridView.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    BaseListAdapter<String> adapter = (BaseListAdapter<String>) parent
+                            .getAdapter();
+                    String item = adapter.getItem(position);
+                    adapter.setChecked(item);
+                    if (carNumInputDialog != null) {
+                        TextView tvCode = (TextView) carNumInputDialog.getWindow().getDecorView().findViewById(R.id.tvCode);
+                        if (tvCode != null) {
+                            tvCode.setText(item);
+                        }
+//                        EditText edCarno = (EditText) carNumInputDialog.getWindow().getDecorView().findViewById(R.id.edCarno);
+//                        if (edCarno != null) {
+//                            edCarno.setSelection(edCarno.getText().length());
+//                            edCarno.setSelected(true);
+//                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+////                            imm.showSoftInput(edCarno, InputMethodManager.SHOW_FORCED);
+//                            imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+//                        }
+                    }
+                    if (carNoPopupWindow != null) {
+                        carNoPopupWindow.dismiss();
+                    }
+                }
+            });
+        }
+        carNoPopupWindow.showAtLocation(textView, Gravity.BOTTOM, 0, 0);
+
     }
 }
