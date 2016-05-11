@@ -1,6 +1,7 @@
 package com.ajb.merchants.fragment;
 
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -59,6 +60,17 @@ public class MainFragment extends BaseFragment {
     private MenuItemAdapter<MenuInfo> couponMenuListAdapter;
     //功能菜单
     private MenuItemAdapter<MenuInfo> mainMenuListAdapter;
+    private AdapterView.OnItemClickListener onItemClickListener;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            onItemClickListener = (AdapterView.OnItemClickListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + "must implement OnItemClickListener");
+        }
+    }
 
     public MainFragment() {
     }
@@ -136,13 +148,6 @@ public class MainFragment extends BaseFragment {
             if (modularMenuList == null) {
                 return;
             }
-            AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                }
-            };
             int size = modularMenuList.size();
             for (int i = 0; i < size; i++) {
                 modularMenu = modularMenuList.get(i);
@@ -152,41 +157,7 @@ public class MainFragment extends BaseFragment {
                     initMainMenuList(modularMenu, onItemClickListener);
                 }
             }
-//            menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    MenuItemAdapter adapter = (MenuItemAdapter) parent.getAdapter();
-//                    Object item = adapter.getItem(position);
-//                    if (item instanceof MenuInfo) {
-//                        MenuInfo menuInfo = ((MenuInfo) item);
-//                        if (menuInfo.isNeedLogin()) {
-//                            if (!isLogin()) {
-//                                showToast("请先登陆");
-//                                startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
-//                                return;
-//                            }
-//                            if (MenuInfo.TO_SOCIETYSHARE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-//                                if (drawer.isDrawerOpen(GravityCompat.START)) {
-//                                    drawer.closeDrawer(GravityCompat.START);
-//                                }
-//                                openSharePopWindow();
-//                            } else {
-//                                menuInfo.click(HomePageActivity.this);
-//                            }
-//                        } else {
-//                            switch (menuInfo.getMenuCode()) {
-//                                case MenuInfo.TO_EXIT://退出掌停宝
-//                                    finish();
-//                                    break;
-//                                default:
-//                                    menuInfo.click(HomePageActivity.this);
-//                                    break;
 //
-//                            }
-//                        }
-//                    }
-//                }
-//            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -199,6 +170,7 @@ public class MainFragment extends BaseFragment {
         } else {
             couponMenuListAdapter.update(mm.getMenuList(), mm.getModularCode());
         }
+        couponGridView.setOnItemClickListener(listener);
     }
 
     protected void initMainMenuList(ModularMenu mm, AdapterView.OnItemClickListener listener) {
@@ -208,6 +180,7 @@ public class MainFragment extends BaseFragment {
         } else {
             mainMenuListAdapter.update(mm.getMenuList(), mm.getModularCode());
         }
+        menuGridView.setOnItemClickListener(listener);
     }
 
 

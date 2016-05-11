@@ -7,6 +7,13 @@
     <string name="action_pay">找车缴费</string>
     <string name="action_map">附近车场</string>
     <string name="action_filter">筛选</string>
+    <string name="action_search">查询</string>
+    <string name="action_ok">确定</string>
+    <string name="action_cancel">取消</string>
+    <!-- 派发优惠-->
+    <string name="title_coupon_scan">扫卡优惠</string>
+    <string name="title_coupon_car_num">车牌优惠</string>
+    <string name="title_coupon_card">卡号优惠</string>
     <!-- 导航菜单-->
     <string name="nav_menu_title_1001">我的车辆</string>
     <string name="nav_menu_title_1002">我的优惠</string>
@@ -62,5 +69,11 @@
     <string name="tip_reset_pwd">请输入新密码</string>
     <string name="tip_reset_pwd_confirm">请确认新密码</string>
     <string name="tip_reset_phone_verification">请确认手机验证码</string>
+    <string name="tip_input_car_num">请输入车牌号码</string>
+    <string name="tip_input_car_num_correct">请输入正确的车牌号码</string>
+    <string name="tip_input_car_num_area">请选择车牌所在省份！</string>
+    <string name="tip_input_card">请输入卡编号</string>
+    <string name="tip_input_card_title">卡编号优惠</string>
+
 
 </resources>

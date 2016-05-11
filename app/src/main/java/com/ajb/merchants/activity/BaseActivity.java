@@ -1594,8 +1594,8 @@ public class BaseActivity extends AppCompatActivity implements BaiduNaviManager.
      *
      * @param bundle
      */
-    protected void goPay(Bundle bundle) {
-        Intent intent = new Intent(getBaseContext(), PayActivity.class);
+    protected void gotoCouponGiving(Bundle bundle) {
+        Intent intent = new Intent(getBaseContext(), CouponGivingActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -1605,7 +1605,8 @@ public class BaseActivity extends AppCompatActivity implements BaiduNaviManager.
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case Constant.REQ_CODE_SCAN:
-                    goPay(data.getExtras());
+                    gotoCouponGiving(data.getExtras());
+                    break;
             }
         }
     }
@@ -1925,5 +1926,9 @@ public class BaseActivity extends AppCompatActivity implements BaiduNaviManager.
         sendBroadcast(intent);
     }
 
+    public static boolean isCarNumberValidated(String carNumber) {
+        String rule = "[\u4e00-\u9fa5]?([A-Za-z]{1}[A-Za-z0-9]{5}|[A-Za-z]{1}[A-Za-z_0-9]{4}[\u4e00-\u9fa5])";
+        return Pattern.matches(rule, carNumber);
+    }
 
 }

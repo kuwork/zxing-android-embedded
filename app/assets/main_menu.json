@@ -14,7 +14,7 @@
         "operateType": "NATIVE",
         "title": "扫卡优惠",
         "type": "NORMAL",
-        "needLogin": true,
+        "needLogin": false,
         "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/2_icon.png"
       },
       {
@@ -24,7 +24,7 @@
         "operateType": "NATIVE",
         "title": "车牌优惠",
         "type": "NORMAL",
-        "needLogin": true,
+        "needLogin": false,
         "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/3_icon.png"
       },
       {
@@ -34,7 +34,7 @@
         "operateType": "NATIVE",
         "title": "卡号优惠",
         "type": "NORMAL",
-        "needLogin": true,
+        "needLogin": false,
         "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/4_icon.png"
       }
     ]

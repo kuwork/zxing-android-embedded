@@ -9,9 +9,9 @@ import java.io.Serializable;
  */
 public class CarInParkingBuilder implements Serializable {
     private String park;
-    private String carNo;
-    private String cardId;
-    private String carSN;
+    private String carNo;//车牌
+    private String cardId;//卡芯片号
+    private String carSN;//卡编号
     private String parkCode;
     private String ltdCode;
     private String parkName;
