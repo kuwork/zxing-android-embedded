@@ -15,12 +15,18 @@
 
 package com.lidroid.xutils.bitmap.download;
 
+import android.content.Context;
+
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.util.IOUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.util.OtherUtils;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -58,6 +64,13 @@ public class DefaultDownloader extends Downloader {
                 fileLen = inputStream.available();
                 bis = new BufferedInputStream(inputStream);
                 result = Long.MAX_VALUE;
+            } else if (uri.startsWith("drawable://")) {//赤裸裸地抄袭,我也用这个协议
+                String drawableIdString = uri.substring(11, uri.length());//注意别算错了
+                int intdrawableId = getResource(drawableIdString); //还原原始的 id
+                InputStream inputStream = this.getContext().getResources().openRawResource(intdrawableId);
+                fileLen = inputStream.available();//抄上面的
+                bis = new BufferedInputStream(inputStream); //抄上面的
+                result = Long.MAX_VALUE;//抄上面的,先这么写,以后讨论
             } else {
                 final URL url = new URL(uri);
                 urlConnection = url.openConnection();
@@ -88,5 +101,16 @@ public class DefaultDownloader extends Downloader {
             IOUtils.closeQuietly(bis);
         }
         return result;
+    }
+
+    public int getResource(String imageName) {
+        Context ctx = this.getContext();
+        String[] strs = imageName.split("\\.");
+        if (strs.length != 3) {
+            return -1;
+        }
+        int resId = ctx.getResources().getIdentifier(strs[2], strs[1], ctx.getPackageName());
+        //如果没有在"mipmap"下找到imageName,将会返回0
+        return resId;
     }
 }
