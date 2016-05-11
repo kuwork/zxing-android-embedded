@@ -338,7 +338,11 @@
         <activity
             android:name=".activity.PopupWindowBannerActivity"
             android:theme="@style/mTransparent_bg" />
-
+         <!--账户管理页面-->
+        <activity
+            android:name=".activity.AccoutManagementActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <service
             android:name=".util.download.DownloadService"
             android:enabled="true"
