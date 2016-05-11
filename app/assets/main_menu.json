@@ -64,7 +64,7 @@
         "menuValue": "购买优惠",
         "operateType": "NATIVE",
         "desc": "向车场在线购买优惠",
-        "title": "购买一会优惠",
+        "title": "购买优惠",
         "type": "NORMAL",
         "needLogin": true,
         "menuPictureUrl": "http://dev.eanpa-gz-manager.com/static/images/v1/6_icon.png"
