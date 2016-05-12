@@ -62,9 +62,8 @@ public class AccountManagementActivity extends BaseActivity {
             public void onClick(View v) {
                 String tag = (String) v.getTag();
                 if (tag.equals("edit")) {
-                    showToast("编辑框");
+
                 } else if (tag.equals("delete")) {
-                    showToast("删除按钮");
 
                 }
                 showOkCancelAlertDialog(false, "提示",
@@ -89,7 +88,6 @@ public class AccountManagementActivity extends BaseActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showToast("对话框");
                 LinearLayout lv_detail = (LinearLayout) view.findViewById(R.id.lv_detail);
                 if (lv_detail.getVisibility() == View.VISIBLE) {
                     lv_detail.setVisibility(View.GONE);

@@ -166,26 +166,28 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
      * 初始化banner圆点
      */
     private void initCirclePoint() {
-        circlePoints = new ImageView[dataList.size()];
-        // 广告栏的小圆点图标
-        for (int i = 0; i < dataList.size(); i++) {
-            // 创建一个ImageView, 并设置宽高. 将该对象放入到数组中
-            ImageView imageView = new ImageView(getApplicationContext());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(DensityUtil.dp2px(getApplicationContext(), 3), 0,
-                    0, 0);
-            imageView.setLayoutParams(params);
-            circlePoints[i] = imageView;
-            // 初始值, 默认第0个选中
-            if (i == 0) {
-                circlePoints[i].setBackgroundResource(R.drawable.circle_choose);
-            } else {
-                circlePoints[i].setBackgroundResource(R.drawable.circle_unchoose);
+        if (dataList.size() > 1) {
+            circlePoints = new ImageView[dataList.size()];
+            // 广告栏的小圆点图标
+            for (int i = 0; i < dataList.size(); i++) {
+                // 创建一个ImageView, 并设置宽高. 将该对象放入到数组中
+                ImageView imageView = new ImageView(getApplicationContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.setMargins(DensityUtil.dp2px(getApplicationContext(), 3), 0,
+                        0, 0);
+                imageView.setLayoutParams(params);
+                circlePoints[i] = imageView;
+                // 初始值, 默认第0个选中
+                if (i == 0) {
+                    circlePoints[i].setBackgroundResource(R.drawable.circle_choose);
+                } else {
+                    circlePoints[i].setBackgroundResource(R.drawable.circle_unchoose);
+                }
+                // 将小圆点放入到布局中
+                splash_circle_groups.addView(circlePoints[i]);
             }
-            // 将小圆点放入到布局中
-            splash_circle_groups.addView(circlePoints[i]);
         }
     }
 

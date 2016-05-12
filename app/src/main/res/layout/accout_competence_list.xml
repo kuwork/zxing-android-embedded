@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/layout_widthfilled_style"
+    android:orientation="vertical">
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
         android:id="@+id/tv_competence"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        />
+        style="@style/item_tv_style"
+        android:layout_gravity="left"
+        android:layout_marginBottom="@dimen/layout_Margin_5"
+        android:layout_marginTop="@dimen/layout_Margin_5"
+        android:textColor="@color/item_tv_color_02" />
 </LinearLayout>

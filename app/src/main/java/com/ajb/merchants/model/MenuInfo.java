@@ -9,6 +9,7 @@ import com.ajb.merchants.activity.AboutActivity;
 import com.ajb.merchants.activity.AccountManagementActivity;
 import com.ajb.merchants.activity.EditorActivity;
 import com.ajb.merchants.activity.ModifyPhoneActivity;
+import com.ajb.merchants.activity.ResetPasswordActivity;
 import com.ajb.merchants.activity.SettingActivity;
 import com.ajb.merchants.activity.WebViewActivity;
 import com.ajb.merchants.util.Constant;
@@ -242,7 +243,11 @@ public class MenuInfo implements Serializable {
                     intent = new Intent(context, ModifyPhoneActivity.class);
                     dealExtras(intent);
                     context.startActivity(intent);
-                } else if (TO_CLEARCACHE.equals(getMenuCode())) {
+                } else if (TO_PWD_RESET.equals(getMenuCode())) {
+                    intent = new Intent(context, ResetPasswordActivity.class);
+                    dealExtras(intent);
+                    context.startActivity(intent);
+                }else if (TO_CLEARCACHE.equals(getMenuCode())) {
                     //清除缓存
                     String cacheDirPath = PathManager.getDiskCacheDir(context) + File.separator + "WebCache";
                     String cacheDirPath2 = PathManager.getDiskCacheDir(context) + "/database/webview.db";
