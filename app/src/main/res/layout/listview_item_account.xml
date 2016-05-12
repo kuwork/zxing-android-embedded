@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ly_content"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <FrameLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/layout_Margin_10">
+
+            <View
+                style="@style/layout_allFilled_style"
+                android:layout_gravity="center"
+                android:background="@drawable/home_avatar_black_bg_account" />
+
+            <ImageView
+                android:id="@+id/im_iocn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@mipmap/default_avatar" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/item_tv_style"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/layout_Margin_10"
+            android:layout_weight="1"
+            android:text="张三1111"
+            android:textColor="#333333" />
+
+        <ImageView
+            android:id="@+id/btn_edit"
+            style="@style/item_img_style"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="0dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:src="@mipmap/account_edit" />
+
+        <ImageView
+            android:id="@+id/btn_delete"
+            style="@style/item_img_style"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginLeft="@dimen/layout_Margin_15"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:src="@mipmap/account_delete" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f2f2f2"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="17dp"
+                    android:text="车场位置 :"
+                    android:textColor="#333333"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="17dp"
+                    android:text="详细信息详细信息"
+                    android:textColor="#606060"
+                    android:textSize="16dp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="17dp"
+                android:text="账户权限 :"
+                android:textColor="#333333"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/gd_competence"
+            android:layout_width="wrap_content"
+            android:layout_height="80dip"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:horizontalSpacing="12dp"
+            android:numColumns="2"
+            android:padding="12dp"
+            android:verticalSpacing="12dp"></GridView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="17dp"
+            android:text="备注:"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="17dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="12dp"
+            android:text="xxxxxxxxxx"
+            android:textColor="#606060"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E5E5E5" />
+</LinearLayout>

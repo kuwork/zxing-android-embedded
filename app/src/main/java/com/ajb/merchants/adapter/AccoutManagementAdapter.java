@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,8 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.ajb.merchants.R.id.ly_content;
 
 /**
  * Created by chenming on 2016/5/11.
@@ -73,7 +70,7 @@ public class AccoutManagementAdapter extends BaseAdapter{
 
          ViewHodler holder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.accout_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.listview_item_account, parent, false);
             holder = new ViewHodler();
             ViewUtils.inject(holder, convertView);
             convertView.setTag(holder);

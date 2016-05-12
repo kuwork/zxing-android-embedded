@@ -1,8 +1,6 @@
 package com.ajb.merchants.activity;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,16 +16,17 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccoutManagementActivity extends BaseActivity {
+public class AccountManagementActivity extends BaseActivity {
 
     private Context context;
     @ViewInject(R.id.listview)
     private ListView listview;//账户列表
     AccoutManagementAdapter accoutManagementAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accout_management);
+        setContentView(R.layout.activity_account_management);
         ViewUtils.inject(this);
         initView();
         setModel();
@@ -37,35 +36,35 @@ public class AccoutManagementActivity extends BaseActivity {
     /**
      * 模拟静态数据
      */
-    private void setModel(){
-        List<String> listCompetence=new ArrayList<String>();
+    private void setModel() {
+        List<String> listCompetence = new ArrayList<String>();
         listCompetence.add("扫卡优惠赠送");
         listCompetence.add("回收优惠");
         listCompetence.add("车牌优惠赠送");
         listCompetence.add("卡号优惠赠送");
         listCompetence.add("发布优惠信息");
-        String[] strName={"张三","李四","李四1","李四2","李四3","李四4","李四5"};
-        String[] strAddress={"高德汇","东圃大厦","东圃大厦1","东圃大厦2","东圃大厦3","东圃大厦4","东圃大厦5"};
-        String[] strRemark={"111111","222222","xas","xa","342342","5656","e1e1e"};
+        String[] strName = {"张三", "李四", "李四1", "李四2", "李四3", "李四4", "李四5"};
+        String[] strAddress = {"高德汇", "东圃大厦", "东圃大厦1", "东圃大厦2", "东圃大厦3", "东圃大厦4", "东圃大厦5"};
+        String[] strRemark = {"111111", "222222", "xas", "xa", "342342", "5656", "e1e1e"};
 
-        List<MerchantsAccoutInfo> listmodel= new ArrayList<MerchantsAccoutInfo>();
+        List<MerchantsAccoutInfo> listmodel = new ArrayList<MerchantsAccoutInfo>();
 
-        for(int i=0;i<strName.length;i++){
-            MerchantsAccoutInfo merchantsAccoutInfo=new MerchantsAccoutInfo();
+        for (int i = 0; i < strName.length; i++) {
+            MerchantsAccoutInfo merchantsAccoutInfo = new MerchantsAccoutInfo();
             merchantsAccoutInfo.setMa_accoutname(strName[i]);
             merchantsAccoutInfo.setMa_address(strAddress[i]);
             merchantsAccoutInfo.setMa_remark(strRemark[i]);
             merchantsAccoutInfo.setMa_listCompetence(listCompetence);
             listmodel.add(merchantsAccoutInfo);
         }
-        AccoutManagementAdapter accoutManagementAdapter=new AccoutManagementAdapter(context, listmodel, new View.OnClickListener() {
+        AccoutManagementAdapter accoutManagementAdapter = new AccoutManagementAdapter(context, listmodel, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tag= (String) v.getTag();
-                if(tag.equals("edit")){
+                String tag = (String) v.getTag();
+                if (tag.equals("edit")) {
                     showToast("编辑框");
-                }else if (tag.equals("delete")){
-                   showToast("删除按钮");
+                } else if (tag.equals("delete")) {
+                    showToast("删除按钮");
 
                 }
                 showOkCancelAlertDialog(false, "提示",
@@ -91,10 +90,10 @@ public class AccoutManagementActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 showToast("对话框");
-                LinearLayout lv_detail= (LinearLayout) view.findViewById(R.id.lv_detail);
-                if(lv_detail.getVisibility()==View.VISIBLE){
+                LinearLayout lv_detail = (LinearLayout) view.findViewById(R.id.lv_detail);
+                if (lv_detail.getVisibility() == View.VISIBLE) {
                     lv_detail.setVisibility(View.GONE);
-                }else{
+                } else {
                     lv_detail.setVisibility(View.VISIBLE);
                 }
 
@@ -105,17 +104,17 @@ public class AccoutManagementActivity extends BaseActivity {
     /**
      * 视图初始化
      */
-    private void initView(){
-        context=AccoutManagementActivity.this;
-        initTitle("账户管理");
-         initBackClick(NO_RES, new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 finish();
-             }
-         });
+    private void initView() {
+        context = AccountManagementActivity.this;
+        initTitle("账号管理");
+        initBackClick(NO_RES, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //图标，对应文本，对应监听事件
-        initMenuClick(NO_ICON, "", null,R.mipmap.account_add,"新增", new View.OnClickListener() {
+        initMenuClick(NO_ICON, "", null, R.drawable.actionbar_add, "新增", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showToast("新增");

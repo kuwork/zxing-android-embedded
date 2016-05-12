@@ -347,9 +347,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeTran.NoActionBar" />
         <activity
-            android:name=".activity.AccoutManagementActivity"
+            android:name=".activity.AccountManagementActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ModifyPhoneActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.EditorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <service
             android:name=".util.download.DownloadService"
             android:enabled="true"

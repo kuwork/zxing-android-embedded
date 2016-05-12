@@ -10,6 +10,8 @@
     <string name="action_search">查询</string>
     <string name="action_ok">确定</string>
     <string name="action_cancel">取消</string>
+    <string name="action_edit">编辑</string>
+    <string name="action_save">保存</string>
     <!-- 派发优惠-->
     <string name="title_coupon_scan">扫卡优惠</string>
     <string name="title_coupon_car_num">车牌优惠</string>
@@ -76,9 +78,7 @@
     <string name="tip_input_card_title">卡编号优惠</string>
     <string name="tip_coupon_tab_money">金额优惠</string>
     <string name="tip_coupon_tab_time">时间优惠</string>
-    <string name="action_edit">编辑</string>
-    <string name="action_save">保存</string>
     <string name="tip_coupon_remark">请输入赠送说明</string>
-
+    <string name="tip_editor">请输入...</string>
 
 </resources>

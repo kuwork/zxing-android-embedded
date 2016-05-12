@@ -52,6 +52,7 @@ public class Constant {
     //Bundle KEY
     public static final String KEY_URL = "URL";
     public static final String KEY_TITLE = "TITLE";
+    public static final String KEY_DESC = "DESC";
     public static final String KEY_CARINPARKING = "carInParking";
     public static final String KEY_PAYSUCCESS = "paySuccess";
     public static final String KEY_BASEMODEL = "baseModel";

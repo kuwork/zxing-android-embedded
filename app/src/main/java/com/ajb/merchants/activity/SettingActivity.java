@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -35,13 +34,10 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.util.App;
 
 import java.util.Arrays;
 import java.util.List;
-
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 设置界面
@@ -50,8 +46,6 @@ public class SettingActivity extends BaseActivity {
 
     @ViewInject(R.id.setting_listview)
     MyListView menuListView;
-    @ViewInject(R.id.change_account_btn)
-    LinearLayout change_account_btn;
     private RequestParams unBindChannelIDParams;
     private Dialog mDialog;
     private View contentView;
@@ -107,6 +101,9 @@ public class SettingActivity extends BaseActivity {
                     Object item = adapter.getItem(position);
                     if (item instanceof MenuInfo) {
                         MenuInfo menuInfo = ((MenuInfo) item);
+                        if (!MenuInfo.TYPE_NORMAL.equals(menuInfo.getType())) {
+                            return;
+                        }
                         if (MenuInfo.TO_CHECKUPDATE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
                             checkUpdate();
                         } else if (MenuInfo.TO_CLEARCACHE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
@@ -229,14 +226,9 @@ public class SettingActivity extends BaseActivity {
                 finish();
             }
         });
-        if (isLogin()) {
-            change_account_btn.setVisibility(View.VISIBLE);
-        } else {
-            change_account_btn.setVisibility(View.GONE);
-        }
     }
 
-    @OnClick(R.id.change_account_btn)
+    /*@OnClick(R.id.change_account_btn)
     public void onLoginOutClick(View v) {
 //        // 退出登陆
 //        sharedFileUtils.putBoolean("isLogin", false);
@@ -253,7 +245,7 @@ public class SettingActivity extends BaseActivity {
                 Constant.InterfaceParam.CHANNELID,
                 JPushInterface.getRegistrationID(getBaseContext()));
         unBindChannelID();
-    }
+    }*/
 
 
     private void unBindChannelID() {

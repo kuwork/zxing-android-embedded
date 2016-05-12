@@ -19,29 +19,6 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:listSelector="?attr/selectableItemBackground" />
-
-            <LinearLayout
-                android:id="@+id/change_account_btn"
-                style="@style/item_layout"
-                android:background="@color/white"
-                android:clickable="true"
-                android:orientation="vertical">
-
-                <View style="@style/line_style" />
-
-                <TextView
-                    style="@style/item_tv_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="49dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="0dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:text="退出登录" />
-
-                <View style="@style/line_style" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

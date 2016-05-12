@@ -71,20 +71,16 @@ public class MerchantDetailActivity extends BaseActivity {
                     Object item = adapter.getItem(position);
                     if (item instanceof MenuInfo) {
                         MenuInfo menuInfo = ((MenuInfo) item);
+                        if (!MenuInfo.TYPE_NORMAL.equals(menuInfo.getType())) {
+                            return;
+                        }
                         if (menuInfo.isNeedLogin()) {
                             if (!isLogin()) {
                                 showToast("请先登陆");
                                 startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
                                 return;
                             }
-//                            if (MenuInfo.TO_SOCIETYSHARE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-//                                if (drawer.isDrawerOpen(GravityCompat.START)) {
-//                                    drawer.closeDrawer(GravityCompat.START);
-//                                }
-//                                openSharePopWindow();
-//                            } else {
-//                                menuInfo.click(HomePageActivity.this);
-//                            }
+                            menuInfo.click(MerchantDetailActivity.this);
                         } else {
                             switch (menuInfo.getMenuCode()) {
                                 case MenuInfo.TO_EXIT://退出掌停宝
