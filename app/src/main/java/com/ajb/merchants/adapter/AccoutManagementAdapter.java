@@ -90,6 +90,9 @@ public class AccoutManagementAdapter extends BaseAdapter{
         holder.gd_competence.setFocusable(false);
         holder.gd_competence.setFocusableInTouchMode(false);
         holder.btn_delete.setOnClickListener(AccoutManagementAdapter.this.onClickListener);
+        holder.btn_delete.setTag("delete");
+        holder.btn_edit.setOnClickListener(AccoutManagementAdapter.this.onClickListener);
+        holder.btn_edit.setTag("edit");
         return convertView;
     }
 
@@ -101,9 +104,9 @@ public class AccoutManagementAdapter extends BaseAdapter{
         @ViewInject(R.id.tv_name)//标题
         TextView tv_name;
         @ViewInject(R.id.btn_edit)
-        Button btn_edit;
+        ImageView btn_edit;
         @ViewInject(R.id.btn_delete)
-        Button btn_delete;
+        ImageView btn_delete;
         @ViewInject(R.id.gd_competence)
         GridView gd_competence;//权限列表
         @ViewInject(R.id.lv_detail)

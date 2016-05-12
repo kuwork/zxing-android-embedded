@@ -61,6 +61,13 @@ public class AccoutManagementActivity extends BaseActivity {
         AccoutManagementAdapter accoutManagementAdapter=new AccoutManagementAdapter(context, listmodel, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String tag= (String) v.getTag();
+                if(tag.equals("edit")){
+                    showToast("编辑框");
+                }else if (tag.equals("delete")){
+                   showToast("删除按钮");
+
+                }
                 showOkCancelAlertDialog(false, "提示",
                         "您确定需要删除账户",
                         "确定", "取消",
@@ -108,7 +115,7 @@ public class AccoutManagementActivity extends BaseActivity {
              }
          });
         //图标，对应文本，对应监听事件
-        initMenuClick(NO_ICON, "", null,NO_RES,"新增", new View.OnClickListener() {
+        initMenuClick(NO_ICON, "", null,R.mipmap.account_add,"新增", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showToast("新增");
