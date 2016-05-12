@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.ajb.merchants.activity.AboutActivity;
+import com.ajb.merchants.activity.EditorActivity;
+import com.ajb.merchants.activity.ModifyPhoneActivity;
 import com.ajb.merchants.activity.SettingActivity;
 import com.ajb.merchants.activity.WebViewActivity;
 import com.ajb.merchants.util.Constant;
@@ -64,12 +66,20 @@ public class MenuInfo implements Serializable {
     /**
      * 设置页面code
      */
-
     public static final String TO_CHECKUPDATE = "200031";
     public static final String TO_CLEARCACHE = "200032";
     public static final String TO_ABOUTUS = "200033";
     public static final String TO_PAGESETTING = "200034";
     public static final String TO_LOGIN_OUT = "200035";
+
+    /**
+     * 商家详情页面code
+     */
+    public static final String TO_STORE_DETAIL = "300001";  //商铺名称
+    public static final String TO_STORE_ADDRESS = "300003"; //商铺地址
+    public static final String TO_STORE_SCOPE = "300004";  //商铺经营范围
+    public static final String TO_CONTACT = "300005";   //商铺联系人
+    public static final String TO_PHONE = "300006";    //商铺电话
 
     public MenuInfo() {
     }
@@ -211,7 +221,17 @@ public class MenuInfo implements Serializable {
                     intent = new Intent(context, SettingActivity.class);
                     dealExtras(intent);
                     context.startActivity(intent);
-                } else
+                } else if (TO_CONTACT.equals(getMenuCode())) {
+                    intent = new Intent(context, EditorActivity.class);
+                    dealExtras(intent);
+                    intent.putExtra(Constant.KEY_TITLE, getTitle());
+                    intent.putExtra(Constant.KEY_DESC, getDesc());
+                    context.startActivity(intent);
+                } else if (TO_PHONE.equals(getMenuCode())) {
+                    intent = new Intent(context, ModifyPhoneActivity.class);
+                    dealExtras(intent);
+                    context.startActivity(intent);
+                } else {
                     //关于我们
                     if (TO_ABOUTUS.equals(getMenuCode())) {
                         context.startActivity(new Intent(context, AboutActivity.class));
@@ -234,6 +254,7 @@ public class MenuInfo implements Serializable {
 //
 //                System.exit(0);
                         }
+                }
                 break;
 
             case MenuInfo.TYPE_OPERATE_WEB:

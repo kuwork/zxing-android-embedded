@@ -1066,6 +1066,9 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         Object item = adapter.getItem(position);
         if (item instanceof MenuInfo) {
             MenuInfo menuInfo = ((MenuInfo) item);
+            if (!MenuInfo.TYPE_NORMAL.equals(menuInfo.getType())) {
+                return;
+            }
             if (menuInfo.isNeedLogin()) {
                 if (!isLogin()) {
                     showToast("请先登陆");
