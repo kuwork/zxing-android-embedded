@@ -1,9 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include layout="@layout/header_btn_layout" />
+
+    <LinearLayout
+        style="@style/item_layout"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/tabMoney"
+            style="@style/layout_allFilled_style"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/item_tv_title_style"
+                android:layout_gravity="center"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/tip_coupon_tab_money"
+                android:textColor="@color/pop_attribution_textview_selector" />
+
+            <View
+                style="@style/line_style"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@drawable/tab_line_selector"
+                android:duplicateParentState="true" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/tabTime"
+            style="@style/layout_allFilled_style"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/item_tv_title_style"
+                android:layout_gravity="center"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/tip_coupon_tab_time"
+                android:textColor="@color/pop_attribution_textview_selector" />
+
+            <View
+                style="@style/line_style"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:background="@drawable/tab_line_selector"
+                android:duplicateParentState="true" />
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <ScrollView style="@style/layout_widthfilled_style">
+
+        <LinearLayout
+            style="@style/layout_widthfilled_style"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <com.ajb.merchants.view.MyListView
+                android:id="@+id/infoListView"
+                style="@style/history_list_style"
+                android:background="@color/white"
+                android:divider="@null"
+                tools:showIn="@layout/pay_listview_detail_item" />
+
+            <View
+                style="@style/line_style"
+                android:layout_height="@dimen/layout_Margin_10" />
+
+            <RelativeLayout
+                style="@style/item_layout"
+                android:paddingLeft="@dimen/layout_Margin_10">
+
+                <TextView
+                    style="@style/item_tv_title_style"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:text="请选择如下优惠券赠送"
+                    android:textColor="@color/pop_attribution_textview_selector" />
+
+                <TextView
+                    android:id="@+id/tvEdit"
+                    style="@style/item_tv_title_style"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/layout_Margin_10"
+                    android:paddingRight="@dimen/layout_Margin_10"
+                    android:text="@string/action_edit"
+                    android:textColor="@color/item_tv_color_04" />
+
+                <TextView
+                    android:id="@+id/tvSave"
+                    style="@style/item_tv_title_style"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:duplicateParentState="true"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/layout_Margin_10"
+                    android:paddingRight="@dimen/layout_Margin_10"
+                    android:text="@string/action_save"
+                    android:textColor="@color/btn_color_normal"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <com.ajb.merchants.view.MyGridView
+                android:id="@+id/gridView"
+                style="@style/grid_style"
+                android:listSelector="@color/transparentColor"
+                android:minHeight="50dp"
+                android:numColumns="4"
+                android:padding="@dimen/layout_Margin_10"
+                tools:listitem="@layout/grid_item_coupon" />
+
+            <EditText
+                style="@style/item_ed_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_Margin_10"
+                android:layout_marginRight="@dimen/layout_Margin_10"
+                android:background="@color/colorWindowBackground"
+                android:gravity="left|top"
+                android:hint="@string/tip_coupon_remark"
+                android:minHeight="100dp"
+                android:padding="@dimen/layout_Margin_10" />
+
+            <Button
+                android:id="@+id/btnSure"
+                style="@style/btn_style"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="@dimen/layout_Margin_20"
+                android:enabled="false"
+                android:text="赠送" />
+
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

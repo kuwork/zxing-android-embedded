@@ -84,17 +84,8 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
 
     private void initWidget() {
         String dataString = sharedFileUtils.getString(SharedFileUtils.BANNER_LIST_LOCAL_SPLASH);
-        if (!TextUtils.isEmpty(dataString)) {
-            dataList = (List<AdInfo>) ObjectUtil.getObject(dataString);
-            if (dataList == null) {
-                dataList = new ArrayList<>();
-            }
-            if (dataList.isEmpty()) {      //当远程没有设置广告的时候就显示默认的
-                AdInfo adInfo = new AdInfo("", "", 1, "2", R.mipmap.splash_pic);
-                dataList.add(adInfo);
-            }
-            canStart = true;
-        } else {
+        boolean isFirstIn = sharedFileUtils.getBoolean(SharedFileUtils.IS_FIRST_IN);//第一次为false
+        if (!isFirstIn) {//首次进入
             canStart = false;
             footLayout.setVisibility(View.GONE);
             sharedFileUtils.putString(SharedFileUtils.BANNER_LIST_SPLASH, null);
@@ -107,8 +98,17 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
 
             adInfo = new AdInfo("", "", 1, "2", R.mipmap.intro_2);
             dataList.add(adInfo);
-
             splash_skip_btn.setVisibility(View.GONE);
+        } else {
+            dataList = (List<AdInfo>) ObjectUtil.getObject(dataString);
+            if (dataList == null) {
+                dataList = new ArrayList<>();
+            }
+            if (dataList.isEmpty()) {      //当远程没有设置广告的时候就显示默认的
+                AdInfo adInfo = new AdInfo("", "", 1, "2", R.mipmap.splash_pic);
+                dataList.add(adInfo);
+            }
+            canStart = true;
         }
         adapter = new SplashBannerAdapter(dataList, getBaseContext(), new View.OnClickListener() {
 
@@ -246,6 +246,7 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
      * 到主页
      */
     private void toHome() {
+        sharedFileUtils.putBoolean(SharedFileUtils.IS_FIRST_IN, true);
         sharedFileUtils.putBoolean(SharedFileUtils.IS_LOGIN, true);
         Intent homeIntent = new Intent(getApplicationContext(), HomePageActivity.class);
         startActivity(homeIntent);

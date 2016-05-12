@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.ajb.merchants.activity.AboutActivity;
+import com.ajb.merchants.activity.AccoutManagementActivity;
 import com.ajb.merchants.activity.SettingActivity;
 import com.ajb.merchants.activity.WebViewActivity;
 import com.ajb.merchants.util.Constant;
@@ -206,23 +207,27 @@ public class MenuInfo implements Serializable {
         Intent intent;
         switch (getOperateType()) {
             case MenuInfo.TYPE_OPERATE_NATIVE:
-                //系统设置
-                if (TO_SETTING.equals(getMenuCode())) {
+                if (TO_ACCOUNT_SETTING.equals(getMenuCode())) {
+                    //账号管理
+                    context.startActivity(new Intent(context, AccoutManagementActivity.class));
+                } else if (TO_ABOUTUS.equals(getMenuCode())) {
+                    //关于我们
+                    context.startActivity(new Intent(context, AboutActivity.class));
+                } else if (TO_SETTING.equals(getMenuCode())) {
+                    //系统设置
                     intent = new Intent(context, SettingActivity.class);
                     dealExtras(intent);
                     context.startActivity(intent);
-                } else
+                } else if (TO_ABOUTUS.equals(getMenuCode())) {
                     //关于我们
-                    if (TO_ABOUTUS.equals(getMenuCode())) {
-                        context.startActivity(new Intent(context, AboutActivity.class));
-                    } else
-                        //清除缓存
-                        if (TO_CLEARCACHE.equals(getMenuCode())) {
-                            String cacheDirPath = PathManager.getDiskCacheDir(context) + File.separator + "WebCache";
-                            String cacheDirPath2 = PathManager.getDiskCacheDir(context) + "/database/webview.db";
-                            String cacheDirPath3 = PathManager.getDiskCacheDir(context) + "/database/webviewCache.db";
-                            // 清除缓存
-                            DataCleanManager.cleanApplicationCache(context, cacheDirPath, cacheDirPath2, cacheDirPath3);
+                    context.startActivity(new Intent(context, AboutActivity.class));
+                } else if (TO_CLEARCACHE.equals(getMenuCode())) {
+                    //清除缓存
+                    String cacheDirPath = PathManager.getDiskCacheDir(context) + File.separator + "WebCache";
+                    String cacheDirPath2 = PathManager.getDiskCacheDir(context) + "/database/webview.db";
+                    String cacheDirPath3 = PathManager.getDiskCacheDir(context) + "/database/webviewCache.db";
+                    // 清除缓存
+                    DataCleanManager.cleanApplicationCache(context, cacheDirPath, cacheDirPath2, cacheDirPath3);
 //                AlarmManager manager = (AlarmManager) getBaseContext()
 //                        .getSystemService(Context.ALARM_SERVICE);
 //                Intent i = getBaseContext().getPackageManager()
@@ -233,7 +238,7 @@ public class MenuInfo implements Serializable {
 //                manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1000, pendingIntent);
 //
 //                System.exit(0);
-                        }
+                }
                 break;
 
             case MenuInfo.TYPE_OPERATE_WEB:

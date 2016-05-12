@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/item_tv_style"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/btn_hollow_selector"
+        android:gravity="center"
+        android:text="0元"
+        android:textColor="@color/grid_item_copon_textview_selector"
+        android:textSize="@dimen/text_size_20" />
+
+    <EditText
+        android:id="@+id/edTitle"
+        android:visibility="gone"
+        style="@style/item_tv_style"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/btn_hollow_selector"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:text=""
+        android:textColor="@color/grid_item_copon_textview_selector"
+        android:textSize="@dimen/text_size_20" />
+
+    <ImageView
+        android:id="@+id/select_ib"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="right|top"
+        android:src="@mipmap/delete"
+        android:visibility="gone" />
+</FrameLayout>

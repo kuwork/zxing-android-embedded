@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ajb.merchants.view.ScaleFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scaleImageViewAttr="http://schemas.android.com/apk/res-auto"
     style="@style/layout_allFilled_style"
     android:background="@drawable/pop_attribution_selector"
-    android:gravity="center"
-    android:padding="@dimen/layout_Margin_10">
+    scaleImageViewAttr:expectH="1"
+    scaleImageViewAttr:expectW="1"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/title"
         style="@style/item_tv_style"
         android:singleLine="false"
+        android:layout_gravity="center"
         android:text="粤"
         android:textColor="@color/pop_attribution_textview_selector"
         android:textSize="@dimen/text_size_18" />
 
-</LinearLayout>
+</com.ajb.merchants.view.ScaleFrameLayout>

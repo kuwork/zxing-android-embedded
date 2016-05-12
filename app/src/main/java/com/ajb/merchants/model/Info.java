@@ -6,6 +6,14 @@ public class Info implements Serializable {
     private String value;
     private String key;
 
+    public Info() {
+    }
+
+    public Info(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
     public void setValue(String value) {
         this.value = value;
     }
