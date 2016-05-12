@@ -74,6 +74,11 @@
     <string name="tip_input_car_num_area">请选择车牌所在省份！</string>
     <string name="tip_input_card">请输入卡编号</string>
     <string name="tip_input_card_title">卡编号优惠</string>
+    <string name="tip_coupon_tab_money">金额优惠</string>
+    <string name="tip_coupon_tab_time">时间优惠</string>
+    <string name="action_edit">编辑</string>
+    <string name="action_save">保存</string>
+    <string name="tip_coupon_remark">请输入赠送说明</string>
 
 
 </resources>

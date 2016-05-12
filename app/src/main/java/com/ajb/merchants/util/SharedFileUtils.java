@@ -30,16 +30,6 @@ public class SharedFileUtils {
     public static final String BALANCE = "balance";
     public static final String LAST_LOC = "com.ajb.anjubao.intelligent.LAST_LOC";
     public static final String LAST_CITY = "com.ajb.anjubao.intelligent.LAST_CITY";
-    //    地图示例参数
-    public static final String COLORINFO_URL = "com.ajb.anjubao.intelligent.COLORINFO_URL";
-    public static final String COLORINFO_URL_NEW = "com.ajb.anjubao.intelligent.COLORINFO_URL_NEW";
-    public static final String COLORINFO_WIDTH = "com.ajb.anjubao.intelligent.COLORINFO_WIDTH";
-    public static final String COLORINFO_HEIGHT = "com.ajb.anjubao.intelligent.COLORINFO_HEIGHT";
-
-    /**
-     * 保存在本地的车牌列表key
-     */
-    public static final String LOCAL_CARNO = "localCarNo";
     //车牌历史
     public static final String LAST_CARNO_AREA = "Last_CarNo_Area";
     public static final String LAST_CARNO = "Last_CarNo";
@@ -47,10 +37,12 @@ public class SharedFileUtils {
     //地图搜索历史
     public static final String LAST_ADDRESS_HISTORY = "Last_Address_History";
     public static final String HOME_NAME = "HOME_NAME";
-
     public static final String COUPON_SETTING = "com.ajb.anjubao.intelligent.COUPON_SETTING";
-    public static final String ACCOUNT_INFO = "com.ajb.anjubao.intelligent.ACCOUNT_INFO";
 
+    public static final String ACCOUNT_INFO = "com.ajb.anjubao.intelligent.ACCOUNT_INFO";
+    //优惠历史
+    public static final String COUPON_MONEY_LIST = "com.ajb.merchants.COUPON_MONEY_LIST";
+    public static final String COUPON_TIME_LIST = "com.ajb.merchants.COUPON_TIME_LIST";
 
     private SharedPreferences sp;
 

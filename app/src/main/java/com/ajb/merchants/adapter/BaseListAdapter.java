@@ -1,14 +1,17 @@
 package com.ajb.merchants.adapter;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,15 +34,51 @@ import java.util.List;
 public class BaseListAdapter<T> extends BaseAdapter {
 
     public final static String TYPE_CAR_NUM = "CAR_NUM";
+    public final static String TYPE_COUPON_GIVING = "COUPON_GIVING";
 
     private final BitmapUtils bitmapUtils;
     private String typeName;
+
+    public List<T> getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(List<T> dataList) {
+        this.dataList = dataList;
+    }
+
     private List<T> dataList;
     private Context context;
     private LayoutInflater mInflater;
     private View.OnClickListener onClickListener;
     private int res;
     private int currentPosition = -1;
+
+    public boolean isEditable() {
+        return isEditable;
+    }
+
+    public void setEditable(boolean editable) {
+        isEditable = editable;
+        notifyDataSetChanged();
+    }
+
+    private boolean isEditable = false;//可否删除
+
+    public boolean isEditing() {
+        return isEditing;
+    }
+
+    public void setEditing(boolean editing) {
+        isEditing = editing;
+    }
+
+    private boolean isEditing = false;//编辑中
+    private String editingStr = "";//编辑文本
+
+    public String getEditingStr() {
+        return editingStr;
+    }
 
     public String getChecked() {
         return checked;
@@ -118,9 +157,33 @@ public class BaseListAdapter<T> extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void removeAt(int index) {
+        if (dataList != null) {
+            if (index < getCount()) {
+                ArrayList<T> list = new ArrayList<T>();
+                for (int i = 0; i < getCount(); i++) {
+                    if (i != index) {
+                        list.add(getItem(i));
+                    }
+                }
+                update(list);
+            }
+        }
+    }
+
+    public void add(T product) {
+        if (dataList != null) {
+            dataList.add(product);
+            notifyDataSetChanged();
+        }
+    }
+
+
     class ViewHolder {
         @ViewInject(R.id.title)
         TextView title;
+        @ViewInject(R.id.edTitle)
+        EditText edTitle;
         @ViewInject(R.id.desc)
         TextView desc;
         @ViewInject(R.id.select_ib)
@@ -129,7 +192,7 @@ public class BaseListAdapter<T> extends BaseAdapter {
         RelativeLayout bg;
         @ViewInject(R.id.divider)
         View divider;
-
+        TextWatcher tw;
 
         public ViewHolder() {
             super();
@@ -190,23 +253,91 @@ public class BaseListAdapter<T> extends BaseAdapter {
                 if (title != null) {
                     title.setText(((ConditionValue) info).getDataName());
                 }
-            } else if (info instanceof BalanceLimitInfo) {// R.layout.balance_limit_item
-                if (title != null) {
-                    SpannableStringBuilder ss = new SpannableStringBuilder();
-                    ss.append(((BalanceLimitInfo) info).getValue());
-                    ss.append(((BalanceLimitInfo) info).getUnit());
-                    ss.setSpan(new RelativeSizeSpan(0.5f), ss.length() - ((BalanceLimitInfo) info).getUnit().length(), ss.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-                    title.setText(ss);
-                }
-                if (desc != null) {
-                    desc.setText(((BalanceLimitInfo) info).getDesc());
-                }
-                if (divider != null) {
-                    if ((position + 1) % 4 == 0) {
-                        divider.setVisibility(View.GONE);
-                    } else {
-                        divider.setVisibility(View.VISIBLE);
+            } else if (info instanceof Product) {
+                if (info instanceof BalanceLimitInfo) {
+                    // R.layout.balance_limit_item
+                    if (title != null) {
+                        SpannableStringBuilder ss = new SpannableStringBuilder();
+                        ss.append(((BalanceLimitInfo) info).getValue());
+                        ss.append(((BalanceLimitInfo) info).getUnit());
+                        ss.setSpan(new RelativeSizeSpan(0.5f), ss.length() - ((BalanceLimitInfo) info).getUnit().length(), ss.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                        title.setText(ss);
                     }
+                    if (desc != null) {
+                        desc.setText(((BalanceLimitInfo) info).getDesc());
+                    }
+                    if (divider != null) {
+                        if ((position + 1) % 4 == 0) {
+                            divider.setVisibility(View.GONE);
+                        } else {
+                            divider.setVisibility(View.VISIBLE);
+                        }
+                    }
+                } else {
+                    switch (typeName) {
+                        case TYPE_COUPON_GIVING:
+                            if ("+".equals(((Product) info).getValue()) && TextUtils.isEmpty(((Product) info).getUnit())) {
+                                if (title != null && edTitle != null) {
+                                    if (isEditing) {
+                                        title.setVisibility(View.GONE);
+                                        edTitle.setVisibility(View.VISIBLE);
+                                        if (tw == null) {
+                                            tw = new TextWatcher() {
+                                                @Override
+                                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                                                }
+
+                                                @Override
+                                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                                                }
+
+                                                @Override
+                                                public void afterTextChanged(Editable s) {
+                                                    editingStr = s.toString();
+                                                }
+                                            };
+                                        }
+                                        edTitle.addTextChangedListener(tw);
+                                        edTitle.requestFocus();
+                                        edTitle.setSelection(edTitle.getText().length());
+
+                                    } else {
+                                        title.setVisibility(View.VISIBLE);
+                                        edTitle.setVisibility(View.GONE);
+                                        if (tw != null) {
+                                            edTitle.removeTextChangedListener(tw);
+                                        }
+                                        title.setText(((Product) info).getValue());
+                                    }
+                                    title.setSelected(isCheck(info));
+                                    edTitle.setSelected(isCheck(info));
+                                }
+                            } else {
+                                if (title != null) {
+                                    title.setVisibility(View.VISIBLE);
+                                    if (edTitle != null) {
+                                        edTitle.setVisibility(View.GONE);
+                                    }
+                                    SpannableStringBuilder ss = new SpannableStringBuilder();
+                                    ss.append(((Product) info).getValue());
+                                    ss.append(((Product) info).getUnit());
+                                    title.setText(ss);
+                                    title.setSelected(isCheck(info));
+                                    edTitle.setSelected(isCheck(info));
+                                }
+                            }
+                            if (img != null) {
+                                if (isEditable) {
+                                    img.setVisibility(View.VISIBLE);
+                                } else {
+                                    img.setVisibility(View.GONE);
+                                }
+                            }
+                            break;
+                    }
+
                 }
             } else if (info instanceof String) {
                 if (title != null) {

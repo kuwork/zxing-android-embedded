@@ -46,4 +46,23 @@ public class Product implements Serializable {
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (value != null ? !value.equals(product.value) : product.value != null) return false;
+        return unit != null ? unit.equals(product.unit) : product.unit == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = value != null ? value.hashCode() : 0;
+        result = 31 * result + (unit != null ? unit.hashCode() : 0);
+        return result;
+    }
 }
