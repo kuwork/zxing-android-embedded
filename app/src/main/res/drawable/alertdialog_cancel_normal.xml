@@ -17,7 +17,7 @@
         android:color="@color/white" />
 
     <corners
-        android:bottomLeftRadius="@dimen/btn_corner_radius"
+        android:bottomLeftRadius="@dimen/dialog_corner_radius"
         android:bottomRightRadius="0dp"
         android:topLeftRadius="0dp"
         android:topRightRadius="0dp" />

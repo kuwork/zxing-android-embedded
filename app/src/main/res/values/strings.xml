@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">掌停宝\n商户端</string>
+    <string name="app_name">掌停宝商户</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

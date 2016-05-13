@@ -66,8 +66,8 @@ public class AccountManagementActivity extends BaseActivity {
                 } else if (tag.equals("delete")) {
 
                 }
-                showOkCancelAlertDialog(false, "提示",
-                        "您确定需要删除账户",
+                showOkCancelAlertDialog(false, "确定删除账户？",
+                        "",
                         "确定", "取消",
                         new View.OnClickListener() {
                             @Override

@@ -215,6 +215,26 @@ public class CouponGivingActivity extends BaseActivity {
 
     @OnClick(value = R.id.btnSure)
     public void onSureClick(View v) {
+        showOkCancelAlertDialog(false, "提示！",
+                "确定要赠送？",
+                "是", "否",
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        give();
+                        dimissOkCancelAlertDialog();
+                    }
+                }, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dimissOkCancelAlertDialog();
+                    }
+                });
+
+
+    }
+
+    private void give() {
         String checked = null;
         if (gridViewAdapter != null) {
             checked = gridViewAdapter.getChecked();
@@ -234,7 +254,7 @@ public class CouponGivingActivity extends BaseActivity {
                 checked = p.toString();
                 //添加进历史
                 if (!moneyList.contains(p)) {
-                    moneyList.add(p);
+                    addAndSort(moneyList, p);
                     sharedFileUtils.putString(SharedFileUtils.COUPON_MONEY_LIST, gson.toJson(moneyList));
                     initGridView(moneyList, p.toString(), false);
                 }
@@ -252,7 +272,7 @@ public class CouponGivingActivity extends BaseActivity {
                 checked = p.toString();
                 //添加进历史
                 if (!timeList.contains(p)) {
-                    timeList.add(p);
+                    addAndSort(timeList, p);
                     sharedFileUtils.putString(SharedFileUtils.COUPON_TIME_LIST, gson.toJson(timeList));
                     initGridView(timeList, p.toString(), false);
                 }
