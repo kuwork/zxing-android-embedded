@@ -1,12 +1,17 @@
 <resources>
 
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--允许绘制状态栏-->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <!-- Status Bar -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
@@ -23,7 +28,6 @@
         <item name="selectableItemBackground">@drawable/selector_btn</item>
         <!--Navigation bar color-->
         <item name="android:windowBackground">@color/colorWindowBackground</item>
-
         <!-- 溢出菜单按钮风格-->
         <!--<item name="actionOverflowButtonStyle">@style/OverFlowButtonStyle</item>-->
         <!-- 溢出菜单文字颜色-->
@@ -32,15 +36,18 @@
     </style>
 
     <style name="AppThemeTran.NoActionBar">
-        <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!--允许绘制状态栏-->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <!-- Status Bar -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
