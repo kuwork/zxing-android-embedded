@@ -1493,10 +1493,16 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                                 .toUpperCase();
                         if (TextUtils.isEmpty(province)) {
                             showToast(getString(R.string.tip_input_car_num_area));
+                            Animation shake = AnimationUtils.loadAnimation(getBaseContext(),
+                                    R.anim.shake);
+                            ((View) edCarno.getParent()).startAnimation(shake);
                             return;
                         }
                         if (TextUtils.isEmpty(carNo)) {
                             showToast(getString(R.string.tip_input_car_num));
+                            Animation shake = AnimationUtils.loadAnimation(getBaseContext(),
+                                    R.anim.shake);
+                            ((View) edCarno.getParent()).startAnimation(shake);
                             return;
                         }
                         String carNoStr = province + carNo;

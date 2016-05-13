@@ -18,18 +18,22 @@
             android:id="@+id/dialogTitle"
             style="@style/item_tv_style"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_Margin_10"
             android:layout_marginRight="@dimen/layout_Margin_10"
+            android:layout_marginTop="@dimen/layout_Margin_20"
             android:gravity="center"
-            android:text="标题" />
-
-        <TextView style="@style/line_style" />
+            android:singleLine="false"
+            android:text="标题"
+            android:textSize="23dp" />
     </LinearLayout>
 
     <ScrollView
         style="@style/item_layout"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:minWidth="240dp"
+        android:layout_marginTop="@dimen/layout_Margin_10"
         android:layout_weight="1">
 
         <LinearLayout style="@style/layout_widthfilled_style">
@@ -41,11 +45,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_Margin_10"
                 android:layout_marginRight="@dimen/layout_Margin_10"
-                android:gravity="left|center_vertical"
-                android:minEms="13"
-                android:minHeight="50dp"
+                android:gravity="center"
+                android:textColor="@color/item_tv_color_02"
                 android:singleLine="false"
-                android:text="" />
+                android:text="提示内容" />
         </LinearLayout>
     </ScrollView>
 
@@ -77,8 +80,15 @@
                 <TextView
                     android:id="@+id/cancel_btn_tv"
                     style="@style/item_tv_style"
-                    android:text="取消" />
+                    android:text="取消"
+                    android:textColor="@color/item_tv_color_04"
+                    android:textSize="@dimen/text_size_20" />
             </LinearLayout>
+
+            <View
+                style="@style/line_2_style"
+                android:layout_marginBottom="@dimen/layout_Margin_5"
+                android:layout_marginTop="@dimen/layout_Margin_5" />
 
             <LinearLayout
                 android:id="@+id/sure_btn"
@@ -93,7 +103,8 @@
                     android:id="@+id/sure_btn_tv"
                     style="@style/item_tv_style"
                     android:text="确定"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/btn_color_normal"
+                    android:textSize="@dimen/text_size_20" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -13,10 +13,10 @@
         android:color="#ffffff" />
 
     <corners
-        android:bottomLeftRadius="@dimen/btn_corner_radius"
-        android:bottomRightRadius="@dimen/btn_corner_radius"
-        android:topLeftRadius="@dimen/btn_corner_radius"
-        android:topRightRadius="@dimen/btn_corner_radius" />
+        android:bottomLeftRadius="@dimen/dialog_corner_radius"
+        android:bottomRightRadius="@dimen/dialog_corner_radius"
+        android:topLeftRadius="@dimen/dialog_corner_radius"
+        android:topRightRadius="@dimen/dialog_corner_radius" />
 
     <padding
         android:bottom="0dp"

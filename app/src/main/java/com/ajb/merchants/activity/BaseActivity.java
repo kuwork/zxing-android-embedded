@@ -752,6 +752,11 @@ public class BaseActivity extends AppCompatActivity implements BaiduNaviManager.
                 .findViewById(R.id.dialogContent);
         tvTitle.setText(title);
         tvContent.setText(content);
+        if (TextUtils.isEmpty(content)) {
+            tvContent.setVisibility(View.GONE);
+        } else {
+            tvContent.setVisibility(View.VISIBLE);
+        }
         View submit = contentView.findViewById(R.id.sure_btn);
         View cancel = contentView.findViewById(R.id.cancel_btn);
         TextView tvSubmit = (TextView) contentView
@@ -814,6 +819,11 @@ public class BaseActivity extends AppCompatActivity implements BaiduNaviManager.
                 .findViewById(R.id.dialogContent);
         tvTitle.setText(title);
         tvContent.setText(content);
+        if (TextUtils.isEmpty(content)) {
+            tvContent.setVisibility(View.GONE);
+        } else {
+            tvContent.setVisibility(View.VISIBLE);
+        }
         View submit = contentView.findViewById(R.id.sure_btn);
         View cancel = contentView.findViewById(R.id.cancel_btn);
         TextView tvSubmit = (TextView) contentView

@@ -27,6 +27,8 @@
     <dimen name="text_size_10">10dp</dimen>
     <!-- 按钮圆角 -->
     <dimen name="btn_corner_radius">5dp</dimen>
+    <!--弹窗圆角-->
+    <dimen name="dialog_corner_radius">10dp</dimen>
     <!-- 地图按钮圆角 -->
     <dimen name="loc_btn_corner_radius">17dp</dimen>
     <dimen name="loc_btn_gradientRadius">30dp</dimen>
