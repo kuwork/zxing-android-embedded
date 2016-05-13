@@ -32,7 +32,6 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.util.App;
 
@@ -123,7 +122,7 @@ public class SettingActivity extends BaseActivity {
                         } else if (MenuInfo.TO_PAGESETTING.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
                             initPageSetting();
                         } else if (MenuInfo.TO_LOGIN_OUT.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-                            //requestLogOut();
+                            requestLogOut();
                         } else {
                             menuInfo.click(SettingActivity.this);
                         }
@@ -133,6 +132,64 @@ public class SettingActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void requestLogOut() {
+        send(Constant.PK_LOGOUT, null,
+                new RequestCallBack<String>() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        if (mDialog != null && mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        mDialog = MyProgressDialog.createLoadingDialog(
+                                SettingActivity.this, "请稍后...");
+                        mDialog.show();
+                    }
+
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        if (mDialog != null && mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        if (responseInfo.statusCode == 200) {
+                            BaseResult<String> result = null;
+                            try {
+                                result = gson.fromJson(
+                                        responseInfo.result,
+                                        new TypeToken<BaseResult<String>>() {
+                                        }.getType());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            if (result == null) {
+                                showToast(getString(R.string.error_network_short));
+                                return;
+                            }
+                            if ("0000".equals(result.code)) {
+                                setResult(RESULT_OK);
+                                sharedFileUtils.remove(SharedFileUtils.KEY_TOKEN);
+                                sharedFileUtils.remove(SharedFileUtils.IS_LOGIN);
+                                finish();
+                            } else {
+                                setResult(RESULT_CANCELED);
+                                showToast(result.msg);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+                        if (mDialog != null && mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        fail(error, msg);
+                        setResult(RESULT_CANCELED);
+                    }
+
+                }
+        );
     }
 
     private void initPageSetting() {
@@ -229,81 +286,5 @@ public class SettingActivity extends BaseActivity {
             }
         });
     }
-
-    /*@OnClick(R.id.change_account_btn)
-    public void onLoginOutClick(View v) {
-//        // 退出登陆
-//        sharedFileUtils.putBoolean("isLogin", false);
-//        finish();
-//        // 设置切换动画，从右边进入，左边退出
-//        overridePendingTransition(R.anim.push_right_in,
-//                R.anim.push_left_out);
-        // 设备绑定
-        unBindChannelIDParams = new RequestParams();
-        unBindChannelIDParams.addQueryStringParameter(
-                Constant.InterfaceParam.USERNAME,
-                sharedFileUtils.getString("LoginName"));
-        unBindChannelIDParams.addQueryStringParameter(
-                Constant.InterfaceParam.CHANNELID,
-                JPushInterface.getRegistrationID(getBaseContext()));
-        unBindChannelID();
-    }*/
-
-
-    private void unBindChannelID() {
-        if (unBindChannelIDParams == null) {
-            return;
-        }
-        send(Constant.APPDELCHANNELID, unBindChannelIDParams,
-                new RequestCallBack<String>() {
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-                        if (mDialog != null && mDialog.isShowing()) {
-                            mDialog.dismiss();
-                        }
-                        mDialog = MyProgressDialog.createLoadingDialog(
-                                SettingActivity.this, "正在注销,请稍后...");
-                        mDialog.show();
-                    }
-
-                    @Override
-                    public void onSuccess(ResponseInfo<String> responseInfo) {
-                        if (mDialog != null && mDialog.isShowing()) {
-                            mDialog.dismiss();
-                        }
-                        if (responseInfo.statusCode == 200) {
-                            Gson gson = new Gson();
-                            BaseResult<String> result = gson.fromJson(
-                                    responseInfo.result,
-                                    new TypeToken<BaseResult<String>>() {
-                                    }.getType());
-                            if ("0000".equals(result.code)) {
-                                LogUtils.d("设备解绑成功");
-                                sharedFileUtils.putBoolean("isLogin", false);
-                                finish();
-                                // 设置切换动画，从右边进入，左边退出
-                                overridePendingTransition(R.anim.push_right_in,
-                                        R.anim.push_left_out);
-                            } else {
-                                LogUtils.e("设备解绑失败:" + result.msg);
-                                showToast(getString(R.string.error_network_short));
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(HttpException error, String msg) {
-                        if (mDialog != null && mDialog.isShowing()) {
-                            mDialog.dismiss();
-                        }
-                        showToast(getString(R.string.error_network_short));
-                        LogUtils.e("设备解绑失败:" + error.getExceptionCode() + ","
-                                + msg);
-                    }
-                });
-
-    }
-
 
 }

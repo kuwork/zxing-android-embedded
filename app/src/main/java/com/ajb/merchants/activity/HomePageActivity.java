@@ -732,6 +732,12 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 case Constant.REQ_CODE_LOGIN:
                     initAccountInfo();
                     break;
+                case Constant.REQ_CODE_LOGOUT:
+                    Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                    intent.putExtra(Constant.KEY_FROM, HomePageActivity.class.getName());//标明是Home页面跳转
+                    startActivity(intent);
+                    finish();
+                    break;
                 default:
                     if (mContent != null) {
                         mContent.onActivityResult(requestCode, resultCode, data);
@@ -1105,6 +1111,10 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                         break;
                     case MenuInfo.TO_COUPON_CARD:
                         showCardInputDialog(true);
+                        break;
+                    case MenuInfo.TO_SETTING:
+                        Intent intent = new Intent(getBaseContext(), SettingActivity.class);
+                        startActivityForResult(intent, Constant.REQ_CODE_LOGOUT);
                         break;
                     default:
                         menuInfo.click(HomePageActivity.this);

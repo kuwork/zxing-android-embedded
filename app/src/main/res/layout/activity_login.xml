@@ -114,7 +114,7 @@
                     android:layout_height="@dimen/layout_Margin_15"
                     android:background="@drawable/checkbox_selector"
                     android:button="@null"
-                    android:checked="true"
+                    android:checked="false"
                     android:gravity="center" />
 
                 <TextView

@@ -1416,25 +1416,32 @@ public class BaseActivity extends AppCompatActivity implements BaiduNaviManager.
         String url = Constant.SERVER_URL + uri;
         LogUtils.v("requestUrl:" + url);
         HttpUtils http = MyApplication.getNoCacheHttpUtils();
-        if (params != null) {
-            if (LogUtils.allowD) {
-                List<NameValuePair> list = (List<org.apache.http.NameValuePair>) params.getQueryStringParams();
-                int size = list.size();
-                StringBuilder sb = new StringBuilder();
-                org.apache.http.NameValuePair nameValuePair;
-                for (int i = 0; i < size; i++) {
-                    nameValuePair = list.get(i);
-                    sb.append(nameValuePair.getName() + "=" + nameValuePair.getValue() + "&");
-                }
-                if (sb.toString().endsWith("&")) {
-                    sb.deleteCharAt(sb.length() - 1);
-                }
-                LogUtils.d(sb.toString());
-            }
-            return http.send(HttpRequest.HttpMethod.POST, url, params, callBack);
-        } else {
-            return http.send(HttpRequest.HttpMethod.POST, url, callBack);
+        if (params == null) {
+            params = new RequestParams();
         }
+        if (!Constant.PK_LOGIN.equals(uri)) {
+            String tokenId = sharedFileUtils.getString(SharedFileUtils.KEY_TOKEN);
+            if (TextUtils.isEmpty(tokenId)) {
+                callBack.onFailure(new HttpException(403), "请重新登录");
+                return null;
+            }
+            params.addQueryStringParameter(Constant.InterfaceParam.TOKEN, tokenId);
+        }
+        if (LogUtils.allowD) {
+            List<NameValuePair> list = (List<org.apache.http.NameValuePair>) params.getQueryStringParams();
+            int size = list.size();
+            StringBuilder sb = new StringBuilder();
+            org.apache.http.NameValuePair nameValuePair;
+            for (int i = 0; i < size; i++) {
+                nameValuePair = list.get(i);
+                sb.append(nameValuePair.getName() + "=" + nameValuePair.getValue() + "&");
+            }
+            if (sb.toString().endsWith("&")) {
+                sb.deleteCharAt(sb.length() - 1);
+            }
+            LogUtils.d(sb.toString());
+        }
+        return http.send(HttpRequest.HttpMethod.POST, url, params, callBack);
     }
 
     //将隐式启动转换为显示启动

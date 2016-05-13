@@ -20,6 +20,7 @@ public class Constant {
     public static final int REQ_CODE_LOGIN = REQ_CODE_BASE + 6;
     public static final int REQ_CODE_SHARE = REQ_CODE_BASE + 7;
     public static final int REQ_CODE_NAV = REQ_CODE_BASE + 8;
+    public static final int REQ_CODE_LOGOUT = REQ_CODE_BASE + 9;    //登出
     //权限访问码
     public static final int PM_CAMERA = 1;//摄像头权限
     public static final int PM_LOCATION = 2;//GPS权限
@@ -44,6 +45,7 @@ public class Constant {
      * 商户端接口
      */
     public static final String PK_LOGIN = "merchantLog/login";// 登录
+    public static final String PK_LOGOUT = "merchantLog/logout";// 登出
 
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";
@@ -124,6 +126,8 @@ public class Constant {
 
         public static final String ACCOUNT = "account";
         public static final String PASSWORD = "password";
+
+        public static final String TOKEN = "token";
 
     }
 

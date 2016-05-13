@@ -250,9 +250,9 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         sharedFileUtils.putBoolean(SharedFileUtils.IS_FIRST_IN, true);
         Intent intent = null;
         if (isLogin()) {
-            intent = new Intent(getApplicationContext(), HomePageActivity.class);
+            intent = new Intent(getBaseContext(), HomePageActivity.class);
         } else {
-            intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent = new Intent(getBaseContext(), LoginActivity.class);
             intent.putExtra(Constant.KEY_FROM, SplashActivity.class.getName());//标明是splash页面跳转
         }
         startActivity(intent);

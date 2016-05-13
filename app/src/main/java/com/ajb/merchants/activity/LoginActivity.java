@@ -138,7 +138,8 @@ public class LoginActivity extends BaseActivity {
                                 String pageStr = "";
                                 if (bundle != null && bundle.containsKey(Constant.KEY_FROM)) {
                                     pageStr = bundle.getString(Constant.KEY_FROM);
-                                    if (SplashActivity.class.getName().equals(pageStr)) {
+                                    if (SplashActivity.class.getName().equals(pageStr)
+                                            || HomePageActivity.class.getName().equals(pageStr)) {
                                         Intent intent = new Intent(getBaseContext(), HomePageActivity.class);
                                         startActivity(intent);
                                         finish();
@@ -150,6 +151,7 @@ public class LoginActivity extends BaseActivity {
                                 showToast(result.msg);
                             }
                         }
+
                     }
 
                     @Override
@@ -157,7 +159,7 @@ public class LoginActivity extends BaseActivity {
                         if (mDialog != null && mDialog.isShowing()) {
                             mDialog.dismiss();
                         }
-                        showToast(getString(R.string.error_network_short));
+                        fail(error, msg);
                     }
 
                 }
