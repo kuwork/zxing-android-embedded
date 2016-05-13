@@ -74,7 +74,6 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
         initWidget();
         createPhotoFileDir();
         initCirclePoint();
-
         getSplashBannerInfo();
         getHomeBannerInfo();
         getHomeSlideBannerInfo();
@@ -249,9 +248,14 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
      */
     private void toHome() {
         sharedFileUtils.putBoolean(SharedFileUtils.IS_FIRST_IN, true);
-        sharedFileUtils.putBoolean(SharedFileUtils.IS_LOGIN, true);
-        Intent homeIntent = new Intent(getApplicationContext(), HomePageActivity.class);
-        startActivity(homeIntent);
+        Intent intent = null;
+        if (isLogin()) {
+            intent = new Intent(getApplicationContext(), HomePageActivity.class);
+        } else {
+            intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.putExtra(Constant.KEY_FROM, SplashActivity.class.getName());//标明是splash页面跳转
+        }
+        startActivity(intent);
         finish();
     }
 

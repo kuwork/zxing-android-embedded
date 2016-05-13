@@ -36,7 +36,6 @@ public class JpushCustomReceiver extends BroadcastReceiver {
                     .getString(JPushInterface.EXTRA_REGISTRATION_ID);
             Log.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
             // send the Registration Id to your server...
-
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent
                 .getAction())) {
             Log.d(TAG,

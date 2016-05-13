@@ -122,6 +122,8 @@ public class SettingActivity extends BaseActivity {
                             });
                         } else if (MenuInfo.TO_PAGESETTING.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
                             initPageSetting();
+                        } else if (MenuInfo.TO_LOGIN_OUT.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+                            //requestLogOut();
                         } else {
                             menuInfo.click(SettingActivity.this);
                         }

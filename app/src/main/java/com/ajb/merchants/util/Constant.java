@@ -60,6 +60,8 @@ public class Constant {
     //绑定车辆所要判断的key，1为我的车辆，2为社区车辆
     public static final String KEY_MODE = "mode";
     public static final String KEY_CARDID = "cardId";
+
+    public static final String KEY_FROM = "from";
     /**
      * 广告类型
      */
@@ -119,6 +121,10 @@ public class Constant {
         public static final String CONTENT = "content";  //其他手写的反馈内容
         public static final String ORDERNO = "orderNo";  //订单主键ID或微信预支付订单prepayid的值
         public static final String APPORDERID = "appOrderId";  //只有是订单反馈时，就存在这个订单id;
+
+        public static final String ACCOUNT = "account";
+        public static final String PASSWORD = "password";
+
     }
 
     /**
