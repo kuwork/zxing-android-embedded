@@ -12,6 +12,9 @@
         android:id="@+id/listview"
         style="@style/layout_allFilled_style"
         android:layout_marginTop="@dimen/layout_Margin_10"
+        android:background="@color/white"
+        android:cacheColorHint="@color/transparentColor"
         android:focusableInTouchMode="true"
+        android:listSelector="?attr/selectableItemBackground"
         tools:listitem="@layout/listview_item_account" />
 </LinearLayout>

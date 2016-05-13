@@ -47,6 +47,7 @@
         <item name="android:textColorSecondary">@color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorWindowBackground</item>
+        <item name="selectableItemBackground">@drawable/selector_btn</item>
     </style>
 
     <!-- 左边的箭头指示-->
@@ -73,6 +74,7 @@
 
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorWindowBackground</item>
+        <item name="selectableItemBackground">@drawable/selector_btn</item>
     </style>
 
     <!--溢出菜单文字样式 对ActionMenuView有效-->
