@@ -44,7 +44,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="@dimen/layout_Margin_15"
         android:layout_marginRight="@dimen/layout_Margin_15"
-        android:background="@drawable/layout_border"
+        android:background="@drawable/layout_border_edittext_bg"
         android:orientation="horizontal">
 
         <TextView

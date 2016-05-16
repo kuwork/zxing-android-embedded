@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:layout_height="50dp"
+    android:gravity="left|center_vertical">
+
+    <TextView
+        android:id="@+id/tv1"
+        style="@style/item_tv_style"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:singleLine="false"
+        android:text="13416333417"
+        android:textColor="@color/item_tv_color_02"
+        android:textSize="@dimen/form_text_size" />
+
+    <TextView
+        android:id="@+id/tv2"
+        style="@style/item_tv_style"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:singleLine="false"
+        android:text="500小时"
+        android:textColor="@color/item_tv_color_02"
+        android:textSize="@dimen/form_text_size" />
+
+    <TextView
+        android:id="@+id/tv3"
+        style="@style/item_tv_style"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:singleLine="false"
+        android:text="粤A12345"
+        android:textColor="@color/item_tv_color_02"
+        android:textSize="@dimen/form_text_size" />
+
+    <TextView
+        android:id="@+id/tv4"
+        style="@style/item_tv_style"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:singleLine="false"
+        android:text="2016-05-15 00:00:00"
+        android:textColor="@color/item_tv_color_02"
+        android:textSize="@dimen/form_text_size" />
+
+</LinearLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutCouponGivingListHeader"
+    style="@style/layout_widthfilled_style"
+    android:layout_height="50dp"
+    android:background="@color/colorWindowBackground">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/layout_widthfilled_style"
+        android:layout_height="50dp"
+        android:gravity="left|center_vertical">
+
+        <TextView
+            android:id="@+id/tv1"
+            style="@style/item_tv_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:text="账号"
+            android:textSize="@dimen/form_text_size" />
+
+        <View
+            style="@style/line_2_style"
+            android:layout_marginBottom="@dimen/layout_Margin_5"
+            android:layout_marginTop="@dimen/layout_Margin_5" />
+
+        <TextView
+            android:id="@+id/tv2"
+            style="@style/item_tv_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:text="面值"
+            android:textSize="@dimen/form_text_size" />
+
+        <View
+            style="@style/line_2_style"
+            android:layout_marginBottom="@dimen/layout_Margin_5"
+            android:layout_marginTop="@dimen/layout_Margin_5" />
+
+        <TextView
+            android:id="@+id/tv3"
+            style="@style/item_tv_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:text="卡编号/车牌号"
+            android:textSize="@dimen/form_text_size" />
+
+        <View
+            style="@style/line_2_style"
+            android:layout_marginBottom="@dimen/layout_Margin_5"
+            android:layout_marginTop="@dimen/layout_Margin_5" />
+
+        <TextView
+            android:id="@+id/tv4"
+            style="@style/item_tv_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:text="回收时间"
+            android:textSize="@dimen/form_text_size" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/line_style"
+        android:layout_gravity="bottom" />
+</FrameLayout>
