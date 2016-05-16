@@ -12,14 +12,12 @@ public class Constant {
     public static final int REQ_CODE_WECHAT = REQ_CODE_BASE + 1;    //startActivityForResult中分享微信填写该请求码
     public static final int REQ_CODE_WECHAT_MOMENT = REQ_CODE_BASE + 2; //startActivityForResult中分享微信朋友圈填写该请求码
     public static final int REQ_CODE_SMS = REQ_CODE_BASE + 3; //startActivityForResult中短信分享填写该请求码
-    //拍照requestCode
-    public static final int REQ_CODE_CAPTURE = REQ_CODE_BASE + 4;
     //	扫描
-    public static final int REQ_CODE_SCAN = REQ_CODE_BASE + 5;
+    public static final int REQ_CODE_SCAN = REQ_CODE_BASE + 4;
     //登陆
-    public static final int REQ_CODE_LOGIN = REQ_CODE_BASE + 6;
-    public static final int REQ_CODE_SHARE = REQ_CODE_BASE + 7;
-    public static final int REQ_CODE_LOGOUT = REQ_CODE_BASE + 8;    //登出
+    public static final int REQ_CODE_LOGIN = REQ_CODE_BASE + 5;
+    public static final int REQ_CODE_SHARE = REQ_CODE_BASE + 6;
+    public static final int REQ_CODE_LOGOUT = REQ_CODE_BASE + 7;    //登出
     //权限访问码
     public static final int PM_CAMERA = 1;//摄像头权限
     public static final int PM_LOCATION = 2;//GPS权限

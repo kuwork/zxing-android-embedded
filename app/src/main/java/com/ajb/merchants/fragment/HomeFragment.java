@@ -184,9 +184,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             case R.id.homeBtn01:
                 ((HomePageActivity) getActivity()).launchApp(getActivity(), "com.doyao.discount");
                 break;
-            case R.id.homeBtn02:
-                ((HomePageActivity) getActivity()).goParkingSearch();
-                break;
             case R.id.homeBtn03:
                 break;
             case R.id.homeBtn04:

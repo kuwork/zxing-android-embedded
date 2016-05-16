@@ -23,7 +23,7 @@
                     scaleImageViewAttr:expectW="750">
 
                     <ImageView
-                        android:id="@+id/imgHeaderBanner"
+                        android:id="@+id/imgHeaderBg"
                         style="@style/layout_allFilled_style"
                         android:scaleType="centerCrop"
                         android:src="@mipmap/header_bg" />
@@ -60,7 +60,7 @@
                             <TextView
                                 style="@style/item_tv_style"
                                 android:layout_marginTop="@dimen/layout_Margin_5"
-                                android:text="新疆牛肉面店"
+                                android:text="@string/tip_tourist"
                                 android:textColor="@color/white" />
                         </LinearLayout>
 

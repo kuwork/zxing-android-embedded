@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/emptyLayout"
+        style="@style/layout_allFilled_style"
+        android:layout_weight="1"
+        android:background="@color/pop_half_transparent"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        style="@style/layout_widthfilled_style"
+        android:layout_gravity="bottom"
+        android:background="@color/colorWindowBackground"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvPick"
+            style="@style/item_layout"
+            android:gravity="center"
+            android:text="选择照片"
+            android:textColor="@color/item_tv_color_01"
+            android:textSize="@dimen/text_size_16" />
+
+        <TextView
+            android:id="@+id/tvCancel"
+            style="@style/item_layout"
+            android:layout_marginTop="@dimen/layout_Margin_10"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/item_tv_color_01"
+            android:textSize="@dimen/text_size_16" />
+    </LinearLayout>
+
+
+</LinearLayout>

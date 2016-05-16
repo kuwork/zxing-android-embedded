@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.ajb.merchants.activity.AccountActivity;
 import com.ajb.merchants.activity.BaseActivity;
 import com.ajb.merchants.others.MyApplication;
 import com.ajb.merchants.util.Constant;
@@ -59,10 +58,10 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
                     intent.putExtra(Constant.InterfaceParam.PREPAYID, PREPAYID);
                     startActivity(intent);*/
                 } else {// 充值
-                    intent = new Intent(WXPayEntryActivity.this,
+                    /*intent = new Intent(WXPayEntryActivity.this,
                             AccountActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                    startActivity(intent);*/
                 }
                 break;
 

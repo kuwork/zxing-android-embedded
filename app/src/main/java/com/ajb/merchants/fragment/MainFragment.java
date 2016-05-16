@@ -8,12 +8,16 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.ajb.merchants.R;
 import com.ajb.merchants.activity.LoginActivity;
@@ -48,16 +52,18 @@ public class MainFragment extends BaseFragment {
     MyGridView couponGridView;
     @ViewInject(R.id.menuGridView)
     MyGridView menuGridView;
-    @ViewInject(R.id.imgHeaderBanner)
-    ImageView imgHeaderBanner;
+    @ViewInject(R.id.imgHeaderBg)
+    ImageView imgHeaderBg;
     private boolean isFirst = true;
+    private View picPickView;
+    private PopupWindow picPickPopwindow;
 
     BlurBitmapTask blurBitmapTask = new BlurBitmapTask(getActivity()) {
         @Override
         protected void onPostExecute(List<Bitmap> list) {
             super.onPostExecute(list);
             if (list.size() > 0) {
-                imgHeaderBanner.setImageBitmap(list.get(0));
+                imgHeaderBg.setImageBitmap(list.get(0));
             }
         }
     };
@@ -122,7 +128,7 @@ public class MainFragment extends BaseFragment {
         );
         BaseListAdapter<BalanceLimitInfo> balanceLimitInfoAdapter = new BaseListAdapter<BalanceLimitInfo>(getActivity(), balanceLimitInfoList, R.layout.balance_limit_item, null);
         balanceGridView.setAdapter(balanceLimitInfoAdapter);
-        ViewTreeObserver viewTreeObserver = imgHeaderBanner.getViewTreeObserver();
+        ViewTreeObserver viewTreeObserver = imgHeaderBg.getViewTreeObserver();
         viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -199,6 +205,48 @@ public class MainFragment extends BaseFragment {
         startActivity(intent);
     }
 
+    @OnClick(R.id.imgHeaderBg)
+    public void onImgHeaderBgClick(View v) {
+        if (!isLogin()) {
+            showToast("请先登陆");
+            startActivityForResult(new Intent(getActivity(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
+            return;
+        }
+        initPicPickPopWindow();
+    }
+
+    /**
+     * 更换相册封面Popwindow
+     */
+    private void initPicPickPopWindow() {
+        if (picPickView == null || picPickPopwindow == null) {
+            picPickView = getActivity().getLayoutInflater().inflate(R.layout.popup_pic_pick, null);
+            picPickPopwindow = new PopupWindow(picPickView);
+            picPickPopwindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            picPickPopwindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+            picPickPopwindow.setAnimationStyle(R.style.AnimationFade);
+        }
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.tvPick:
+                        break;
+                    default:
+                        picPickPopwindow.dismiss();
+                        break;
+                }
+            }
+        };
+        LinearLayout emptyLayout = (LinearLayout) picPickView.findViewById(R.id.emptyLayout);
+        TextView tvPick = (TextView) picPickView.findViewById(R.id.tvPick);
+        TextView tvCancel = (TextView) picPickView.findViewById(R.id.tvCancel);
+        emptyLayout.setOnClickListener(onClickListener);
+        tvCancel.setOnClickListener(onClickListener);
+        tvPick.setOnClickListener(onClickListener);
+        tvPick.setText("更换相册封面");
+        picPickPopwindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+    }
 
     @Override
     public void onResume() {

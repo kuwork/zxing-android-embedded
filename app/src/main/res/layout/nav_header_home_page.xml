@@ -45,14 +45,13 @@
             android:id="@+id/tvAccountName"
             style="@style/item_tv_style"
             android:layout_gravity="left"
-            android:text="未登录"
+            android:text="@string/tip_tourist"
             android:textColor="@color/item_tv_color_02" />
 
         <TextView
             style="@style/item_tv_third_style"
             android:layout_gravity="left"
             android:layout_marginTop="@dimen/layout_Margin_10"
-            android:text="1008610086"
             android:textColor="@color/item_tv_color_04" />
     </LinearLayout>
 </RelativeLayout>

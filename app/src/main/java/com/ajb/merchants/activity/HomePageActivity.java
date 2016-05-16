@@ -1,18 +1,14 @@
 package com.ajb.merchants.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -28,7 +24,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -60,10 +55,8 @@ import com.ajb.merchants.adapter.SortDistrictAdapter;
 import com.ajb.merchants.fragment.BaseFragment;
 import com.ajb.merchants.fragment.HomeFragment;
 import com.ajb.merchants.fragment.MainFragment;
-import com.ajb.merchants.interfaces.OnCameraListener;
 import com.ajb.merchants.model.AccountInfo;
 import com.ajb.merchants.model.AdInfo;
-import com.ajb.merchants.model.BaiduShortUrlUtils;
 import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.CarInParkingBuilder;
 import com.ajb.merchants.model.MenuInfo;
@@ -74,7 +67,6 @@ import com.ajb.merchants.model.filter.Condition;
 import com.ajb.merchants.model.filter.ConditionValue;
 import com.ajb.merchants.others.MyApplication;
 import com.ajb.merchants.task.CityUpdateTask;
-import com.ajb.merchants.util.CarLocation;
 import com.ajb.merchants.util.CommonUtils;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.SharedFileUtils;
@@ -107,12 +99,8 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.util.App;
 import com.util.DensityUtil;
 import com.util.ObjectUtil;
-import com.util.PathManager;
 import com.zxing.activity.CaptureActivity;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -124,11 +112,8 @@ import java.util.Set;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.system.text.ShortMessage;
-import cn.sharesdk.wechat.friends.Wechat;
-import cn.sharesdk.wechat.moments.WechatMoments;
 
-public class HomePageActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener, OnCameraListener, OnItemClickListener {
+public class HomePageActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener, OnItemClickListener {
     //  @ViewInject(R.id.fab)
     //  FloatingActionButton fab;
     @ViewInject(R.id.drawer_layout)
@@ -146,16 +131,11 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     @ViewInject(R.id.home_slide_menu_banner_img)
     ScaleImageView home_slide_menu_banner_img;
     View menuPay;
-    private PopupWindow share_popWindow;
     private Fragment mContent;
     private FragmentManager manager;
     private boolean hasPayNews = true;
     private int currentPic;
     private List<AdInfo> dataList;
-    private FrameLayout imageLinear;
-    private File photoFile, file;
-    private View contentView;   //拍照popwindow的view
-    private PopupWindow carLocationPop;
     private HomeFragment home;
     private LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
@@ -182,11 +162,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             sharedFileUtils.putString(SharedFileUtils.HOME_NAME, homeName);
         }
         initFirst();
-//        if (initDirs()) {
-//            initNavi();
-//        }
-//        initSharePopWindow();
-//        createPhotoFileDir();
         getLocalSlideBanner();
         initLeftMenu();
         updateAccountInfo(getAccountInfo());
@@ -263,208 +238,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         mLocClient.setLocOption(option);
         mLocClient.start();
     }
-
-    private void createPhotoFileDir() {
-        // 存储至DCIM文件夹
-        photoFile = new File(PathManager.getDiskFileDir(getBaseContext()) + File.separator + CarLocation.CAPTURE_FOLDER);
-        if (!photoFile.exists()) {
-            photoFile.mkdirs();
-        }
-    }
-
-    /**
-     * 初始化图片预览LocationPopupWindow
-     *
-     * @param bitmap
-     * @return
-     * @Title initCarLocationPopWindow
-     * @Description
-     * @author 李庆育
-     * @date 2015-10-22 下午4:32:07
-     */
-
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void initCarLocationPopWindow(final Bitmap bitmap) {
-        if (bitmap == null) {
-            return;
-        }
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.cancel_btn:
-                        carLocationPop.dismiss();
-                        bitmap.recycle();
-                        break;
-                    case R.id.sure_btn:
-                        onStartCaptrue();
-                        carLocationPop.dismiss();
-                        bitmap.recycle();
-                        break;
-
-                    case R.id.car_location_pic_del:
-                        boolean isDelete = CarLocation.deleteCarLocationBitmap(getBaseContext());
-                        if (isDelete) {
-                            showToast("删除成功");
-//                            if (mContent instanceof MapViewFragment) {
-//                                ((MapViewFragment) mContent).isCarLocationPicExist();
-//                            }
-                        }
-                        carLocationPop.dismiss();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-        if (contentView == null || carLocationPop == null) {
-            contentView = getLayoutInflater().inflate(
-                    R.layout.popup_car_location_pic, null);
-            carLocationPop = new PopupWindow(contentView);
-            carLocationPop.setWindowLayoutMode(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT);
-        }
-        contentView.findViewById(R.id.cancel_btn).setOnClickListener(
-                onClickListener);
-        contentView.findViewById(R.id.sure_btn).setOnClickListener(
-                onClickListener);
-        contentView.findViewById(R.id.car_location_pic_del).setOnClickListener(onClickListener);
-        final ImageView imageView = (ImageView) contentView
-                .findViewById(R.id.car_location_pic);
-        imageView.setImageBitmap(bitmap);
-        imageLinear = (FrameLayout) imageView.getParent();
-        ViewTreeObserver viewTreeObserver = imageLinear.getViewTreeObserver();
-        viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-
-            @Override
-            public boolean onPreDraw() {
-                int w = imageLinear.getWidth();
-                int bmpW = bitmap.getWidth();
-                int bmpH = bitmap.getHeight();
-                int h = w * bmpH / bmpW;
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) imageLinear
-                        .getLayoutParams();
-                params.width = w;
-                params.height = h;
-                imageLinear.setLayoutParams(params);
-                return true;
-            }
-        });
-        carLocationPop.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
-    }
-
-    /**
-     * 显示图片预览LocationPopupWindow
-     *
-     * @Title showLocationPopWindow
-     * @Description
-     * @author 李庆育
-     * @date 2015-10-22 下午4:56:48
-     */
-    public void showLocationPopWindow() {
-        if (!carLocationPop.isShowing()) {
-            carLocationPop.showAtLocation(getWindow().getDecorView(),
-                    Gravity.CENTER, 0, 0);
-        } else {
-            showToast("请稍等");
-        }
-    }
-
-    public void SaveImageFromDiff(File file) {
-        if (file == null) {
-            return;
-        }
-        String filePath = file.getAbsolutePath();
-        LogUtils.d("filePath=" + file.getAbsolutePath() + ";");
-        if (!file.exists()) {
-            showToast("照片保存失败");
-            return;
-        }
-        try {
-            BitmapFactory.Options opts = new BitmapFactory.Options();
-            opts.inJustDecodeBounds = true;
-            // 不去真的解析图片 获取图片头部信息
-            BitmapFactory.decodeFile(filePath, opts);
-            int height = opts.outHeight;
-            int width = opts.outWidth;
-            LogUtils.i("height=" + height + ";width=" + width);
-            int w, h;
-            if (width > height) {// 横向的
-                w = 500 * width / height;
-                h = 500;
-            } else {
-                w = 500;
-                h = 500 * height / width;
-            }
-            // 计算采样率
-            int scaleX = height / h;
-            int scaleY = width / w;
-            int scale = Math.min(scaleX, scaleY);
-            opts.inJustDecodeBounds = false;
-            opts.inSampleSize = scale;
-            Bitmap bitmap = BitmapFactory.decodeFile(filePath, opts);
-            File imageFile = new File(photoFile.getAbsolutePath(), CarLocation.ZTB_CARNO);
-            clearImageCache(photoFile);
-            //图片接近(0~0.01)是16:9的比例的时候，强行旋转图片
-            double sixteen = 16;
-            double nine = 9;
-            double sixteenToNineValue = sixteen / nine; //代表16除以9
-            double imgW = Double.valueOf(width);
-            double imgH = Double.valueOf(height);
-            double imgHToimgW = imgH / imgW;  //代表高除以宽
-            if (Math.abs(sixteenToNineValue - imgHToimgW) >= 0 && Math.abs(sixteenToNineValue - imgHToimgW) < 0.02) {
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);  // 旋转90度
-                //宽高都缩小4倍
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, width / 4, height / 4, matrix, true);
-            }
-            saveImage(imageFile, bitmap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void saveImage(File imageFile, Bitmap bm) {
-        try {
-            if (!imageFile.exists()) {
-                imageFile.createNewFile();
-            }
-            BufferedOutputStream bos = new BufferedOutputStream(
-                    new FileOutputStream(imageFile));
-            /* 采用压缩转档方法 */
-            bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-            /* 调用flush()方法，更新BufferStream */
-            bos.flush();
-            /* 结束OutputStream */
-            bos.close();
-            showToast("照片保存成功");
-//            if (mContent instanceof MapViewFragment) {
-//                if (((MapViewFragment) mContent).isCarLocationPicExist()) {
-//                    onShowPhoto();
-//                }
-//            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            showToast("照片保存失败");
-        }
-    }
-
-    /**
-     * @Title clearImageCache
-     * @Description 清空缓存图片
-     * @author jerry
-     * @date 2015年8月21日 上午11:35:18
-     */
-    public void clearImageCache(File photoFile) {
-        if (photoFile != null) {
-            File f1 = new File(photoFile, CarLocation.ZTB_CARNO);
-            if (f1 != null && f1.exists()) {
-                f1.delete();
-            }
-        }
-    }
-
 
     @Override
     protected void onResume() {
@@ -551,15 +324,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             });
         }
     }
-
-
-    /**
-     * 预约分享
-     */
-    public void goParkingSearch() {
-
-    }
-
 
     private void initDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -674,9 +438,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     @OnClick(R.id.account_header)
     public void onAccountHeaderClick(View v) {
         if (isLogin()) {
-            Intent intent = new Intent(getBaseContext(), AccountActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent intent = new Intent(getBaseContext(), MerchantDetailActivity.class);
             startActivity(intent);
         } else {
             startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
@@ -686,21 +448,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String inviteCode = getInviteCode();
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case Constant.REQ_CODE_WECHAT:
-                    shareToWechat(inviteCode);
-                    break;
-                case Constant.REQ_CODE_WECHAT_MOMENT:
-                    shareToWechatMoment(inviteCode);
-                    break;
-                case Constant.REQ_CODE_SMS:
-                    shareToSMS(inviteCode);
-                    break;
-                case Constant.REQ_CODE_CAPTURE:
-                    SaveImageFromDiff(file);
-                    break;
                 case Constant.REQ_CODE_LOGIN:
                     initAccountInfo();
                     break;
@@ -770,137 +519,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     }
 
     /**
-     * 初始化分享popWindow
-     */
-    private void initSharePopWindow() {
-        View contentView = getLayoutInflater().inflate(R.layout.popwindow_social_share, null);
-        LinearLayout share_wechat = (LinearLayout) contentView.findViewById(R.id.share_wechat);
-        LinearLayout share_wechat_moment = (LinearLayout) contentView.findViewById(R.id.share_wechat_moment);
-        LinearLayout share_sms = (LinearLayout) contentView.findViewById(R.id.share_sms);
-        LinearLayout space = (LinearLayout) contentView.findViewById(R.id.space);
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.share_wechat:
-                        String inviteCode = getInviteCode();
-                        if (!TextUtils.isEmpty(inviteCode)) {
-                            shareToWechat(inviteCode);
-                        } else {
-                            goLogin(Constant.REQ_CODE_WECHAT);
-                        }
-                        break;
-
-                    case R.id.share_wechat_moment:
-                        String mInviteCode = getInviteCode();
-                        if (!TextUtils.isEmpty(mInviteCode)) {
-                            shareToWechatMoment(mInviteCode);
-                        } else {
-                            goLogin(Constant.REQ_CODE_WECHAT_MOMENT);
-                        }
-                        break;
-
-                    case R.id.share_sms:
-                        String mInviteCode2 = getInviteCode();
-                        if (!TextUtils.isEmpty(mInviteCode2)) {
-                            shareToSMS(mInviteCode2);
-                        } else {
-                            goLogin(Constant.REQ_CODE_SMS);
-                        }
-                        break;
-
-                    case R.id.space:
-                        share_popWindow.dismiss();
-                        break;
-                }
-            }
-        };
-        share_wechat.setOnClickListener(onClickListener);
-        share_wechat_moment.setOnClickListener(onClickListener);
-        share_sms.setOnClickListener(onClickListener);
-        space.setOnClickListener(onClickListener);
-        share_popWindow = new PopupWindow(contentView,
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-    }
-
-    /**
-     * 打开分享popWindow
-     */
-    private void openSharePopWindow() {
-        if (!share_popWindow.isShowing()) {
-            share_popWindow.showAtLocation(getWindow().getDecorView(),
-                    Gravity.CENTER_HORIZONTAL, 0, 0);
-        } else {
-            showToast("请稍后");
-        }
-    }
-
-    /**
-     * 分享到微信
-     */
-    private void shareToWechat(String inviteCode) {
-        Platform.ShareParams wechat = new Platform.ShareParams();
-        wechat.setTitle("掌停宝");
-        wechat.setText("下载掌停宝APP送优惠卷礼包,停车缴费轻松搞定,请输入我的优惠码" + inviteCode);
-        wechat.setImageData(BitmapFactory.decodeResource(getResources(), R.mipmap.share_logo));
-        wechat.setUrl("http://ajbwechat.eanpa-gz-manager.com/weChat/app/appUser/toInvitationPage?code="
-                + inviteCode);
-        wechat.setShareType(Platform.SHARE_WEBPAGE);
-        Platform weixin = ShareSDK.getPlatform(HomePageActivity.this, Wechat.NAME);
-        weixin.setPlatformActionListener(HomePageActivity.this);
-        weixin.share(wechat);
-    }
-
-    /**
-     * 分享到微信朋友圈
-     */
-    private void shareToWechatMoment(String inviteCode) {
-        Platform.ShareParams wechat = new Platform.ShareParams();
-        wechat.setTitle("下载掌停宝APP送优惠卷礼包,停车缴费轻松搞定,请输入我的优惠码" + inviteCode);
-        wechat.setImageData(BitmapFactory.decodeResource(getResources(), R.mipmap.share_logo));
-        wechat.setUrl("http://ajbwechat.eanpa-gz-manager.com/weChat/app/appUser/toInvitationPage?code="
-                + inviteCode);
-        wechat.setShareType(Platform.SHARE_WEBPAGE);
-        Platform weixin = ShareSDK.getPlatform(HomePageActivity.this, WechatMoments.NAME);
-        weixin.setPlatformActionListener(HomePageActivity.this);
-        weixin.share(wechat);
-    }
-
-    /**
-     * 短信分享
-     */
-    private void shareToSMS(final String inviteCode) {
-        new BaiduShortUrlUtils(
-                "http://ajbwechat.eanpa-gz-manager.com/weChat/app/appUser/toInvitationPage?code="
-                        + inviteCode,
-                new BaiduShortUrlUtils.OnGetShortUrlListener() {
-                    @Override
-                    public void onResult(String shortUrl) {
-                        ShortMessage.ShareParams shareParams = new ShortMessage.ShareParams();
-                        shareParams.setTitle("掌停宝");
-                        shareParams.setText("下载掌停宝APP送优惠卷礼包,停车缴费轻松搞定,请输入我的优惠码 "
-                                + shortUrl);
-                        Platform sms = ShareSDK.getPlatform(ShortMessage.NAME);
-                        sms.share(shareParams);
-                    }
-                }).start();
-    }
-
-    /**
-     * 获取邀请码
-     *
-     * @return
-     */
-    private String getInviteCode() {
-        String inviteCode = getSharedFileUtils().getString(SharedFileUtils.INVITE);
-        if (!TextUtils.isEmpty(inviteCode)) {
-            return inviteCode;
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * 跳转到登陆界面
      */
     private void goLogin(int mRequestCode) {
@@ -960,25 +578,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onCancel(Platform platform, int i) {
         Toast.makeText(getApplicationContext(), "分享取消", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * 开始拍照
-     */
-    @Override
-    public void onStartCaptrue() {
-        if (photoFile.exists()) {
-            file = new File(photoFile, CarLocation.ZTB_CARNO);
-        }
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-        startActivityForResult(intent, Constant.REQ_CODE_CAPTURE);
-    }
-
-    @Override
-    public void onShowPhoto() {
-        Bitmap bitmap = CarLocation.getCarLocationBitmap(getBaseContext());
-        initCarLocationPopWindow(bitmap);
     }
 
     public void launchApp(Context context, String packageName) {
