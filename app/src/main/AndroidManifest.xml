@@ -233,7 +233,7 @@
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
 
         <!-- User defined.  For test only  用户自定义的广播接收器 -->
-        <receiver android:name="com.ajb.merchants.receiver.JpushCustomReceiver">
+        <receiver android:name=".receiver.JpushCustomReceiver">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required  用户注册SDK的intent -->
@@ -251,7 +251,6 @@
                 <category android:name="com.ajb.merchants" />
             </intent-filter>
         </receiver>
-
 
         <!-- ShareSDK使用到的Activity -->
 
@@ -347,7 +346,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeTran.NoActionBar" />
         <activity
-            android:name=".activity.AccountManagementActivity"
+            android:name=".activity.AccountListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -356,6 +355,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.EditorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AccountManagementActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 

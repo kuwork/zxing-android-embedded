@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_widthfilled_style"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        style="@style/item_img_style"
+        android:layout_width="@dimen/layout_Margin_15"
+        android:layout_height="@dimen/layout_Margin_15"
+        android:src="@mipmap/checkbox" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/item_tv_style"
+        android:layout_marginRight="@dimen/layout_Margin_5"
+        android:gravity="left"
+        android:text="回收优惠"
+        android:textColor="@color/item_tv_color_02" />
+</LinearLayout>

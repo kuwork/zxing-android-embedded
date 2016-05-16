@@ -2,19 +2,209 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/layout_allFilled_style"
-    android:descendantFocusability="blocksDescendants"
     android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <include layout="@layout/header_btn_layout" />
 
-    <ListView
-        android:id="@+id/listview"
+    <ScrollView
         style="@style/layout_allFilled_style"
-        android:layout_marginTop="@dimen/layout_Margin_10"
-        android:background="@color/white"
-        android:cacheColorHint="@color/transparentColor"
-        android:focusableInTouchMode="true"
-        android:listSelector="?attr/selectableItemBackground"
-        tools:listitem="@layout/listview_item_account" />
+        android:scrollbars="none">
+
+        <LinearLayout
+            style="@style/layout_allFilled_style"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/item_tv_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="left"
+                android:layout_marginTop="@dimen/layout_Margin_10"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/layout_Margin_10"
+                android:text="设置子账户用户名及密码" />
+
+            <View style="@style/line_style" />
+
+            <LinearLayout
+                style="@style/layout_widthfilled_style"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/layout_Margin_15"
+                android:paddingLeft="@dimen/layout_Margin_10"
+                android:paddingTop="@dimen/layout_Margin_15">
+
+                <LinearLayout
+                    style="@style/layout_widthfilled_style"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        style="@style/layout_widthfilled_style"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/radius_bg_white">
+
+                            <EditText
+                                android:id="@+id/edAccount"
+                                style="@style/item_tv_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:background="@null"
+                                android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@_"
+                                android:gravity="left|center_vertical"
+                                android:hint="请输入子账户用户名"
+                                android:paddingLeft="@dimen/layout_Margin_10"
+                                android:paddingRight="@dimen/layout_Margin_5"
+                                android:textColorHint="@color/item_tv_color_04" />
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/item_tv_second_style"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="4dp"
+                            android:text="*"
+                            android:textColor="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/layout_widthfilled_style"
+                        android:layout_marginTop="@dimen/layout_Margin_10"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/radius_bg_white">
+
+                            <EditText
+                                android:id="@+id/edPassword"
+                                style="@style/item_tv_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:background="@null"
+                                android:gravity="left|center_vertical"
+                                android:hint="请输入子账户用户密码"
+                                android:inputType="textPassword"
+                                android:paddingLeft="@dimen/layout_Margin_10"
+                                android:paddingRight="@dimen/layout_Margin_5"
+                                android:textColorHint="@color/item_tv_color_04" />
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/item_tv_second_style"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="4dp"
+                            android:text="*"
+                            android:textColor="@color/colorPrimary" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgPasswordPass"
+                    style="@style/item_img_style"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="@dimen/layout_Margin_15"
+                    android:src="@mipmap/ic_account_pass"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layout_widthfilled_style"
+                android:layout_marginTop="@dimen/layout_Margin_10"
+                android:background="@color/white"
+                android:minHeight="50dp"
+                android:paddingBottom="@dimen/layout_Margin_15"
+                android:paddingLeft="@dimen/layout_Margin_5"
+                android:paddingRight="@dimen/layout_Margin_5"
+                android:paddingTop="@dimen/layout_Margin_15">
+
+                <TextView
+                    style="@style/item_tv_style"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="@dimen/layout_Margin_5"
+                    android:gravity="left|top"
+                    android:text="备        注:" />
+
+                <TextView
+                    android:id="@+id/tvNote"
+                    style="@style/item_tv_style"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="@dimen/layout_Margin_5"
+                    android:gravity="left|top"
+                    android:singleLine="false"
+                    android:textColor="@color/item_tv_color_02" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layout_widthfilled_style"
+                android:layout_marginTop="@dimen/layout_Margin_10"
+                android:background="@color/white"
+                android:minHeight="50dp"
+                android:paddingBottom="@dimen/layout_Margin_15"
+                android:paddingLeft="@dimen/layout_Margin_5"
+                android:paddingRight="@dimen/layout_Margin_5"
+                android:paddingTop="@dimen/layout_Margin_15">
+
+                <TextView
+                    style="@style/item_tv_style"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="@dimen/layout_Margin_5"
+                    android:gravity="left|top"
+                    android:text="车场位置:" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    style="@style/item_tv_style"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="@dimen/layout_Margin_5"
+                    android:gravity="left|top"
+                    android:singleLine="false"
+                    android:textColor="@color/item_tv_color_02" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layout_widthfilled_style"
+                android:layout_marginTop="@dimen/layout_Margin_10"
+                android:background="@color/white"
+                android:minHeight="50dp"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/layout_Margin_15"
+                android:paddingLeft="@dimen/layout_Margin_5"
+                android:paddingRight="@dimen/layout_Margin_5"
+                android:paddingTop="@dimen/layout_Margin_15">
+
+                <TextView
+                    style="@style/item_tv_style"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="@dimen/layout_Margin_5"
+                    android:gravity="left|top"
+                    android:text="账号权限:" />
+
+                <com.ajb.merchants.view.MyGridView
+                    android:id="@+id/gridViewAccountPermission"
+                    style="@style/layout_widthfilled_style"
+                    android:layout_marginLeft="50dp"
+                    android:background="@color/transparentColor"
+                    android:cacheColorHint="@color/transparentColor"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:listSelector="@color/transparentColor"
+                    android:numColumns="2"
+                    tools:listitem="@layout/grid_item_account_permission" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
