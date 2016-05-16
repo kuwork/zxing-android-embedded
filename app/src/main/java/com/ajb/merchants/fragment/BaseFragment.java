@@ -2,6 +2,7 @@ package com.ajb.merchants.fragment;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -15,12 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ajb.merchants.R;
+import com.ajb.merchants.activity.LoginActivity;
 import com.ajb.merchants.interfaces.OnViewErrorListener;
 import com.ajb.merchants.others.MyApplication;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.HttpHandler;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -125,25 +128,32 @@ public class BaseFragment extends Fragment implements OnViewErrorListener {
         String url = Constant.SERVER_URL + uri;
         LogUtils.v("requestUrl:" + url);
         HttpUtils http = MyApplication.getNoCacheHttpUtils();
-        if (params != null) {
-            if (LogUtils.allowD) {
-                List<NameValuePair> list = (List<org.apache.http.NameValuePair>) params.getQueryStringParams();
-                int size = list.size();
-                StringBuilder sb = new StringBuilder();
-                org.apache.http.NameValuePair nameValuePair;
-                for (int i = 0; i < size; i++) {
-                    nameValuePair = list.get(i);
-                    sb.append(nameValuePair.getName() + "=" + nameValuePair.getValue() + "&");
-                }
-                if (sb.toString().endsWith("&")) {
-                    sb.deleteCharAt(sb.length() - 1);
-                }
-                LogUtils.d(sb.toString());
-            }
-            return http.send(HttpRequest.HttpMethod.POST, url, params, callBack);
-        } else {
-            return http.send(HttpRequest.HttpMethod.POST, url, callBack);
+        if (params == null) {
+            params = new RequestParams();
         }
+        if (!Constant.PK_LOGIN.equals(uri)) {
+            String tokenId = sharedFileUtils.getString(SharedFileUtils.TOKEN);
+            if (TextUtils.isEmpty(tokenId)) {
+                callBack.onFailure(new HttpException(403), "请重新登录");
+                return null;
+            }
+            params.addQueryStringParameter(Constant.InterfaceParam.TOKEN, tokenId);
+        }
+        if (LogUtils.allowD) {
+            List<NameValuePair> list = (List<org.apache.http.NameValuePair>) params.getQueryStringParams();
+            int size = list.size();
+            StringBuilder sb = new StringBuilder();
+            org.apache.http.NameValuePair nameValuePair;
+            for (int i = 0; i < size; i++) {
+                nameValuePair = list.get(i);
+                sb.append(nameValuePair.getName() + "=" + nameValuePair.getValue() + "&");
+            }
+            if (sb.toString().endsWith("&")) {
+                sb.deleteCharAt(sb.length() - 1);
+            }
+            LogUtils.d(sb.toString());
+        }
+        return http.send(HttpRequest.HttpMethod.POST, url, params, callBack);
     }
 
     protected boolean initDirs() {
@@ -245,5 +255,16 @@ public class BaseFragment extends Fragment implements OnViewErrorListener {
 
     public String getFrom() {
         return from;
+    }
+
+    protected void fail(HttpException error, String msg) {
+        if (error.getExceptionCode() == 0) {
+            showToast(getString(R.string.error_network_short));
+        } else if (error.getExceptionCode() == 403) {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            getActivity().startActivityForResult(intent, Constant.REQ_CODE_LOGIN);
+        } else {
+            showToast(msg);
+        }
     }
 }

@@ -1,14 +1,15 @@
 package com.ajb.merchants.fragment;
 
 
-import android.content.Intent;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,17 +25,22 @@ import com.ajb.merchants.activity.LoginActivity;
 import com.ajb.merchants.activity.MerchantDetailActivity;
 import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.adapter.MenuItemAdapter;
+import com.ajb.merchants.model.AccountSettingInfo;
 import com.ajb.merchants.model.BalanceLimitInfo;
+import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.task.BlurBitmapTask;
 import com.ajb.merchants.util.CommonUtils;
 import com.ajb.merchants.util.Constant;
+import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.MyGridView;
 import com.ajb.merchants.view.MySwipeRefreshLayout;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -111,7 +117,7 @@ public class MainFragment extends BaseFragment {
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                requestMainSetting();
             }
         });
         swipeLayout.setColorSchemeColors(
@@ -126,8 +132,8 @@ public class MainFragment extends BaseFragment {
                 new BalanceLimitInfo("0.0", "元", "当月已赠金额"),
                 new BalanceLimitInfo("0.0", "小时", "当月已赠时间")
         );
-        BaseListAdapter<BalanceLimitInfo> balanceLimitInfoAdapter = new BaseListAdapter<BalanceLimitInfo>(getActivity(), balanceLimitInfoList, R.layout.balance_limit_item, null);
-        balanceGridView.setAdapter(balanceLimitInfoAdapter);
+
+        initBalance(balanceLimitInfoList);
         ViewTreeObserver viewTreeObserver = imgHeaderBg.getViewTreeObserver();
         viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
@@ -139,38 +145,88 @@ public class MainFragment extends BaseFragment {
                 return true;
             }
         });
-        initLeftMenu();
+        String menuJson = CommonUtils.getFromAssets(getActivity(), "main_menu.json");
+        String modelMenuJson = sharedFileUtils.getString(SharedFileUtils.ACCOUNT_SETING_INFO);
+        if (!TextUtils.isEmpty(menuJson)) {
+            try {
+                AccountSettingInfo asi = gson.fromJson(modelMenuJson, new TypeToken<AccountSettingInfo>() {
+                }.getType());
+                if (asi != null) {
+                    initBalance(asi.getBalanceList());
+//                initLeftMenu(asi.getModularMenus());
+                }
+                List<ModularMenu> modularMenu = gson.fromJson(menuJson, new TypeToken<List<ModularMenu>>() {
+                }.getType());
+
+                initLeftMenu(modularMenu);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        requestMainSetting();
         return v;
+    }
+
+    private void initBalance(List<BalanceLimitInfo> balanceLimitInfoList) {
+        BaseListAdapter<BalanceLimitInfo> balanceLimitInfoAdapter = new BaseListAdapter<BalanceLimitInfo>(getActivity(), balanceLimitInfoList, R.layout.balance_limit_item, null);
+        balanceGridView.setAdapter(balanceLimitInfoAdapter);
+    }
+
+    private void requestMainSetting() {
+        send(Constant.PK_MAIN_SETTING, null, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                swipeLayout.setRefreshing(false);
+                if (responseInfo.statusCode == 200) {
+                    BaseResult<AccountSettingInfo> result = null;
+                    try {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult<AccountSettingInfo>>() {
+                                }.getType());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result == null) {
+                        showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    if ("0000".equals(result.code)) {
+                        sharedFileUtils.putString(SharedFileUtils.ACCOUNT_SETING_INFO, gson.toJson(result.data));
+//                        initLeftMenu(result.data.getModularMenus());
+                        initBalance(result.data.getBalanceList());
+                    } else {
+                        showToast(result.msg);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                swipeLayout.setRefreshing(false);
+                fail(error, msg);
+            }
+
+        });
     }
 
     /**
      * 初始化侧滑菜单
      */
-    private void initLeftMenu() {
+    private void initLeftMenu(List<ModularMenu> modularMenuList) {
         ModularMenu modularMenu;
-        String menuJson = CommonUtils.getFromAssets(getActivity(), "main_menu.json");
-        if (menuJson.equals("")) {
+        if (modularMenuList == null) {
             return;
         }
-        try {
-            Gson gson = new Gson();
-            List<ModularMenu> modularMenuList = gson.fromJson(menuJson, new TypeToken<List<ModularMenu>>() {
-            }.getType());
-            if (modularMenuList == null) {
-                return;
+        int size = modularMenuList.size();
+        for (int i = 0; i < size; i++) {
+            modularMenu = modularMenuList.get(i);
+            if (ModularMenu.CODE_COUPON.equals(modularMenu.getModularCode())) {
+                initCouponMenuList(modularMenu, onItemClickListener);
+            } else if (ModularMenu.CODE_MAIN_MENU.equals(modularMenu.getModularCode())) {
+                initMainMenuList(modularMenu, onItemClickListener);
             }
-            int size = modularMenuList.size();
-            for (int i = 0; i < size; i++) {
-                modularMenu = modularMenuList.get(i);
-                if (ModularMenu.CODE_COUPON.equals(modularMenu.getModularCode())) {
-                    initCouponMenuList(modularMenu, onItemClickListener);
-                } else if (ModularMenu.CODE_MAIN_MENU.equals(modularMenu.getModularCode())) {
-                    initMainMenuList(modularMenu, onItemClickListener);
-                }
-            }
-//
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -260,4 +316,11 @@ public class MainFragment extends BaseFragment {
         LogUtils.d("onPause");
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == Constant.REQ_CODE_LOGIN) {
+            swipeLayout.setRefreshing(true);
+            requestMainSetting();
+        }
+    }
 }

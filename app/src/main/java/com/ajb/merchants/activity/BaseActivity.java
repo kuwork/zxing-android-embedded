@@ -1425,7 +1425,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
             params = new RequestParams();
         }
         if (!Constant.PK_LOGIN.equals(uri)) {
-            String tokenId = sharedFileUtils.getString(SharedFileUtils.KEY_TOKEN);
+            String tokenId = sharedFileUtils.getString(SharedFileUtils.TOKEN);
             if (TextUtils.isEmpty(tokenId)) {
                 callBack.onFailure(new HttpException(403), "请重新登录");
                 return null;
@@ -1788,6 +1788,9 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
     protected void fail(HttpException error, String msg) {
         if (error.getExceptionCode() == 0) {
             showToast(getString(R.string.error_network_short));
+        } else if (error.getExceptionCode() == 403) {
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            startActivityForResult(intent, Constant.REQ_CODE_LOGIN);
         } else {
             showToast(msg);
         }

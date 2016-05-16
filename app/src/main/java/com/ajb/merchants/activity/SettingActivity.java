@@ -169,7 +169,7 @@ public class SettingActivity extends BaseActivity {
                             }
                             if ("0000".equals(result.code)) {
                                 setResult(RESULT_OK);
-                                sharedFileUtils.remove(SharedFileUtils.KEY_TOKEN);
+                                sharedFileUtils.remove(SharedFileUtils.TOKEN);
                                 sharedFileUtils.remove(SharedFileUtils.IS_LOGIN);
                                 finish();
                             } else {
@@ -195,7 +195,7 @@ public class SettingActivity extends BaseActivity {
     private void initPageSetting() {
         if (contentView == null || popup == null) {
             contentView = getLayoutInflater().inflate(
-                    R.layout.popup_carno_list, null);
+                    R.layout.popup_list, null);
             popup = new PopupWindow(contentView);
             popup.setWindowLayoutMode(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT);
