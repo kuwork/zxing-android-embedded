@@ -1,6 +1,6 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="@dimen/layout_Margin_10"
-    android:insetRight="@dimen/layout_Margin_10">
+    android:insetLeft="0dp"
+    android:insetRight="0dp">
 
     <shape android:shape="rectangle">
         <solid android:color="@color/line_color" />

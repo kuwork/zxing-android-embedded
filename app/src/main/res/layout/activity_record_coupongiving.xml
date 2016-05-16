@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_allFilled_style"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_btn_layout" />
+
+    <FrameLayout style="@style/layout_allFilled_style">
+
+
+        <LinearLayout
+            style="@style/layout_allFilled_style"
+            android:orientation="vertical">
+
+            <include layout="@layout/list_item_record_coupon_giving_header" />
+
+            <RelativeLayout style="@style/layout_allFilled_style">
+
+                <FrameLayout
+                    style="@style/layout_allFilled_style"
+                    android:layout_above="@+id/editLayout">
+
+                    <com.handmark.pulltorefresh.library.PullToRefreshListView
+                        android:id="@+id/listview"
+                        fadeEdgetLength="0dp"
+                        style="@style/layout_allFilled_style"
+                        android:dividerHeight="0.5dp"
+                        android:background="@color/white"
+                        android:divider="@drawable/list_divider_fill"
+                        tools:listitem="@layout/list_item_record_coupon_giving"
+                        android:visibility="visible" />
+
+                    <include
+                        android:id="@+id/null_data"
+                        layout="@layout/error_layout"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <include
+                    android:id="@+id/editLayout"
+                    layout="@layout/edit_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/layoutSearch"
+            layout="@layout/layout_record_search"
+            android:visibility="gone" />
+
+    </FrameLayout>
+</LinearLayout>

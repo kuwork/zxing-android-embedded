@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.ajb.merchants.activity.AboutActivity;
 import com.ajb.merchants.activity.AccountManagementActivity;
+import com.ajb.merchants.activity.CouponGivingRecordActivity;
 import com.ajb.merchants.activity.EditorActivity;
 import com.ajb.merchants.activity.ModifyPhoneActivity;
 import com.ajb.merchants.activity.ResetPasswordActivity;
@@ -217,7 +218,13 @@ public class MenuInfo implements Serializable {
         Intent intent;
         switch (getOperateType()) {
             case MenuInfo.TYPE_OPERATE_NATIVE:
-                if (TO_ACCOUNT_SETTING.equals(getMenuCode())) {
+                if (TO_RECORD_GIVING.equals(getMenuCode())) {
+                    //赠送记录
+                    intent = new Intent(context, CouponGivingRecordActivity.class);
+                    dealExtras(intent);
+                    intent.putExtra(Constant.KEY_TITLE, getTitle());
+                    context.startActivity(intent);
+                } else if (TO_ACCOUNT_SETTING.equals(getMenuCode())) {
                     //账号管理
                     context.startActivity(new Intent(context, AccountManagementActivity.class));
                 } else if (TO_ABOUTUS.equals(getMenuCode())) {
