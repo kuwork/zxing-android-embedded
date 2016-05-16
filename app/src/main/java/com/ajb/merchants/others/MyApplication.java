@@ -1,25 +1,13 @@
 package com.ajb.merchants.others;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Notification;
 import android.content.Context;
-import android.widget.Toast;
-import cn.jpush.android.api.CustomPushNotificationBuilder;
-import cn.jpush.android.api.JPushInterface;
 
 import com.ajb.merchants.R;
 import com.ajb.merchants.model.CityCharModle;
 import com.ajb.merchants.model.ProvinceInfo;
-import com.baidu.mapapi.SDKInitializer;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.DbUtils.DbUpgradeListener;
 import com.lidroid.xutils.HttpUtils;
@@ -27,6 +15,16 @@ import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.util.App;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import cn.jpush.android.api.CustomPushNotificationBuilder;
+import cn.jpush.android.api.JPushInterface;
 
 public class MyApplication extends Application {
 	public static Set<String> citySet = new HashSet<String>();
@@ -71,7 +69,6 @@ public class MyApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		SDKInitializer.initialize(this);
 		if (!"official".equals(App.getMetaData(this, "update_type"))) {
 			JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
 		}

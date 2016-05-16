@@ -53,14 +53,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:design:23.+'
     compile 'com.android.support:support-v4:23.+'
-    compile files('libs/calligraphy-1.2.0.jar')
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.4.1'
-    compile files('libs/baidumapapi_base_v3_7_3.jar')
-    compile files('libs/baidumapapi_cloud_v3_7_3.jar')
-    compile files('libs/baidumapapi_map_v3_7_3.jar')
-    compile files('libs/baidumapapi_radar_v3_7_3.jar')
-    compile files('libs/baidumapapi_search_v3_7_3.jar')
-    compile files('libs/baidumapapi_util_v3_7_3.jar')
-    compile files('libs/BaiduNaviSDK_3.1.1.jar')
     compile files('libs/pinyin4j-2.5.0.jar')
 }

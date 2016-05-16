@@ -205,7 +205,7 @@ public class BaseListAdapter<T> extends BaseAdapter {
                 }
                 if (img != null) {
                     if (isCheck(info)) {
-                        img.setImageResource(R.drawable.actionbar_done);
+                        img.setImageResource(R.drawable.actionbar_check);
                         img.setVisibility(View.VISIBLE);
                     } else {
                         img.setVisibility(View.GONE);

@@ -61,8 +61,6 @@ import com.ajb.merchants.fragment.BaseFragment;
 import com.ajb.merchants.fragment.HomeFragment;
 import com.ajb.merchants.fragment.MainFragment;
 import com.ajb.merchants.interfaces.OnCameraListener;
-import com.ajb.merchants.interfaces.OnLocateListener;
-import com.ajb.merchants.interfaces.OnSearchListener;
 import com.ajb.merchants.model.AccountInfo;
 import com.ajb.merchants.model.AdInfo;
 import com.ajb.merchants.model.BaiduShortUrlUtils;
@@ -88,8 +86,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -132,7 +128,7 @@ import cn.sharesdk.system.text.ShortMessage;
 import cn.sharesdk.wechat.friends.Wechat;
 import cn.sharesdk.wechat.moments.WechatMoments;
 
-public class HomePageActivity extends BaseActivity implements View.OnClickListener, OnSearchListener, PlatformActionListener, OnCameraListener, OnLocateListener, OnItemClickListener {
+public class HomePageActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener, OnCameraListener, OnItemClickListener {
     //  @ViewInject(R.id.fab)
     //  FloatingActionButton fab;
     @ViewInject(R.id.drawer_layout)
@@ -161,7 +157,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private View contentView;   //拍照popwindow的view
     private PopupWindow carLocationPop;
     private HomeFragment home;
-    private MyLocationData locData;//定位结果
     private LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
     private String homeName;
@@ -676,29 +671,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         });
     }
 
-    @Override
-    public void onListClick(MyLocationData locData) {
-
-    }
-
-    @Override
-    public void onSearchBarClick() {
-        if (toolbar != null) {
-//            initMapSearch();
-        }
-    }
-
-    @Override
-    public void onSearchResultShow(GeoCodeResult result) {
-        if (result == null) {
-            return;
-        }
-//        initMap();
-//        if (mContent instanceof MapViewFragment) {
-//            ((MapViewFragment) mContent).showSearchResult(result);
-//        }
-    }
-
     @OnClick(R.id.account_header)
     public void onAccountHeaderClick(View v) {
         if (isLogin()) {
@@ -1153,7 +1125,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                     + location.getDirection());
             sharedFileUtils.putString(SharedFileUtils.LAST_LOC, location.getLatitude() + "," + location.getLongitude());
             sharedFileUtils.putString(SharedFileUtils.LAST_CITY, location.getCity());
-            onLocate(location);
             dealRunnableMap();
         }
 
@@ -1165,30 +1136,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             mLocClient.stop();
         }
         super.onPause();
-    }
-
-
-    @Override
-    public void onLocate(BDLocation location) {
-        if (location == null) {
-            return;
-        }
-        LogUtils.d("定位成功");
-        locData = new MyLocationData.Builder()
-                .satellitesNum(location.getSatelliteNumber())
-                .speed(location.getSpeed())
-                .direction(location.getDirection())
-                .accuracy(location.getRadius())
-                .latitude(location.getLatitude())
-                .longitude(location.getLongitude()).build();
-        if (mContent != null && mContent instanceof OnLocateListener) {
-            ((OnLocateListener) mContent).onLocate(location);
-        }
-    }
-
-    @Override
-    public MyLocationData getLocation() {
-        return locData;
     }
 
 

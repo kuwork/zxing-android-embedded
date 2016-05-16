@@ -19,8 +19,7 @@ public class Constant {
     //登陆
     public static final int REQ_CODE_LOGIN = REQ_CODE_BASE + 6;
     public static final int REQ_CODE_SHARE = REQ_CODE_BASE + 7;
-    public static final int REQ_CODE_NAV = REQ_CODE_BASE + 8;
-    public static final int REQ_CODE_LOGOUT = REQ_CODE_BASE + 9;    //登出
+    public static final int REQ_CODE_LOGOUT = REQ_CODE_BASE + 8;    //登出
     //权限访问码
     public static final int PM_CAMERA = 1;//摄像头权限
     public static final int PM_LOCATION = 2;//GPS权限

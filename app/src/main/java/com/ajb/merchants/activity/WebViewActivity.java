@@ -13,7 +13,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ajb.merchants.R;
-import com.ajb.merchants.model.CarPark;
 import com.ajb.merchants.model.ShareInfo;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.view.CustomWebView;
@@ -22,7 +21,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.map.MyLocationData;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -41,7 +39,8 @@ public class WebViewActivity extends BaseActivity {
     TextView tvErrorTip;
     private String url = "";
     private String title = "";
-    private CarPark carPark;//目标车场
+    private LocationClient mLocClient;
+    public MyLocationListenner myListener = new MyLocationListenner();
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -86,44 +85,9 @@ public class WebViewActivity extends BaseActivity {
                     }
                     break;
                 }
-                case Constant.REQ_CODE_NAV: {
-                    CarPark info = (CarPark) msg.obj;
-                    if (info == null
-                            || TextUtils.isEmpty(info.getParkName())
-                            || TextUtils.isEmpty(info.getAddress())
-                            || TextUtils.isEmpty(info.getLatitude())
-                            || TextUtils.isEmpty(info.getLongitude())) {
-                        return;
-                    }
-                    WebViewActivity.this.carPark = info;
-                    double lat = 0;
-                    double lng = 0;
-                    if (locData != null) {
-                        try {
-                            lat = locData.latitude;
-                            lng = locData.longitude;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            lat = 0;
-                            lng = 0;
-                        }
-                    }
-                    if (lat == 0 && lng == 0) {
-                        if (mLocClient != null) {
-                            mLocClient.start();
-                            showToast("定位中,请稍后..");
-                        }
-                    } else {
-                        navToCarpark(lat, lng, info);
-                    }
-                    break;
-                }
             }
         }
     };
-    private LocationClient mLocClient;
-    public MyLocationListenner myListener = new MyLocationListenner();
-    private MyLocationData locData;
 
     /**
      * 定位SDK监听函数
@@ -151,14 +115,6 @@ public class WebViewActivity extends BaseActivity {
             LogUtils.v(location.getLatitude() + "---"
                     + location.getLongitude() + "---"
                     + location.getDirection());
-            locData = new MyLocationData.Builder()
-                    .direction(location.getDirection())
-                    .accuracy(location.getRadius())
-                    .latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            if (carPark != null) {
-                navToCarpark(locData.latitude, locData.longitude, carPark);
-            }
         }
 
     }
@@ -267,8 +223,4 @@ public class WebViewActivity extends BaseActivity {
         title = (String) savedInstanceState.get(Constant.KEY_TITLE);
     }
 
-    protected void navToCarpark(double latitude, double longitude, CarPark carPark) {
-        super.navToCarpark(latitude, longitude, carPark);
-        WebViewActivity.this.carPark = null;
-    }
 }
