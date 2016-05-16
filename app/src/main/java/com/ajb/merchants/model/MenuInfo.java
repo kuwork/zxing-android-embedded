@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.ajb.merchants.activity.AboutActivity;
-import com.ajb.merchants.activity.AccountManagementActivity;
+import com.ajb.merchants.activity.AccountListActivity;
 import com.ajb.merchants.activity.EditorActivity;
 import com.ajb.merchants.activity.ModifyPhoneActivity;
 import com.ajb.merchants.activity.ResetPasswordActivity;
@@ -219,7 +219,7 @@ public class MenuInfo implements Serializable {
             case MenuInfo.TYPE_OPERATE_NATIVE:
                 if (TO_ACCOUNT_SETTING.equals(getMenuCode())) {
                     //账号管理
-                    context.startActivity(new Intent(context, AccountManagementActivity.class));
+                    context.startActivity(new Intent(context, AccountListActivity.class));
                 } else if (TO_ABOUTUS.equals(getMenuCode())) {
                     //关于我们
                     context.startActivity(new Intent(context, AboutActivity.class));
