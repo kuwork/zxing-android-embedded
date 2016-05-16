@@ -44,7 +44,8 @@ public class SharedFileUtils {
     public static final String COUPON_MONEY_LIST = "com.ajb.merchants.COUPON_MONEY_LIST";
     public static final String COUPON_TIME_LIST = "com.ajb.merchants.COUPON_TIME_LIST";
 
-    public static final String KEY_TOKEN = "TOKEN";
+    public static final String TOKEN = "com.ajb.merchants.TOKEN";
+    public static final String ACCOUNT_SETING_INFO = "com.ajb.merchants.ACCOUNT_SETING_INFO";
 
     private SharedPreferences sp;
 

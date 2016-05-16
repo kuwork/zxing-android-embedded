@@ -731,6 +731,9 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                     break;
                 case Constant.REQ_CODE_LOGIN:
                     initAccountInfo();
+                    if (mContent != null) {
+                        mContent.onActivityResult(requestCode, resultCode, data);
+                    }
                     break;
                 case Constant.REQ_CODE_LOGOUT:
                     Intent intent = new Intent(getBaseContext(), LoginActivity.class);

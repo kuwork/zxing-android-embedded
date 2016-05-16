@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/layout_border_hollow"
     android:gravity="center_vertical"
     android:minHeight="90dp"
-    android:background="@drawable/layout_border_hollow"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/layout_Margin_5">
+    android:paddingLeft="@dimen/layout_Margin_5"
+    android:paddingRight="@dimen/layout_Margin_5">
 
     <ImageView
         android:id="@+id/imgMenu"
@@ -29,14 +30,17 @@
                 style="@style/grid_menu_title_style2"
                 android:layout_width="match_parent"
                 android:layout_toLeftOf="@+id/arrow5"
+                android:maxLines="2"
+                android:singleLine="false"
                 android:text="清除缓存" />
 
             <TextView
                 android:id="@+id/tvDesc"
                 style="@style/grid_menu_desc_style2"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/layout_Margin_5"
                 android:layout_toLeftOf="@+id/arrow5"
+                android:maxLines="2"
+                android:singleLine="false"
                 android:text="描述"
                 android:visibility="visible" />
         </LinearLayout>

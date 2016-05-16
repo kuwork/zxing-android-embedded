@@ -46,6 +46,7 @@ public class Constant {
      */
     public static final String PK_LOGIN = "merchantLog/login";// 登录
     public static final String PK_LOGOUT = "merchantLog/logout";// 登出
+    public static final String PK_MAIN_SETTING = "/merchantFunction/homeMaxPort";//主页设置信息
 
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";

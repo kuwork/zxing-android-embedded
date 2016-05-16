@@ -132,7 +132,8 @@ public class LoginActivity extends BaseActivity {
                             }
                             if ("0000".equals(result.code)) {
                                 setResult(RESULT_OK);
-                                sharedFileUtils.putString(SharedFileUtils.KEY_TOKEN, result.data);
+                                sharedFileUtils.putString(SharedFileUtils.TOKEN, result.data);
+                                sharedFileUtils.putString(SharedFileUtils.LOGIN_NAME, edAccount.getText().toString().trim());
                                 sharedFileUtils.putBoolean(SharedFileUtils.IS_LOGIN, true);
                                 Bundle bundle = getIntent().getExtras();
                                 String pageStr = "";

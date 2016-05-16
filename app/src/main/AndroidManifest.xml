@@ -107,7 +107,7 @@
         <!-- 正式产品ID -->
         <meta-data
             android:name="product_app_id"
-            android:value="b6d9f85e-a301-47a6-b92d-8e89c70464ef" />
+            android:value="d76cd178-869c-4fbc-8fee-a6969b2e1ea4" />
         <!-- 测试产品ID -->
         <!-- <meta-data -->
         <!-- android:name="product_app_id" -->
