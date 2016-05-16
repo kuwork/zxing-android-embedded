@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
-import com.ajb.merchants.model.CarPark;
 import com.ajb.merchants.model.DeviceInfo;
 import com.ajb.merchants.model.ShareInfo;
 import com.ajb.merchants.model.UserAppInfo;
@@ -64,19 +63,6 @@ public class UserInterface {
             }.getType());
             if (shareInfo != null && customWebView.getHandler() != null) {
                 customWebView.getHandler().sendMessage(customWebView.getHandler().obtainMessage(Constant.REQ_CODE_SHARE, shareInfo));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @JavascriptInterface
-    public void navToCarpark(String str) {
-        try {
-            CarPark info = gson.fromJson(str, new TypeToken<CarPark>() {
-            }.getType());
-            if (info != null && customWebView.getHandler() != null) {
-                customWebView.getHandler().sendMessage(customWebView.getHandler().obtainMessage(Constant.REQ_CODE_NAV, info));
             }
         } catch (Exception e) {
             e.printStackTrace();

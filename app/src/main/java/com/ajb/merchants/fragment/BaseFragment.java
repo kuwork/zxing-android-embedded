@@ -2,7 +2,6 @@ package com.ajb.merchants.fragment;
 
 
 import android.app.Activity;
-import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -17,13 +16,9 @@ import android.widget.Toast;
 
 import com.ajb.merchants.R;
 import com.ajb.merchants.interfaces.OnViewErrorListener;
-import com.ajb.merchants.model.CarPark;
 import com.ajb.merchants.others.MyApplication;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.SharedFileUtils;
-import com.baidu.navisdk.adapter.BNRouteGuideManager;
-import com.baidu.navisdk.adapter.BNRoutePlanNode;
-import com.baidu.navisdk.adapter.BaiduNaviManager;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.HttpHandler;
@@ -36,7 +31,6 @@ import com.util.PathManager;
 import org.apache.http.NameValuePair;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,14 +38,13 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BaseFragment extends Fragment implements BaiduNaviManager.RoutePlanListener, OnViewErrorListener {
+public class BaseFragment extends Fragment implements OnViewErrorListener {
 
     protected Gson gson;
     private Toolbar toolbar;
     private TextView headerMenu1;
     protected SharedFileUtils sharedFileUtils;
     private String mSDCardPath;
-    private BNRoutePlanNode mBNRoutePlanNode;
     private View errorView;
     protected Map<Integer, Runnable> runnableMap;//延时定位处理
     protected String from;//上一级页面的类名
@@ -153,61 +146,6 @@ public class BaseFragment extends Fragment implements BaiduNaviManager.RoutePlan
         }
     }
 
-    protected void navToCarpark(double latitude, double longitude, CarPark carPark) {
-        boolean isInitSuccess = BaiduNaviManager.isNaviInited();
-        boolean isInitSoSuccess = BaiduNaviManager.isNaviSoLoadSuccess();
-
-        if (!isInitSuccess || !isInitSoSuccess) {
-            //版本判断
-            if (Build.VERSION.SDK_INT >= 23) {
-                showToast("当前系统版本暂不支持使用导航功能");
-                return;
-            } else {
-                showToast("百度地图初始化引擎失败");
-            }
-            return;
-        }
-        if (carPark == null) {
-            showToast("缺少车场信息，无法开启导航");
-            return;
-        }
-        launchNavigator(
-                latitude,
-                longitude,
-                "我的位置",
-                Double.valueOf(carPark.getLatitude()),
-                Double.valueOf(carPark.getLongitude()),
-                carPark.getAddress());
-    }
-
-    protected void initNavi() {
-        BaiduNaviManager.getInstance().init(getActivity(), mSDCardPath, Constant.APP_FOLDER_NAME,
-                new BaiduNaviManager.NaviInitListener() {
-                    @Override
-                    public void onAuthResult(int status, String msg) {
-                        String authinfo;
-                        if (0 == status) {
-                            authinfo = "key校验成功!";
-                        } else {
-                            authinfo = "key校验失败, " + msg;
-                        }
-                        LogUtils.d(authinfo);
-                    }
-
-                    public void initSuccess() {
-                        LogUtils.d("百度导航引擎初始化成功");
-                    }
-
-                    public void initStart() {
-                        LogUtils.d("百度导航引擎初始化开始");
-                    }
-
-                    public void initFailed() {
-                        LogUtils.d("百度导航引擎初始化失败");
-                    }
-                }, null);
-    }
-
     protected boolean initDirs() {
         mSDCardPath = PathManager.getSdcardDir();
         if (mSDCardPath == null) {
@@ -225,51 +163,9 @@ public class BaseFragment extends Fragment implements BaiduNaviManager.RoutePlan
         return true;
     }
 
-    /**
-     * 启动GPS导航. 前置条件：导航引擎初始化成功
-     */
-    protected void launchNavigator(double fromlatitude, double fromlongitude,
-                                   String fromAddress, double tolatitude,
-                                   double tolongitude, String topoiaddress) {
-        BNRoutePlanNode sNode = new BNRoutePlanNode(fromlongitude, fromlatitude,
-                fromAddress, null, BNRoutePlanNode.CoordinateType.BD09LL);
-        BNRoutePlanNode eNode = new BNRoutePlanNode(tolongitude,
-                tolatitude, topoiaddress, null,
-                BNRoutePlanNode.CoordinateType.BD09LL);
-        if (sNode != null && eNode != null) {
-            List<BNRoutePlanNode> list = new ArrayList<BNRoutePlanNode>();
-            list.add(sNode);
-            list.add(eNode);
-            BNRouteGuideManager.getInstance().setVoiceModeInNavi(BNRouteGuideManager.VoiceMode.Novice);
-            this.mBNRoutePlanNode = sNode;
-            showToast("正在启动导航，请稍后");
-            LogUtils.d("正在启动导航，请稍后:" + fromlatitude + "," + fromlongitude + "->" + tolatitude + "," + tolongitude);
-            BaiduNaviManager.getInstance().launchNavigator(getActivity(), list,
-                    BaiduNaviManager.RoutePlanPreference.ROUTE_PLAN_MOD_RECOMMEND,
-                    true, this);
-        }
-    }
-
-
-    @Override
-    public void onJumpToNavigator() {
-//        Intent intent = new Intent(getActivity(), BaiduNavGuideActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable(BaiduNavGuideActivity.KEY_ROUTE_PLAN_NODE, (BNRoutePlanNode) mBNRoutePlanNode);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-    }
-
-    @Override
-    public void onRoutePlanFailed() {
-        showToast("导航规划失败，请重试");
-    }
-
-
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return false;
     }
-
 
     /**
      * @param v     列表布局（内容）
