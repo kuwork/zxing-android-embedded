@@ -215,6 +215,19 @@ public class CouponGivingActivity extends BaseActivity {
 
     @OnClick(value = R.id.btnSure)
     public void onSureClick(View v) {
+        if (gridViewAdapter != null) {
+            String checked = gridViewAdapter.getChecked();
+            if (TextUtils.isEmpty(checked)) {
+                showToast("请选择一张优惠券!");
+                return;
+            } else if ("+".equals(checked)) {
+                String editingStr = gridViewAdapter.getEditingStr().trim();
+                if (TextUtils.isEmpty(editingStr)) {
+                    showToast("请输入自定义时间!");
+                    return;
+                }
+            }
+        }
         showOkCancelAlertDialog(false, "提示！",
                 "确定要赠送？",
                 "是", "否",
