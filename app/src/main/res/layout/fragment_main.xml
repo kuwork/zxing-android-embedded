@@ -58,6 +58,7 @@
                             </FrameLayout>
 
                             <TextView
+                                android:id="@+id/tvStoreName"
                                 style="@style/item_tv_style"
                                 android:layout_marginTop="@dimen/layout_Margin_5"
                                 android:text="@string/tip_tourist"

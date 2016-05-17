@@ -1,6 +1,8 @@
 package com.ajb.merchants.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -12,14 +14,20 @@ import android.widget.TextView;
 
 import com.ajb.merchants.R;
 import com.ajb.merchants.adapter.MenuItemAdapter;
+import com.ajb.merchants.model.AccountSettingInfo;
 import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.util.CommonUtils;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.view.MyListView;
+import com.ajb.merchants.view.RoundedImageView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
+import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
+import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
@@ -29,6 +37,8 @@ public class MerchantDetailActivity extends BaseActivity {
 
     @ViewInject(R.id.detailListView)
     MyListView detailListView;
+    @ViewInject(R.id.imgAvatar)
+    RoundedImageView imgAvatar;
     private View picPickView;
     private PopupWindow picPickPopwindow;
 
@@ -46,6 +56,23 @@ public class MerchantDetailActivity extends BaseActivity {
             }
         });
         initHeaderDivider(false);
+        AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
+        if (accountSettingInfo != null && accountSettingInfo.getAccountInfo() != null) {
+            if (imgAvatar != null) {
+                BitmapUtils bitmapUtils = new BitmapUtils(getBaseContext());
+                bitmapUtils.display(imgAvatar, accountSettingInfo.getAccountInfo().getHeadimgUrl(), new BitmapLoadCallBack<RoundedImageView>() {
+                    @Override
+                    public void onLoadCompleted(RoundedImageView container, String uri, Bitmap bitmap, BitmapDisplayConfig config, BitmapLoadFrom from) {
+                        container.setImageBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void onLoadFailed(RoundedImageView container, String uri, Drawable drawable) {
+                        container.setImageResource(R.mipmap.default_avatar);
+                    }
+                });
+            }
+        }
     }
 
     /**

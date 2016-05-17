@@ -52,7 +52,7 @@ import android.widget.Toast;
 import com.ajb.merchants.R;
 import com.ajb.merchants.adapter.MenuItemAdapter;
 import com.ajb.merchants.interfaces.OnViewErrorListener;
-import com.ajb.merchants.model.AccountInfo;
+import com.ajb.merchants.model.AccountSettingInfo;
 import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.model.ShareInfo;
@@ -1799,7 +1799,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
     protected void initBroadcast() {
         Intent intent = new Intent();
         broadcastReceiver = new MyBroadcast();
-        IntentFilter filter = new IntentFilter(Constant.BROADCAST.ACCOUNT_INFO);
+        IntentFilter filter = new IntentFilter(Constant.BROADCAST.ACCOUNT_SETING_INFO);
         //注册广播接收器
         registerReceiver(broadcastReceiver, filter);
     }
@@ -1807,8 +1807,8 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
     private class MyBroadcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (Constant.BROADCAST.ACCOUNT_INFO.equals(intent.getAction())) {
-                updateAccountInfo((AccountInfo) intent.getSerializableExtra(Constant.KEY_ACCOUNT_INFO));
+            if (Constant.BROADCAST.ACCOUNT_SETING_INFO.equals(intent.getAction())) {
+                updateAccountSettingInfo((AccountSettingInfo) intent.getSerializableExtra(Constant.KEY_ACCOUNT_SETTING_INFO));
             }
         }
     }
@@ -1818,15 +1818,15 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
      *
      * @param info
      */
-    protected void updateAccountInfo(AccountInfo info) {
+    protected void updateAccountSettingInfo(AccountSettingInfo info) {
 
     }
 
     /**
      * @return 本地缓存的用户信息
      */
-    protected AccountInfo getAccountInfo() {
-        return (AccountInfo) ObjectUtil.getObject(sharedFileUtils.getString(SharedFileUtils.ACCOUNT_INFO));
+    protected AccountSettingInfo getAccountSettingInfo() {
+        return (AccountSettingInfo) ObjectUtil.getObject(sharedFileUtils.getString(SharedFileUtils.ACCOUNT_SETING_INFO));
     }
 
     /**
@@ -1834,10 +1834,10 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
      *
      * @param info
      */
-    protected void saveAndNoticeAccountInfoChange(AccountInfo info) {
-        sharedFileUtils.putString(SharedFileUtils.ACCOUNT_INFO, ObjectUtil.getBASE64String(info));
-        Intent intent = new Intent(Constant.BROADCAST.ACCOUNT_INFO);
-        intent.putExtra(Constant.KEY_ACCOUNT_INFO, info);
+    protected void saveAndNoticeAccountInfoChange(AccountSettingInfo info) {
+        sharedFileUtils.putString(SharedFileUtils.ACCOUNT_SETING_INFO, ObjectUtil.getBASE64String(info));
+        Intent intent = new Intent(Constant.BROADCAST.ACCOUNT_SETING_INFO);
+        intent.putExtra(Constant.KEY_ACCOUNT_SETTING_INFO, info);
         sendBroadcast(intent);
     }
 

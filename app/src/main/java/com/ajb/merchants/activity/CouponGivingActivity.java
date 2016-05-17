@@ -166,11 +166,12 @@ public class CouponGivingActivity extends BaseActivity {
             case R.id.tabMoney:
                 v.setSelected(true);
                 initGridView(moneyList, "", false);
-
+                btnSure.setEnabled(false);
                 break;
             case R.id.tabTime:
                 v.setSelected(true);
                 initGridView(timeList, "", false);
+                btnSure.setEnabled(false);
                 break;
         }
     }
@@ -192,10 +193,13 @@ public class CouponGivingActivity extends BaseActivity {
                     gridViewAdapter.removeAt(gridViewAdapter.getCount() - 1);
                 }
                 gridViewAdapter.setEditable(true);
+                gridViewAdapter.setChecked(null);
+                btnSure.setEnabled(false);
                 break;
             case R.id.tvSave:
                 v.setVisibility(View.GONE);
                 tvEdit.setVisibility(View.VISIBLE);
+                btnSure.setEnabled(false);
                 List<Product> dataList = gridViewAdapter.getDataList();
                 if (tabMoney.isSelected()) {
                     moneyList.clear();

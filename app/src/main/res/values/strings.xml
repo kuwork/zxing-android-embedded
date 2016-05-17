@@ -83,5 +83,6 @@
     <string name="tip_tourist">未登录</string>
     <string name="tip_coupon_tab_plate_num">车牌</string>
     <string name="tip_coupon_tab_card">卡号</string>
+    <string name="tip_store_name_default">店铺名称</string>
 
 </resources>

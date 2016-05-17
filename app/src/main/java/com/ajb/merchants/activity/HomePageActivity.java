@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -72,6 +73,7 @@ import com.ajb.merchants.util.CommonUtils;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.MyGridView;
+import com.ajb.merchants.view.RoundedImageView;
 import com.ajb.merchants.view.ScaleImageView;
 import com.ajb.merchants.view.SideBar;
 import com.ajb.merchants.view.SyncHorizontalScrollView;
@@ -79,10 +81,13 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
+import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
+import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.SqlInfo;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
@@ -90,7 +95,6 @@ import com.lidroid.xutils.db.table.DbModel;
 import com.lidroid.xutils.db.table.TableUtils;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
@@ -124,10 +128,12 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     ListView menuListView;
     @ViewInject(R.id.toolbar)
     Toolbar toolbar;
-    @ViewInject(R.id.imgAvator)
-    ImageView imgAvatar;
+    @ViewInject(R.id.imgAvatar)
+    RoundedImageView imgAvatar;
     @ViewInject(R.id.tvAccountName)
     TextView tvAccountName;
+    @ViewInject(R.id.tvAccountDesc)
+    TextView tvAccountDesc;
     @ViewInject(R.id.home_slide_menu_banner_img)
     ScaleImageView home_slide_menu_banner_img;
     View menuPay;
@@ -164,9 +170,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
         initFirst();
         getLocalSlideBanner();
-        initLeftMenu();
-        updateAccountInfo(getAccountInfo());
-        ShareSDK.initSDK(this);
+        updateAccountSettingInfo(getAccountSettingInfo());
+//        ShareSDK.initSDK(this);
         requestPermission(Constant.PM_LOCATION,
                 new String[]{
                         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -186,13 +191,84 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                     }
                 });
         checkUpdate();//检查更新
+        initAccountSettingInfo();
     }
 
     @Override
-    protected void updateAccountInfo(AccountInfo info) {
-        super.updateAccountInfo(info);
+    protected void updateAccountSettingInfo(AccountSettingInfo info) {
+        super.updateAccountSettingInfo(info);
         if (info == null) {
             return;
+        }
+        initAccountInfo(imgAvatar, tvAccountName, null, info.getAccountInfo());
+        if (tvAccountDesc != null) {
+            tvAccountDesc.setText(TextUtils.isEmpty(info.getAccountInfo().getPhone()) ? "" : info.getAccountInfo().getPhone());
+        }
+        initMenu(info.getModularMenus());
+        if (mContent != null && mContent instanceof MainFragment) {
+            MainFragment fragment = (MainFragment) mContent;
+            initAccountInfo(fragment.imgAvatar, null, fragment.tvStoreName, info.getAccountInfo());
+            BitmapUtils bitmapUtils = new BitmapUtils(getBaseContext());
+            fragment.initHeaderBg(getBaseContext(), info.getAccountInfo().getCoverimgUrl());
+        }
+    }
+
+    private void initAccountInfo(RoundedImageView imgAvatar, TextView tvAccountName, TextView tvStoreName, AccountInfo accountInfo) {
+        BitmapUtils bitmapUtils = new BitmapUtils(getBaseContext());
+        if (accountInfo == null) {
+            if (imgAvatar != null) {
+                imgAvatar.setImageResource(R.mipmap.default_avatar);
+            }
+            if (tvAccountName != null) {
+                tvAccountName.setText(getString(R.string.tip_tourist));
+            }
+            return;
+        }
+        if (imgAvatar != null) {
+            bitmapUtils.display(imgAvatar, accountInfo.getHeadimgUrl(), new BitmapLoadCallBack<RoundedImageView>() {
+                @Override
+                public void onLoadCompleted(RoundedImageView container, String uri, Bitmap bitmap, BitmapDisplayConfig config, BitmapLoadFrom from) {
+                    container.setImageBitmap(bitmap);
+                }
+
+                @Override
+                public void onLoadFailed(RoundedImageView container, String uri, Drawable drawable) {
+                    container.setImageResource(R.mipmap.default_avatar);
+                }
+            });
+        }
+        if (tvAccountName != null) {
+            tvAccountName.setText(TextUtils.isEmpty(accountInfo.getAccountName()) ? getString(R.string.tip_tourist) : accountInfo.getAccountName());
+        }
+        if (tvStoreName != null) {
+            tvStoreName.setText(TextUtils.isEmpty(accountInfo.getStoreName()) ? "" : accountInfo.getStoreName());
+        }
+    }
+
+    /**
+     * 初始化侧滑菜单
+     */
+    private void initMenu(List<ModularMenu> modularMenuList) {
+        ModularMenu modularMenu;
+        if (modularMenuList == null) {
+            return;
+        }
+        int size = modularMenuList.size();
+        for (int i = 0; i < size; i++) {
+            modularMenu = modularMenuList.get(i);
+            if (ModularMenu.CODE_COUPON.equals(modularMenu.getModularCode())) {
+                if (mContent != null && mContent instanceof MainFragment) {
+                    ((MainFragment) mContent).
+                            initCouponMenuList(getBaseContext(), modularMenu, this);
+                }
+            } else if (ModularMenu.CODE_MAIN_MENU.equals(modularMenu.getModularCode())) {
+                if (mContent != null && mContent instanceof MainFragment) {
+                    ((MainFragment) mContent).
+                            initMainMenuList(getBaseContext(), modularMenu, this);
+                }
+            } else if (ModularMenu.CODE_LEFTMENU.equals(modularMenu.getModularCode())) {
+                initLeftMenuList(modularMenu, this);
+            }
         }
     }
 
@@ -243,38 +319,29 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onResume() {
         super.onResume();
-        initAccountInfo();
-        if (mLocClient != null) {
-            mLocClient.start();
-        }
+
+//        if (mLocClient != null) {
+//            mLocClient.start();
+//        }
     }
 
     /**
      * 初始化侧滑菜单
      */
-    private void initLeftMenu() {
-        ModularMenu leftMenu = null;
-        String modelMenuJson = sharedFileUtils.getString(SharedFileUtils.ACCOUNT_SETING_INFO);
-        List<ModularMenu> modularMenuList = null;
-        if (modelMenuJson != null) {
-            try {
-                AccountSettingInfo asi = gson.fromJson(modelMenuJson, new TypeToken<AccountSettingInfo>() {
-                }.getType());
+    private void initLeftMenu(AccountSettingInfo asi) {
 
-                if (asi != null && asi.getModularMenus() != null) {
-                    modularMenuList = asi.getModularMenus();
-                    ModularMenu modularMenu;
-                    int size = modularMenuList.size();
-                    for (int i = 0; i < size; i++) {
-                        modularMenu = modularMenuList.get(i);
-                        if (ModularMenu.CODE_LEFTMENU.equals(modularMenu.getModularCode())) {
-                            leftMenu = modularMenu;
-                            break;
-                        }
+        ModularMenu modularMenu, leftMenu = null;
+        if (asi != null && asi.getModularMenus() != null) {
+            List<ModularMenu> modularMenuList = asi.getModularMenus();
+            if (modularMenuList != null) {
+                int size = modularMenuList.size();
+                for (int i = 0; i < size; i++) {
+                    modularMenu = modularMenuList.get(i);
+                    if (ModularMenu.CODE_LEFTMENU.equals(modularMenu.getModularCode())) {
+                        leftMenu = modularMenu;
+                        break;
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         initLeftMenuList(leftMenu, this);
@@ -465,10 +532,10 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case Constant.REQ_CODE_LOGIN:
-                    initAccountInfo();
-                    if (mContent != null) {
-                        mContent.onActivityResult(requestCode, resultCode, data);
-                    }
+                    initAccountSettingInfo();
+//                    if (mContent != null) {
+//                        mContent.onActivityResult(requestCode, resultCode, data);
+//                    }
                     break;
                 case Constant.REQ_CODE_LOGOUT:
                     Intent intent = new Intent(getBaseContext(), LoginActivity.class);
@@ -485,53 +552,62 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    private void initAccountInfo() {
+    private void initAccountSettingInfo() {
         if (isLogin()) {
-            //用户名不要全局变量
-            String accountName = getSharedFileUtils().getString(SharedFileUtils.LOGIN_NAME);
-            if (TextUtils.isEmpty(accountName)) {
-                tvAccountName.setText(R.string.error_hava_not_login);
-                tvAccountName.setTag(null);
-            } else {
-                tvAccountName.setText(CommonUtils.omittText(accountName, 3, 3));
-                tvAccountName.setTag(accountName);
-                getAccoutInfo(accountName);
-            }
-        } else {
-            tvAccountName.setText(R.string.error_hava_not_login);
-            tvAccountName.setTag(null);
-
+            getAccoutInfo();
         }
     }
 
     // 获取用户详细信息
-    public void getAccoutInfo(String userName) {
-        RequestParams params = new RequestParams();
-        params.addQueryStringParameter(Constant.InterfaceParam.USERNAME, userName);
-        send(Constant.APPGETRENEWINFO, params, new RequestCallBack<String>() {
+    public void getAccoutInfo() {
+        send(Constant.PK_MAIN_SETTING, null, new RequestCallBack<String>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                if (mContent != null) {
+                    if (mContent instanceof MainFragment) {
+                        ((MainFragment) mContent).setRefreshing(true);
+                    }
+                }
+            }
+
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                LogUtils.d(responseInfo.result);
+                if (mContent != null) {
+                    if (mContent instanceof MainFragment) {
+                        ((MainFragment) mContent).setRefreshing(false);
+                    }
+                }
                 if (responseInfo.statusCode == 200) {
+                    BaseResult<AccountSettingInfo> result = null;
                     try {
-                        BaseResult<AccountInfo> r = gson.fromJson(responseInfo.result, new TypeToken<BaseResult<AccountInfo>>() {
-                        }.getType());
-                        if ("0000".equals(r.code) && r.data != null) {
-                            saveAndNoticeAccountInfoChange(r.data);
-                        } else {
-                            showToast(getString(R.string.error_network_short));
-                        }
-                    } catch (JsonSyntaxException e) {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult<AccountSettingInfo>>() {
+                                }.getType());
+                    } catch (Exception e) {
                         e.printStackTrace();
+                    }
+                    if (result == null) {
                         showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    if ("0000".equals(result.code)) {
+                        saveAndNoticeAccountInfoChange(result.data);
+                    } else {
+                        showToast(result.msg);
                     }
                 }
             }
 
             @Override
             public void onFailure(HttpException error, String msg) {
-                LogUtils.d(msg);
-                showToast(getString(R.string.error_network_short));
+                if (mContent != null) {
+                    if (mContent instanceof MainFragment) {
+                        ((MainFragment) mContent).setRefreshing(false);
+                    }
+                }
+                fail(error, msg);
             }
         });
     }

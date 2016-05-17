@@ -2,18 +2,17 @@ package com.ajb.merchants.fragment;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,21 +25,19 @@ import com.ajb.merchants.activity.LoginActivity;
 import com.ajb.merchants.activity.MerchantDetailActivity;
 import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.adapter.MenuItemAdapter;
-import com.ajb.merchants.model.AccountSettingInfo;
 import com.ajb.merchants.model.BalanceLimitInfo;
-import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.task.BlurBitmapTask;
 import com.ajb.merchants.util.Constant;
-import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.MyGridView;
 import com.ajb.merchants.view.MySwipeRefreshLayout;
-import com.google.gson.reflect.TypeToken;
+import com.ajb.merchants.view.RoundedImageView;
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
+import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
+import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -59,25 +56,21 @@ public class MainFragment extends BaseFragment {
     @ViewInject(R.id.menuGridView)
     MyGridView menuGridView;
     @ViewInject(R.id.imgHeaderBg)
-    ImageView imgHeaderBg;
-    private boolean isFirst = true;
+    public ImageView imgHeaderBg;
+    @ViewInject(R.id.imgAvatar)
+    public RoundedImageView imgAvatar;
+    @ViewInject(R.id.tvStoreName)
+    public TextView tvStoreName;
     private View picPickView;
     private PopupWindow picPickPopwindow;
 
-    BlurBitmapTask blurBitmapTask = new BlurBitmapTask(getActivity()) {
-        @Override
-        protected void onPostExecute(List<Bitmap> list) {
-            super.onPostExecute(list);
-            if (list.size() > 0) {
-                imgHeaderBg.setImageBitmap(list.get(0));
-            }
-        }
-    };
+
     //优惠方式
     private MenuItemAdapter<MenuInfo> couponMenuListAdapter;
     //功能菜单
     private MenuItemAdapter<MenuInfo> mainMenuListAdapter;
     private AdapterView.OnItemClickListener onItemClickListener;
+    private BlurBitmapTask blurBitmapTask;
 
     @Override
     public void onAttach(Activity activity) {
@@ -117,7 +110,11 @@ public class MainFragment extends BaseFragment {
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                requestMainSetting();
+                if (getActivity() instanceof HomePageActivity) {
+                    ((HomePageActivity) getActivity()).getAccoutInfo();
+                } else {
+                    swipeLayout.setRefreshing(false);
+                }
             }
         });
         swipeLayout.setColorSchemeColors(
@@ -134,33 +131,42 @@ public class MainFragment extends BaseFragment {
         );
 
         initBalance(balanceLimitInfoList);
-        ViewTreeObserver viewTreeObserver = imgHeaderBg.getViewTreeObserver();
-        viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+        return v;
+    }
+
+    public void initHeaderBg(Context context, String url) {
+        if (imgHeaderBg == null) {
+            return;
+        }
+        BitmapUtils bitmapUtils = new BitmapUtils(context);
+        String s = (String) imgHeaderBg.getTag();
+        if (s != null && s.equals(url)) {
+            return;
+        }
+        bitmapUtils.display(imgHeaderBg, url, new BitmapLoadCallBack<ImageView>() {
             @Override
-            public boolean onPreDraw() {
-                if (isFirst) {
-                    blurBitmapTask.execute(BitmapFactory.decodeResource(getResources(), R.mipmap.header_bg_01));
-                    isFirst = false;
+            public void onLoadCompleted(ImageView container, String uri, Bitmap bitmap, BitmapDisplayConfig config, BitmapLoadFrom from) {
+                container.setTag(uri);
+                if (blurBitmapTask != null && !blurBitmapTask.isCancelled()) {
+                    blurBitmapTask.cancel(true);
                 }
-                return true;
+                blurBitmapTask = new BlurBitmapTask(getActivity()) {
+                    @Override
+                    protected void onPostExecute(List<Bitmap> list) {
+                        super.onPostExecute(list);
+                        if (list.size() > 0) {
+                            imgHeaderBg.setImageBitmap(list.get(0));
+                        }
+                    }
+                };
+                blurBitmapTask.execute(bitmap);
+            }
+
+            @Override
+            public void onLoadFailed(ImageView container, String uri, Drawable drawable) {
+                container.setImageResource(R.mipmap.header_bg);
             }
         });
-        String modelMenuJson = sharedFileUtils.getString(SharedFileUtils.ACCOUNT_SETING_INFO);
-        if (!TextUtils.isEmpty(modelMenuJson)) {
-            try {
-                AccountSettingInfo asi = gson.fromJson(modelMenuJson, new TypeToken<AccountSettingInfo>() {
-                }.getType());
-                if (asi != null) {
-                    initBalance(asi.getBalanceList());
-                    initMenu(asi.getModularMenus());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        requestMainSetting();
-        return v;
     }
 
     private void initBalance(List<BalanceLimitInfo> balanceLimitInfoList) {
@@ -168,68 +174,12 @@ public class MainFragment extends BaseFragment {
         balanceGridView.setAdapter(balanceLimitInfoAdapter);
     }
 
-    private void requestMainSetting() {
-        send(Constant.PK_MAIN_SETTING, null, new RequestCallBack<String>() {
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                swipeLayout.setRefreshing(false);
-                if (responseInfo.statusCode == 200) {
-                    BaseResult<AccountSettingInfo> result = null;
-                    try {
-                        result = gson.fromJson(
-                                responseInfo.result,
-                                new TypeToken<BaseResult<AccountSettingInfo>>() {
-                                }.getType());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    if (result == null) {
-                        showToast(getString(R.string.error_network_short));
-                        return;
-                    }
-                    if ("0000".equals(result.code)) {
-                        sharedFileUtils.putString(SharedFileUtils.ACCOUNT_SETING_INFO, gson.toJson(result.data));
-                        initBalance(result.data.getBalanceList());
-                        initMenu(result.data.getModularMenus());
-                    } else {
-                        showToast(result.msg);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(HttpException error, String msg) {
-                swipeLayout.setRefreshing(false);
-                fail(error, msg);
-            }
-
-        });
-    }
-
-    /**
-     * 初始化侧滑菜单
-     */
-    private void initMenu(List<ModularMenu> modularMenuList) {
-        ModularMenu modularMenu;
-        if (modularMenuList == null) {
+    public void initCouponMenuList(Context context, ModularMenu mm, AdapterView.OnItemClickListener listener) {
+        if (couponGridView == null) {
             return;
         }
-        int size = modularMenuList.size();
-        for (int i = 0; i < size; i++) {
-            modularMenu = modularMenuList.get(i);
-            if (ModularMenu.CODE_COUPON.equals(modularMenu.getModularCode())) {
-                initCouponMenuList(modularMenu, onItemClickListener);
-            } else if (ModularMenu.CODE_MAIN_MENU.equals(modularMenu.getModularCode())) {
-                initMainMenuList(modularMenu, onItemClickListener);
-            } else if (ModularMenu.CODE_LEFTMENU.equals(modularMenu.getModularCode())) {
-                ((HomePageActivity) getActivity()).initLeftMenuList(modularMenu, onItemClickListener);
-            }
-        }
-    }
-
-    protected void initCouponMenuList(ModularMenu mm, AdapterView.OnItemClickListener listener) {
         if (couponMenuListAdapter == null) {
-            couponMenuListAdapter = new MenuItemAdapter<MenuInfo>(getActivity(), mm.getMenuList(), mm.getModularCode());
+            couponMenuListAdapter = new MenuItemAdapter<MenuInfo>(context, mm.getMenuList(), mm.getModularCode());
             couponGridView.setAdapter(couponMenuListAdapter);
         }
         if (mm != null) {
@@ -238,9 +188,12 @@ public class MainFragment extends BaseFragment {
         couponGridView.setOnItemClickListener(listener);
     }
 
-    protected void initMainMenuList(ModularMenu mm, AdapterView.OnItemClickListener listener) {
+    public void initMainMenuList(Context context, ModularMenu mm, AdapterView.OnItemClickListener listener) {
+        if (menuGridView == null) {
+            return;
+        }
         if (mainMenuListAdapter == null) {
-            mainMenuListAdapter = new MenuItemAdapter<MenuInfo>(getActivity(), mm.getMenuList(), mm.getModularCode());
+            mainMenuListAdapter = new MenuItemAdapter<MenuInfo>(context, mm.getMenuList(), mm.getModularCode());
             menuGridView.setAdapter(mainMenuListAdapter);
         }
         if (mm != null) {
@@ -315,11 +268,9 @@ public class MainFragment extends BaseFragment {
         LogUtils.d("onPause");
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == Constant.REQ_CODE_LOGIN) {
-            swipeLayout.setRefreshing(true);
-            requestMainSetting();
+    public void setRefreshing(boolean refreshing) {
+        if (swipeLayout != null) {
+            swipeLayout.setRefreshing(refreshing);
         }
     }
 }

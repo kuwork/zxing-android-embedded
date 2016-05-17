@@ -12,6 +12,16 @@ public class AccountSettingInfo implements Serializable {
     @SerializedName("menu")
     List<ModularMenu> modularMenus;
     List<BalanceLimitInfo> balanceList;
+    @SerializedName("homeAccount")
+    AccountInfo accountInfo;
+
+    public AccountInfo getAccountInfo() {
+        return accountInfo;
+    }
+
+    public void setAccountInfo(AccountInfo accountInfo) {
+        this.accountInfo = accountInfo;
+    }
 
     public List<BalanceLimitInfo> getBalanceList() {
         return balanceList;

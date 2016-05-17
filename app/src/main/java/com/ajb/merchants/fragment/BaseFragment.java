@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.ajb.merchants.R;
 import com.ajb.merchants.activity.LoginActivity;
 import com.ajb.merchants.interfaces.OnViewErrorListener;
+import com.ajb.merchants.model.AccountSettingInfo;
 import com.ajb.merchants.others.MyApplication;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.SharedFileUtils;
@@ -29,6 +30,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
+import com.util.ObjectUtil;
 import com.util.PathManager;
 
 import org.apache.http.NameValuePair;
@@ -266,5 +268,12 @@ public class BaseFragment extends Fragment implements OnViewErrorListener {
         } else {
             showToast(msg);
         }
+    }
+
+    /**
+     * @return 本地缓存的用户信息
+     */
+    protected AccountSettingInfo getAccountSettingInfo() {
+        return (AccountSettingInfo) ObjectUtil.getObject(sharedFileUtils.getString(SharedFileUtils.ACCOUNT_SETING_INFO));
     }
 }

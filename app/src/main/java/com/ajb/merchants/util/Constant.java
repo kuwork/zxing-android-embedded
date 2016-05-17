@@ -56,7 +56,7 @@ public class Constant {
     public static final String KEY_CARINPARKING = "carInParking";
     public static final String KEY_PAYSUCCESS = "paySuccess";
     public static final String KEY_BASEMODEL = "baseModel";
-    public static final String KEY_ACCOUNT_INFO = "AccountInfo";
+    public static final String KEY_ACCOUNT_SETTING_INFO = "AccountInfo";
     //绑定车辆所要判断的key，1为我的车辆，2为社区车辆
     public static final String KEY_MODE = "mode";
     public static final String KEY_CARDID = "cardId";
@@ -150,6 +150,6 @@ public class Constant {
      * 广播标志
      */
     public static class BROADCAST {
-        public static final String ACCOUNT_INFO = "com.ajb.merchants.BROADCAST.ACCOUNT_INFO";
+        public static final String ACCOUNT_SETING_INFO = "com.ajb.merchants.BROADCAST.ACCOUNT_SETING_INFO";
     }
 }

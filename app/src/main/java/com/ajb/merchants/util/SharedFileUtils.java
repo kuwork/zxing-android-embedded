@@ -39,7 +39,7 @@ public class SharedFileUtils {
     public static final String HOME_NAME = "HOME_NAME";
     public static final String COUPON_SETTING = "com.ajb.anjubao.intelligent.COUPON_SETTING";
 
-    public static final String ACCOUNT_INFO = "com.ajb.anjubao.intelligent.ACCOUNT_INFO";
+    public static final String ACCOUNT_INFO = "com.ajb.anjubao.intelligent.ACCOUNT_SETING_INFO";
     //优惠历史
     public static final String COUPON_MONEY_LIST = "com.ajb.merchants.COUPON_MONEY_LIST";
     public static final String COUPON_TIME_LIST = "com.ajb.merchants.COUPON_TIME_LIST";
