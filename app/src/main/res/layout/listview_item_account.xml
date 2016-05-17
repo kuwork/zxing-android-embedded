@@ -72,25 +72,9 @@
         android:padding="@dimen/layout_Margin_10"
         android:visibility="gone">
 
-        <LinearLayout
-            style="@style/layout_widthfilled_style"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/item_tv_style"
-                android:text="车场位置：" />
-
-            <TextView
-                android:id="@+id/tv_address"
-                style="@style/item_tv_style"
-                android:text="详细信息详细信息"
-                android:textColor="@color/item_tv_color_02" />
-        </LinearLayout>
-
         <TextView
             style="@style/item_tv_style"
             android:layout_gravity="left"
-            android:layout_marginTop="@dimen/layout_Margin_15"
             android:text="账户权限 :" />
 
         <com.ajb.merchants.view.MyGridView
