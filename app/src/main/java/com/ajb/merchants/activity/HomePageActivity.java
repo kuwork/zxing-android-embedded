@@ -56,6 +56,7 @@ import com.ajb.merchants.fragment.BaseFragment;
 import com.ajb.merchants.fragment.HomeFragment;
 import com.ajb.merchants.fragment.MainFragment;
 import com.ajb.merchants.model.AccountInfo;
+import com.ajb.merchants.model.AccountSettingInfo;
 import com.ajb.merchants.model.AdInfo;
 import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.CarInParkingBuilder;
@@ -78,7 +79,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.DbUtils;
@@ -148,6 +148,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private Dialog carNumInputDialog, cardInputDialog;
     private View carNoPopupView;
     private PopupWindow carNoPopupWindow;
+    private MenuItemAdapter<MenuInfo> leftMenuListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -252,31 +253,44 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
      * 初始化侧滑菜单
      */
     private void initLeftMenu() {
-        ModularMenu modularMenu;
-        String menuJson = CommonUtils.getFromAssets(getBaseContext(), "menu.json");
-        if (menuJson.equals("")) {
-            return;
-        }
-        try {
-            Gson gson = new Gson();
-            List<ModularMenu> modularMenuList = gson.fromJson(menuJson, new TypeToken<List<ModularMenu>>() {
-            }.getType());
-            if (modularMenuList == null) {
-                return;
-            }
-            int size = modularMenuList.size();
-            for (int i = 0; i < size; i++) {
-                modularMenu = modularMenuList.get(i);
-                if (ModularMenu.CODE_LEFTMENU.equals(modularMenu.getModularCode())) {
-                    MenuItemAdapter<MenuInfo> adapter = new MenuItemAdapter<>(getBaseContext(), modularMenu.getMenuList(), modularMenu.getModularCode());
-                    menuListView.setAdapter(adapter);
+        ModularMenu leftMenu = null;
+        String modelMenuJson = sharedFileUtils.getString(SharedFileUtils.ACCOUNT_SETING_INFO);
+        List<ModularMenu> modularMenuList = null;
+        if (modelMenuJson != null) {
+            try {
+                AccountSettingInfo asi = gson.fromJson(modelMenuJson, new TypeToken<AccountSettingInfo>() {
+                }.getType());
+
+                if (asi != null && asi.getModularMenus() != null) {
+                    modularMenuList = asi.getModularMenus();
+                    ModularMenu modularMenu;
+                    int size = modularMenuList.size();
+                    for (int i = 0; i < size; i++) {
+                        modularMenu = modularMenuList.get(i);
+                        if (ModularMenu.CODE_LEFTMENU.equals(modularMenu.getModularCode())) {
+                            leftMenu = modularMenu;
+                            break;
+                        }
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            menuListView.setOnItemClickListener(this);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        initLeftMenuList(leftMenu, this);
     }
+
+    public void initLeftMenuList(ModularMenu mm, AdapterView.OnItemClickListener listener) {
+        if (leftMenuListAdapter == null) {
+            leftMenuListAdapter = new MenuItemAdapter<MenuInfo>(getBaseContext(), null, ModularMenu.CODE_LEFTMENU);
+            menuListView.setAdapter(leftMenuListAdapter);
+        }
+        if (mm != null) {
+            leftMenuListAdapter.update(mm.getMenuList(), mm.getModularCode());
+        }
+        menuListView.setOnItemClickListener(listener);
+    }
+
 
     private void initHome() {
         if (home == null) {
@@ -486,6 +500,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         } else {
             tvAccountName.setText(R.string.error_hava_not_login);
             tvAccountName.setTag(null);
+
         }
     }
 

@@ -8,8 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.Gravity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ajb.merchants.R;
+import com.ajb.merchants.activity.HomePageActivity;
 import com.ajb.merchants.activity.LoginActivity;
 import com.ajb.merchants.activity.MerchantDetailActivity;
 import com.ajb.merchants.adapter.BaseListAdapter;
@@ -31,7 +32,6 @@ import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.task.BlurBitmapTask;
-import com.ajb.merchants.util.CommonUtils;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.MyGridView;
@@ -145,20 +145,15 @@ public class MainFragment extends BaseFragment {
                 return true;
             }
         });
-        String menuJson = CommonUtils.getFromAssets(getActivity(), "main_menu.json");
         String modelMenuJson = sharedFileUtils.getString(SharedFileUtils.ACCOUNT_SETING_INFO);
-        if (!TextUtils.isEmpty(menuJson)) {
+        if (!TextUtils.isEmpty(modelMenuJson)) {
             try {
                 AccountSettingInfo asi = gson.fromJson(modelMenuJson, new TypeToken<AccountSettingInfo>() {
                 }.getType());
                 if (asi != null) {
                     initBalance(asi.getBalanceList());
-//                initLeftMenu(asi.getModularMenus());
+                    initMenu(asi.getModularMenus());
                 }
-                List<ModularMenu> modularMenu = gson.fromJson(menuJson, new TypeToken<List<ModularMenu>>() {
-                }.getType());
-
-                initLeftMenu(modularMenu);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -194,8 +189,8 @@ public class MainFragment extends BaseFragment {
                     }
                     if ("0000".equals(result.code)) {
                         sharedFileUtils.putString(SharedFileUtils.ACCOUNT_SETING_INFO, gson.toJson(result.data));
-//                        initLeftMenu(result.data.getModularMenus());
                         initBalance(result.data.getBalanceList());
+                        initMenu(result.data.getModularMenus());
                     } else {
                         showToast(result.msg);
                     }
@@ -214,7 +209,7 @@ public class MainFragment extends BaseFragment {
     /**
      * 初始化侧滑菜单
      */
-    private void initLeftMenu(List<ModularMenu> modularMenuList) {
+    private void initMenu(List<ModularMenu> modularMenuList) {
         ModularMenu modularMenu;
         if (modularMenuList == null) {
             return;
@@ -226,6 +221,8 @@ public class MainFragment extends BaseFragment {
                 initCouponMenuList(modularMenu, onItemClickListener);
             } else if (ModularMenu.CODE_MAIN_MENU.equals(modularMenu.getModularCode())) {
                 initMainMenuList(modularMenu, onItemClickListener);
+            } else if (ModularMenu.CODE_LEFTMENU.equals(modularMenu.getModularCode())) {
+                ((HomePageActivity) getActivity()).initLeftMenuList(modularMenu, onItemClickListener);
             }
         }
     }
@@ -234,7 +231,8 @@ public class MainFragment extends BaseFragment {
         if (couponMenuListAdapter == null) {
             couponMenuListAdapter = new MenuItemAdapter<MenuInfo>(getActivity(), mm.getMenuList(), mm.getModularCode());
             couponGridView.setAdapter(couponMenuListAdapter);
-        } else {
+        }
+        if (mm != null) {
             couponMenuListAdapter.update(mm.getMenuList(), mm.getModularCode());
         }
         couponGridView.setOnItemClickListener(listener);
@@ -244,7 +242,8 @@ public class MainFragment extends BaseFragment {
         if (mainMenuListAdapter == null) {
             mainMenuListAdapter = new MenuItemAdapter<MenuInfo>(getActivity(), mm.getMenuList(), mm.getModularCode());
             menuGridView.setAdapter(mainMenuListAdapter);
-        } else {
+        }
+        if (mm != null) {
             mainMenuListAdapter.update(mm.getMenuList(), mm.getModularCode());
         }
         menuGridView.setOnItemClickListener(listener);

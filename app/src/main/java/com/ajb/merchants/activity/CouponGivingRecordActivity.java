@@ -19,7 +19,6 @@ import com.ajb.merchants.adapter.PopupWindowAdapter;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.view.MyGridView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -34,8 +33,6 @@ import java.util.Map;
  */
 public class CouponGivingRecordActivity extends BaseActivity {
 
-    @ViewInject(R.id.xRecyclerView)
-    XRecyclerView xRecyclerView;
     @ViewInject(R.id.listview)
     PullToRefreshListView listView;
     @ViewInject(R.id.layoutSearch)

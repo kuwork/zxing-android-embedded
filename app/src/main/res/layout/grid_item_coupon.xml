@@ -26,6 +26,7 @@
         android:gravity="center"
         android:inputType="numberDecimal"
         android:text=""
+        android:imeOptions="actionDone"
         android:textColor="@color/grid_item_copon_textview_selector"
         android:textSize="@dimen/text_size_20" />
 
