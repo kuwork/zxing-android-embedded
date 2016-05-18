@@ -1,6 +1,8 @@
 package com.ajb.merchants.activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -8,7 +10,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ajb.merchants.R;
+import com.ajb.merchants.model.AccountInfo;
+import com.ajb.merchants.model.AccountSettingInfo;
+import com.ajb.merchants.model.BaseResult;
+import com.ajb.merchants.util.Constant;
+import com.ajb.merchants.util.MyProgressDialog;
+import com.ajb.merchants.util.EdittextFilterTextWatcher;
+import com.ajb.merchants.util.SharedFileUtils;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
@@ -29,12 +43,18 @@ public class ResetPasswordActivity extends BaseActivity {
     @ViewInject(R.id.btnResetPassword)
     private Button btnResetPassword;
 
+    private AccountSettingInfo accountSettingInfo;
+    private AccountInfo accountInfo;
+    private TimeCount timeCount;
+    private Dialog mDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
         ViewUtils.inject(this);
         initData();
+        onTextChange();
     }
 
     private void initData() {
@@ -45,13 +65,18 @@ public class ResetPasswordActivity extends BaseActivity {
                 finish();
             }
         });
+        accountSettingInfo = getAccountSettingInfo();
+        accountInfo = accountSettingInfo.getAccountInfo();
+        if (accountSettingInfo == null || accountInfo == null) {
+            return;
+        }
         if (tvName != null) {
-            if (!TextUtils.isEmpty(getLoginName())) {
-                tvName.setText(getLoginName());
+            if (!TextUtils.isEmpty(accountInfo.getAccountName())) {
+                tvName.setText(accountSettingInfo.getAccountInfo().getAccountName());
             }
         }
         if (tvPhone != null) {
-            if (!TextUtils.isEmpty(tvPhone.getText().toString().trim())) {
+            if (!TextUtils.isEmpty(accountInfo.getPhone())) {
                 btnVerification.setEnabled(true);
             } else {
                 btnVerification.setEnabled(false);
@@ -59,15 +84,244 @@ public class ResetPasswordActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 添加edittext文本框监听
+     */
+    private void onTextChange() {
+        if (edPassword == null) {
+            return;
+        }
+        if (edConfirmPassword == null) {
+            return;
+        }
+        if (edVerification == null) {
+            return;
+        }
+        edPassword.addTextChangedListener(new EdittextFilterTextWatcher(edConfirmPassword, edVerification, btnResetPassword));
+        edConfirmPassword.addTextChangedListener(new EdittextFilterTextWatcher(edPassword, edVerification, btnResetPassword));
+        edVerification.addTextChangedListener(new EdittextFilterTextWatcher(edPassword, edConfirmPassword, btnResetPassword));
+    }
+
     @OnClick(value = {R.id.btnVerification, R.id.btnResetPassword})
     public void onBtnClick(View v) {
         switch (v.getId()) {
             case R.id.btnVerification:
-                //getVerificationCode();
+                getVerificationCode();
                 break;
 
             case R.id.btnResetPassword:
+                String account = accountInfo.getAccountName();
+                String phone = accountInfo.getPhone();
+                String password = edPassword.getText().toString().trim();
+                String confirmPassword = edConfirmPassword.getText().toString().trim();
+                String msgCode = edVerification.getText().toString().trim();
+                if (TextUtils.isEmpty(password)) {
+                    showToast(getString(R.string.tip_reset_pwd));
+                    return;
+                }
+                if (TextUtils.isEmpty(confirmPassword)) {
+                    showToast(getString(R.string.tip_reset_pwd_confirm));
+                    return;
+                }
+                if (!confirmPassword.equals(password)) {
+                    showToast(getString(R.string.tip_password_not_match));
+                    return;
+                }
+                if (TextUtils.isEmpty(msgCode)) {
+                    showToast(getString(R.string.tip_reset_phone_verification));
+                    return;
+                }
+                if (TextUtils.isEmpty(account)) {
+                    showToast(getString(R.string.tip_empty_account_name));
+                    return;
+                }
+                if (TextUtils.isEmpty(phone)) {
+                    showToast(getString(R.string.tip_empty_phone));
+                    return;
+                }
+                requestResetPassword(account, password, msgCode, phone);
                 break;
         }
     }
+
+    /**
+     * 获取手机验证码
+     */
+    private void getVerificationCode() {
+        String account = accountInfo.getAccountName();
+        String phone = accountInfo.getPhone();
+        if (TextUtils.isEmpty(account)) {
+            return;
+        }
+        if (TextUtils.isEmpty(phone)) {
+            return;
+        }
+        RequestParams params = new RequestParams();
+        params.addBodyParameter(Constant.InterfaceParam.ACCOUNT, account);
+        params.addBodyParameter(Constant.InterfaceParam.PHONE, phone);
+        send(Constant.PK_MSG_PUSH, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                mDialog = MyProgressDialog.createLoadingDialog(
+                        ResetPasswordActivity.this, "请稍后...");
+                mDialog.show();
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                if (responseInfo.statusCode == 200) {
+                    BaseResult<String> result = null;
+                    try {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult<String>>() {
+                                }.getType());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result == null) {
+                        showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    if ("0000".equals(result.code)) {
+                        timeCount = new TimeCount(60 * 1000, 200); //构造CountDownTimer对象(60s)
+                        timeCount.begin();
+                    } else {
+                        showToast(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                fail(error, msg);
+            }
+        });
+    }
+
+    /**
+     * 重置密码
+     */
+    private void requestResetPassword(String account, String password, String msgCode, String phone) {
+        RequestParams params = new RequestParams();
+        params.addBodyParameter(Constant.InterfaceParam.ACCOUNT, account);
+        params.addBodyParameter(Constant.InterfaceParam.PASSWORD, password);
+        params.addBodyParameter(Constant.InterfaceParam.CODE, msgCode);
+        params.addBodyParameter(Constant.InterfaceParam.PHONE, phone);
+        send(Constant.PK_RESET_PASSWORD, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                mDialog = MyProgressDialog.createLoadingDialog(
+                        ResetPasswordActivity.this, "请稍后...");
+                mDialog.show();
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                if (responseInfo.statusCode == 200) {
+                    BaseResult<String> result = null;
+                    try {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult<String>>() {
+                                }.getType());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result == null) {
+                        showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    if ("0000".equals(result.code)) {
+                        setResult(RESULT_OK);
+                        sharedFileUtils.remove(SharedFileUtils.TOKEN);
+                        sharedFileUtils.remove(SharedFileUtils.IS_LOGIN);
+                        showToast(result.getMsg());
+                        finish();
+                    } else {
+                        setResult(RESULT_CANCELED);
+                        showToast(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                fail(error, msg);
+                setResult(RESULT_CANCELED);
+            }
+        });
+    }
+
+    /**
+     * 倒计时
+     */
+    private class TimeCount extends CountDownTimer {
+
+        /**
+         * 参数依次为总时长,和计时的时间间隔
+         *
+         * @param millisInFuture    The number of millis in the future from the call
+         *                          to {@link #start()} until the countdown is done and {@link #onFinish()}
+         *                          is called.
+         * @param countDownInterval The interval along the way to receive
+         *                          {@link #onTick(long)} callbacks.
+         */
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        public void begin() {
+            btnVerification.setEnabled(false);
+            btnVerification.setText("60s");
+            start();
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {  //计时过程显示
+            btnVerification.setText((int) Math.ceil(millisUntilFinished / 1000f) + "s");
+        }
+
+        @Override
+        public void onFinish() { //计时完毕时触发
+            btnVerification.setText("0s");
+            if (!TextUtils.isEmpty(accountInfo.getPhone())) {
+                btnVerification.setEnabled(true);
+            } else {
+                btnVerification.setEnabled(false);
+            }
+            cancel();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timeCount != null) {
+            timeCount.cancel();
+        }
+    }
+
 }

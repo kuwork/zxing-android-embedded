@@ -18,6 +18,7 @@ public class Constant {
     public static final int REQ_CODE_LOGIN = REQ_CODE_BASE + 5;
     public static final int REQ_CODE_SHARE = REQ_CODE_BASE + 6;
     public static final int REQ_CODE_LOGOUT = REQ_CODE_BASE + 7;    //登出
+    public static final int REQ_CODE_PWD_RESET = REQ_CODE_BASE + 8;    //重置密码
     //权限访问码
     public static final int PM_CAMERA = 1;//摄像头权限
     public static final int PM_LOCATION = 2;//GPS权限
@@ -129,8 +130,9 @@ public class Constant {
 
         public static final String ACCOUNT = "account";
         public static final String PASSWORD = "password";
-
+        public static final String PHONE = "phone";
         public static final String TOKEN = "token";
+        public static final String CODE = "code";
 
     }
 
