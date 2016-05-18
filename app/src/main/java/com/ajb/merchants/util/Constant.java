@@ -47,6 +47,7 @@ public class Constant {
     public static final String PK_MAIN_SETTING = "merchantFunction/homeMaxPort";//主页设置信息
     public static final String PK_RESET_PASSWORD = "merchantLog/resetPassword";//重置密码
     public static final String PK_MSG_PUSH = "merchantLog/infoPush";//获取短信随机码
+    public static final String PK_QUERYACCOUNT = "merchantLog/queryAccount";//账号管理-查询某个商铺所有账号接口
 
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";

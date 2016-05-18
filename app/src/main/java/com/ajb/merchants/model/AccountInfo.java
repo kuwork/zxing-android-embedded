@@ -1,19 +1,22 @@
 package com.ajb.merchants.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by jerry on 16/1/18.
  */
 public class AccountInfo implements Serializable {
 
+    private String id;
+    private String account;
     private String accountName;
-
-
     private String storeName;
     private String headimgUrl;
     private String phone;
     private String coverimgUrl;
+    private String remark;  //备注
+    private List<String> rightList; //权限列表
 
     public String getAccountName() {
         return accountName;
@@ -53,5 +56,37 @@ public class AccountInfo implements Serializable {
 
     public void setCoverimgUrl(String coverimgUrl) {
         this.coverimgUrl = coverimgUrl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public List<String> getRightList() {
+        return rightList;
+    }
+
+    public void setRightList(List<String> rightList) {
+        this.rightList = rightList;
     }
 }

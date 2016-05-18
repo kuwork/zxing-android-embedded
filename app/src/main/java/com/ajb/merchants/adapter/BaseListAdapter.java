@@ -14,9 +14,11 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.ajb.merchants.R;
+import com.ajb.merchants.model.AccountInfo;
 import com.ajb.merchants.model.BalanceLimitInfo;
 import com.ajb.merchants.model.BaseModel;
 import com.ajb.merchants.model.Coupon;
@@ -24,20 +26,30 @@ import com.ajb.merchants.model.HomePageInfo;
 import com.ajb.merchants.model.Info;
 import com.ajb.merchants.model.Product;
 import com.ajb.merchants.model.filter.ConditionValue;
+import com.ajb.merchants.view.MyGridView;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BaseListAdapter<T> extends BaseAdapter {
 
     public final static String TYPE_CAR_NUM = "CAR_NUM";
     public final static String TYPE_COUPON_GIVING = "COUPON_GIVING";
-
     private final BitmapUtils bitmapUtils;
     private String typeName;
+    private List<T> dataList;
+    private Context context;
+    private LayoutInflater mInflater;
+    private View.OnClickListener onClickListener;
+    private int res;
+    private int currentPosition = -1;
+    private boolean isEditable = false;//可否删除
+    private String checked;
 
     public List<T> getDataList() {
         return dataList;
@@ -47,13 +59,6 @@ public class BaseListAdapter<T> extends BaseAdapter {
         this.dataList = dataList;
     }
 
-    private List<T> dataList;
-    private Context context;
-    private LayoutInflater mInflater;
-    private View.OnClickListener onClickListener;
-    private int res;
-    private int currentPosition = -1;
-
     public boolean isEditable() {
         return isEditable;
     }
@@ -62,8 +67,6 @@ public class BaseListAdapter<T> extends BaseAdapter {
         isEditable = editable;
         notifyDataSetChanged();
     }
-
-    private boolean isEditable = false;//可否删除
 
     public boolean isEditing() {
         return isEditing;
@@ -88,8 +91,6 @@ public class BaseListAdapter<T> extends BaseAdapter {
         this.checked = checked;
         notifyDataSetChanged();
     }
-
-    private String checked;
 
     public BaseListAdapter(Context context, List<T> dataList, int res, View.OnClickListener onClickListener) {
         this(context, dataList, res, null, onClickListener);
@@ -182,16 +183,26 @@ public class BaseListAdapter<T> extends BaseAdapter {
     class ViewHolder {
         @ViewInject(R.id.title)
         TextView title;
+        @ViewInject(R.id.tvPermisssion)
+        TextView tvPermisssion;
         @ViewInject(R.id.edTitle)
         EditText edTitle;
         @ViewInject(R.id.desc)
         TextView desc;
+        @ViewInject(R.id.tvDesc)
+        TextView tvDesc;
         @ViewInject(R.id.select_ib)
         ImageView img;
+        @ViewInject(R.id.btn_edit)
+        ImageView imgEdit;
+        @ViewInject(R.id.btn_delete)
+        ImageView imgDelete;
         @ViewInject(R.id.item_bg)
         RelativeLayout bg;
         @ViewInject(R.id.divider)
         View divider;
+        @ViewInject(R.id.gridView)
+        MyGridView gridView;
         TextWatcher tw;
 
         public ViewHolder() {
@@ -348,6 +359,62 @@ public class BaseListAdapter<T> extends BaseAdapter {
                         title.setSelected(false);
                     }
                 }
+            } else if (info instanceof AccountInfo) {
+                AccountInfo accountInfo = (AccountInfo) info;
+                if (title != null) {
+                    title.setText(TextUtils.isEmpty(accountInfo.getAccount()) ? "" : accountInfo.getAccount());
+                }
+                if (img != null) {
+                    String headImgUrl = accountInfo.getHeadimgUrl();
+                    if (!TextUtils.isEmpty(headImgUrl)) {
+                        bitmapUtils.display(img, accountInfo.getHeadimgUrl());
+                    } else {
+                        img.setImageResource(R.mipmap.default_avatar);
+                    }
+                }
+                if (desc != null) {
+                    String descStr = accountInfo.getRemark();
+                    if (TextUtils.isEmpty(descStr)) {
+                        if (tvDesc != null) {
+                            tvDesc.setVisibility(View.GONE);
+                        }
+                        desc.setVisibility(View.GONE);
+                    } else {
+                        if (tvDesc != null) {
+                            tvDesc.setVisibility(View.VISIBLE);
+                        }
+                        desc.setVisibility(View.VISIBLE);
+                        desc.setText(descStr);
+                    }
+                }
+                if (imgEdit != null) {
+                    imgEdit.setTag(accountInfo);
+                    imgEdit.setOnClickListener(onClickListener);
+                }
+                if (imgDelete != null) {
+                    imgDelete.setTag(accountInfo);
+                    imgDelete.setOnClickListener(onClickListener);
+                }
+                if (gridView != null) {
+                    List<String> permissionList = accountInfo.getRightList();
+                    if (permissionList != null && !permissionList.isEmpty()) {
+                        if (tvPermisssion != null) {
+                            tvPermisssion.setVisibility(View.VISIBLE);
+                        }
+                        gridView.setVisibility(View.VISIBLE);
+                        String[] from = {"competence"};
+                        int[] to = {R.id.tv_competence};
+                        SimpleAdapter simpleAdapter = new SimpleAdapter(context, dealListToMap(permissionList), R.layout.accout_competence_list, from, to);
+                        gridView.setAdapter(simpleAdapter);
+                        gridView.setFocusable(false);
+                        gridView.setFocusableInTouchMode(false);
+                    } else {
+                        if (tvPermisssion != null) {
+                            tvPermisssion.setVisibility(View.GONE);
+                        }
+                        gridView.setVisibility(View.GONE);
+                    }
+                }
             }
         }
     }
@@ -378,5 +445,15 @@ public class BaseListAdapter<T> extends BaseAdapter {
     public void selectItem(int position) {
         this.currentPosition = position;
         notifyDataSetChanged();
+    }
+
+    private List<Map<String, Object>> dealListToMap(List<String> list) {
+        List<Map<String, Object>> listObject = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("competence", list.get(i));
+            listObject.add(map);
+        }
+        return listObject;
     }
 }

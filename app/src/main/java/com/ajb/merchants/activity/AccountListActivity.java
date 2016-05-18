@@ -1,28 +1,38 @@
 package com.ajb.merchants.activity;
 
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.ajb.merchants.R;
-import com.ajb.merchants.adapter.AccoutManagementAdapter;
-import com.ajb.merchants.model.MerchantsAccoutInfo;
+import com.ajb.merchants.adapter.BaseListAdapter;
+import com.ajb.merchants.model.AccountInfo;
+import com.ajb.merchants.model.AccountSettingInfo;
+import com.ajb.merchants.model.BaseResult;
+import com.ajb.merchants.util.Constant;
+import com.ajb.merchants.util.MyProgressDialog;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountListActivity extends BaseActivity {
 
-    private Context context;
-    @ViewInject(R.id.listview)
-    private ListView listview;//账户列表
-    AccoutManagementAdapter accoutManagementAdapter;
+    @ViewInject(R.id.accountListView)
+    private ListView accountListView;//账户列表
+    private BaseListAdapter<AccountInfo> adapter;
+    private AccountInfo clickItem;
+    private Dialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,63 +40,25 @@ public class AccountListActivity extends BaseActivity {
         setContentView(R.layout.activity_account_list);
         ViewUtils.inject(this);
         initView();
-        setModel();
+        getAccountList();
     }
 
-
-    /**
-     * 模拟静态数据
-     */
-    private void setModel() {
-        List<String> listCompetence = new ArrayList<String>();
-        listCompetence.add("扫卡优惠赠送");
-        listCompetence.add("回收优惠");
-        listCompetence.add("车牌优惠赠送");
-        listCompetence.add("卡号优惠赠送");
-        listCompetence.add("发布优惠信息");
-        String[] strName = {"张三", "李四", "李四1", "李四2", "李四3", "李四4", "李四5"};
-        String[] strAddress = {"高德汇", "东圃大厦", "东圃大厦1", "东圃大厦2", "东圃大厦3", "东圃大厦4", "东圃大厦5"};
-        String[] strRemark = {"111111", "222222", "xas", "xa", "342342", "5656", "e1e1e"};
-
-        List<MerchantsAccoutInfo> listmodel = new ArrayList<MerchantsAccoutInfo>();
-
-        for (int i = 0; i < strName.length; i++) {
-            MerchantsAccoutInfo merchantsAccoutInfo = new MerchantsAccoutInfo();
-            merchantsAccoutInfo.setMa_accoutname(strName[i]);
-            merchantsAccoutInfo.setMa_address(strAddress[i]);
-            merchantsAccoutInfo.setMa_remark(strRemark[i]);
-            merchantsAccoutInfo.setMa_listCompetence(listCompetence);
-            listmodel.add(merchantsAccoutInfo);
-        }
-        AccoutManagementAdapter accoutManagementAdapter = new AccoutManagementAdapter(context, listmodel, new View.OnClickListener() {
+    private void initView() {
+        initTitle("账号管理");
+        initBackClick(NO_RES, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tag = (String) v.getTag();
-                if (tag.equals("edit")) {
-
-                } else if (tag.equals("delete")) {
-
-                }
-                showOkCancelAlertDialog(false, "确定删除账户？",
-                        "",
-                        "确定", "取消",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(
-                                    View arg0) {
-                                dimissOkCancelAlertDialog();
-                            }
-                        }, new View.OnClickListener() {
-                            @Override
-                            public void onClick(
-                                    View arg0) {
-                                dimissOkCancelAlertDialog();
-                            }
-                        });
+                finish();
             }
         });
-        listview.setAdapter(accoutManagementAdapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        initMenuClick(NO_ICON, "", null, R.drawable.actionbar_add, "新增", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), AccountManagementActivity.class);
+                startActivity(intent);
+            }
+        });
+        accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 LinearLayout lv_detail = (LinearLayout) view.findViewById(R.id.lv_detail);
@@ -101,23 +73,112 @@ public class AccountListActivity extends BaseActivity {
     }
 
     /**
-     * 视图初始化
+     * 获取账户列表
      */
-    private void initView() {
-        context = AccountListActivity.this;
-        initTitle("账号管理");
-        initBackClick(NO_RES, new View.OnClickListener() {
+    private void getAccountList() {
+        AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
+        if (accountSettingInfo == null) {
+            return;
+        }
+        AccountInfo accountInfo = accountSettingInfo.getAccountInfo();
+        if (accountInfo == null) {
+            return;
+        }
+        String account = accountInfo.getAccountName();
+        if (TextUtils.isEmpty(account)) {
+            showToast(getString(R.string.tip_empty_account_name));
+            return;
+        }
+        RequestParams params = new RequestParams();
+        params.addBodyParameter(Constant.InterfaceParam.ACCOUNT, account);
+        send(Constant.PK_QUERYACCOUNT, params, new RequestCallBack<String>() {
+
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onStart() {
+                super.onStart();
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                mDialog = MyProgressDialog.createLoadingDialog(
+                        AccountListActivity.this, "请稍后...");
+                mDialog.show();
             }
-        });
-        //图标，对应文本，对应监听事件
-        initMenuClick(NO_ICON, "", null, R.drawable.actionbar_add, "新增", new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), AccountManagementActivity.class);
-                startActivity(intent);
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                if (responseInfo.statusCode == 200) {
+                    BaseResult<List<AccountInfo>> result = null;
+                    try {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult<List<AccountInfo>>>() {
+                                }.getType());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result == null) {
+                        showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    if ("0000".equals(result.code)) {
+                        if (result.data != null) {
+                            if (adapter == null) {
+                                adapter = new BaseListAdapter<AccountInfo>(getBaseContext(), result.data, R.layout.listview_item_account, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        switch (v.getId()) {
+                                            case R.id.btn_edit:
+                                                clickItem = (AccountInfo) v.getTag();
+                                                break;
+
+                                            case R.id.btn_delete:
+                                                clickItem = (AccountInfo) v.getTag();
+                                                showOkCancelAlertDialog(false, "确定删除账户？",
+                                                        "",
+                                                        "确定", "取消",
+                                                        new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(
+                                                                    View arg0) {
+                                                                // TODO: 2016/5/18 delete account
+                                                            }
+                                                        }, new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(
+                                                                    View arg0) {
+                                                                dimissOkCancelAlertDialog();
+                                                            }
+                                                        });
+
+                                                break;
+                                        }
+                                    }
+                                });
+                                accountListView.setAdapter(adapter);
+                            } else {
+                                adapter.update(result.data);
+                            }
+                        }
+                    } else {
+                        showOkAlertDialog(false, "提示", result.getMsg(), "确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                fail(error, msg);
             }
         });
     }

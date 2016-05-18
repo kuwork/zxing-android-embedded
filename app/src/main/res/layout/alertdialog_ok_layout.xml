@@ -18,19 +18,24 @@
             android:id="@+id/dialogTitle"
             style="@style/item_tv_style"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_Margin_10"
             android:layout_marginRight="@dimen/layout_Margin_10"
+            android:layout_marginTop="@dimen/layout_Margin_20"
             android:gravity="center"
-            android:text="标题" />
+            android:singleLine="false"
+            android:text="标题"
+            android:textSize="23dp" />
 
-        <TextView style="@style/line_style" />
     </LinearLayout>
 
     <ScrollView
         style="@style/item_layout"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="@dimen/layout_Margin_10"
+        android:layout_weight="1"
+        android:minWidth="240dp">
 
         <LinearLayout style="@style/layout_widthfilled_style">
 
@@ -41,11 +46,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_Margin_10"
                 android:layout_marginRight="@dimen/layout_Margin_10"
-                android:gravity="left|center_vertical"
-                android:minEms="13"
-                android:minHeight="50dp"
+                android:gravity="center"
                 android:singleLine="false"
-                android:text="" />
+                android:text="提示内容"
+                android:textColor="@color/item_tv_color_02" />
         </LinearLayout>
     </ScrollView>
 
@@ -67,6 +71,7 @@
             <LinearLayout
                 android:id="@+id/sure_btn"
                 style="@style/btn_style"
+                android:layout_height="50dp"
                 android:layout_margin="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/alertdialog_ok_single_selector"
@@ -76,7 +81,8 @@
                     android:id="@+id/sure_btn_tv"
                     style="@style/item_tv_style"
                     android:text="确定"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/btn_color_normal"
+                    android:textSize="@dimen/text_size_20" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

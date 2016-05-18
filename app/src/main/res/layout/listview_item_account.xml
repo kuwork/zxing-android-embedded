@@ -21,7 +21,7 @@
                 android:background="@drawable/home_avatar_black_bg_account" />
 
             <com.ajb.merchants.view.RoundedImageView
-                android:id="@+id/im_iocn"
+                android:id="@+id/select_ib"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -29,12 +29,11 @@
         </FrameLayout>
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/title"
             style="@style/item_tv_style"
             android:layout_gravity="left|center_vertical"
             android:layout_marginLeft="@dimen/layout_Margin_10"
-            android:layout_weight="1"
-            android:text="张三1111" />
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/btn_edit"
@@ -69,16 +68,18 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:orientation="vertical"
-        android:padding="@dimen/layout_Margin_10"
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/tvPermisssion"
             style="@style/item_tv_style"
             android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/layout_Margin_10"
+            android:layout_marginTop="@dimen/layout_Margin_10"
             android:text="账户权限 :" />
 
         <com.ajb.merchants.view.MyGridView
-            android:id="@+id/gd_competence"
+            android:id="@+id/gridView"
             style="@style/layout_widthfilled_style"
             android:layout_marginLeft="50dp"
             android:background="@color/transparentColor"
@@ -89,19 +90,22 @@
             android:numColumns="2" />
 
         <TextView
+            android:id="@+id/tvDesc"
             style="@style/item_tv_style"
             android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/layout_Margin_10"
             android:layout_marginTop="@dimen/layout_Margin_5"
             android:text="备        注:" />
 
         <TextView
-            android:id="@+id/tv_remark"
+            android:id="@+id/desc"
             style="@style/item_tv_style"
             android:layout_width="match_parent"
             android:layout_gravity="left"
+            android:layout_marginBottom="@dimen/layout_Margin_10"
+            android:layout_marginLeft="@dimen/layout_Margin_10"
             android:layout_marginTop="@dimen/layout_Margin_5"
             android:singleLine="false"
-            android:text="android test"
             android:textColor="@color/item_tv_color_02" />
     </LinearLayout>
 
