@@ -78,6 +78,7 @@ public class ResetPasswordActivity extends BaseActivity {
         if (tvPhone != null) {
             if (!TextUtils.isEmpty(accountInfo.getPhone())) {
                 btnVerification.setEnabled(true);
+                tvPhone.setText(accountInfo.getPhone());
             } else {
                 btnVerification.setEnabled(false);
             }
@@ -306,7 +307,7 @@ public class ResetPasswordActivity extends BaseActivity {
 
         @Override
         public void onFinish() { //计时完毕时触发
-            btnVerification.setText("0s");
+            btnVerification.setText("获取验证码");
             if (!TextUtils.isEmpty(accountInfo.getPhone())) {
                 btnVerification.setEnabled(true);
             } else {
