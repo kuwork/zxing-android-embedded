@@ -70,7 +70,10 @@
     <string name="tip_consent_agreement">我已阅读并同意商户服务协议</string>
     <string name="tip_reset_pwd">请输入新密码</string>
     <string name="tip_reset_pwd_confirm">请确认新密码</string>
+    <string name="tip_password_not_match">两次密码不一致</string>
     <string name="tip_reset_phone_verification">请确认手机验证码</string>
+    <string name="tip_empty_account_name">用户名不能为空</string>
+    <string name="tip_empty_phone">手机号不能为空</string>
     <string name="tip_input_car_num">请输入车牌号码</string>
     <string name="tip_input_car_num_correct">请输入正确的车牌号码</string>
     <string name="tip_input_car_num_area">请选择车牌所在省份！</string>

@@ -319,7 +319,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onResume() {
         super.onResume();
-
 //        if (mLocClient != null) {
 //            mLocClient.start();
 //        }
@@ -537,6 +536,8 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
 //                        mContent.onActivityResult(requestCode, resultCode, data);
 //                    }
                     break;
+
+                case Constant.REQ_CODE_PWD_RESET:
                 case Constant.REQ_CODE_LOGOUT:
                     Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                     intent.putExtra(Constant.KEY_FROM, HomePageActivity.class.getName());//标明是Home页面跳转
@@ -756,6 +757,10 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                             break;
                         case MenuInfo.TO_COUPON_CARD:
                             showCardInputDialog(true);
+                            break;
+                        case MenuInfo.TO_PWD_RESET:
+                            Intent intent = new Intent(getBaseContext(), ResetPasswordActivity.class);
+                            startActivityForResult(intent, Constant.REQ_CODE_PWD_RESET);
                             break;
                         default:
                             menuInfo.click(HomePageActivity.this);
@@ -1123,6 +1128,90 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    /**
+     * 卡编号弹窗
+     */
+    protected void showCardInputDialog(boolean canCancel) {
+        String title = getString(R.string.tip_input_card);
+        String okText = getString(R.string.action_search);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText edCard = null;
+                switch (v.getId()) {
+                    case R.id.sure_btn:
+                        edCard = (EditText) v.getTag(R.id.edCard);
+                        String card = edCard.getText().toString().trim()
+                                .toUpperCase();
+                        if (TextUtils.isEmpty(card)) {
+                            showToast(getString(R.string.tip_input_card));
+                            Animation shake = AnimationUtils.loadAnimation(getBaseContext(),
+                                    R.anim.shake);
+                            ((View) edCard.getParent()).startAnimation(shake);
+                            return;
+                        }
+                        if (cardInputDialog != null) {
+                            cardInputDialog.dismiss();
+                        }
+                        Intent intent = new Intent(getBaseContext(), CouponGivingActivity.class);
+                        intent.putExtra(Constant.KEY_TITLE, getString(R.string.title_coupon_card));
+                        CarInParkingBuilder carInParkingBuilder = new CarInParkingBuilder();
+                        carInParkingBuilder.setCarSN(card);
+                        intent.putExtra(Constant.KEY_CARINPARKING, carInParkingBuilder);
+                        startActivity(intent);
+                        break;
+                    case R.id.cancel_btn:
+                        if (cardInputDialog != null) {
+                            cardInputDialog.dismiss();
+                        }
+                        break;
+                    case R.id.tvCode:
+                        edCard = (EditText) v.getTag(R.id.edCarno);
+                        if (edCard != null) {
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(edCard.getWindowToken(), 0);
+                        }
+                        showCarNoPopupWindow((TextView) v);
+                        break;
+                }
+            }
+        };
+        View contentView = getLayoutInflater().inflate(
+                R.layout.alertdialog_card_input_layout, null);
+        TextView tvTitle = (TextView) contentView
+                .findViewById(R.id.dialogTitle);
+        tvTitle.setText(title);
+        View submit = contentView.findViewById(R.id.sure_btn);
+        View cancel = contentView.findViewById(R.id.cancel_btn);
+        TextView tvSubmit = (TextView) contentView
+                .findViewById(R.id.sure_btn_tv);
+        EditText edCard = (EditText) contentView
+                .findViewById(R.id.edCard);
+        submit.setTag(R.id.edCard, edCard);
+        if (!TextUtils.isEmpty(title) && tvTitle != null) {
+            tvTitle.setText(title);
+        }
+        if (!TextUtils.isEmpty(okText) && tvSubmit != null) {
+            tvSubmit.setText(okText);
+        }
+        submit.setOnClickListener(listener);
+        cancel.setOnClickListener(listener);
+        if (cardInputDialog == null) {
+            cardInputDialog = new Dialog(this, R.style.Dialog);
+            Window win = cardInputDialog.getWindow();
+            win.setContentView(contentView);
+            cardInputDialog.setCancelable(canCancel);
+            cardInputDialog.show();
+        } else {
+            Window win = cardInputDialog.getWindow();
+            win.setContentView(contentView);
+            cardInputDialog.setCancelable(canCancel);
+            if (!cardInputDialog.isShowing()) {
+                cardInputDialog.show();
+            }
+        }
+    }
+
     protected void showCarNumInputDialog(boolean canCancel) {
         String title = getString(R.string.title_coupon_car_num);
         String okText = getString(R.string.action_search);
@@ -1258,90 +1347,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    /**
-     * 卡编号弹窗
-     */
-    protected void showCardInputDialog(boolean canCancel) {
-        String title = getString(R.string.tip_input_card);
-        String okText = getString(R.string.action_search);
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText edCard = null;
-                switch (v.getId()) {
-                    case R.id.sure_btn:
-                        edCard = (EditText) v.getTag(R.id.edCard);
-                        String card = edCard.getText().toString().trim()
-                                .toUpperCase();
-                        if (TextUtils.isEmpty(card)) {
-                            showToast(getString(R.string.tip_input_card));
-                            Animation shake = AnimationUtils.loadAnimation(getBaseContext(),
-                                    R.anim.shake);
-                            ((View) edCard.getParent()).startAnimation(shake);
-                            return;
-                        }
-                        if (cardInputDialog != null) {
-                            cardInputDialog.dismiss();
-                        }
-                        Intent intent = new Intent(getBaseContext(), CouponGivingActivity.class);
-                        intent.putExtra(Constant.KEY_TITLE, getString(R.string.title_coupon_card));
-                        CarInParkingBuilder carInParkingBuilder = new CarInParkingBuilder();
-                        carInParkingBuilder.setCarSN(card);
-                        intent.putExtra(Constant.KEY_CARINPARKING, carInParkingBuilder);
-                        startActivity(intent);
-                        break;
-                    case R.id.cancel_btn:
-                        if (cardInputDialog != null) {
-                            cardInputDialog.dismiss();
-                        }
-                        break;
-                    case R.id.tvCode:
-                        edCard = (EditText) v.getTag(R.id.edCarno);
-                        if (edCard != null) {
-                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(edCard.getWindowToken(), 0);
-                        }
-                        showCarNoPopupWindow((TextView) v);
-                        break;
-                }
-            }
-        };
-        View contentView = getLayoutInflater().inflate(
-                R.layout.alertdialog_card_input_layout, null);
-        TextView tvTitle = (TextView) contentView
-                .findViewById(R.id.dialogTitle);
-        tvTitle.setText(title);
-        View submit = contentView.findViewById(R.id.sure_btn);
-        View cancel = contentView.findViewById(R.id.cancel_btn);
-        TextView tvSubmit = (TextView) contentView
-                .findViewById(R.id.sure_btn_tv);
-        EditText edCard = (EditText) contentView
-                .findViewById(R.id.edCard);
-        submit.setTag(R.id.edCard, edCard);
-        if (!TextUtils.isEmpty(title) && tvTitle != null) {
-            tvTitle.setText(title);
-        }
-        if (!TextUtils.isEmpty(okText) && tvSubmit != null) {
-            tvSubmit.setText(okText);
-        }
-        submit.setOnClickListener(listener);
-        cancel.setOnClickListener(listener);
-        if (cardInputDialog == null) {
-            cardInputDialog = new Dialog(this, R.style.Dialog);
-            Window win = cardInputDialog.getWindow();
-            win.setContentView(contentView);
-            cardInputDialog.setCancelable(canCancel);
-            cardInputDialog.show();
-        } else {
-            Window win = cardInputDialog.getWindow();
-            win.setContentView(contentView);
-            cardInputDialog.setCancelable(canCancel);
-            if (!cardInputDialog.isShowing()) {
-                cardInputDialog.show();
-            }
-        }
-    }
-
 
     /**
      * 创建popupWindow菜单
@@ -1410,4 +1415,5 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         carNoPopupWindow.showAtLocation(textView, Gravity.BOTTOM, 0, 0);
 
     }
+
 }

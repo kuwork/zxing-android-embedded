@@ -245,10 +245,6 @@ public class MenuInfo implements Serializable {
                     intent = new Intent(context, ModifyPhoneActivity.class);
                     dealExtras(intent);
                     context.startActivity(intent);
-                } else if (TO_PWD_RESET.equals(getMenuCode())) {
-                    intent = new Intent(context, ResetPasswordActivity.class);
-                    dealExtras(intent);
-                    context.startActivity(intent);
                 } else if (TO_CLEARCACHE.equals(getMenuCode())) {
                     //清除缓存
                     String cacheDirPath = PathManager.getDiskCacheDir(context) + File.separator + "WebCache";
