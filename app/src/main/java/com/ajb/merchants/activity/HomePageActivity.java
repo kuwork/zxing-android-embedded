@@ -170,7 +170,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
         initFirst();
         getLocalSlideBanner();
-        updateAccountSettingInfo(getAccountSettingInfo());
 //        ShareSDK.initSDK(this);
         requestPermission(Constant.PM_LOCATION,
                 new String[]{
@@ -319,7 +318,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onResume() {
         super.onResume();
-
+        updateAccountSettingInfo(getAccountSettingInfo());
 //        if (mLocClient != null) {
 //            mLocClient.start();
 //        }

@@ -1,6 +1,7 @@
 package com.ajb.merchants.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -37,6 +38,8 @@ import com.util.App;
 
 import java.util.Arrays;
 import java.util.List;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 设置界面
@@ -135,6 +138,20 @@ public class SettingActivity extends BaseActivity {
     }
 
     private void requestLogOut() {
+        String userName = getLoginName();
+        if (TextUtils.isEmpty(userName)) {
+            sharedFileUtils.remove(SharedFileUtils.IS_LOGIN);
+            sharedFileUtils.remove(SharedFileUtils.TOKEN);
+            sharedFileUtils.remove(SharedFileUtils.ACCOUNT_SETING_INFO);
+            startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
+            return;
+        }
+        String channelId = JPushInterface.getRegistrationID(getBaseContext());
+        // 起线程去登录
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, userName);
+        params.addQueryStringParameter(Constant.InterfaceParam.CHANNELID, channelId);
+
         send(Constant.PK_LOGOUT, null,
                 new RequestCallBack<String>() {
                     @Override
@@ -171,6 +188,7 @@ public class SettingActivity extends BaseActivity {
                                 setResult(RESULT_OK);
                                 sharedFileUtils.remove(SharedFileUtils.TOKEN);
                                 sharedFileUtils.remove(SharedFileUtils.IS_LOGIN);
+                                sharedFileUtils.remove(SharedFileUtils.ACCOUNT_SETING_INFO);
                                 finish();
                             } else {
                                 setResult(RESULT_CANCELED);
