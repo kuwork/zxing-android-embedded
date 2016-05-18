@@ -328,25 +328,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     /**
      * 初始化侧滑菜单
      */
-    private void initLeftMenu(AccountSettingInfo asi) {
-
-        ModularMenu modularMenu, leftMenu = null;
-        if (asi != null && asi.getModularMenus() != null) {
-            List<ModularMenu> modularMenuList = asi.getModularMenus();
-            if (modularMenuList != null) {
-                int size = modularMenuList.size();
-                for (int i = 0; i < size; i++) {
-                    modularMenu = modularMenuList.get(i);
-                    if (ModularMenu.CODE_LEFTMENU.equals(modularMenu.getModularCode())) {
-                        leftMenu = modularMenu;
-                        break;
-                    }
-                }
-            }
-        }
-        initLeftMenuList(leftMenu, this);
-    }
-
     public void initLeftMenuList(ModularMenu mm, AdapterView.OnItemClickListener listener) {
         if (leftMenuListAdapter == null) {
             leftMenuListAdapter = new MenuItemAdapter<MenuInfo>(getBaseContext(), null, ModularMenu.CODE_LEFTMENU);

@@ -372,6 +372,10 @@
                 <category android:name="com.ajb.merchants" />
             </intent-filter>
         </service>
+        <activity
+            android:name=".activity.UpdateDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/mTransparent_bg" />
 
         <!-- alipay sdk begin -->
         <activity

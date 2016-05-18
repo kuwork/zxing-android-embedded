@@ -60,7 +60,9 @@
     </LinearLayout>
 
 
-    <ScrollView style="@style/layout_widthfilled_style">
+    <ScrollView
+        style="@style/layout_widthfilled_style"
+        android:paddingBottom="@dimen/layout_Margin_10">
 
         <LinearLayout
             style="@style/layout_widthfilled_style"
@@ -143,7 +145,8 @@
                 android:gravity="left|top"
                 android:hint="@string/tip_coupon_remark"
                 android:minHeight="100dp"
-                android:padding="@dimen/layout_Margin_10" />
+                android:padding="@dimen/layout_Margin_10"
+                android:singleLine="false" />
 
             <Button
                 android:id="@+id/btnSure"
