@@ -64,6 +64,8 @@ public class Constant {
     public static final String KEY_CARDID = "cardId";
 
     public static final String KEY_FROM = "from";
+    public static final String KEY_UPDATE_APK_DIR = "update_apk_dir";// 更新下载的apk所在目录
+    public static final String KEY_UPDATE_PENDING_INTENT = "update_pending_intent";// 更新下载完的apk点击的pendingIntent
     /**
      * 广告类型
      */
@@ -75,6 +77,7 @@ public class Constant {
     public static final String AD_TYPE_PAY_WECHAT = "6";   //支付页面广告 微信支付
     public static final String AD_TYPE_PAY_ALIPAY = "7";   //支付页面广告 支付宝支付
     public static final String AD_TYPE_PAY = "8";   //支付页面广告 APP支付需要加8
+
 
     /**
      * 接口参数

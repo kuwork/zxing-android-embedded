@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
+    style="@style/layout_allFilled_style">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="50dp"
+        android:background="@drawable/alertdialog_bg_top"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/item_tv_style"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="下载完成"
+            android:textSize="23dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/download_package_dir"
+                style="@style/item_tv_style"
+                android:singleLine="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnlayoutUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <TextView style="@style/line_style" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/cancel_btn"
+                    style="@style/btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/alertdialog_cancel_selector"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/cancel_btn_tv"
+                        style="@style/item_tv_style"
+                        android:text="@string/action_close"
+                        android:textColor="@color/item_tv_color_04"
+                        android:textSize="@dimen/text_size_20" />
+                </LinearLayout>
+
+                <View
+                    style="@style/line_2_style"
+                    android:layout_marginBottom="@dimen/layout_Margin_5"
+                    android:layout_marginTop="@dimen/layout_Margin_5" />
+
+                <LinearLayout
+                    android:id="@+id/sure_btn"
+                    style="@style/btn_style"
+                    android:layout_height="50dp"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/alertdialog_ok_selector"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/sure_btn_tv"
+                        style="@style/item_tv_style"
+                        android:text="@string/action_install"
+                        android:textColor="@color/btn_color_normal"
+                        android:textSize="@dimen/text_size_20" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

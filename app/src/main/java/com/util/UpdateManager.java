@@ -1,5 +1,7 @@
 package com.util;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -63,17 +65,21 @@ public class UpdateManager {
     private Gson gson;
     private Handler mHandler;
     private HttpHandler<File> downloadHandler;
+    private Notification notification;
+    private NotificationManager mNotifManager;
 
     public UpdateManager(Context context, UpdateCallback updateCallback) {
         ctx = context;
         callback = updateCallback;
         getCurVersion();
-        sdcardPath = PathManager.getSdcardDir();
+        sdcardPath = PathManager.getDownLoadDir();
         packageNameString = App.getPackageName(context);
         LogUtils.i("sdcard路径：" + sdcardPath);
         LogUtils.i("包名：" + packageNameString);
         gson = new Gson();
         mHandler = new Handler();
+        mNotifManager = (NotificationManager) ctx
+                .getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     public String getNewVersionName() {
@@ -131,7 +137,6 @@ public class UpdateManager {
             LogUtils.i("文件" + file.getAbsolutePath() + "不存在！");
         }
     }
-
 
     public interface UpdateCallback {
         public static final int ERRORCODE_UNKNOWN = 10000;
@@ -325,6 +330,11 @@ public class UpdateManager {
             LogUtils.e("更新信息为空，无法进行下载");
             return;
         }
+        if (sdcardPath == null) {
+            callback.onError(UpdateCallback.ERRORCODE_DOWNLOAD_ERROR, null,
+                    "sdcard can not be used!");
+            return;
+        }
         newPathString = sdcardPath + App.getPackageName(ctx) + "_"
                 + updateInfo.getVersionName() + "_"
                 + updateInfo.getVersionCode() + ".apk";
@@ -337,6 +347,25 @@ public class UpdateManager {
         } else if (UpdateInfo.INC_UPDATE.equals(updateInfo.getUpdateType())) {
             target = patchPathString;
         }
+        File file = new File(newPathString);
+        if (file.exists()) {
+            LogUtils.d("文件已存在");
+            try {
+                String localSha1Value = SHA1Util.sumFile(ctx, file);
+                if (localSha1Value.equals(updateInfo.getNewSHA())) {
+                    callback.onDownloadCompleted(updateInfo, new File(
+                            newPathString));
+                    return;
+                }
+            } catch (OutOfMemoryError e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
         downloadHandler = getHttpUtils().download(updateInfo.getUrl(), target,
                 true, new RequestCallBack<File>() {
                     @Override
@@ -420,7 +449,7 @@ public class UpdateManager {
                 // 判断SHA1
                 LogUtils.d("full package downloaded，start checking...");
                 if (updateInfo.getNewSHA().equals(
-                        SHA1Util.sumFile(newPathString))) {
+                        SHA1Util.sumFile(ctx, newPathString))) {
                     callback.onDownloadCompleted(updateInfo, new File(
                             newPathString));
                 } else {
@@ -435,7 +464,7 @@ public class UpdateManager {
                 // 判断SHA1
                 LogUtils.d("inc package downloaded，start checking...");
                 if (updateInfo.getIncreaseSHA().equals(
-                        SHA1Util.sumFile(patchPathString))) {// a14c575bdbcabdf40ab8f09b570f6a55d658a4d8
+                        SHA1Util.sumFile(ctx, patchPathString))) {// a14c575bdbcabdf40ab8f09b570f6a55d658a4d8
                     // 合并文件
                     File file = new File(ctx.getPackageManager()
                             .getApplicationInfo(packageNameString, 0).sourceDir);
@@ -457,7 +486,7 @@ public class UpdateManager {
                     PatchUtils.patch(oldPathString, newPathString,
                             patchPathString);
                     if (updateInfo.getNewSHA().equals(
-                            SHA1Util.sumFile(newPathString))) {
+                            SHA1Util.sumFile(ctx, newPathString))) {
                         callback.onDownloadCompleted(updateInfo, new File(
                                 newPathString));
                     } else {

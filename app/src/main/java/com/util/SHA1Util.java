@@ -1,12 +1,16 @@
-/**   
- * @Title SHA1Util.java 
- * @Package util 
- * @Description  
+/**
+ * @Title SHA1Util.java
+ * @Package util
+ * @Description
  * @author 陈国宏
  * @date 2013年12月2日 下午2:31:20 
- * @version V1.0   
+ * @version V1.0
  */
 package com.util;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +25,9 @@ import java.security.NoSuchAlgorithmException;
  * @date 2013年12月2日 下午2:31:20
  */
 public class SHA1Util {
+
+	private static final String NAME = "SHA1_SETTING";
+	private static final String KEY = "PEER_SIZE";
 
 	/**
 	 * @Title sum
@@ -56,15 +63,22 @@ public class SHA1Util {
 	 * @throws OutOfMemoryError
 	 * @throws IOException
 	 */
-	public static String sumFile(String path) throws OutOfMemoryError,
-			IOException {
+	public static String sumFile(Context context, String path)
+			throws OutOfMemoryError, IOException {
 		File file = new File(path);
 		FileInputStream in = new FileInputStream(file);
+		SharedPreferences sp = context.getSharedPreferences(NAME,
+				context.MODE_PRIVATE);
 		MessageDigest messagedigest;
+		int size = sp.getInt(KEY, 1024 * 1024 * 1);
+		if (size == 1024 * 1024 * 1) {
+			sp.edit().putInt(KEY, size).commit();
+		}
+		Log.d("sha-size", size + "");
 		try {
 			messagedigest = MessageDigest.getInstance("SHA-1");
 
-			byte[] buffer = new byte[1024 * 1024 * 1];
+			byte[] buffer = new byte[size];
 			int len = 0;
 
 			while ((len = in.read(buffer)) > 0) {
@@ -80,26 +94,30 @@ public class SHA1Util {
 			// e.toString());
 			e.printStackTrace();
 		} catch (OutOfMemoryError e) {
-
 			// NQLog.e("getFileSha1->OutOfMemoryError###", e.toString());
+			sp.edit().putInt(KEY, size >> 1).commit();
 			e.printStackTrace();
-			throw e;
 		} finally {
 			in.close();
 		}
 		return null;
 	}
 
-	public static String sumFile(File file) throws OutOfMemoryError,
-			IOException {
+	public static String sumFile(Context context, File file)
+			throws OutOfMemoryError, IOException {
 		FileInputStream in = new FileInputStream(file);
+		SharedPreferences sp = context.getSharedPreferences(NAME,
+				context.MODE_PRIVATE);
 		MessageDigest messagedigest;
+		int size = sp.getInt(KEY, 1024 * 1024 * 1);
+		if (size == 1024 * 1024 * 1) {
+			sp.edit().putInt(KEY, size).commit();
+		}
+		Log.d("sha-size", size + "");
 		try {
 			messagedigest = MessageDigest.getInstance("SHA-1");
-
-			byte[] buffer = new byte[1024 * 1024 * 10];
+			byte[] buffer = new byte[size];
 			int len = 0;
-
 			while ((len = in.read(buffer)) > 0) {
 				// 该对象通过使用 update（）方法处理数据
 				messagedigest.update(buffer, 0, len);
@@ -112,25 +130,29 @@ public class SHA1Util {
 			// e.toString());
 			e.printStackTrace();
 		} catch (OutOfMemoryError e) {
-
 			// NQLog.e("getFileSha1->OutOfMemoryError###", e.toString());
+			sp.edit().putInt(KEY, size >> 1).commit();
 			e.printStackTrace();
-			throw e;
 		} finally {
 			in.close();
 		}
 		return null;
 	}
 
-	public static String sumFile(FileInputStream in) throws OutOfMemoryError,
-			IOException {
+	public static String sumFile(Context context, FileInputStream in)
+			throws OutOfMemoryError, IOException {
+		SharedPreferences sp = context.getSharedPreferences(NAME,
+				context.MODE_PRIVATE);
 		MessageDigest messagedigest;
+		int size = sp.getInt(KEY, 1024 * 1024 * 1);
+		if (size == 1024 * 1024 * 1) {
+			sp.edit().putInt(KEY, size).commit();
+		}
+		Log.d("sha-size", size + "");
 		try {
 			messagedigest = MessageDigest.getInstance("SHA-1");
-
-			byte[] buffer = new byte[1024 * 1024 * 10];
+			byte[] buffer = new byte[size];
 			int len = 0;
-
 			while ((len = in.read(buffer)) > 0) {
 				// 该对象通过使用 update（）方法处理数据
 				messagedigest.update(buffer, 0, len);
@@ -144,10 +166,9 @@ public class SHA1Util {
 			// e.toString());
 			e.printStackTrace();
 		} catch (OutOfMemoryError e) {
-
 			// NQLog.e("getFileSha1->OutOfMemoryError###", e.toString());
+			sp.edit().putInt(KEY, size >> 1).commit();
 			e.printStackTrace();
-			throw e;
 		} finally {
 			in.close();
 		}

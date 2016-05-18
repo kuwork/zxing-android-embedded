@@ -993,6 +993,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
                                             R.id.downLoadProgressss, 10000, 10000,
                                             false);
                                     notification.contentView = mContentView;
+                                    notification.contentIntent = null;
                                     mNotifManager.notify(R.id.downLoadIcon,
                                             notification);
                                     break;
@@ -1017,6 +1018,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
                                             R.id.downLoadProgressss, 10000, 10000,
                                             false);
                                     notification.contentView = mContentView;
+                                    notification.contentIntent = null;
                                     mNotifManager.notify(R.id.downLoadIcon,
                                             notification);
                                     break;
@@ -1067,6 +1069,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
                                         R.id.downLoadProgressss, 10000, 10000,
                                         false);
                                 notification.contentView = mContentView;
+                                notification.contentIntent = null;
                                 LogUtils.d("进度条已满");
                             } else {
                                 notification.icon = android.R.drawable.stat_sys_download;
@@ -1089,6 +1092,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
                                         R.id.downLoadProgressss, 10000,
                                         (int) progress * 100, false);
                                 notification.contentView = mContentView;
+                                notification.contentIntent = null;
                             }
                             mNotifManager.notify(R.id.downLoadIcon,
                                     notification);
@@ -1126,6 +1130,23 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
                             notification.contentIntent = contentIntent;
                             mNotifManager.notify(R.id.downLoadIcon,
                                     notification);
+
+
+                            /**
+                             * 跳转到自定义的dialog中
+                             */
+                            Intent dialogIntent = new Intent(getBaseContext(),
+                                    UpdateDialog.class);
+                            dialogIntent.putExtra(Constant.KEY_UPDATE_APK_DIR,
+                                    file.getAbsolutePath());
+                            dialogIntent.putExtra(
+                                    Constant.KEY_UPDATE_PENDING_INTENT,
+                                    contentIntent);
+                            dialogIntent
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            dialogIntent
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            getBaseContext().startActivity(dialogIntent);
                         }
                     });
         }

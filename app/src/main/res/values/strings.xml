@@ -12,6 +12,8 @@
     <string name="action_cancel">取消</string>
     <string name="action_edit">编辑</string>
     <string name="action_save">保存</string>
+    <string name="action_close">关闭</string>
+    <string name="action_install">安装</string>
     <!-- 派发优惠-->
     <string name="title_coupon_scan">扫卡优惠</string>
     <string name="title_coupon_car_num">车牌优惠</string>

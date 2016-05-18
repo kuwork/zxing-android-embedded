@@ -17,7 +17,7 @@ public class App {
 
 	/**
 	 * 获取app版本名
-	 * 
+	 *
 	 * @return 返回当前版本名
 	 */
 	public static String getVersionName(Context context) {
@@ -33,7 +33,7 @@ public class App {
 
 	/**
 	 * 获取app版本号
-	 * 
+	 *
 	 * @return 返回当前版本号
 	 */
 	public static int getVersionCode(Context context) {
@@ -49,7 +49,7 @@ public class App {
 
 	/**
 	 * 获取app包名
-	 * 
+	 *
 	 * @return 返回包名
 	 */
 	public static String getPackageName(Context context) {
@@ -191,7 +191,7 @@ public class App {
 		try {
 			File file = new File(ctx.getPackageManager().getApplicationInfo(
 					getPackageName(ctx), 0).sourceDir);
-			return SHA1Util.sumFile(file);
+			return SHA1Util.sumFile(ctx,file);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";

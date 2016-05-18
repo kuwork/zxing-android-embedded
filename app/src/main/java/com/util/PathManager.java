@@ -83,6 +83,9 @@ public class PathManager {
             File cacheDir = Environment.getDownloadCacheDirectory();
             if (cacheDir != null && cacheDir.exists()) {
                 sdPath = cacheDir.getPath();
+                if (!sdPath.endsWith(File.separator)) {
+                    sdPath += File.separator;
+                }
             }
         }
         return sdPath;
@@ -96,11 +99,17 @@ public class PathManager {
                     .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             if (downloadFile != null && downloadFile.exists()) {
                 dir = downloadFile.getPath();
+                if (!dir.endsWith(File.separator)) {
+                    dir += File.separator;
+                }
                 return dir;
             } else {
                 downloadFile = Environment.getExternalStorageDirectory();
                 if (downloadFile != null && downloadFile.exists()) {
                     dir = downloadFile.getPath();
+                    if (!dir.endsWith(File.separator)) {
+                        dir += File.separator;
+                    }
                     return dir;
                 }
             }
