@@ -147,12 +147,10 @@ public class SettingActivity extends BaseActivity {
             return;
         }
         String channelId = JPushInterface.getRegistrationID(getBaseContext());
-        // 起线程去登录
         RequestParams params = new RequestParams();
         params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, userName);
         params.addQueryStringParameter(Constant.InterfaceParam.CHANNELID, channelId);
-
-        send(Constant.PK_LOGOUT, null,
+        send(Constant.PK_LOGOUT, params,
                 new RequestCallBack<String>() {
                     @Override
                     public void onStart() {
