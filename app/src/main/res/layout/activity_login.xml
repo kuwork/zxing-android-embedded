@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@null"
-                    android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@_"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@_"
                     android:gravity="left|center_vertical"
                     android:hint="@string/tip_login_account"
                     android:inputType="textPhonetic"
