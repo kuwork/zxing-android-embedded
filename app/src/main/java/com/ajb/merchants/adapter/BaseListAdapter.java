@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.ajb.merchants.R;
 import com.ajb.merchants.model.BalanceLimitInfo;
 import com.ajb.merchants.model.BaseModel;
-import com.ajb.merchants.model.Coupon;
+import com.ajb.merchants.model.CouponSendType;
 import com.ajb.merchants.model.HomePageInfo;
 import com.ajb.merchants.model.Info;
 import com.ajb.merchants.model.Product;
@@ -211,18 +211,6 @@ public class BaseListAdapter<T> extends BaseAdapter {
                         img.setVisibility(View.GONE);
                     }
                 }
-            } else if (info instanceof Coupon) {
-                Coupon coupon = ((Coupon) info);
-                if (title != null) {
-                    title.setText(TextUtils.isEmpty(coupon.getName()) ? ""
-                            : coupon.getName());
-                }
-                if (null != desc) {
-                    String unit = coupon.getUnit();
-                    desc.setText(TextUtils.isEmpty(coupon.getValue()) ? ""
-                            : coupon.getValue());
-                    desc.append((TextUtils.isEmpty(unit) ? "" : unit));
-                }
             } else if (info instanceof Info) {
                 if (title != null) {
                     title.setText(((Info) info).getKey());
@@ -348,6 +336,15 @@ public class BaseListAdapter<T> extends BaseAdapter {
                         title.setSelected(false);
                     }
                 }
+            } else if (info instanceof CouponSendType) {
+                if (title != null) {
+                    title.setText(((CouponSendType) info).getTitle());
+                    ViewGroup parent = (ViewGroup) title.getParent();
+                    boolean isCheck = isCheck(info);
+                    for (int i = 0; i < parent.getChildCount(); i++) {
+                        parent.getChildAt(i).setSelected(isCheck);
+                    }
+                }
             }
         }
     }
@@ -370,6 +367,13 @@ public class BaseListAdapter<T> extends BaseAdapter {
                 return true;
             } else {
                 return false;
+            }
+        }
+        if (info instanceof CouponSendType) {
+            if (TextUtils.isEmpty(((CouponSendType) info).getTitle())) {
+                return false;
+            } else {
+                return ((CouponSendType) info).getTitle().equals(checked);
             }
         }
         return false;

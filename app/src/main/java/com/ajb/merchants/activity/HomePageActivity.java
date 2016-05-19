@@ -1266,7 +1266,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                         Intent intent = new Intent(getBaseContext(), CouponGivingActivity.class);
                         intent.putExtra(Constant.KEY_TITLE, getString(R.string.title_coupon_card));
                         CarInParkingBuilder carInParkingBuilder = new CarInParkingBuilder();
-                        carInParkingBuilder.setCarSN(card);
+                        carInParkingBuilder.setCardSnId(card);
                         intent.putExtra(Constant.KEY_CARINPARKING, carInParkingBuilder);
                         startActivity(intent);
                         break;

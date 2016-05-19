@@ -195,7 +195,7 @@ public class CaptureActivity extends BaseActivity implements Callback, OnClickLi
                     String[] strList = str.split("=");
                     Bundle bundle = new Bundle();
                     CarInParkingBuilder carInParkingBuilder = new CarInParkingBuilder();
-                    carInParkingBuilder.setCarSN(strList[1]);
+                    carInParkingBuilder.setCardSnId(strList[1]);
                     bundle.putSerializable(Constant.KEY_CARINPARKING, carInParkingBuilder);
                     bundle.putString(Constant.KEY_TITLE, getString(R.string.title_coupon_scan));
                     i.putExtras(bundle);

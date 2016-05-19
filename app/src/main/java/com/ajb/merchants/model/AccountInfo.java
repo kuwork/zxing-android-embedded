@@ -8,8 +8,6 @@ import java.io.Serializable;
 public class AccountInfo implements Serializable {
 
     private String accountName;
-
-
     private String storeName;
     private String headimgUrl;
     private String phone;

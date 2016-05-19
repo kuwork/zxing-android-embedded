@@ -186,6 +186,12 @@ public class BaseFragment extends Fragment implements OnViewErrorListener {
      */
     @Override
     public void showErrorPage(View v, int strId, int imgId) {
+        String tip = getResources().getString(strId);
+        showErrorPage(v, tip, imgId);
+    }
+
+    @Override
+    public void showErrorPage(View v, String tip, int imgId) {
         ViewGroup parent = (ViewGroup) v.getParent();
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
         errorView = getActivity().getLayoutInflater().inflate(R.layout.error_layout, null);
@@ -209,7 +215,7 @@ public class BaseFragment extends Fragment implements OnViewErrorListener {
         TextView tvError = (TextView) errorView.findViewById(R.id.tvError);
         ImageView imgError = (ImageView) errorView.findViewById(R.id.imgError);
         if (tvError != null) {
-            tvError.setText(getResources().getString(strId));
+            tvError.setText(tip);
         }
         if (imgError != null) {
             imgError.setImageResource(imgId);

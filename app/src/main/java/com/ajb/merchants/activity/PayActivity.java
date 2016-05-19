@@ -689,9 +689,9 @@ public class PayActivity extends BaseActivity implements View.OnClickListener,
             params.addQueryStringParameter(Constant.InterfaceParam.PARKCODE,
                     carInParkingBuilder.getParkCode());
         }
-        if (!TextUtils.isEmpty(carInParkingBuilder.getCarSN())) {
+        if (!TextUtils.isEmpty(carInParkingBuilder.getCardSnId())) {
             params.addQueryStringParameter(Constant.InterfaceParam.CARSN,
-                    carInParkingBuilder.getCarSN());
+                    carInParkingBuilder.getCardSnId());
         }
         if (!TextUtils.isEmpty(carInParkingBuilder.getCarNo())) {
             params.addQueryStringParameter(Constant.InterfaceParam.CARNO,

@@ -1,42 +1,49 @@
 package com.ajb.merchants.activity;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.ajb.merchants.R;
 import com.ajb.merchants.adapter.BaseListAdapter;
+import com.ajb.merchants.model.BaseResult;
+import com.ajb.merchants.model.CarInParkingBuilder;
+import com.ajb.merchants.model.CarParkingInInfo;
+import com.ajb.merchants.model.Coupon;
+import com.ajb.merchants.model.CouponSendType;
 import com.ajb.merchants.model.Info;
-import com.ajb.merchants.model.Product;
 import com.ajb.merchants.util.Constant;
+import com.ajb.merchants.util.MyProgressDialog;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.MyGridView;
 import com.ajb.merchants.view.MyListView;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * 设置界面
  */
 public class CouponGivingActivity extends BaseActivity {
-    @ViewInject(R.id.tabMoney)
-    View tabMoney;
-    @ViewInject(R.id.tabTime)
-    View tabTime;
     @ViewInject(R.id.infoListView)
     MyListView listView;
     @ViewInject(R.id.gridView)
     MyGridView gridView;
+    @ViewInject(R.id.tabGridView)
+    MyGridView tabGridView;
     @ViewInject(R.id.tvEdit)
     TextView tvEdit;
     @ViewInject(R.id.tvSave)
@@ -44,8 +51,12 @@ public class CouponGivingActivity extends BaseActivity {
     @ViewInject(R.id.btnSure)
     Button btnSure;
     private BaseListAdapter<Info> infoAdapter;
-    private BaseListAdapter<Product> gridViewAdapter;
-    private List<Product> moneyList, timeList;
+    private BaseListAdapter<Coupon> gridViewAdapter;
+    private CarInParkingBuilder carInParkingBuilder;
+    private Dialog mDialog;
+    private CarParkingInInfo carParkingInInfo;
+    private BaseListAdapter<CouponSendType> tabGridViewAdapter;
+    private CouponSendType couponSendTypeSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +69,12 @@ public class CouponGivingActivity extends BaseActivity {
             if (bundle.containsKey(Constant.KEY_TITLE)) {
                 title = bundle.getString(Constant.KEY_TITLE);
             }
+            if (bundle.containsKey(Constant.KEY_CARINPARKING)) {
+                carInParkingBuilder = (CarInParkingBuilder) bundle.getSerializable(Constant.KEY_CARINPARKING);
+                if (carInParkingBuilder != null) {
+                    requestCarParkInInfo(carInParkingBuilder);
+                }
+            }
         }
         initTitle(title);
         initBackClick(R.id.NO_RES, new View.OnClickListener() {
@@ -66,43 +83,65 @@ public class CouponGivingActivity extends BaseActivity {
                 finish();
             }
         });
-        List<Info> list = Arrays.asList(
-                new Info("车牌号码:", "粤A12345"),
-                new Info("进场时间:", "2016-05-12 00:00:00"));
-        initListView(list);
-        try {
-            String moneyJsonStr = sharedFileUtils.getString(SharedFileUtils.COUPON_MONEY_LIST);
-            moneyList = gson.fromJson(moneyJsonStr, new TypeToken<List<Product>>() {
-            }.getType());
-            String timeJsonStr = sharedFileUtils.getString(SharedFileUtils.COUPON_TIME_LIST);
-            timeList = gson.fromJson(timeJsonStr, new TypeToken<List<Product>>() {
-            }.getType());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (moneyList == null) {
-            moneyList = new ArrayList<>();
-        }
-        if (timeList == null) {
-            timeList = new ArrayList<>();
-        }
+//        List<Info> list = Arrays.asList(
+//                new Info("车牌号码:", "粤A12345"),
+//                new Info("进场时间:", "2016-05-12 00:00:00"));
+//        initInfoListView(list);
 
-        tabMoney.performClick();
+//        try {
+//            String moneyJsonStr = sharedFileUtils.getString(SharedFileUtils.COUPON_MONEY_LIST);
+//            moneyList = gson.fromJson(moneyJsonStr, new TypeToken<List<Coupon>>() {
+//            }.getType());
+//            String timeJsonStr = sharedFileUtils.getString(SharedFileUtils.COUPON_TIME_LIST);
+//            timeList = gson.fromJson(timeJsonStr, new TypeToken<List<Coupon>>() {
+//            }.getType());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        if (moneyList == null) {
+//            moneyList = new ArrayList<>();
+//        }
+//        if (timeList == null) {
+//            timeList = new ArrayList<>();
+//        }
     }
 
-    /**
-     * @param list    数据
-     * @param checked 默认选中
-     */
-    private void initGridView(List<Product> list, String checked, boolean isEditable) {
+    private void initGridView(CouponSendType item, String checked, boolean isEditable) {
+        if (item == null) {
+            return;
+        }
         if (null == gridView) {
             return;
         }
-        List<Product> data = new ArrayList<>();
-        data.addAll(list);
-        data.add(new Product("+", ""));
+        this.couponSendTypeSelected = item;
+        List<Coupon> list = null;
+        List<Coupon> data = new ArrayList<>();
+        if (item.getSendModel() == CouponSendType.TYPE_SERVER) {
+            list = item.getFavList();
+            if (list != null && list.size() > 0) {
+                data.addAll(list);
+            }
+            tvSave.setVisibility(View.GONE);
+            tvEdit.setVisibility(View.GONE);
+        } else if (item.getSendModel() == CouponSendType.TYPE_NATIVE) {
+            try {
+                String jsonStr = sharedFileUtils.getString(SharedFileUtils.COUPON_LIST + "." + item.getTitle());
+                list = gson.fromJson(jsonStr, new TypeToken<List<Coupon>>() {
+                }.getType());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (list != null && list.size() > 0) {
+                item.setFavList(list);
+                data.addAll(list);
+            }
+            data.add(new Coupon("+", ""));
+            tvSave.setVisibility(View.GONE);
+            tvEdit.setVisibility(View.VISIBLE);
+        }
+
         if (null == gridViewAdapter) {
-            gridViewAdapter = new BaseListAdapter<Product>(
+            gridViewAdapter = new BaseListAdapter<Coupon>(
                     getBaseContext(),
                     data,
                     R.layout.grid_item_coupon, BaseListAdapter.TYPE_COUPON_GIVING,
@@ -114,8 +153,8 @@ public class CouponGivingActivity extends BaseActivity {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    BaseListAdapter<Product> adapter = (BaseListAdapter<Product>) parent.getAdapter();
-                    Product item = adapter.getItem(position);
+                    BaseListAdapter<Coupon> adapter = (BaseListAdapter<Coupon>) parent.getAdapter();
+                    Coupon item = adapter.getItem(position);
                     if (adapter.isEditable()) {
                         showToast("删除" + item.toString());
                         adapter.removeAt(position);
@@ -138,7 +177,7 @@ public class CouponGivingActivity extends BaseActivity {
         }
     }
 
-    private void initListView(List<Info> infoList) {
+    private void initInfoListView(List<Info> infoList) {
         if (null == listView) {
             return;
         }
@@ -154,32 +193,31 @@ public class CouponGivingActivity extends BaseActivity {
         }
     }
 
-    @OnClick(value = {R.id.tabMoney, R.id.tabTime})
-    public void onTabClick(View v) {
-        ViewGroup parent = (ViewGroup) v.getParent();
-        for (int i = 0; i < parent.getChildCount(); i++) {
-            parent.getChildAt(i).setSelected(false);
-        }
-        tvSave.setVisibility(View.GONE);
-        tvEdit.setVisibility(View.VISIBLE);
-        switch (v.getId()) {
-            case R.id.tabMoney:
-                v.setSelected(true);
-                initGridView(moneyList, "", false);
-                btnSure.setEnabled(false);
-                break;
-            case R.id.tabTime:
-                v.setSelected(true);
-                initGridView(timeList, "", false);
-                btnSure.setEnabled(false);
-                break;
-        }
-    }
+//    @OnClick(value = {R.id.tabMoney, R.id.tabTime})
+//    public void onTabClick(View v) {
+//        ViewGroup parent = (ViewGroup) v.getParent();
+//        for (int i = 0; i < parent.getChildCount(); i++) {
+//            parent.getChildAt(i).setSelected(false);
+//        }
+//        tvSave.setVisibility(View.GONE);
+//        tvEdit.setVisibility(View.VISIBLE);
+//        switch (v.getId()) {
+//            case R.id.tabMoney:
+//                v.setSelected(true);
+//                initGridView(moneyList, "", false);
+//                btnSure.setEnabled(false);
+//                break;
+//            case R.id.tabTime:
+//                v.setSelected(true);
+//                initGridView(timeList, "", false);
+//                btnSure.setEnabled(false);
+//                break;
+//        }
+//    }
 
     @OnClick(value = {R.id.tvEdit, R.id.tvSave})
     public void onEditOrSaveClick(View v) {
-
-        Product item = null;
+        Coupon item = null;
         switch (v.getId()) {
             case R.id.tvEdit:
                 if (gridViewAdapter == null || gridViewAdapter.getCount() == 1) {
@@ -200,17 +238,12 @@ public class CouponGivingActivity extends BaseActivity {
                 v.setVisibility(View.GONE);
                 tvEdit.setVisibility(View.VISIBLE);
                 btnSure.setEnabled(false);
-                List<Product> dataList = gridViewAdapter.getDataList();
-                if (tabMoney.isSelected()) {
-                    moneyList.clear();
-                    moneyList.addAll(dataList);
-                    sharedFileUtils.putString(SharedFileUtils.COUPON_MONEY_LIST, gson.toJson(moneyList));
-                    initGridView(moneyList, "", false);
-                } else {
-                    timeList.clear();
-                    timeList.addAll(dataList);
-                    sharedFileUtils.putString(SharedFileUtils.COUPON_TIME_LIST, gson.toJson(timeList));
-                    initGridView(timeList, "", false);
+                List<Coupon> dataList = gridViewAdapter.getDataList();
+                if (couponSendTypeSelected != null) {
+                    if (couponSendTypeSelected.getSendModel() == CouponSendType.TYPE_NATIVE) {
+                        sharedFileUtils.putString(SharedFileUtils.COUPON_LIST + "." + couponSendTypeSelected.getTitle(), gson.toJson(dataList));
+                        initGridView(couponSendTypeSelected, "", false);
+                    }
                 }
                 break;
         }
@@ -260,46 +293,145 @@ public class CouponGivingActivity extends BaseActivity {
                 return;
             }
         }
-        if (tabMoney.isSelected()) {
-            if ("+".equals(checked)) {//自定义
-                String editingStr = gridViewAdapter.getEditingStr().trim();
-                if (TextUtils.isEmpty(editingStr)) {
-                    showToast("请输入自定义金额!");
-                    return;
-                }
-                Product p = new Product(editingStr, "元");
-                checked = p.toString();
-                //添加进历史
-                if (!moneyList.contains(p)) {
-                    addAndSort(moneyList, p);
-                    sharedFileUtils.putString(SharedFileUtils.COUPON_MONEY_LIST, gson.toJson(moneyList));
-                    initGridView(moneyList, p.toString(), false);
-                }
-            }
-            showToast(checked);
-
-        } else {
-            if ("+".equals(checked)) {//自定义
-                String editingStr = gridViewAdapter.getEditingStr().trim();
-                if (TextUtils.isEmpty(editingStr)) {
-                    showToast("请输入自定义时间!");
-                    return;
-                }
-                Product p = new Product(editingStr, "小时");
-                checked = p.toString();
-                //添加进历史
-                if (!timeList.contains(p)) {
-                    addAndSort(timeList, p);
-                    sharedFileUtils.putString(SharedFileUtils.COUPON_TIME_LIST, gson.toJson(timeList));
-                    initGridView(timeList, p.toString(), false);
+        if (couponSendTypeSelected != null) {
+            if (couponSendTypeSelected.getSendModel() == CouponSendType.TYPE_NATIVE) {
+                if ("+".equals(checked)) {//自定义
+                    String editingStr = gridViewAdapter.getEditingStr().trim();
+                    if (TextUtils.isEmpty(editingStr)) {
+                        showToast("请输入自定义金额!");
+                        return;
+                    }
+                    Coupon p = new Coupon(editingStr, "元");
+                    checked = p.toString();
+                    //添加进历史
+                    addAndSort(couponSendTypeSelected.getFavList(), p);
+                    sharedFileUtils.putString(SharedFileUtils.COUPON_LIST + "." + couponSendTypeSelected.getTitle(), gson.toJson(couponSendTypeSelected.getFavList()));
+                    initGridView(couponSendTypeSelected, "", false);
                 }
             }
-            showToast(checked);
         }
+        showToast(checked);
+
+
     }
 
-    private void addAndSort(List<Product> list, Product p) {
+    private void addAndSort(List<Coupon> list, Coupon p) {
         list.add(p);
+    }
+
+    private void requestCarParkInInfo(CarInParkingBuilder carInParkingBuilder) {
+        if (carInParkingBuilder == null
+                || (TextUtils.isEmpty(carInParkingBuilder.getCardSnId()) && TextUtils.isEmpty(carInParkingBuilder.getCarNo()))) {
+            showToast("查询失败");
+            return;
+        }
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter(Constant.InterfaceParam.CARNO, carInParkingBuilder.getCarNo());
+        params.addQueryStringParameter(Constant.InterfaceParam.CARD_SN_ID, carInParkingBuilder.getCardSnId());
+        send(Constant.PK_GET_CAR_MERCHANT_MSG, params,
+                new RequestCallBack<String>() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        if (mDialog != null && mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        mDialog = MyProgressDialog.createLoadingDialog(
+                                CouponGivingActivity.this, "请稍后...");
+                        mDialog.show();
+                    }
+
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        if (mDialog != null && mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        if (responseInfo.statusCode == 200) {
+                            BaseResult<CarParkingInInfo> result = null;
+                            try {
+                                result = gson.fromJson(
+                                        responseInfo.result,
+                                        new TypeToken<BaseResult<CarParkingInInfo>>() {
+                                        }.getType());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            if (result == null) {
+                                showToast(getString(R.string.error_network_short));
+                                return;
+                            }
+                            if ("0000".equals(result.code)) {
+                                initPageSetting(result.data);
+                            } else {
+                                showOkAlertDialog(false, "提示", result.msg, getString(R.string.action_close), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dimissOkAlertDialog();
+                                        finish();
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+                        if (mDialog != null && mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        fail(error, msg);
+                    }
+
+                }
+        );
+    }
+
+    /**
+     * 页面设置
+     */
+    private void initPageSetting(CarParkingInInfo data) {
+        if (data == null) {
+            return;
+        }
+        this.carParkingInInfo = data;
+        initInfoListView(data.getInfoList());
+        if (data.getTopList() != null && data.getTopList().size() > 0) {
+            data.getTopList().get(0).setTitle("金额");
+            data.getTopList().get(1).setTitle("时间");
+            if (tabGridView != null) {
+                if (tabGridViewAdapter == null) {
+                    tabGridViewAdapter = new BaseListAdapter<CouponSendType>(getBaseContext(), data.getTopList(), R.layout.grid_item_tab, null);
+                    tabGridView.setAdapter(tabGridViewAdapter);
+                    tabGridViewAdapter.setChecked(data.getTopList().get(0).getTitle());
+                    initGridView(data.getTopList().get(0), "", false);
+                    tabGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            BaseListAdapter<CouponSendType> adapter = (BaseListAdapter<CouponSendType>) parent.getAdapter();
+                            CouponSendType item = adapter.getItem(position);
+                            if (item != null) {
+                                adapter.setChecked(item.getTitle());
+                                initGridView(item, "", false);
+                            }
+
+                        }
+                    });
+                } else {
+                    tabGridViewAdapter.update(data.getTopList());
+                }
+
+            }
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (carInParkingBuilder != null) {
+                requestCarParkInInfo(carInParkingBuilder);
+            }
+        }
     }
 
 }
