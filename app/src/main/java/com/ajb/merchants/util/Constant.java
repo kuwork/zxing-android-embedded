@@ -49,6 +49,7 @@ public class Constant {
     public static final String PK_MSG_PUSH = "merchantLog/infoPush";//获取短信随机码
     public static final String PK_QUERYACCOUNT = "merchantLog/queryAccount";//账号管理-查询某个商铺所有账号接口
     public static final String PK_DELETEACCOUNT = "merchantLog/deleteAccount";//账号管理-删除子账号接口
+    public static final String PK_QUERYACCOUNT_RIGHT = "merchantLog/queryAccountRight";//账号管理-查看某个用户的权限(新增或编辑)
 
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";
