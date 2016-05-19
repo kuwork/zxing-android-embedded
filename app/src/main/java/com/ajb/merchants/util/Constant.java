@@ -49,6 +49,7 @@ public class Constant {
     public static final String PK_MSG_PUSH = "merchantLog/infoPush";//获取短信随机码
     public static final String PK_QUERYACCOUNT = "merchantLog/queryAccount";//账号管理-查询某个商铺所有账号接口
     public static final String PK_DELETEACCOUNT = "merchantLog/deleteAccount";//账号管理-删除子账号接口
+    public static final String PK_GET_CAR_MERCHANT_MSG = "/merchantFunction/getCarAndMerchantMsg";//获取车辆信息以及商户派发权限
 
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";
@@ -82,6 +83,7 @@ public class Constant {
     public static final String AD_TYPE_PAY = "8";   //支付页面广告 APP支付需要加8
 
 
+
     /**
      * 接口参数
      *
@@ -93,8 +95,6 @@ public class Constant {
         public static final String CARSN = "carSN";
         // 车场号
         public static final String PARKCODE = "parkCode";
-        // 车牌号牌
-        public static final String CARNO = "carNo";
         // 用户名
         public static final String USERNAME = "userName";
         public static final String TYPE = "type";
@@ -136,6 +136,10 @@ public class Constant {
         public static final String TOKEN = "token";
         public static final String CODE = "code";
         public static final String ID = "id";
+        // 车牌号牌
+        public static final String CARNO = "carNo";
+        //卡面编号
+        public static final String CARD_SN_ID = "cardSnId";
 
     }
 

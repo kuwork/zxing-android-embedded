@@ -8,59 +8,16 @@
 
     <include layout="@layout/header_btn_layout" />
 
-    <LinearLayout
-        style="@style/item_layout"
-        android:orientation="horizontal">
+    <com.ajb.merchants.view.MyGridView
+        android:id="@+id/tabGridView"
+        style="@style/grid_style"
+        android:minHeight="50dp"
+        android:numColumns="2"
+        tools:listitem="@layout/grid_item_tab" />
 
-        <FrameLayout
-            android:id="@+id/tabMoney"
-            style="@style/layout_allFilled_style"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/item_tv_title_style"
-                android:layout_gravity="center"
-                android:duplicateParentState="true"
-                android:gravity="center"
-                android:text="@string/tip_coupon_tab_money"
-                android:textColor="@color/pop_attribution_textview_selector" />
-
-            <View
-                style="@style/line_style"
-                android:layout_height="1dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:background="@drawable/tab_line_selector"
-                android:duplicateParentState="true" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/tabTime"
-            style="@style/layout_allFilled_style"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/item_tv_title_style"
-                android:layout_gravity="center"
-                android:duplicateParentState="true"
-                android:gravity="center"
-                android:text="@string/tip_coupon_tab_time"
-                android:textColor="@color/pop_attribution_textview_selector" />
-
-            <View
-                style="@style/line_style"
-                android:layout_height="1dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:background="@drawable/tab_line_selector"
-                android:duplicateParentState="true" />
-        </FrameLayout>
-    </LinearLayout>
-
-
-    <ScrollView style="@style/layout_widthfilled_style">
+    <ScrollView
+        style="@style/layout_widthfilled_style"
+        android:paddingBottom="@dimen/layout_Margin_10">
 
         <LinearLayout
             style="@style/layout_widthfilled_style"
@@ -143,7 +100,8 @@
                 android:gravity="left|top"
                 android:hint="@string/tip_coupon_remark"
                 android:minHeight="100dp"
-                android:padding="@dimen/layout_Margin_10" />
+                android:padding="@dimen/layout_Margin_10"
+                android:singleLine="false" />
 
             <Button
                 android:id="@+id/btnSure"

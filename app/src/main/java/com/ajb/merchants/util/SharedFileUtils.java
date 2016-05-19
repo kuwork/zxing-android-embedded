@@ -41,6 +41,7 @@ public class SharedFileUtils {
 
     public static final String ACCOUNT_INFO = "com.ajb.anjubao.intelligent.ACCOUNT_SETING_INFO";
     //优惠历史
+    public static final String COUPON_LIST = "com.ajb.merchants.COUPON_LIST";
     public static final String COUPON_MONEY_LIST = "com.ajb.merchants.COUPON_MONEY_LIST";
     public static final String COUPON_TIME_LIST = "com.ajb.merchants.COUPON_TIME_LIST";
 
