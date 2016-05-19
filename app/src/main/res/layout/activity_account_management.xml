@@ -125,25 +125,25 @@
                 android:layout_marginTop="@dimen/layout_Margin_10"
                 android:background="@color/white"
                 android:minHeight="50dp"
-                android:paddingBottom="@dimen/layout_Margin_15"
-                android:paddingLeft="@dimen/layout_Margin_5"
-                android:paddingRight="@dimen/layout_Margin_5"
-                android:paddingTop="@dimen/layout_Margin_15">
+                android:paddingLeft="@dimen/layout_Margin_5">
 
                 <TextView
                     style="@style/item_tv_style"
+                    android:layout_height="50dp"
                     android:layout_gravity="top"
                     android:layout_marginLeft="@dimen/layout_Margin_5"
-                    android:gravity="left|top"
+                    android:gravity="center_vertical"
                     android:text="备        注:" />
 
                 <EditText
-                    android:id="@+id/edNote"
+                    android:id="@+id/edRemark"
                     style="@style/item_tv_style"
-                    android:layout_gravity="top"
-                    android:layout_marginLeft="@dimen/layout_Margin_5"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="@null"
-                    android:gravity="left|top"
+                    android:gravity="left|center_vertical"
+                    android:minHeight="50dp"
+                    android:padding="@dimen/layout_Margin_10"
                     android:singleLine="false"
                     android:textColor="@color/item_tv_color_02" />
             </LinearLayout>

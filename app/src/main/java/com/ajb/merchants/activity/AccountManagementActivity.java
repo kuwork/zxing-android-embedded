@@ -28,4 +28,8 @@ public class AccountManagementActivity extends BaseActivity {
             }
         });
     }
+
+    private void getAccountPermission() {
+
+    }
 }
