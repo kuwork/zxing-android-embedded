@@ -39,7 +39,7 @@
     <string name="error_no_carno_binded">未绑定车牌</string>
     <string name="error_hava_not_login">未登录</string>
     <string name="error_network_short">网络不给力,请稍后再试</string>
-    <string name="error_network">网络出问题了~请您查看网络设置\n点击屏幕，重新加载</string>
+    <string name="error_network">出错了~点击重新加载！</string>
     <string name="error_no_carno">亲，您暂无绑定车牌哦！</string>
     <string name="error_no_carpark_nearby">暂无附近车场哦！</string>
     <string name="error_phone">请检查手机号码格式是否正确</string>
@@ -76,6 +76,8 @@
     <string name="tip_reset_phone_verification">请确认手机验证码</string>
     <string name="tip_empty_account_name">用户名不能为空</string>
     <string name="tip_empty_phone">手机号不能为空</string>
+    <string name="tip_empty_id">ID不能为空</string>
+    <string name="tip_delete_fail">删除失败</string>
     <string name="tip_input_car_num">请输入车牌号码</string>
     <string name="tip_input_car_num_correct">请输入正确的车牌号码</string>
     <string name="tip_input_car_num_area">请选择车牌所在省份！</string>
@@ -89,5 +91,6 @@
     <string name="tip_coupon_tab_plate_num">车牌</string>
     <string name="tip_coupon_tab_card">卡号</string>
     <string name="tip_store_name_default">店铺名称</string>
+    <string name="tip_no_record">暂无数据</string>
 
 </resources>

@@ -1579,7 +1579,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
             imgError.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    refreshErrorPage();
+                    onErrorPageClick();
                 }
             });
         }
@@ -1592,7 +1592,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
     }
 
     @Override
-    public void refreshErrorPage() {
+    public void onErrorPageClick() {
         if (errorView != null) {
             ((ViewGroup) errorView.getParent()).removeView(errorView);
         }

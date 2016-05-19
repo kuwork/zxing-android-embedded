@@ -16,16 +16,14 @@
             android:id="@+id/imgError"
             android:layout_width="@dimen/error_img_width"
             android:layout_height="@dimen/error_img_height"
-            android:layout_marginBottom="@dimen/layout_Margin_5"
-            android:src="@mipmap/norecord" />
+            android:layout_marginBottom="@dimen/layout_Margin_10"
+            android:src="@mipmap/no_need_pay" />
 
         <TextView
             android:id="@+id/tvError"
-            style="@style/item_tv_third_style"
-            android:layout_below="@+id/imgError"
-            android:layout_centerHorizontal="true"
+            style="@style/item_tv_style"
             android:gravity="center"
             android:singleLine="false"
-            android:text="@string/error_no_carno" />
+            android:text="@string/tip_no_record" />
     </LinearLayout>
 </RelativeLayout>

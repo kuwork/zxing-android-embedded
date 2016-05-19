@@ -8,7 +8,9 @@ import java.util.List;
  */
 public class AccountInfo implements Serializable {
 
-    private String id;
+    private String id;  //子账户id
+    private String accountId;
+    private String storeId;
     private String account;
     private String accountName;
     private String storeName;
@@ -88,5 +90,21 @@ public class AccountInfo implements Serializable {
 
     public void setRightList(List<String> rightList) {
         this.rightList = rightList;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 }

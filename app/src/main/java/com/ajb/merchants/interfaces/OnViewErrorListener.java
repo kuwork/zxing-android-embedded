@@ -11,6 +11,6 @@ public interface OnViewErrorListener {
 
     public void showErrorPage(View v, int strId, int imgId);
 
-    public void refreshErrorPage();
+    public void onErrorPageClick();
 
 }

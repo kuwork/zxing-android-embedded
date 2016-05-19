@@ -22,6 +22,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.List;
@@ -84,13 +85,13 @@ public class AccountListActivity extends BaseActivity {
         if (accountInfo == null) {
             return;
         }
-        String account = accountInfo.getAccountName();
+        String account = accountInfo.getAccount();
         if (TextUtils.isEmpty(account)) {
             showToast(getString(R.string.tip_empty_account_name));
             return;
         }
         RequestParams params = new RequestParams();
-        params.addBodyParameter(Constant.InterfaceParam.ACCOUNT, account);
+        params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, account);
         send(Constant.PK_QUERYACCOUNT, params, new RequestCallBack<String>() {
 
             @Override
@@ -125,6 +126,10 @@ public class AccountListActivity extends BaseActivity {
                     }
                     if ("0000".equals(result.code)) {
                         if (result.data != null) {
+                            if (result.data.isEmpty()) {
+                                showErrorPage(accountListView, R.string.tip_no_record, R.mipmap.no_need_pay);
+                                return;
+                            }
                             if (adapter == null) {
                                 adapter = new BaseListAdapter<AccountInfo>(getBaseContext(), result.data, R.layout.listview_item_account, new View.OnClickListener() {
                                     @Override
@@ -143,7 +148,8 @@ public class AccountListActivity extends BaseActivity {
                                                             @Override
                                                             public void onClick(
                                                                     View arg0) {
-                                                                // TODO: 2016/5/18 delete account
+                                                                dimissOkCancelAlertDialog();
+                                                                deleteAccount(clickItem.getId());
                                                             }
                                                         }, new View.OnClickListener() {
                                                             @Override
@@ -169,6 +175,89 @@ public class AccountListActivity extends BaseActivity {
                                 finish();
                             }
                         });
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                fail(error, msg);
+                showErrorPage(accountListView, R.string.error_network, R.mipmap.no_need_pay);
+            }
+        });
+    }
+
+    @Override
+    public void onErrorPageClick() {
+        super.onErrorPageClick();
+        getAccountList();
+    }
+
+    /**
+     * 删除账号
+     *
+     * @param id 子账号id
+     */
+    private void deleteAccount(String id) {
+        if (TextUtils.isEmpty(id)) {
+            showToast(getString(R.string.tip_delete_fail));
+            LogUtils.d(getString(R.string.tip_empty_id));
+            return;
+        }
+        AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
+        if (accountSettingInfo == null) {
+            return;
+        }
+        AccountInfo accountInfo = accountSettingInfo.getAccountInfo();
+        if (accountInfo == null) {
+            return;
+        }
+        String account = accountInfo.getAccount();
+        if (TextUtils.isEmpty(account)) {
+            showToast(getString(R.string.tip_empty_account_name));
+            return;
+        }
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, account);
+        params.addQueryStringParameter(Constant.InterfaceParam.ID, id);
+        send(Constant.PK_DELETEACCOUNT, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                mDialog = MyProgressDialog.createLoadingDialog(
+                        AccountListActivity.this, "请稍后...");
+                mDialog.show();
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                if (responseInfo.statusCode == 200) {
+                    BaseResult result = null;
+                    try {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult>() {
+                                }.getType());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result == null) {
+                        showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    showToast(result.getMsg());
+                    if ("0000".equals(result.code)) {
+                        getAccountList();
                     }
                 }
             }

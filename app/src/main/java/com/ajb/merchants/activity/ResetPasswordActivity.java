@@ -3,7 +3,9 @@ package com.ajb.merchants.activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +17,6 @@ import com.ajb.merchants.model.AccountSettingInfo;
 import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.MyProgressDialog;
-import com.ajb.merchants.util.EdittextFilterTextWatcher;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
@@ -71,8 +72,8 @@ public class ResetPasswordActivity extends BaseActivity {
             return;
         }
         if (tvName != null) {
-            if (!TextUtils.isEmpty(accountInfo.getAccountName())) {
-                tvName.setText(accountSettingInfo.getAccountInfo().getAccountName());
+            if (!TextUtils.isEmpty(accountInfo.getAccount())) {
+                tvName.setText(accountSettingInfo.getAccountInfo().getAccount());
             }
         }
         if (tvPhone != null) {
@@ -98,9 +99,25 @@ public class ResetPasswordActivity extends BaseActivity {
         if (edVerification == null) {
             return;
         }
-        edPassword.addTextChangedListener(new EdittextFilterTextWatcher(edConfirmPassword, edVerification, btnResetPassword));
-        edConfirmPassword.addTextChangedListener(new EdittextFilterTextWatcher(edPassword, edVerification, btnResetPassword));
-        edVerification.addTextChangedListener(new EdittextFilterTextWatcher(edPassword, edConfirmPassword, btnResetPassword));
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                btnResetPassword.setEnabled(isAllFill());
+            }
+        };
+        edPassword.addTextChangedListener(textWatcher);
+        edConfirmPassword.addTextChangedListener(textWatcher);
+        edVerification.addTextChangedListener(textWatcher);
     }
 
     @OnClick(value = {R.id.btnVerification, R.id.btnResetPassword})
@@ -111,7 +128,7 @@ public class ResetPasswordActivity extends BaseActivity {
                 break;
 
             case R.id.btnResetPassword:
-                String account = accountInfo.getAccountName();
+                String account = accountInfo.getAccount();
                 String phone = accountInfo.getPhone();
                 String password = edPassword.getText().toString().trim();
                 String confirmPassword = edConfirmPassword.getText().toString().trim();
@@ -149,7 +166,7 @@ public class ResetPasswordActivity extends BaseActivity {
      * 获取手机验证码
      */
     private void getVerificationCode() {
-        String account = accountInfo.getAccountName();
+        String account = accountInfo.getAccount();
         String phone = accountInfo.getPhone();
         if (TextUtils.isEmpty(account)) {
             return;
@@ -216,10 +233,10 @@ public class ResetPasswordActivity extends BaseActivity {
      */
     private void requestResetPassword(String account, String password, String msgCode, String phone) {
         RequestParams params = new RequestParams();
-        params.addBodyParameter(Constant.InterfaceParam.ACCOUNT, account);
-        params.addBodyParameter(Constant.InterfaceParam.PASSWORD, password);
-        params.addBodyParameter(Constant.InterfaceParam.CODE, msgCode);
-        params.addBodyParameter(Constant.InterfaceParam.PHONE, phone);
+        params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, account);
+        params.addQueryStringParameter(Constant.InterfaceParam.PASSWORD, password);
+        params.addQueryStringParameter(Constant.InterfaceParam.CODE, msgCode);
+        params.addQueryStringParameter(Constant.InterfaceParam.PHONE, phone);
         send(Constant.PK_RESET_PASSWORD, params, new RequestCallBack<String>() {
 
             @Override
@@ -323,6 +340,25 @@ public class ResetPasswordActivity extends BaseActivity {
         if (timeCount != null) {
             timeCount.cancel();
         }
+    }
+
+    private boolean isAllFill() {
+        if (TextUtils.isEmpty(tvName.getText())) {
+            return false;
+        }
+        if (TextUtils.isEmpty(edPassword.getText())) {
+            return false;
+        }
+        if (TextUtils.isEmpty(edConfirmPassword.getText())) {
+            return false;
+        }
+        if (TextUtils.isEmpty(tvPhone.getText())) {
+            return false;
+        }
+        if (TextUtils.isEmpty(edVerification.getText())) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -216,7 +216,7 @@ public class BaseFragment extends Fragment implements OnViewErrorListener {
             imgError.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    refreshErrorPage();
+                    onErrorPageClick();
                 }
             });
         }
@@ -233,7 +233,7 @@ public class BaseFragment extends Fragment implements OnViewErrorListener {
      * 点击刷新，调用此方法
      */
     @Override
-    public void refreshErrorPage() {
+    public void onErrorPageClick() {
         if (errorView != null) {
             ((ViewGroup) errorView.getParent()).removeView(errorView);
         }

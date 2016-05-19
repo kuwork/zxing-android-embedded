@@ -48,6 +48,7 @@ public class Constant {
     public static final String PK_RESET_PASSWORD = "merchantLog/resetPassword";//重置密码
     public static final String PK_MSG_PUSH = "merchantLog/infoPush";//获取短信随机码
     public static final String PK_QUERYACCOUNT = "merchantLog/queryAccount";//账号管理-查询某个商铺所有账号接口
+    public static final String PK_DELETEACCOUNT = "merchantLog/deleteAccount";//账号管理-删除子账号接口
 
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";
@@ -134,6 +135,7 @@ public class Constant {
         public static final String PHONE = "phone";
         public static final String TOKEN = "token";
         public static final String CODE = "code";
+        public static final String ID = "id";
 
     }
 

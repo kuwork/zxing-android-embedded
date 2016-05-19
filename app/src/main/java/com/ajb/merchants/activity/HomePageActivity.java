@@ -238,7 +238,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             });
         }
         if (tvAccountName != null) {
-            tvAccountName.setText(TextUtils.isEmpty(accountInfo.getAccountName()) ? getString(R.string.tip_tourist) : accountInfo.getAccountName());
+            tvAccountName.setText(TextUtils.isEmpty(accountInfo.getAccount()) ? getString(R.string.tip_tourist) : accountInfo.getAccount());
         }
         if (tvStoreName != null) {
             tvStoreName.setText(TextUtils.isEmpty(accountInfo.getStoreName()) ? "" : accountInfo.getStoreName());
