@@ -24,6 +24,7 @@ import com.ajb.merchants.model.BaseModel;
 import com.ajb.merchants.model.CouponSendType;
 import com.ajb.merchants.model.HomePageInfo;
 import com.ajb.merchants.model.Info;
+import com.ajb.merchants.model.PermissionInfo;
 import com.ajb.merchants.model.Product;
 import com.ajb.merchants.model.filter.ConditionValue;
 import com.ajb.merchants.view.MyGridView;
@@ -412,6 +413,18 @@ public class BaseListAdapter<T> extends BaseAdapter {
                         parent.getChildAt(i).setSelected(isCheck);
                     }
                 }
+            } else if (info instanceof PermissionInfo) {
+                PermissionInfo permissionInfo = (PermissionInfo) info;
+                if (title != null) {
+                    title.setText(permissionInfo.getName());
+                }
+                if (img != null) {
+                    if (permissionInfo.getIsOpen().equals("1")) {
+                        img.setImageResource(R.mipmap.checkbox_focus);
+                    } else {
+                        img.setImageResource(R.mipmap.checkbox);
+                    }
+                }
             }
         }
 
@@ -434,14 +447,14 @@ public class BaseListAdapter<T> extends BaseAdapter {
                 } else {
                     return false;
                 }
-            }
-            if (info instanceof CouponSendType) {
+            } else if (info instanceof CouponSendType) {
                 if (TextUtils.isEmpty(((CouponSendType) info).getTitle())) {
                     return false;
                 } else {
                     return ((CouponSendType) info).getTitle().equals(checked);
                 }
             }
+
             return false;
         }
     }
@@ -460,4 +473,5 @@ public class BaseListAdapter<T> extends BaseAdapter {
         }
         return listObject;
     }
+
 }
