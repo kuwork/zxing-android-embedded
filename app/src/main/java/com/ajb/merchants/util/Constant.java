@@ -52,6 +52,7 @@ public class Constant {
     public static final String PK_QUERYACCOUNT_RIGHT = "merchantLog/queryAccountRight";//账号管理-查看某个用户的权限(新增或编辑)
     public static final String PK_ADDACCOUNT = "merchantLog/addAccount";//账号管理-新增账号保存接口
     public static final String PK_CHECKACCOUNT = "merchantLog/checkAccount";//账号管理-检测用户是否存在接口
+    public static final String PK_UPDATEACCOUNT = "merchantLog/updateAccount";//账号管理-账号修改保存接口
     public static final String PK_GET_CAR_MERCHANT_MSG = "merchantFunction/getCarAndMerchantMsg";//获取车辆信息以及商户派发权限
 
     // app应用ID
@@ -134,6 +135,7 @@ public class Constant {
 
         public static final String ACCOUNT = "account";
         public static final String NEWACCOUNT = "newAccount";
+        public static final String EDITACCOUNT = "editAccount";
         public static final String PASSWORD = "password";
         public static final String PHONE = "phone";
         public static final String TOKEN = "token";

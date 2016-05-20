@@ -10,9 +10,12 @@ import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -200,6 +203,8 @@ public class BaseListAdapter<T> extends BaseAdapter {
         ImageView imgDelete;
         @ViewInject(R.id.item_bg)
         RelativeLayout bg;
+        @ViewInject(R.id.detailLayout)
+        LinearLayout detailLayout;
         @ViewInject(R.id.divider)
         View divider;
         @ViewInject(R.id.gridView)
@@ -404,6 +409,21 @@ public class BaseListAdapter<T> extends BaseAdapter {
                         gridView.setVisibility(View.GONE);
                     }
                 }
+                Animation drapDwon = AnimationUtils.loadAnimation(context, R.anim.drop_down_anim);
+                if (position == currentPosition) {
+                    if (detailLayout != null) {
+                        if (detailLayout.getVisibility() == View.VISIBLE) {
+                            detailLayout.setVisibility(View.GONE);
+                        } else {
+                            detailLayout.setVisibility(View.VISIBLE);
+                            detailLayout.startAnimation(drapDwon);
+                        }
+                    }
+                } else {
+                    if (detailLayout != null) {
+                        detailLayout.setVisibility(View.GONE);
+                    }
+                }
             } else if (info instanceof CouponSendType) {
                 if (title != null) {
                     title.setText(((CouponSendType) info).getTitle());
@@ -454,7 +474,6 @@ public class BaseListAdapter<T> extends BaseAdapter {
                     return ((CouponSendType) info).getTitle().equals(checked);
                 }
             }
-
             return false;
         }
     }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.ajb.merchants.R;
 import com.ajb.merchants.adapter.BaseListAdapter;
@@ -45,8 +46,14 @@ public class AccountManagementActivity extends BaseActivity {
     private EditText edRemark;
     @ViewInject(R.id.imgPasswordPass)
     private ImageView imgPasswordPass;
+    @ViewInject(R.id.edAccountLayout)
+    private LinearLayout edAccountLayout;
     private Dialog mDialog;
     private BaseListAdapter<PermissionInfo> adapter;
+    private AccountInfo editAccountInfo;
+    public static final int MODE_ADD = 0;   //添加账户
+    public static final int MODE_EDIT = 1;  //编辑账户
+    private int currentMode = MODE_ADD; //默认是添加账户页面
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -78,40 +85,74 @@ public class AccountManagementActivity extends BaseActivity {
         initMenuClick(NO_ICON, "", null, R.drawable.actionbar_done, "完成", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addAccount();
-            }
-        });
-        edAccount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.toString().length() == 0) {
-                    imgPasswordPass.setVisibility(View.INVISIBLE);
+                if (currentMode == MODE_ADD) {
+                    addAccount();
                 } else {
-                    imgPasswordPass.setVisibility(View.INVISIBLE);
-                    handler.removeMessages(0);
-                    handler.sendEmptyMessageDelayed(0, 500);
+                    modifyAccount();
                 }
             }
         });
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            if (bundle.containsKey(Constant.KEY_MODE)) {
+                currentMode = bundle.getInt(Constant.KEY_MODE);
+            }
+            if (bundle.containsKey(Constant.KEY_ACCOUNT_SETTING_INFO)) {
+                editAccountInfo = (AccountInfo) bundle.getSerializable(Constant.KEY_ACCOUNT_SETTING_INFO);
+            }
+        }
+        if (currentMode == MODE_EDIT) {
+            if (edAccountLayout != null) {
+                edAccountLayout.setVisibility(View.GONE);
+            }
+            if (edPassword != null) {
+                if (editAccountInfo != null) {
+                    edPassword.setText(editAccountInfo.getPassword());
+                }
+                edPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (hasFocus) {
+                            edPassword.setText("");
+                        }
+                    }
+                });
+            }
+        } else {
+            if (edAccountLayout != null) {
+                edAccountLayout.setVisibility(View.VISIBLE);
+            }
+            edAccount.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        edAccount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    checkAccount();
                 }
-            }
-        });
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (s.toString().length() == 0) {
+                        imgPasswordPass.setVisibility(View.INVISIBLE);
+                    } else {
+                        imgPasswordPass.setVisibility(View.INVISIBLE);
+                        handler.removeMessages(0);
+                        handler.sendEmptyMessageDelayed(0, 500);
+                    }
+                }
+            });
+            edAccount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        checkAccount();
+                    }
+                }
+            });
+        }
     }
 
     @OnClick(R.id.imgPasswordPass)
@@ -139,8 +180,13 @@ public class AccountManagementActivity extends BaseActivity {
             showToast(getString(R.string.tip_empty_account_name));
             return;
         }
-        final RequestParams params = new RequestParams();
+        RequestParams params = new RequestParams();
         params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, account);
+        if (currentMode == MODE_EDIT) {
+            if (editAccountInfo != null) {
+                params.addQueryStringParameter(Constant.InterfaceParam.EDITACCOUNT, editAccountInfo.getAccount());
+            }
+        }
         send(Constant.PK_QUERYACCOUNT_RIGHT, params, new RequestCallBack<String>() {
 
             @Override
@@ -357,6 +403,91 @@ public class AccountManagementActivity extends BaseActivity {
 
             @Override
             public void onFailure(HttpException error, String msg) {
+                fail(error, msg);
+            }
+        });
+    }
+
+    /**
+     * 修改账户信息
+     */
+    private void modifyAccount() {
+        if (editAccountInfo == null) {
+            return;
+        }
+        AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
+        if (accountSettingInfo == null) {
+            return;
+        }
+        AccountInfo accountInfo = accountSettingInfo.getAccountInfo();
+        if (accountInfo == null) {
+            return;
+        }
+        String account = accountInfo.getAccount();
+        if (TextUtils.isEmpty(account)) {
+            showToast(getString(R.string.tip_empty_account_name));
+            return;
+        }
+        String passwordStr = edPassword.getText().toString().trim();
+        String remarkStr = edRemark.getText().toString().trim();
+        if (TextUtils.isEmpty(passwordStr)) {
+            showToast(getString(R.string.tip_enter_sub_password));
+            return;
+        }
+        List<PermissionInfo> dataList = null;
+        if (adapter != null) {
+            dataList = adapter.getDataList();
+        }
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, account);
+        params.addQueryStringParameter(Constant.InterfaceParam.PASSWORD, passwordStr);
+        params.addQueryStringParameter(Constant.InterfaceParam.ID, editAccountInfo.getId());
+        params.addQueryStringParameter(Constant.InterfaceParam.IDS, gson.toJson(dataList));
+        params.addQueryStringParameter(Constant.InterfaceParam.REMARK, remarkStr);
+        send(Constant.PK_UPDATEACCOUNT, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                mDialog = MyProgressDialog.createLoadingDialog(
+                        AccountManagementActivity.this, "请稍后...");
+                mDialog.show();
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                if (responseInfo.statusCode == 200) {
+                    BaseResult result = null;
+                    try {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult>() {
+                                }.getType());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result == null) {
+                        showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    showToast(result.getMsg());
+                    if ("0000".equals(result.code)) {
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
                 fail(error, msg);
             }
         });

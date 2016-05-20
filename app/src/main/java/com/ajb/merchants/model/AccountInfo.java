@@ -18,6 +18,7 @@ public class AccountInfo implements Serializable {
     private String phone;
     private String coverimgUrl;
     private String remark;  //备注
+    private String password;//子账户密码
     private List<String> rightList; //权限列表
 
     public String getAccountName() {
@@ -106,5 +107,13 @@ public class AccountInfo implements Serializable {
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

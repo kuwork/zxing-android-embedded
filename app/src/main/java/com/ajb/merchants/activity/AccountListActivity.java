@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.ajb.merchants.R;
@@ -61,13 +60,10 @@ public class AccountListActivity extends BaseActivity {
         accountListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LinearLayout lv_detail = (LinearLayout) view.findViewById(R.id.lv_detail);
-                if (lv_detail.getVisibility() == View.VISIBLE) {
-                    lv_detail.setVisibility(View.GONE);
-                } else {
-                    lv_detail.setVisibility(View.VISIBLE);
+                BaseListAdapter<AccountInfo> adapter = (BaseListAdapter<AccountInfo>) parent.getAdapter();
+                if (adapter != null) {
+                    adapter.selectItem(position);
                 }
-
             }
         });
     }
@@ -136,6 +132,10 @@ public class AccountListActivity extends BaseActivity {
                                         switch (v.getId()) {
                                             case R.id.btn_edit:
                                                 clickItem = (AccountInfo) v.getTag();
+                                                Intent intent = new Intent(getBaseContext(), AccountManagementActivity.class);
+                                                intent.putExtra(Constant.KEY_MODE, AccountManagementActivity.MODE_EDIT);
+                                                intent.putExtra(Constant.KEY_ACCOUNT_SETTING_INFO, clickItem);
+                                                startActivity(intent);
                                                 break;
 
                                             case R.id.btn_delete:
