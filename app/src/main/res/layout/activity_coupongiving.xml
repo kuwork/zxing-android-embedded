@@ -12,12 +12,15 @@
         android:id="@+id/tabGridView"
         style="@style/grid_style"
         android:minHeight="50dp"
-        android:numColumns="2"
-        tools:listitem="@layout/grid_item_tab" />
+        android:numColumns="2" />
+
+    <View style="@style/line_style" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         style="@style/layout_widthfilled_style"
-        android:paddingBottom="@dimen/layout_Margin_10">
+        android:paddingBottom="@dimen/layout_Margin_10"
+        android:visibility="gone">
 
         <LinearLayout
             style="@style/layout_widthfilled_style"
@@ -110,7 +113,6 @@
                 android:layout_marginTop="@dimen/layout_Margin_20"
                 android:enabled="false"
                 android:text="赠送" />
-
 
         </LinearLayout>
     </ScrollView>

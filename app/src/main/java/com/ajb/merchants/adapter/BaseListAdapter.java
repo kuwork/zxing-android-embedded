@@ -2,6 +2,7 @@ package com.ajb.merchants.adapter;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -33,6 +34,8 @@ import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +44,7 @@ public class BaseListAdapter<T> extends BaseAdapter {
 
     public final static String TYPE_CAR_NUM = "CAR_NUM";
     public final static String TYPE_COUPON_GIVING = "COUPON_GIVING";
+    public final static String TYPE_COUPON_GIVING_RECORD = "COUPON_GIVING_RECORD";
     private final BitmapUtils bitmapUtils;
     private String typeName;
     private List<T> dataList;
@@ -51,6 +55,27 @@ public class BaseListAdapter<T> extends BaseAdapter {
     private int currentPosition = -1;
     private boolean isEditable = false;//可否删除
     private String checked;
+    private List<Map<String, String>> headers;//标题栏数据
+
+    public List<Map<String, String>> getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(List<Map<String, String>> headers) {
+        Collections.sort(headers, new Comparator<Map<String, String>>() {
+            public int compare(Map<String, String> o1, Map<String, String> o2) {
+                //o1，o2是list中的Map，可以在其内取得值，按其排序，此例为升序，s1和s2是排序字段值
+                Integer s1 = Integer.parseInt(o1.get("id"));
+                Integer s2 = Integer.parseInt(o2.get("id"));
+                if (s1 > s2) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        this.headers = headers;
+    }
 
     public List<T> getDataList() {
         return dataList;
@@ -204,7 +229,16 @@ public class BaseListAdapter<T> extends BaseAdapter {
         View divider;
         @ViewInject(R.id.gridView)
         MyGridView gridView;
-        TextWatcher tw;
+        @ViewInject(R.id.tv1)
+        TextView tv1;
+        @ViewInject(R.id.tv2)
+        TextView tv2;
+        @ViewInject(R.id.tv3)
+        TextView tv3;
+        @ViewInject(R.id.tv4)
+        TextView tv4;
+        private TextWatcher tw;
+        private InputFilter lengthfilter;
 
         public ViewHolder() {
             super();
@@ -283,6 +317,8 @@ public class BaseListAdapter<T> extends BaseAdapter {
                                         edTitle.setVisibility(View.VISIBLE);
                                         if (tw == null) {
                                             tw = new TextWatcher() {
+                                                private boolean isChanged = false;
+
                                                 @Override
                                                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -300,6 +336,30 @@ public class BaseListAdapter<T> extends BaseAdapter {
                                             };
                                         }
                                         edTitle.addTextChangedListener(tw);
+                                        if (lengthfilter == null) {
+                                            lengthfilter = new InputFilter() {
+                                                public CharSequence filter(CharSequence source, int start, int end,
+                                                                           Spanned dest, int dstart, int dend) {
+                                                    // 删除等特殊字符，直接返回
+                                                    if ("".equals(source.toString())) {
+                                                        return null;
+                                                    }
+                                                    String dValue = dest.toString();
+                                                    String[] splitArray = dValue.split("\\.");
+                                                    if (splitArray.length > 1) {
+                                                        String dotValue = splitArray[1];
+                                                        //输入框小数的位数
+                                                        int DECIMAL_DIGITS = 1;
+                                                        int diff = dotValue.length() + 1 - DECIMAL_DIGITS;
+                                                        if (diff > 0) {
+                                                            return source.subSequence(start, end - diff);
+                                                        }
+                                                    }
+                                                    return null;
+                                                }
+                                            };
+                                        }
+                                        edTitle.setFilters(new InputFilter[]{lengthfilter});
                                         edTitle.requestFocus();
                                         edTitle.setSelection(edTitle.getText().length());
 
@@ -424,6 +484,25 @@ public class BaseListAdapter<T> extends BaseAdapter {
                     } else {
                         img.setImageResource(R.mipmap.checkbox);
                     }
+                }
+            } else if (info instanceof Map) {
+                switch (typeName) {
+                    case TYPE_COUPON_GIVING_RECORD:
+                        if (headers != null && headers.size() == 4) {
+                            if (tv1 != null) {
+                                tv1.setText(((Map<String, String>) info).get(headers.get(0).get("key")));
+                            }
+                            if (tv2 != null) {
+                                tv2.setText(((Map<String, String>) info).get(headers.get(1).get("key")));
+                            }
+                            if (tv3 != null) {
+                                tv3.setText(((Map<String, String>) info).get(headers.get(2).get("key")));
+                            }
+                            if (tv4 != null) {
+                                tv4.setText(((Map<String, String>) info).get(headers.get(3).get("key")));
+                            }
+                        }
+                        break;
                 }
             }
         }
