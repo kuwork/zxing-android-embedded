@@ -44,7 +44,9 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/edAccountLayout"
                         style="@style/layout_widthfilled_style"
+                        android:layout_marginBottom="@dimen/layout_Margin_10"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -78,7 +80,6 @@
 
                     <LinearLayout
                         style="@style/layout_widthfilled_style"
-                        android:layout_marginTop="@dimen/layout_Margin_10"
                         android:orientation="horizontal">
 
                         <LinearLayout

@@ -55,6 +55,8 @@ public class Constant {
     public static final String PK_GET_CAR_MERCHANT_MSG = "/merchantFunction/getCarAndMerchantMsg";//获取车辆信息以及商户派发权限
     public static final String PK_SEND_COUPON = "/merchantFunction/sendCoupon";
     public static final String PK_GET_SEND_RECORDS = "/couponsLog/getSendRecords";//赠送记录
+    public static final String PK_UPDATEACCOUNT = "merchantLog/updateAccount";//账号管理-账号修改保存接口
+
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";
     //应用存储文件夹
@@ -135,6 +137,7 @@ public class Constant {
 
         public static final String ACCOUNT = "account";
         public static final String NEWACCOUNT = "newAccount";
+        public static final String EDITACCOUNT = "editAccount";
         public static final String PASSWORD = "password";
         public static final String PHONE = "phone";
         public static final String TOKEN = "token";
