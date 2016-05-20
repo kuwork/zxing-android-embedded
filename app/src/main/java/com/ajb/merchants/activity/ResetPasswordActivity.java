@@ -77,9 +77,16 @@ public class ResetPasswordActivity extends BaseActivity {
             }
         }
         if (tvPhone != null) {
-            if (!TextUtils.isEmpty(accountInfo.getPhone())) {
+            String phoneStr = "";
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                if (bundle.containsKey(Constant.InterfaceParam.PHONE)) {
+                    phoneStr = bundle.getString(Constant.InterfaceParam.PHONE);
+                }
+            }
+            tvPhone.setText(phoneStr);
+            if (!TextUtils.isEmpty(phoneStr)) {
                 btnVerification.setEnabled(true);
-                tvPhone.setText(accountInfo.getPhone());
             } else {
                 btnVerification.setEnabled(false);
             }

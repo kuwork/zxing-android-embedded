@@ -2,7 +2,11 @@ package com.ajb.merchants.activity;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -25,6 +29,9 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
+
+import java.util.List;
 
 public class AccountManagementActivity extends BaseActivity {
 
@@ -38,9 +45,18 @@ public class AccountManagementActivity extends BaseActivity {
     private EditText edRemark;
     @ViewInject(R.id.imgPasswordPass)
     private ImageView imgPasswordPass;
-
     private Dialog mDialog;
     private BaseListAdapter<PermissionInfo> adapter;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    checkAccount();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +78,53 @@ public class AccountManagementActivity extends BaseActivity {
         initMenuClick(NO_ICON, "", null, R.drawable.actionbar_done, "完成", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addAccount();
+            }
+        });
+        edAccount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 0) {
+                    imgPasswordPass.setVisibility(View.INVISIBLE);
+                } else {
+                    imgPasswordPass.setVisibility(View.INVISIBLE);
+                    handler.removeMessages(0);
+                    handler.sendEmptyMessageDelayed(0, 500);
+                }
+            }
+        });
+
+        edAccount.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    checkAccount();
+                }
             }
         });
     }
 
+    @OnClick(R.id.imgPasswordPass)
+    public void onImgClick(View v) {
+        String msg = (String) v.getTag();
+        if (!TextUtils.isEmpty(msg)) {
+            showToast(msg);
+        }
+    }
+
+    /**
+     * 获取账户权限
+     */
     private void getAccountPermission() {
         AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
         if (accountSettingInfo == null) {
@@ -160,6 +219,144 @@ public class AccountManagementActivity extends BaseActivity {
                 if (mDialog != null && mDialog.isShowing()) {
                     mDialog.dismiss();
                 }
+                fail(error, msg);
+            }
+        });
+    }
+
+    /**
+     * 新增账号
+     */
+    private void addAccount() {
+        String newAccountStr = edAccount.getText().toString().trim();
+        String newAccountPwd = edPassword.getText().toString().trim();
+        String remarkStr = edRemark.getText().toString().trim();
+        if (TextUtils.isEmpty(newAccountStr)) {
+            showToast(getString(R.string.tip_enter_sub_name));
+            return;
+        }
+        if (TextUtils.isEmpty(newAccountPwd)) {
+            showToast(getString(R.string.tip_enter_sub_password));
+            return;
+        }
+        if (TextUtils.isEmpty(remarkStr)) {
+            showToast(getString(R.string.tip_empty_remark));
+            return;
+        }
+        List<PermissionInfo> dataList = null;
+        if (adapter != null) {
+            dataList = adapter.getDataList();
+        }
+        AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
+        if (accountSettingInfo == null) {
+            return;
+        }
+        AccountInfo accountInfo = accountSettingInfo.getAccountInfo();
+        if (accountInfo == null) {
+            return;
+        }
+        String account = accountInfo.getAccount();
+        if (TextUtils.isEmpty(account)) {
+            showToast(getString(R.string.tip_empty_account_name));
+            return;
+        }
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, account);
+        params.addQueryStringParameter(Constant.InterfaceParam.NEWACCOUNT, newAccountStr);
+        params.addQueryStringParameter(Constant.InterfaceParam.PASSWORD, newAccountPwd);
+        params.addQueryStringParameter(Constant.InterfaceParam.REMARK, remarkStr);
+        params.addQueryStringParameter(Constant.InterfaceParam.IDS, gson.toJson(dataList));
+        send(Constant.PK_ADDACCOUNT, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                mDialog = MyProgressDialog.createLoadingDialog(
+                        AccountManagementActivity.this, "请稍后...");
+                mDialog.show();
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                if (responseInfo.statusCode == 200) {
+                    BaseResult result = null;
+                    try {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult>() {
+                                }.getType());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result == null) {
+                        showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    showToast(result.getMsg());
+                    if ("0000".equals(result.code)) {
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (mDialog != null && mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                fail(error, msg);
+            }
+        });
+    }
+
+    /**
+     * 校验用户是否存在
+     */
+    private void checkAccount() {
+        String account = edAccount.getText().toString().trim();
+        if (TextUtils.isEmpty(account)) {
+            return;
+        }
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter(Constant.InterfaceParam.ACCOUNT, account);
+        send(Constant.PK_CHECKACCOUNT, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (responseInfo.statusCode == 200) {
+                    BaseResult result = null;
+                    try {
+                        result = gson.fromJson(
+                                responseInfo.result,
+                                new TypeToken<BaseResult>() {
+                                }.getType());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (result == null) {
+                        showToast(getString(R.string.error_network_short));
+                        return;
+                    }
+                    if ("0000".equals(result.code)) {
+                        imgPasswordPass.setVisibility(View.VISIBLE);
+                        imgPasswordPass.setImageResource(R.mipmap.ic_account_pass);
+                    } else {
+                        imgPasswordPass.setVisibility(View.VISIBLE);
+                        imgPasswordPass.setImageResource(R.mipmap.no_need_pay);
+                        imgPasswordPass.setTag(result.getMsg());
+                        showToast(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
                 fail(error, msg);
             }
         });

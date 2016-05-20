@@ -41,7 +41,6 @@ public class AccountListActivity extends BaseActivity {
         setContentView(R.layout.activity_account_list);
         ViewUtils.inject(this);
         initView();
-        getAccountList();
     }
 
     private void initView() {
@@ -270,5 +269,11 @@ public class AccountListActivity extends BaseActivity {
                 fail(error, msg);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAccountList();
     }
 }

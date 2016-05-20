@@ -741,6 +741,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                             break;
                         case MenuInfo.TO_PWD_RESET:
                             Intent intent = new Intent(getBaseContext(), ResetPasswordActivity.class);
+                            menuInfo.dealExtras(intent);
                             startActivityForResult(intent, Constant.REQ_CODE_PWD_RESET);
                             break;
                         default:
@@ -775,7 +776,6 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             }
         }
     }
-
 
 
     /**

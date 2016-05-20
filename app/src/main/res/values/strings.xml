@@ -77,6 +77,7 @@
     <string name="tip_empty_account_name">用户名不能为空</string>
     <string name="tip_empty_phone">手机号不能为空</string>
     <string name="tip_empty_id">ID不能为空</string>
+    <string name="tip_empty_remark">请输入备注</string>
     <string name="tip_delete_fail">删除失败</string>
     <string name="tip_input_car_num">请输入车牌号码</string>
     <string name="tip_input_car_num_correct">请输入正确的车牌号码</string>
@@ -93,5 +94,7 @@
     <string name="tip_store_name_default">店铺名称</string>
     <string name="tip_no_record">暂无数据</string>
     <string name="tip_no_permission">无权变更该状态！</string>
+    <string name="tip_enter_sub_name">请输入子账户用户名</string>
+    <string name="tip_enter_sub_password">请输入子账户用户密码</string>
 
 </resources>

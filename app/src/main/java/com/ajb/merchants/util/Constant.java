@@ -50,7 +50,9 @@ public class Constant {
     public static final String PK_QUERYACCOUNT = "merchantLog/queryAccount";//账号管理-查询某个商铺所有账号接口
     public static final String PK_DELETEACCOUNT = "merchantLog/deleteAccount";//账号管理-删除子账号接口
     public static final String PK_QUERYACCOUNT_RIGHT = "merchantLog/queryAccountRight";//账号管理-查看某个用户的权限(新增或编辑)
-    public static final String PK_GET_CAR_MERCHANT_MSG = "/merchantFunction/getCarAndMerchantMsg";//获取车辆信息以及商户派发权限
+    public static final String PK_ADDACCOUNT = "merchantLog/addAccount";//账号管理-新增账号保存接口
+    public static final String PK_CHECKACCOUNT = "merchantLog/checkAccount";//账号管理-检测用户是否存在接口
+    public static final String PK_GET_CAR_MERCHANT_MSG = "merchantFunction/getCarAndMerchantMsg";//获取车辆信息以及商户派发权限
 
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";
@@ -82,7 +84,6 @@ public class Constant {
     public static final String AD_TYPE_PAY_WECHAT = "6";   //支付页面广告 微信支付
     public static final String AD_TYPE_PAY_ALIPAY = "7";   //支付页面广告 支付宝支付
     public static final String AD_TYPE_PAY = "8";   //支付页面广告 APP支付需要加8
-
 
 
     /**
@@ -132,11 +133,13 @@ public class Constant {
         public static final String APPORDERID = "appOrderId";  //只有是订单反馈时，就存在这个订单id;
 
         public static final String ACCOUNT = "account";
+        public static final String NEWACCOUNT = "newAccount";
         public static final String PASSWORD = "password";
         public static final String PHONE = "phone";
         public static final String TOKEN = "token";
         public static final String CODE = "code";
         public static final String ID = "id";
+        public static final String REMARK = "remark";
         // 车牌号牌
         public static final String CARNO = "carNo";
         //卡面编号
