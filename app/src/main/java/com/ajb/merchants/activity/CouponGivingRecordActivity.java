@@ -252,7 +252,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
                                     showToast("刷新列表失败");
                                 }
                             } else {
-                                showToast("刷新列表失败");
+                                showToast(rr.msg);
                             }
                         } catch (JsonSyntaxException e) {
                             e.printStackTrace();

@@ -22,7 +22,7 @@ public class CouponSendType implements Serializable {
     private int sendModel;//1:非自定义,2:自定义
     private double timeTop;
     private String allowToSend;//00:可以派发,01:不能再派发
-    private double couponType;//派发优惠券类型，1为金额优惠，2为时间优惠
+    private int couponType;//派发优惠券类型，1为金额优惠，2为时间优惠
     private double time;
     private double value;
     private String unit;
@@ -109,11 +109,11 @@ public class CouponSendType implements Serializable {
         this.allowToSend = allowToSend;
     }
 
-    public double getCouponType() {
+    public int getCouponType() {
         return couponType;
     }
 
-    public void setCouponType(double couponType) {
+    public void setCouponType(int couponType) {
         this.couponType = couponType;
     }
 

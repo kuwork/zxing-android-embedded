@@ -314,7 +314,7 @@ public class CouponGivingActivity extends BaseActivity {
                 initGridView(couponSendTypeSelected, checked, false);
             }
         }
-        showToast(checked);
+//        showToast(checked);
         Pattern pat = Pattern.compile("[\\u4e00-\\u9fa5]");
         Matcher mat = pat.matcher(checked);
         RequestParams requestParams = new RequestParams();
