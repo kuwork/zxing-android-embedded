@@ -92,5 +92,6 @@
     <string name="tip_coupon_tab_card">卡号</string>
     <string name="tip_store_name_default">店铺名称</string>
     <string name="tip_no_record">暂无数据</string>
+    <string name="error_coupon_send_fail">优惠券赠送失败</string>
 
 </resources>

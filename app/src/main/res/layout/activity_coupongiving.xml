@@ -16,6 +16,7 @@
         tools:listitem="@layout/grid_item_tab" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         style="@style/layout_widthfilled_style"
         android:paddingBottom="@dimen/layout_Margin_10">
 

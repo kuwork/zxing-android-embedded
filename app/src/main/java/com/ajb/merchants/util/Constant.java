@@ -51,7 +51,8 @@ public class Constant {
     public static final String PK_DELETEACCOUNT = "merchantLog/deleteAccount";//账号管理-删除子账号接口
     public static final String PK_QUERYACCOUNT_RIGHT = "merchantLog/queryAccountRight";//账号管理-查看某个用户的权限(新增或编辑)
     public static final String PK_GET_CAR_MERCHANT_MSG = "/merchantFunction/getCarAndMerchantMsg";//获取车辆信息以及商户派发权限
-
+    public static final String PK_SEND_COUPON = "/merchantFunction/sendCoupon";
+    public static final String PK_GET_SEND_RECORDS = "/couponsLog/getSendRecords";//赠送记录
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";
     //应用存储文件夹
@@ -66,8 +67,8 @@ public class Constant {
     public static final String KEY_ACCOUNT_SETTING_INFO = "AccountInfo";
     //绑定车辆所要判断的key，1为我的车辆，2为社区车辆
     public static final String KEY_MODE = "mode";
-    public static final String KEY_CARDID = "cardId";
 
+    public static final String KEY_CARDID = "cardId";
     public static final String KEY_FROM = "from";
     public static final String KEY_UPDATE_APK_DIR = "update_apk_dir";// 更新下载的apk所在目录
     public static final String KEY_UPDATE_PENDING_INTENT = "update_pending_intent";// 更新下载完的apk点击的pendingIntent
@@ -82,7 +83,6 @@ public class Constant {
     public static final String AD_TYPE_PAY_WECHAT = "6";   //支付页面广告 微信支付
     public static final String AD_TYPE_PAY_ALIPAY = "7";   //支付页面广告 支付宝支付
     public static final String AD_TYPE_PAY = "8";   //支付页面广告 APP支付需要加8
-
 
 
     /**
@@ -142,6 +142,12 @@ public class Constant {
         //卡面编号
         public static final String CARD_SN_ID = "cardSnId";
 
+        public static final String ACCTIME = "accTime";
+        public static final String COUPON_TYPE = "couponType";
+        public static final String VALUE = "value";
+        public static final String TIME = "time";
+        public static final String ROWS = "rows";
+        public static final String PAGE = "page";
     }
 
     /**
