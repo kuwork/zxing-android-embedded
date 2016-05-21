@@ -24,7 +24,6 @@ import com.ajb.merchants.model.Pager;
 import com.ajb.merchants.model.PagerWithHeader;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.view.MyGridView;
-import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -209,7 +208,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
                 new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
-                        Gson gson = new Gson();
+                        listView.onRefreshComplete();
                         try {
                             BaseResult<PagerWithHeader> rr = gson.fromJson(
                                     responseInfo.result,
@@ -217,7 +216,6 @@ public class CouponGivingRecordActivity extends BaseActivity {
                                     }.getType());
                             if ("0000".equals(rr.code)) {
                                 if (rr.data != null) {
-
                                     if (rr.data.headers != null && rr.data.headers.size() == 4) {
                                         billListAdapter.setHeaders(rr.data.headers);
                                         if (tvHeader1 != null) {
@@ -233,6 +231,12 @@ public class CouponGivingRecordActivity extends BaseActivity {
                                             tvHeader4.setText(rr.data.headers.get(3).get("title"));
                                         }
                                     }
+                                    if (rr.data.pager.page == rr.data.pager.pageCount) {
+                                        showToast("到达最后一页");
+                                        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+                                    } else {
+                                        listView.setMode(PullToRefreshBase.Mode.BOTH);
+                                    }
                                     if (rr.data.pager.list.size() > 0) {
                                         if (rr.data.pager.page <= 1) {
                                             billListAdapter
@@ -245,11 +249,8 @@ public class CouponGivingRecordActivity extends BaseActivity {
                                             billListAdapter
                                                     .notifyDataSetChanged();
                                         }
-                                        listView.setMode(PullToRefreshBase.Mode.BOTH);
                                     } else {
                                         showToast(getString(R.string.error_no_more));
-                                        listView.onRefreshComplete();
-                                        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                                         if (billListAdapter.getCount() == 0) {
                                             showErrorPage(listView, R.string.error_no_more, R.mipmap.norecord);
                                         }
