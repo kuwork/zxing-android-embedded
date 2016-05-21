@@ -59,6 +59,8 @@
             </FrameLayout>
         </LinearLayout>
 
+        <View style="@style/line_style" />
+
         <FrameLayout
             style="@style/layout_widthfilled_style"
             android:orientation="vertical">
