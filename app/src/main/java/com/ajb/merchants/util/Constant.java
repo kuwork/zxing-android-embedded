@@ -24,8 +24,8 @@ public class Constant {
     public static final int PM_LOCATION = 2;//GPS权限
     //接口地址
 //    public static final String SERVER_URL = "http://app.eanpa-gz-manager.com/";//正式环境
-//    public static final String SERVER_URL = "http://115.29.211.91:28082/";//正式库测试环境
-    public static final String SERVER_URL = "http://172.16.35.6:18080/";// 开发
+    public static final String SERVER_URL = "http://alipay.ajbparking.com:8007/";//正式库测试环境
+//    public static final String SERVER_URL = "http://172.16.35.6:18080/";// 开发
     //    public static final String NEWSERVER_URL = "http://218.244.141.147:13901";// 心跳开发
     public static final String APPSEARCHCARCOUNT = "appSearchCarCount";//(新)查询计费接口
     public static final String APPPAYV2 = "appPayV2";// (新)停车缴费-微信支付接口（调用微信统一下单接口）

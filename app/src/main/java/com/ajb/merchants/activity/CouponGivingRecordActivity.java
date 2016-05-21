@@ -1,9 +1,11 @@
 package com.ajb.merchants.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
@@ -197,8 +199,12 @@ public class CouponGivingRecordActivity extends BaseActivity {
         RequestParams params = new RequestParams();
         params.addQueryStringParameter(Constant.InterfaceParam.ROWS, size + "");
         params.addQueryStringParameter(Constant.InterfaceParam.PAGE, index + "");
-        params.addQueryStringParameter(Constant.InterfaceParam.CARNO, "");
-        params.addQueryStringParameter(Constant.InterfaceParam.CARD_SN_ID, "");
+        if (!TextUtils.isEmpty(carNo)) {
+            params.addQueryStringParameter(Constant.InterfaceParam.CARNO, carNo);
+        }
+        if (!TextUtils.isEmpty(cardSnId)) {
+            params.addQueryStringParameter(Constant.InterfaceParam.CARD_SN_ID, cardSnId);
+        }
         send(Constant.PK_GET_SEND_RECORDS, params,
                 new RequestCallBack<String>() {
                     @Override
@@ -211,7 +217,9 @@ public class CouponGivingRecordActivity extends BaseActivity {
                                     }.getType());
                             if ("0000".equals(rr.code)) {
                                 if (rr.data != null) {
+
                                     if (rr.data.headers != null && rr.data.headers.size() == 4) {
+                                        billListAdapter.setHeaders(rr.data.headers);
                                         if (tvHeader1 != null) {
                                             tvHeader1.setText(rr.data.headers.get(0).get("title"));
                                         }
@@ -224,7 +232,6 @@ public class CouponGivingRecordActivity extends BaseActivity {
                                         if (tvHeader4 != null) {
                                             tvHeader4.setText(rr.data.headers.get(3).get("title"));
                                         }
-                                        billListAdapter.setHeaders(rr.data.headers);
                                     }
                                     if (rr.data.pager.list.size() > 0) {
                                         if (rr.data.pager.page <= 1) {
@@ -265,13 +272,17 @@ public class CouponGivingRecordActivity extends BaseActivity {
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         LogUtils.e(error.getExceptionCode() + ":" + msg);
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                listView.onRefreshComplete();
-                                showErrorPage(listView, R.string.error_network, R.mipmap.network);
-                            }
-                        }, 500);
+                        listView.onRefreshComplete();
+                        if (error.getExceptionCode() == 0) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    showErrorPage(listView, R.string.error_network, R.mipmap.network);
+                                }
+                            }, 500);
+                        } else {
+                            fail(error, msg);
+                        }
                     }
                 });
     }
@@ -292,7 +303,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
 
     @OnClick(R.id.sure_btn)
     public void onSureClick(View v) {
-        layoutSearch.setVisibility(View.GONE);
+
         if (tabCarNo.isSelected()) {
             carNo = tvCode.getText().toString().trim() + edCarno.getText().toString().trim();
             cardSnId = null;
@@ -316,6 +327,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
                 }
             }, 200);
         }
+        layoutSearch.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.tvCode)
@@ -347,6 +359,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
     /**
      * 创建popupWindow菜单
      */
+
     private void showCarNoPopupWindow(TextView textView) {
         // TODO Auto-generated method stub
         if (carNoPopupView == null || carNoPopupWindow == null) {
@@ -398,7 +411,19 @@ public class CouponGivingRecordActivity extends BaseActivity {
             });
         }
         carNoPopupWindow.showAtLocation(textView, Gravity.BOTTOM, 0, 0);
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == Constant.REQ_CODE_LOGIN) {
+            pager = null;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    listView.onRefreshComplete();
+                    listView.setRefreshing(true);
+                }
+            }, 1000);
+        }
+    }
 }
