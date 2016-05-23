@@ -285,10 +285,6 @@ public class AccountManagementActivity extends BaseActivity {
             showToast(getString(R.string.tip_enter_sub_password));
             return;
         }
-        if (TextUtils.isEmpty(remarkStr)) {
-            showToast(getString(R.string.tip_empty_remark));
-            return;
-        }
         List<PermissionInfo> dataList = null;
         if (adapter != null) {
             dataList = adapter.getDataList();
