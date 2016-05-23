@@ -75,19 +75,18 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/tvKey"
                                         style="@style/item_tv_title_style"
                                         android:layout_gravity="left"
                                         android:layout_marginTop="@dimen/layout_Margin_5"
-                                        android:text="账户余额"
                                         android:textColor="@color/white" />
 
                                     <TextView
-                                        android:id="@+id/tvPrice"
+                                        android:id="@+id/tvValue"
                                         style="@style/item_tv_second_style"
                                         android:layout_gravity="left"
                                         android:layout_marginTop="@dimen/layout_Margin_5"
                                         android:singleLine="false"
-                                        android:text="新疆牛肉面店"
                                         android:textColor="@color/white" />
                                 </LinearLayout>
                             </LinearLayout>
@@ -117,7 +116,6 @@
                                             style="@style/item_tv_style"
                                             android:layout_height="wrap_content"
                                             android:layout_centerHorizontal="true"
-                                            android:text="无限制"
                                             android:textColor="@color/white" />
 
                                         <TextView
@@ -127,7 +125,6 @@
                                             android:layout_below="@+id/title"
                                             android:layout_centerHorizontal="true"
                                             android:layout_marginTop="2dp"
-                                            android:text="当月已赠"
                                             android:textColor="@color/white" />
                                     </LinearLayout>
 
@@ -161,7 +158,6 @@
                                             style="@style/item_tv_style"
                                             android:layout_height="wrap_content"
                                             android:layout_centerHorizontal="true"
-                                            android:text="100元/100元"
                                             android:textColor="@color/white" />
 
                                         <TextView
@@ -171,7 +167,6 @@
                                             android:layout_below="@+id/title"
                                             android:layout_centerHorizontal="true"
                                             android:layout_marginTop="2dp"
-                                            android:text="当月已金额"
                                             android:textColor="@color/white" />
                                     </LinearLayout>
 
@@ -203,7 +198,6 @@
                                             style="@style/item_tv_style"
                                             android:layout_height="wrap_content"
                                             android:layout_centerHorizontal="true"
-                                            android:text="100元/100元"
                                             android:textColor="@color/white" />
 
                                         <TextView
@@ -213,7 +207,6 @@
                                             android:layout_below="@+id/title"
                                             android:layout_centerHorizontal="true"
                                             android:layout_marginTop="2dp"
-                                            android:text="当月赠金额"
                                             android:textColor="@color/white" />
                                     </LinearLayout>
                                 </RelativeLayout>
