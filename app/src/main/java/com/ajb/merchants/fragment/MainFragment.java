@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -118,10 +119,10 @@ public class MainFragment extends BaseFragment {
             }
         });
         swipeLayout.setColorSchemeColors(
-                getResources().getColor(R.color.holo_blue_bright),
-                getResources().getColor(R.color.holo_green_light),
-                getResources().getColor(R.color.holo_orange_light),
-                getResources().getColor(R.color.holo_red_light));
+                ContextCompat.getColor(getActivity(), R.color.holo_blue_bright),
+                ContextCompat.getColor(getActivity(), R.color.holo_green_light),
+                ContextCompat.getColor(getActivity(), R.color.holo_orange_light),
+                ContextCompat.getColor(getActivity(), R.color.holo_red_light));
 
         List<BalanceLimitInfo> balanceLimitInfoList = Arrays.asList(
                 new BalanceLimitInfo("", "元", "可赠金额"),

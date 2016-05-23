@@ -11,7 +11,7 @@ import java.util.List;
 public class MerchantsDetailInfo implements Serializable {
 
     private List<Info> balanceList;
-    private ModularMenu infoList;
+    private ModularMenu menu;
     private Info topList;
 
     public List<Info> getBalanceList() {
@@ -22,12 +22,12 @@ public class MerchantsDetailInfo implements Serializable {
         this.balanceList = balanceList;
     }
 
-    public ModularMenu getInfoList() {
-        return infoList;
+    public ModularMenu getMenu() {
+        return menu;
     }
 
-    public void setInfoList(ModularMenu infoList) {
-        this.infoList = infoList;
+    public void setMenu(ModularMenu menu) {
+        this.menu = menu;
     }
 
     public Info getTopList() {

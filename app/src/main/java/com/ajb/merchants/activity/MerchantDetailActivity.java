@@ -1,11 +1,15 @@
 package com.ajb.merchants.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +28,9 @@ import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.MerchantsDetailInfo;
 import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.util.Constant;
-import com.ajb.merchants.util.MyProgressDialog;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.MyListView;
+import com.ajb.merchants.view.MySwipeRefreshLayout;
 import com.ajb.merchants.view.RoundedImageView;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.BitmapUtils;
@@ -43,9 +47,13 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.util.ObjectUtil;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MerchantDetailActivity extends BaseActivity {
 
+    @ViewInject(R.id.swipeLayout)
+    MySwipeRefreshLayout swipeLayout;
     @ViewInject(R.id.detailListView)
     private MyListView detailListView;
     @ViewInject(R.id.imgAvatar)
@@ -68,7 +76,6 @@ public class MerchantDetailActivity extends BaseActivity {
     private TextView desc3;
     private View picPickView;
     private PopupWindow picPickPopwindow;
-    private Dialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +90,18 @@ public class MerchantDetailActivity extends BaseActivity {
             }
         });
         initHeaderDivider(false);
+        swipeLayout.setCanRefresh(true);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMerchantsDetail();
+            }
+        });
+        swipeLayout.setColorSchemeColors(
+                ContextCompat.getColor(getBaseContext(), R.color.holo_blue_bright),
+                ContextCompat.getColor(getBaseContext(), R.color.holo_green_light),
+                ContextCompat.getColor(getBaseContext(), R.color.holo_orange_light),
+                ContextCompat.getColor(getBaseContext(), R.color.holo_red_light));
         getMerchantsDetail();
         AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
         if (accountSettingInfo != null && accountSettingInfo.getAccountInfo() != null) {
@@ -103,9 +122,6 @@ public class MerchantDetailActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 初始化侧滑菜单
-     */
     private void initMenuInfo(ModularMenu modularMenu) {
         if (modularMenu == null) {
             return;
@@ -133,9 +149,6 @@ public class MerchantDetailActivity extends BaseActivity {
                         menuInfo.click(MerchantDetailActivity.this);
                     } else {
                         switch (menuInfo.getMenuCode()) {
-                            case MenuInfo.TO_EXIT://退出掌停宝
-                                finish();
-                                break;
                             default:
                                 menuInfo.click(MerchantDetailActivity.this);
                                 break;
@@ -164,23 +177,43 @@ public class MerchantDetailActivity extends BaseActivity {
             return;
         }
         if (title1 != null) {
-            title1.setText(balanceList.get(0).getKey());
+            title1.setText(dealUnit(balanceList.get(0).getValue()));
         }
         if (desc1 != null) {
-            desc1.setText(balanceList.get(0).getValue());
+            desc1.setText(balanceList.get(0).getKey());
         }
         if (title2 != null) {
-            title2.setText(balanceList.get(1).getValue());
+            title2.setText(dealUnit(balanceList.get(1).getValue()));
         }
         if (desc2 != null) {
             desc2.setText(balanceList.get(1).getKey());
         }
         if (title3 != null) {
-            title3.setText(balanceList.get(2).getValue());
+            title3.setText(dealUnit(balanceList.get(2).getValue()));
         }
         if (desc3 != null) {
             desc3.setText(balanceList.get(2).getKey());
         }
+    }
+
+    private SpannableString dealUnit(String str) {
+        if (TextUtils.isEmpty(str)) {
+            return new SpannableString("");
+        }
+        SpannableString ss = new SpannableString(str);
+        if (str.indexOf("/") == -1) {
+            return ss;
+        }
+        Pattern pat = Pattern.compile("[\\u4e00-\\u9fa5]+");
+        Matcher matcher = pat.matcher(str);
+        while (matcher.find()) {
+            ss.setSpan(new RelativeSizeSpan(0.5f),
+                    matcher.start(),
+                    matcher.end(),
+                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+            );
+        }
+        return ss;
     }
 
     @OnClick(R.id.imgAvatar)
@@ -229,15 +262,18 @@ public class MerchantDetailActivity extends BaseActivity {
     private void getMerchantsDetail() {
         AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
         if (accountSettingInfo == null) {
+            swipeLayout.setRefreshing(false);
             return;
         }
         AccountInfo accountInfo = accountSettingInfo.getAccountInfo();
         if (accountInfo == null) {
+            swipeLayout.setRefreshing(false);
             return;
         }
         String account = accountInfo.getAccount();
         if (TextUtils.isEmpty(account)) {
             showToast(getString(R.string.tip_empty_account_name));
+            swipeLayout.setRefreshing(false);
             return;
         }
         RequestParams params = new RequestParams();
@@ -247,19 +283,11 @@ public class MerchantDetailActivity extends BaseActivity {
             @Override
             public void onStart() {
                 super.onStart();
-                if (mDialog != null && mDialog.isShowing()) {
-                    mDialog.dismiss();
-                }
-                mDialog = MyProgressDialog.createLoadingDialog(
-                        MerchantDetailActivity.this, "请稍后...");
-                mDialog.show();
+                swipeLayout.setRefreshing(true);
             }
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                if (mDialog != null && mDialog.isShowing()) {
-                    mDialog.dismiss();
-                }
                 if (responseInfo.statusCode == 200) {
                     BaseResult<MerchantsDetailInfo> result = null;
                     try {
@@ -277,7 +305,7 @@ public class MerchantDetailActivity extends BaseActivity {
                     if ("0000".equals(result.code)) {
                         if (result.data != null) {
                             sharedFileUtils.putString(SharedFileUtils.MERCHANT_DETAIL_INFO, ObjectUtil.getBASE64String(result.data));
-                            initMenuInfo(result.data.getInfoList());
+                            initMenuInfo(result.data.getMenu());
                             initTopInfo(result.data.getTopList());
                             initBalanceInfo(result.data.getBalanceList());
                         }
@@ -285,24 +313,23 @@ public class MerchantDetailActivity extends BaseActivity {
                         showToast(result.getMsg());
                     }
                 }
+                swipeLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(HttpException error, String msg) {
-                if (mDialog != null && mDialog.isShowing()) {
-                    mDialog.dismiss();
-                }
                 fail(error, msg);
+                swipeLayout.setRefreshing(false);
             }
         });
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        MerchantsDetailInfo info = (MerchantsDetailInfo) ObjectUtil.getObject(SharedFileUtils.MERCHANT_DETAIL_INFO);
+    protected void onStart() {
+        super.onStart();
+        MerchantsDetailInfo info = (MerchantsDetailInfo) ObjectUtil.getObject(sharedFileUtils.getString(SharedFileUtils.MERCHANT_DETAIL_INFO));
         if (info != null) {
-            initMenuInfo(info.getInfoList());
+            initMenuInfo(info.getMenu());
             initTopInfo(info.getTopList());
             initBalanceInfo(info.getBalanceList());
         }
