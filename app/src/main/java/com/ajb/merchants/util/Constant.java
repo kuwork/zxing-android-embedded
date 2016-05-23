@@ -56,6 +56,7 @@ public class Constant {
     public static final String PK_SEND_COUPON = "/merchantFunction/sendCoupon";
     public static final String PK_GET_SEND_RECORDS = "/couponsLog/getSendRecords";//赠送记录
     public static final String PK_UPDATEACCOUNT = "merchantLog/updateAccount";//账号管理-账号修改保存接口
+    public static final String PK_GETSTOREDETAILS = "merchantStore/getStoreDetails";//获取商户详细信息接口
 
     // app应用ID
     public static final String APP_ID = "wx494442457975748a";
