@@ -7,11 +7,9 @@ import android.widget.Toast;
 
 import com.ajb.merchants.activity.AboutActivity;
 import com.ajb.merchants.activity.AccountListActivity;
-import com.ajb.merchants.activity.AccountManagementActivity;
 import com.ajb.merchants.activity.CouponGivingRecordActivity;
 import com.ajb.merchants.activity.EditorActivity;
 import com.ajb.merchants.activity.ModifyPhoneActivity;
-import com.ajb.merchants.activity.ResetPasswordActivity;
 import com.ajb.merchants.activity.WebViewActivity;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.DataCleanManager;
@@ -238,8 +236,6 @@ public class MenuInfo implements Serializable {
                         ) {
                     intent = new Intent(context, EditorActivity.class);
                     dealExtras(intent);
-                    intent.putExtra(Constant.KEY_TITLE, getTitle());
-                    intent.putExtra(Constant.KEY_DESC, getDesc());
                     context.startActivity(intent);
                 } else if (TO_PHONE.equals(getMenuCode())) {
                     intent = new Intent(context, ModifyPhoneActivity.class);
@@ -303,6 +299,10 @@ public class MenuInfo implements Serializable {
         }
         if (getExtras() != null) {
             for (Map.Entry<String, String> entry : getExtras().entrySet()) {
+                if (entry.getValue() == null) {
+                    intent.putExtra(entry.getKey(), "");
+                    continue;
+                }
                 if ("false".equals(entry.getValue().toLowerCase()) || "true".equals(entry.getValue().toLowerCase())) {
                     intent.putExtra(entry.getKey(), Boolean.valueOf(entry.getValue()).booleanValue());
                 } else {
