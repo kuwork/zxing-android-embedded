@@ -125,7 +125,6 @@
                     android:gravity="left|center_vertical"
                     android:hint="@string/tip_input_card"
                     android:inputType="numberSigned"
-                    android:maxLength="6"
                     android:paddingLeft="@dimen/layout_Margin_15"
                     android:paddingRight="@dimen/layout_Margin_15" />
             </LinearLayout>
