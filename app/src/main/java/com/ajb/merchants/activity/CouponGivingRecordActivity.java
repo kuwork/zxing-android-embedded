@@ -98,6 +98,19 @@ public class CouponGivingRecordActivity extends BaseActivity {
         initMenuClick(NO_ICON, "", null, R.drawable.actionbar_search, "搜索", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!TextUtils.isEmpty(cardSnId)) {
+                    edCard.setText(cardSnId);
+                }else{
+                    edCard.setText(null);
+                }
+                if (!TextUtils.isEmpty(carNo)) {
+                    tvCode.setText(carNo.substring(0, 1));
+                    edCarno.setText(carNo.substring(1));
+                }else{
+                    tvCode.setText("粤");
+                    edCarno.setText(null);
+                }
+
                 layoutSearch.setVisibility(View.VISIBLE);
                 tabCarNo.performClick();
 
@@ -306,7 +319,11 @@ public class CouponGivingRecordActivity extends BaseActivity {
     public void onSureClick(View v) {
 
         if (tabCarNo.isSelected()) {
-            carNo = tvCode.getText().toString().trim() + edCarno.getText().toString().trim();
+            if (TextUtils.isEmpty(edCarno.getText().toString().trim())) {
+                carNo = null;
+            } else {
+                carNo = tvCode.getText().toString().trim() + edCarno.getText().toString().trim();
+            }
             cardSnId = null;
             pager = null;
             new Handler().postDelayed(new Runnable() {
