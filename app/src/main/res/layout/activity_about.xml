@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/layout_allFilled_style"
-    android:fitsSystemWindows="true"
-    tools:context="com.ajb.anjubao.intelligent.activity.AboutActivity">
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/about_header_layout"
@@ -45,7 +44,8 @@
 
                 <RelativeLayout
                     android:id="@+id/service_term"
-                    style="@style/item_layout">
+                    style="@style/item_layout"
+                    android:visibility="gone">
 
                     <TextView
                         style="@style/item_tv_style"
@@ -89,7 +89,8 @@
 
                 <RelativeLayout
                     android:id="@+id/layout_soft_guide"
-                    style="@style/item_layout">
+                    style="@style/item_layout"
+                    android:visibility="gone">
 
                     <TextView
                         style="@style/item_tv_style"
