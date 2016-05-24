@@ -359,6 +359,17 @@ public class BaseListAdapter<T> extends BaseAdapter {
                                                         if (diff > 0) {
                                                             return source.subSequence(start, end - diff);
                                                         }
+                                                    } else {
+                                                        String str = dValue;
+                                                        if (dValue.endsWith(".")) {
+                                                            str = dValue.substring(0, dValue.length() - 1);
+                                                            if (TextUtils.isDigitsOnly(source) && str.length() <= 3) {
+                                                                return source;
+                                                            }
+                                                        } else if (TextUtils.isDigitsOnly(source) && str.length() >= 3) {
+                                                            return "";
+                                                        }
+
                                                     }
                                                     return null;
                                                 }

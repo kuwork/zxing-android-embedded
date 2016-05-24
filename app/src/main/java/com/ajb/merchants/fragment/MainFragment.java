@@ -72,6 +72,7 @@ public class MainFragment extends BaseFragment {
     private MenuItemAdapter<MenuInfo> mainMenuListAdapter;
     private AdapterView.OnItemClickListener onItemClickListener;
     private BlurBitmapTask blurBitmapTask;
+    private BaseListAdapter<BalanceLimitInfo> balanceLimitInfoAdapter;
 
     @Override
     public void onAttach(Activity activity) {
@@ -170,9 +171,13 @@ public class MainFragment extends BaseFragment {
         });
     }
 
-    private void initBalance(List<BalanceLimitInfo> balanceLimitInfoList) {
-        BaseListAdapter<BalanceLimitInfo> balanceLimitInfoAdapter = new BaseListAdapter<BalanceLimitInfo>(getActivity(), balanceLimitInfoList, R.layout.balance_limit_item, null);
-        balanceGridView.setAdapter(balanceLimitInfoAdapter);
+    public void initBalance(List<BalanceLimitInfo> balanceLimitInfoList) {
+        if (balanceLimitInfoAdapter == null) {
+            balanceLimitInfoAdapter = new BaseListAdapter<BalanceLimitInfo>(getActivity(), balanceLimitInfoList, R.layout.balance_limit_item, null);
+            balanceGridView.setAdapter(balanceLimitInfoAdapter);
+        } else {
+            balanceLimitInfoAdapter.update(balanceLimitInfoList);
+        }
     }
 
     public void initCouponMenuList(Context context, ModularMenu mm, AdapterView.OnItemClickListener listener) {

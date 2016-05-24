@@ -209,6 +209,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             initAccountInfo(fragment.imgAvatar, null, fragment.tvStoreName, info.getAccountInfo());
             BitmapUtils bitmapUtils = new BitmapUtils(getBaseContext());
             fragment.initHeaderBg(getBaseContext(), info.getAccountInfo().getCoverimgUrl());
+            fragment.initBalance(info.getBalanceList());
         }
     }
 
@@ -540,7 +541,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    // 获取用户详细信息
+    // 获取主页详细信息
     public void getAccoutInfo() {
         send(Constant.PK_MAIN_SETTING, null, new RequestCallBack<String>() {
             @Override
