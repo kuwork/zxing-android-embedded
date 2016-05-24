@@ -111,6 +111,7 @@ public class EditorActivity extends BaseActivity {
                     }
                     showToast(result.msg);
                     if ("0000".equals(result.code)) {
+                        setResult(RESULT_OK);
                         finish();
                     }
                 }

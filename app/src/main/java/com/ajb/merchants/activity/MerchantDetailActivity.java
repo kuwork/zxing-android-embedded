@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
@@ -102,7 +103,6 @@ public class MerchantDetailActivity extends BaseActivity {
                 ContextCompat.getColor(getBaseContext(), R.color.holo_green_light),
                 ContextCompat.getColor(getBaseContext(), R.color.holo_orange_light),
                 ContextCompat.getColor(getBaseContext(), R.color.holo_red_light));
-        getMerchantsDetail();
         AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
         if (accountSettingInfo != null && accountSettingInfo.getAccountInfo() != null) {
             if (imgAvatar != null) {
@@ -120,6 +120,12 @@ public class MerchantDetailActivity extends BaseActivity {
                 });
             }
         }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getMerchantsDetail();
+            }
+        }, 1000);
     }
 
     private void initMenuInfo(ModularMenu modularMenu) {
@@ -146,7 +152,25 @@ public class MerchantDetailActivity extends BaseActivity {
                             startActivityForResult(new Intent(getBaseContext(), LoginActivity.class), Constant.REQ_CODE_LOGIN);
                             return;
                         }
-                        menuInfo.click(MerchantDetailActivity.this);
+                        if (MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+                            swipeLayout.setRefreshing(false);
+                            Intent intent = null;
+                            if (MenuInfo.TO_CONTACT.equals(menuInfo.getMenuCode())
+                                    || MenuInfo.TO_STORE_DETAIL.equals(menuInfo.getMenuCode()) ||
+                                    MenuInfo.TO_STORE_ADDRESS.equals(menuInfo.getMenuCode()) ||
+                                    MenuInfo.TO_STORE_SCOPE.equals(menuInfo.getMenuCode())
+                                    ) {
+                                intent = new Intent(getBaseContext(), EditorActivity.class);
+                                menuInfo.dealExtras(intent);
+                                startActivityForResult(intent, Constant.REQ_CODE_MODIFY);
+                            } else if (MenuInfo.TO_PHONE.equals(menuInfo.getMenuCode())) {
+                                intent = new Intent(getBaseContext(), ModifyPhoneActivity.class);
+                                menuInfo.dealExtras(intent);
+                                startActivityForResult(intent, Constant.REQ_CODE_MODIFY);
+                            }
+                        } else {
+                            menuInfo.click(MerchantDetailActivity.this);
+                        }
                     } else {
                         switch (menuInfo.getMenuCode()) {
                             default:
@@ -332,6 +356,21 @@ public class MerchantDetailActivity extends BaseActivity {
             initMenuInfo(info.getMenu());
             initTopInfo(info.getTopList());
             initBalanceInfo(info.getBalanceList());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == Constant.REQ_CODE_MODIFY) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getMerchantsDetail();
+                    }
+                }, 500);
+            }
         }
     }
 }
