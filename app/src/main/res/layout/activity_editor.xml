@@ -12,8 +12,10 @@
 
     <LinearLayout
         style="@style/item_layout"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/layout_Margin_10"
         android:background="@color/white"
+        android:minHeight="50dp"
         android:orientation="vertical">
 
         <View style="@style/line_style" />
@@ -24,7 +26,8 @@
             android:layout_weight="1"
             android:hint="@string/tip_editor"
             android:paddingLeft="@dimen/layout_Margin_10"
-            android:paddingRight="@dimen/layout_Margin_10" />
+            android:paddingRight="@dimen/layout_Margin_10"
+            android:singleLine="false" />
 
         <View style="@style/line_style" />
     </LinearLayout>

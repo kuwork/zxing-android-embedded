@@ -72,6 +72,7 @@
                                 <LinearLayout
                                     style="@style/layout_widthfilled_style"
                                     android:layout_marginLeft="@dimen/layout_Margin_15"
+                                    android:layout_marginRight="@dimen/layout_Margin_5"
                                     android:orientation="vertical">
 
                                     <TextView

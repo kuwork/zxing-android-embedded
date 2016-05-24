@@ -8,8 +8,6 @@ import android.widget.Toast;
 import com.ajb.merchants.activity.AboutActivity;
 import com.ajb.merchants.activity.AccountListActivity;
 import com.ajb.merchants.activity.CouponGivingRecordActivity;
-import com.ajb.merchants.activity.EditorActivity;
-import com.ajb.merchants.activity.ModifyPhoneActivity;
 import com.ajb.merchants.activity.WebViewActivity;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.DataCleanManager;
@@ -229,18 +227,6 @@ public class MenuInfo implements Serializable {
                 } else if (TO_ABOUTUS.equals(getMenuCode())) {
                     //关于我们
                     context.startActivity(new Intent(context, AboutActivity.class));
-                } else if (TO_CONTACT.equals(getMenuCode())
-                        || TO_STORE_DETAIL.equals(getMenuCode()) ||
-                        TO_STORE_ADDRESS.equals(getMenuCode()) ||
-                        TO_STORE_SCOPE.equals(getMenuCode())
-                        ) {
-                    intent = new Intent(context, EditorActivity.class);
-                    dealExtras(intent);
-                    context.startActivity(intent);
-                } else if (TO_PHONE.equals(getMenuCode())) {
-                    intent = new Intent(context, ModifyPhoneActivity.class);
-                    dealExtras(intent);
-                    context.startActivity(intent);
                 } else if (TO_CLEARCACHE.equals(getMenuCode())) {
                     //清除缓存
                     String cacheDirPath = PathManager.getDiskCacheDir(context) + File.separator + "WebCache";
