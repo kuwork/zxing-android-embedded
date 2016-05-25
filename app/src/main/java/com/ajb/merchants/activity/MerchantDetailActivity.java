@@ -363,7 +363,7 @@ public class MerchantDetailActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == Constant.REQ_CODE_MODIFY) {
+            if (requestCode == Constant.REQ_CODE_MODIFY || requestCode == Constant.REQ_CODE_LOGIN) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

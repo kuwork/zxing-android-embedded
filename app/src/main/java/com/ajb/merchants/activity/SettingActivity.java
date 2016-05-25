@@ -187,6 +187,7 @@ public class SettingActivity extends BaseActivity {
                                 sharedFileUtils.remove(SharedFileUtils.TOKEN);
                                 sharedFileUtils.remove(SharedFileUtils.IS_LOGIN);
                                 sharedFileUtils.remove(SharedFileUtils.ACCOUNT_SETING_INFO);
+                                sharedFileUtils.remove(SharedFileUtils.MERCHANT_DETAIL_INFO);
                                 finish();
                             } else {
                                 setResult(RESULT_CANCELED);
