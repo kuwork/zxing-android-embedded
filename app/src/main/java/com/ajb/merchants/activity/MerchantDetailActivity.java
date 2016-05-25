@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
@@ -225,17 +226,25 @@ public class MerchantDetailActivity extends BaseActivity {
             return new SpannableString("");
         }
         SpannableString ss = new SpannableString(str);
-        if (str.indexOf("/") == -1) {
-            return ss;
-        }
+//        if (str.indexOf("/") == -1) {
+//            return ss;
+//        }
+        String[] strs = str.split("/");
+        SpannableStringBuilder ssb = new SpannableStringBuilder();
         Pattern pat = Pattern.compile("[\\u4e00-\\u9fa5]+");
-        Matcher matcher = pat.matcher(str);
+        Pattern patWithNum = Pattern.compile("[\\d]+[\\u4e00-\\u9fa5]+");
+        Matcher matcher = patWithNum.matcher(str);
         while (matcher.find()) {
-            ss.setSpan(new RelativeSizeSpan(0.5f),
-                    matcher.start(),
-                    matcher.end(),
-                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-            );
+            Matcher matcher1 = pat.matcher(matcher.group());
+            if (matcher1.find()) {
+                int start = str.indexOf(matcher1.group());
+                int end = start + matcher1.group().length();
+                ss.setSpan(new RelativeSizeSpan(0.5f),
+                        start,
+                        end,
+                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                );
+            }
         }
         return ss;
     }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.ajb.merchants.R;
 import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.model.AccountSettingInfo;
+import com.ajb.merchants.model.BalanceLimitInfo;
 import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.CarInParkingBuilder;
 import com.ajb.merchants.model.CarParkingInInfo;
@@ -346,11 +347,11 @@ public class CouponGivingActivity extends BaseActivity {
                     mDialog.dismiss();
                 }
                 if (responseInfo.statusCode == 200) {
-                    BaseResult<String> result = null;
+                    BaseResult<List<BalanceLimitInfo>> result = null;
                     try {
                         result = gson.fromJson(
                                 responseInfo.result,
-                                new TypeToken<BaseResult<String>>() {
+                                new TypeToken<BaseResult<List<BalanceLimitInfo>>>() {
                                 }.getType());
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -361,6 +362,13 @@ public class CouponGivingActivity extends BaseActivity {
                     }
                     showToast(result.msg);
                     if ("0000".equals(result.code)) {
+                        if (result.data != null) {
+                            if (result.data.size() == 4) {
+                                AccountSettingInfo accountSettingInfo = getAccountSettingInfo();
+                                accountSettingInfo.setBalanceList(result.data);
+                                saveAndNoticeAccountInfoChange(accountSettingInfo);
+                            }
+                        }
                         finish();
                     }
                 }
