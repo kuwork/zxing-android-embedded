@@ -136,7 +136,7 @@ public class ResetPasswordActivity extends BaseActivity {
 
             case R.id.btnResetPassword:
                 String account = accountInfo.getAccount();
-                String phone = accountInfo.getPhone();
+                String phone = tvPhone.getText().toString();
                 String password = edPassword.getText().toString().trim();
                 String confirmPassword = edConfirmPassword.getText().toString().trim();
                 String msgCode = edVerification.getText().toString().trim();
@@ -174,11 +174,13 @@ public class ResetPasswordActivity extends BaseActivity {
      */
     private void getVerificationCode() {
         String account = accountInfo.getAccount();
-        String phone = accountInfo.getPhone();
+        String phone = tvPhone.getText().toString();
         if (TextUtils.isEmpty(account)) {
+            fail(new HttpException(403), null);
             return;
         }
         if (TextUtils.isEmpty(phone)) {
+            showToast("获取验证码失败");
             return;
         }
         RequestParams params = new RequestParams();

@@ -30,10 +30,6 @@ public class Constant {
     //    public static final String NEWSERVER_URL = "http://218.244.141.147:13901";// 心跳开发
     public static final String APPSEARCHCARCOUNT = "appSearchCarCount";//(新)查询计费接口
     public static final String APPPAYV2 = "appPayV2";// (新)停车缴费-微信支付接口（调用微信统一下单接口）
-    public static final String APPGETRENEWINFO = "appGetRenewInfo";// 获取会员激活预支付订单
-    public static final String APPSAVECHANNELID = "appSaveChannelId";// 用户模块-保存channelId接口
-    public static final String APPDELCHANNELID = "appDelChannelId";// 用户模块-取消channelId接口
-    public static final String RENEWSINGNIN = "renewSignIn";// 签到接口
     public static final String APPUSERCOUPONSV2 = "/zoneCode/appUserCouponsV2";// 使用优惠券抵扣
     public static final String APPPAYFORALIV2 = "appPayForAliV2";// 扫卡支付
     public static final String APPQUREYAD = "appQureyAd";   //广告

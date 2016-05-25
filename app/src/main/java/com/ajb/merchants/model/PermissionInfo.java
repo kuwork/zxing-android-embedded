@@ -21,8 +21,8 @@ public class PermissionInfo implements Serializable {
     private String name;    //权限名称
     private String menuId;  //菜单id
     private String isOpen;  //是否打开该权限;1-打开;0-关闭
-    private  String isEdit;  //是否允许编辑;1-允许;0-不允许;默认允许
-    private  String isVisible;  //是否可见;1-可见;0-不可见;默认可见
+    private String isEdit;  //是否允许编辑;1-允许;0-不允许;默认允许
+    private String isVisible;  //是否可见;1-可见;0-不可见;默认可见
 
     public String getMenuId() {
         return menuId;
