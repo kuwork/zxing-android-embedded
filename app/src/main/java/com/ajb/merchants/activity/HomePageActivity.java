@@ -320,6 +320,10 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     protected void onResume() {
         super.onResume();
         updateAccountSettingInfo(getAccountSettingInfo());
+        //更换登录名登录
+        if (isLogin() && !getLoginName().equals(tvAccountName.getText())) {
+            getAccoutInfo();
+        }
 //        if (mLocClient != null) {
 //            mLocClient.start();
 //        }
