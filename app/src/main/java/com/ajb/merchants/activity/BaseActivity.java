@@ -924,6 +924,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
                                     "取消", new OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+                                            sharedFileUtils.remove(SharedFileUtils.LAST_CHECK_UPDATE_TIME);
                                             if (updateInfoDialog != null) {
                                                 updateInfoDialog.dismiss();
                                             }
@@ -932,8 +933,8 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
                                     }, new OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+                                            sharedFileUtils.putString(SharedFileUtils.LAST_CHECK_UPDATE_TIME, DateConvertor.getTimestampString());
                                             if (updateInfoDialog != null) {
-                                                sharedFileUtils.putString(SharedFileUtils.LAST_CHECK_UPDATE_TIME, DateConvertor.getTimestampString());
                                                 updateInfoDialog.dismiss();
                                             }
                                         }
