@@ -9,6 +9,15 @@ import java.io.Serializable;
 public class BalanceLimitInfo extends Product implements Serializable {
 
     private String desc;
+    private int serial;
+
+    public int getSerial() {
+        return serial;
+    }
+
+    public void setSerial(int serial) {
+        this.serial = serial;
+    }
 
     public BalanceLimitInfo(String value, String unit, String desc) {
         super(value, unit);

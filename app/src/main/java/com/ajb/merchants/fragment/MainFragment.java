@@ -44,6 +44,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainFragment extends BaseFragment {
@@ -172,6 +174,16 @@ public class MainFragment extends BaseFragment {
     }
 
     public void initBalance(List<BalanceLimitInfo> balanceLimitInfoList) {
+        Collections.sort(balanceLimitInfoList, new Comparator<BalanceLimitInfo>() {
+            public int compare(BalanceLimitInfo o1, BalanceLimitInfo o2) {
+                //o1，o2是list中的Map，可以在其内取得值，按其排序，此例为升序，s1和s2是排序字段值
+                if (o1.getSerial() > o2.getSerial()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
         if (balanceLimitInfoAdapter == null) {
             balanceLimitInfoAdapter = new BaseListAdapter<BalanceLimitInfo>(getActivity(), balanceLimitInfoList, R.layout.balance_limit_item, null);
             balanceGridView.setAdapter(balanceLimitInfoAdapter);
