@@ -71,6 +71,7 @@ import com.ajb.merchants.others.MyApplication;
 import com.ajb.merchants.task.CityUpdateTask;
 import com.ajb.merchants.util.CommonUtils;
 import com.ajb.merchants.util.Constant;
+import com.ajb.merchants.util.DateConvertor;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.MyGridView;
 import com.ajb.merchants.view.RoundedImageView;
@@ -189,7 +190,11 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                         showToast("相关权限被禁止，可能无法使用部分功能");
                     }
                 });
-        checkUpdate();//检查更新
+        String lastCheckTime = sharedFileUtils.getString(SharedFileUtils.LAST_CHECK_UPDATE_TIME);
+        if (TextUtils.isEmpty(lastCheckTime) || System.currentTimeMillis() - DateConvertor.getTimeFromString(lastCheckTime) > 1 * 60 * 60 * 1000) {
+            //距离上次取消更新时间超过一小时，才会检查更新
+            checkUpdate();//检查更新
+        }
         initAccountSettingInfo();
     }
 
@@ -211,6 +216,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             fragment.initHeaderBg(getBaseContext(), info.getAccountInfo().getCoverimgUrl());
             fragment.initBalance(info.getBalanceList());
         }
+        warnUser();
     }
 
     private void initAccountInfo(RoundedImageView imgAvatar, TextView tvAccountName, TextView tvStoreName, AccountInfo accountInfo) {

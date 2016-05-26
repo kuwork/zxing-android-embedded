@@ -58,6 +58,7 @@ import com.ajb.merchants.model.ModularMenu;
 import com.ajb.merchants.model.ShareInfo;
 import com.ajb.merchants.others.MyApplication;
 import com.ajb.merchants.util.Constant;
+import com.ajb.merchants.util.DateConvertor;
 import com.ajb.merchants.util.MyProgressDialog;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.AutoWrapcontentListView;
@@ -932,6 +933,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
                                         @Override
                                         public void onClick(View v) {
                                             if (updateInfoDialog != null) {
+                                                sharedFileUtils.putString(SharedFileUtils.LAST_CHECK_UPDATE_TIME, DateConvertor.getTimestampString());
                                                 updateInfoDialog.dismiss();
                                             }
                                         }

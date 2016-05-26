@@ -46,6 +46,7 @@ public class SharedFileUtils {
     public static final String TOKEN = "com.ajb.merchants.TOKEN";
     public static final String ACCOUNT_SETING_INFO = "com.ajb.merchants.ACCOUNT_SETING_INFO";
     public static final String MERCHANT_DETAIL_INFO = "com.ajb.merchants.MERCHANT_DETAIL_INFO";
+    public static final String LAST_CHECK_UPDATE_TIME = "com.ajb.merchants.LAST_CHECK_UPDATE_TIME";
 
     private SharedPreferences sp;
 
