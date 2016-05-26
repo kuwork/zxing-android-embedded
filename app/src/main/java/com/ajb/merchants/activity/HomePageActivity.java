@@ -759,30 +759,26 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                             menuInfo.click(HomePageActivity.this);
                             break;
                     }
+                } else {
+                    menuInfo.click(HomePageActivity.this);
                 }
 
             } else {
-                switch (menuInfo.getMenuCode()) {
-                    case MenuInfo.TO_EXIT://退出掌停宝
-                        finish();
-                        break;
-                    case MenuInfo.TO_COUPON_SCAN:
-                        scan();
-                        break;
-                    case MenuInfo.TO_COUPON_CAR_NUM:
-                        showCarNumInputDialog(true);
-                        break;
-                    case MenuInfo.TO_COUPON_CARD:
-                        showCardInputDialog(true);
-                        break;
-                    case MenuInfo.TO_SETTING:
-                        Intent intent = new Intent(getBaseContext(), SettingActivity.class);
-                        startActivityForResult(intent, Constant.REQ_CODE_LOGOUT);
-                        break;
-                    default:
-                        menuInfo.click(HomePageActivity.this);
-                        break;
-
+                if (MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+                    switch (menuInfo.getMenuCode()) {
+                        case MenuInfo.TO_EXIT://退出掌停宝
+                            finish();
+                            break;
+                        case MenuInfo.TO_SETTING:
+                            Intent intent = new Intent(getBaseContext(), SettingActivity.class);
+                            startActivityForResult(intent, Constant.REQ_CODE_LOGOUT);
+                            break;
+                        default:
+                            menuInfo.click(HomePageActivity.this);
+                            break;
+                    }
+                } else {
+                    menuInfo.click(HomePageActivity.this);
                 }
             }
         }
