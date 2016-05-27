@@ -148,7 +148,6 @@ public class CouponGivingActivity extends BaseActivity {
             tvSave.setVisibility(View.GONE);
             tvEdit.setVisibility(View.VISIBLE);
         }
-
         if (null == gridViewAdapter) {
             gridViewAdapter = new BaseListAdapter<Coupon>(
                     getBaseContext(),
@@ -388,6 +387,13 @@ public class CouponGivingActivity extends BaseActivity {
         if (!list.contains(p)) {
             list.add(p);
         }
+        sortCouponList(list);
+    }
+
+    private void sortCouponList(List<Coupon> list) {
+        if (list == null || list.isEmpty()) {
+            return;
+        }
         Collections.sort(list, new Comparator<Coupon>() {
             public int compare(Coupon o1, Coupon o2) {
                 //o1，o2是list中的Map，可以在其内取得值，按其排序，此例为升序，s1和s2是排序字段值
@@ -491,8 +497,11 @@ public class CouponGivingActivity extends BaseActivity {
             return;
         }
         this.carParkingInInfo = data;
-        initInfoListView(data.getInfoList());
+        initInfoListView(data.getInfoList());//车辆信息
         if (data.getTopList() != null && data.getTopList().size() > 0) {
+            for (int i = 0; i < data.getTopList().size(); i++) {
+                sortCouponList(data.getTopList().get(i).getFavList());
+            }
             if (tabGridView != null) {
                 if (tabGridViewAdapter == null) {
                     tabGridViewAdapter = new BaseListAdapter<CouponSendType>(getBaseContext(), data.getTopList(), R.layout.grid_item_tab, null);

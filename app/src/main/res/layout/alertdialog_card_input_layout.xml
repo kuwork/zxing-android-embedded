@@ -47,6 +47,23 @@
         android:background="@drawable/layout_border_edittext_bg"
         android:orientation="horizontal">
 
+        <TextView
+            style="@style/item_tv_style"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="center"
+            android:paddingLeft="@dimen/layout_Margin_15"
+            android:paddingRight="@dimen/layout_Margin_15"
+            android:text="@string/tip_card_input"
+            android:textColor="@color/btn_color_normal"
+            android:textSize="@dimen/text_size_18" />
+
+        <TextView
+            style="@style/line_2_style"
+            android:layout_marginBottom="@dimen/layout_Margin_5"
+            android:layout_marginTop="@dimen/layout_Margin_5" />
+
         <EditText
             android:id="@+id/edCard"
             style="@style/item_ed_style"
