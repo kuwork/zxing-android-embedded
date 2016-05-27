@@ -17,16 +17,15 @@ import com.ajb.merchants.adapter.BaseListAdapter;
 import com.ajb.merchants.adapter.MenuItemAdapter;
 import com.ajb.merchants.fragment.HomeFragment;
 import com.ajb.merchants.fragment.MainFragment;
+import com.ajb.merchants.model.AccountSettingInfo;
 import com.ajb.merchants.model.BaseResult;
 import com.ajb.merchants.model.HomePageInfo;
 import com.ajb.merchants.model.MenuInfo;
 import com.ajb.merchants.model.ModularMenu;
-import com.ajb.merchants.util.CommonUtils;
 import com.ajb.merchants.util.Constant;
 import com.ajb.merchants.util.MyProgressDialog;
 import com.ajb.merchants.util.SharedFileUtils;
 import com.ajb.merchants.view.MyListView;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -59,8 +58,29 @@ public class SettingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ViewUtils.inject(this);
-        initView();
-        initMenu();
+        String title = getString(R.string.title_setting);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null && bundle.containsKey(Constant.KEY_TITLE)) {
+            title = bundle.getString(Constant.KEY_TITLE);
+        }
+        initTitle(title);
+        initBackClick(R.id.NO_RES, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        updateAccountSettingInfo(getAccountSettingInfo());
+    }
+
+    @Override
+    protected void updateAccountSettingInfo(AccountSettingInfo info) {
+        super.updateAccountSettingInfo(info);
+        if (info == null) {
+            return;
+        }
+        initMenu(info.getModularMenus());
+        warnUser();
     }
 
     @Override
@@ -75,66 +95,57 @@ public class SettingActivity extends BaseActivity {
     /**
      * 初始化菜单
      */
-    private void initMenu() {
+    private void initMenu(List<ModularMenu> modularMenuList) {
         ModularMenu modularMenu;
-        final String menuJson = CommonUtils.getFromAssets(getBaseContext(), "setting.json");
-        if (menuJson.equals("")) {
+        if (modularMenuList == null) {
             return;
         }
-        try {
-            Gson gson = new Gson();
-            List<ModularMenu> modularMenuList = gson.fromJson(menuJson, new TypeToken<List<ModularMenu>>() {
-            }.getType());
-            if (modularMenuList == null) {
-                return;
+        int size = modularMenuList.size();
+        for (int i = 0; i < size; i++) {
+            modularMenu = modularMenuList.get(i);
+            if (ModularMenu.CODE_SETTING.equals(modularMenu.getModularCode())) {
+                MenuItemAdapter<MenuInfo> adapter = new MenuItemAdapter<>(getBaseContext(), dealMenuGroup(modularMenu.getMenuList()), modularMenu.getModularCode());
+                menuListView.setAdapter(adapter);
             }
-            int size = modularMenuList.size();
-            for (int i = 0; i < size; i++) {
-                modularMenu = modularMenuList.get(i);
-                if (ModularMenu.CODE_SETTING.equals(modularMenu.getModularCode())) {
-                    MenuItemAdapter<MenuInfo> adapter = new MenuItemAdapter<>(getBaseContext(), dealMenuGroup(modularMenu.getMenuList()), modularMenu.getModularCode());
-                    menuListView.setAdapter(adapter);
-                }
-            }
-            menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    MenuItemAdapter adapter = (MenuItemAdapter) parent.getAdapter();
-                    Object item = adapter.getItem(position);
-                    if (item instanceof MenuInfo) {
-                        MenuInfo menuInfo = ((MenuInfo) item);
-                        if (!MenuInfo.TYPE_NORMAL.equals(menuInfo.getType())) {
-                            return;
-                        }
-                        if (MenuInfo.TO_CHECKUPDATE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-                            checkUpdate();
-                        } else if (MenuInfo.TO_CLEARCACHE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-                            showOkCancelAlertDialog(true, "提示", "将清除本地缓存文件,是否继续?", "继续", "关闭", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
+        }
+
+        menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MenuItemAdapter adapter = (MenuItemAdapter) parent.getAdapter();
+                Object item = adapter.getItem(position);
+                if (item instanceof MenuInfo) {
+                    MenuInfo menuInfo = ((MenuInfo) item);
+                    if (!MenuInfo.TYPE_NORMAL.equals(menuInfo.getType())) {
+                        return;
+                    }
+                    if (MenuInfo.TO_CHECKUPDATE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+                        checkUpdate();
+                    } else if (MenuInfo.TO_CLEARCACHE.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+                        showOkCancelAlertDialog(true, "提示", "将清除本地缓存文件,是否继续?", "继续", "关闭", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 //                                    clearCacheFolder(getBaseContext().getCacheDir(), System.currentTimeMillis());
-                                    clearBeforeExit(getBaseContext());
-                                    dimissOkCancelAlertDialog();
-                                }
-                            }, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dimissOkCancelAlertDialog();
-                                }
-                            });
-                        } else if (MenuInfo.TO_PAGESETTING.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-                            initPageSetting();
-                        } else if (MenuInfo.TO_LOGIN_OUT.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
-                            requestLogOut();
-                        } else {
-                            menuInfo.click(SettingActivity.this);
-                        }
+                                clearBeforeExit(getBaseContext());
+                                dimissOkCancelAlertDialog();
+                            }
+                        }, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dimissOkCancelAlertDialog();
+                            }
+                        });
+                    } else if (MenuInfo.TO_PAGESETTING.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+                        initPageSetting();
+                    } else if (MenuInfo.TO_LOGIN_OUT.equals(menuInfo.getMenuCode()) && MenuInfo.TYPE_OPERATE_NATIVE.equals(menuInfo.getOperateType())) {
+                        requestLogOut();
+                    } else {
+                        menuInfo.click(SettingActivity.this);
                     }
                 }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            }
+        });
+
     }
 
     private void requestLogOut() {
@@ -294,14 +305,5 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
-    private void initView() {
-        initTitle("设置");
-        initBackClick(R.id.NO_RES, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
 
 }

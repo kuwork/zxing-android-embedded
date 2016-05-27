@@ -156,6 +156,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
     private View carNoPopupView;
     private PopupWindow carNoPopupWindow;
     private MenuItemAdapter<MenuInfo> leftMenuListAdapter;
+    private BaseListAdapter<String> provinceAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +172,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
         }
         initFirst();
         getLocalSlideBanner();
-//        ShareSDK.initSDK(this);
+//      ShareSDK.initSDK(this);
         requestPermission(Constant.PM_LOCATION,
                 new String[]{
                         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -771,6 +772,7 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                             break;
                         case MenuInfo.TO_SETTING:
                             Intent intent = new Intent(getBaseContext(), SettingActivity.class);
+                            menuInfo.dealExtras(intent);
                             startActivityForResult(intent, Constant.REQ_CODE_LOGOUT);
                             break;
                         default:
@@ -1200,6 +1202,9 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                 .findViewById(R.id.tvCode);
         EditText edCarno = (EditText) contentView
                 .findViewById(R.id.edCarno);
+        if (provinceAdapter != null && !TextUtils.isEmpty(provinceAdapter.getChecked())) {
+            tvCode.setText(provinceAdapter.getChecked());
+        }
         tvCode.setTag(R.id.edCarno, edCarno);
         edCarno.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1372,9 +1377,10 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
             MyGridView gridView = (MyGridView) carNoPopupView.findViewById(R.id.gridView);
             carNoPopupView.findViewById(R.id.space).setOnClickListener(onClickListener);
             /** 设置网格布局的适配器 */
-            BaseListAdapter<String> adapter = PopupWindowAdapter.getAdapter(getBaseContext());
-            adapter.setChecked(textView.getText().toString());
-            gridView.setAdapter(adapter);
+            if (provinceAdapter == null) {
+                provinceAdapter = PopupWindowAdapter.getAdapter(getBaseContext());
+            }
+            gridView.setAdapter(provinceAdapter);
             /** 设置网格布局的菜单项点击时候的Listener */
             gridView.setOnItemClickListener(new OnItemClickListener() {
                 @Override
@@ -1403,6 +1409,9 @@ public class HomePageActivity extends BaseActivity implements View.OnClickListen
                     }
                 }
             });
+        }
+        if (provinceAdapter != null) {
+            provinceAdapter.setChecked(textView.getText().toString());
         }
         carNoPopupWindow.showAtLocation(textView, Gravity.BOTTOM, 0, 0);
 

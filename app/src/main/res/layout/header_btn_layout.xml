@@ -27,6 +27,12 @@
             android:textColor="@color/white" />
 
         <android.support.v7.widget.ActionMenuView
+            android:id="@+id/action_menu_view_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left" />
+
+        <android.support.v7.widget.ActionMenuView
             android:id="@+id/action_menu_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,6 +52,12 @@
 
         <TextView
             android:id="@+id/headerMenu3"
+            android:layout_width="1px"
+            android:layout_height="1px"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/headerMenu4"
             android:layout_width="1px"
             android:layout_height="1px"
             android:visibility="invisible" />

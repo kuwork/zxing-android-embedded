@@ -169,6 +169,7 @@ public class WebViewActivity extends BaseActivity {
         } else {
             initTitle(title);
         }
+        //左侧关闭按钮
         initBackClick(NO_RES, new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,6 +178,12 @@ public class WebViewActivity extends BaseActivity {
                 } else {
                     finish();
                 }
+            }
+        });
+        initCloseMenuClick(R.drawable.actionbar_finish, getString(R.string.action_close), new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         if (!TextUtils.isEmpty(url)) {

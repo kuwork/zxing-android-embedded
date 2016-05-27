@@ -175,7 +175,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
     private UpdateReceiver updateReceiver;
     protected SharedFileUtils sharedFileUtils;
     protected Toolbar toolbar;
-    private TextView headerMenu2, headerMenu3, headerMenu1;
+    private TextView headerMenu2, headerMenu3, headerMenu1,headerMenu4;
     private String mSDCardPath;
 
     @Override
@@ -544,6 +544,49 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
 //            } else {//小于API11时
 //                MenuCompat.setShowAsAction(menuItem, MenuItem.SHOW_AS_ACTION_NEVER);
 //            }
+
+            for (int i = 0; i < actionMenuView.getChildCount(); i++) {
+                ActionMenuItemView v = (ActionMenuItemView) actionMenuView.getChildAt(i);
+                v.setBackgroundResource(R.drawable.selector_menu_bg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void initCloseMenuClick(int resLeft,String textLeft, OnClickListener left) {
+        try {
+            headerMenu4 = (TextView) findViewById(R.id.headerMenu4);
+            ActionMenuView actionMenuView = (ActionMenuView) findViewById(R.id.action_menu_view_left);
+            if (actionMenuView == null) {
+                LogUtils.d("Toolbar为空");
+                return;
+            }
+            actionMenuView.getMenu().clear();
+            if (headerMenu4 != null && resLeft != NO_ICON) {
+                if (resLeft == NO_RES) {
+                    resLeft = R.drawable.actionbar_menu;
+                }
+                headerMenu4.setText(textLeft + "");
+                MenuItem menuItem = actionMenuView.getMenu().add(100, R.id.headerMenu2, 1, textLeft + "").setIcon(resLeft);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                } else {//小于API11时
+                    MenuCompat.setShowAsAction(menuItem, MenuItem.SHOW_AS_ACTION_ALWAYS);
+                }
+                if (left != null && headerMenu4 != null) {
+                    headerMenu4.setOnClickListener(left);
+                    menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            if (headerMenu4 != null) {
+                                headerMenu4.performClick();
+                            }
+                            return false;
+                        }
+                    });
+                }
+            }
 
             for (int i = 0; i < actionMenuView.getChildCount(); i++) {
                 ActionMenuItemView v = (ActionMenuItemView) actionMenuView.getChildAt(i);

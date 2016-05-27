@@ -18,23 +18,7 @@
     <string name="title_coupon_scan">扫卡优惠</string>
     <string name="title_coupon_car_num">车牌优惠</string>
     <string name="title_coupon_card">卡号优惠</string>
-    <!-- 导航菜单-->
-    <string name="nav_menu_title_1001">我的车辆</string>
-    <string name="nav_menu_title_1002">我的优惠</string>
-    <string name="nav_menu_title_1003">预约记录</string>
-    <string name="nav_menu_title_1004">停车记录</string>
-    <string name="nav_menu_title_1005">消费明细</string>
-    <string name="nav_menu_title_1006">附近车场</string>
-    <!--社区服务-->
-    <string name="nav_menu_title_2000">社区服务</string>
-    <string name="nav_menu_title_2001">分享车位</string>
-    <string name="nav_menu_title_2002">月租缴费</string>
-    <!--APP活动-->
-    <string name="nav_menu_title_3000">优惠码</string>
-    <string name="nav_menu_title_3001">有奖推荐</string>
-    <!--APP本地设置-->
-    <string name="nav_menu_title_9001">系统设置</string>
-    <string name="nav_menu_title_9002">退出掌停宝</string>
+    <string name="title_setting">设置</string>
     <!--错误信息-->
     <string name="error_no_carno_binded">未绑定车牌</string>
     <string name="error_hava_not_login">未登录</string>

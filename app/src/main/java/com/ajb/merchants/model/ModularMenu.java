@@ -11,12 +11,12 @@ import java.util.List;
 public class ModularMenu implements Serializable {
 
     public final static String CODE_ACCOUNT = "170000";
-    public final static String CODE_MENU = "1000";
-    public final static String CODE_COUPON = "100001";
-    public final static String CODE_MAIN_MENU = "100002";
-    public final static String CODE_LEFTMENU = "100003";
-    public final static String CODE_SETTING = "100004";
-    public final static String CODE_MERCHANTS_DETAILS = "000001";
+    public final static String CODE_MENU = "1000";//任务栏下拉菜单
+    public final static String CODE_COUPON = "100001";//优惠菜单
+    public final static String CODE_MAIN_MENU = "100002";//功能菜单
+    public final static String CODE_LEFTMENU = "100003";//左侧菜单
+    public final static String CODE_MERCHANTS_DETAILS = "100004";//商户详情
+    public final static String CODE_SETTING = "100005";//设置菜单
     /**
      * modularId : 1
      * modularCode : 180000

@@ -77,6 +77,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
     private int PAGE_SIZE = 10;
     private String carNo;
     private String cardSnId;
+    private BaseListAdapter<String> provinceAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,14 +101,18 @@ public class CouponGivingRecordActivity extends BaseActivity {
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(cardSnId)) {
                     edCard.setText(cardSnId);
-                }else{
+                } else {
                     edCard.setText(null);
                 }
                 if (!TextUtils.isEmpty(carNo)) {
                     tvCode.setText(carNo.substring(0, 1));
                     edCarno.setText(carNo.substring(1));
-                }else{
-                    tvCode.setText("粤");
+                } else {
+                    if (provinceAdapter != null && !TextUtils.isEmpty(provinceAdapter.getChecked())) {
+                        tvCode.setText(provinceAdapter.getChecked());
+                    } else {
+                        tvCode.setText("粤");
+                    }
                     edCarno.setText(null);
                 }
 
@@ -407,9 +412,10 @@ public class CouponGivingRecordActivity extends BaseActivity {
             MyGridView gridView = (MyGridView) carNoPopupView.findViewById(R.id.gridView);
             carNoPopupView.findViewById(R.id.space).setOnClickListener(onClickListener);
             /** 设置网格布局的适配器 */
-            BaseListAdapter<String> adapter = PopupWindowAdapter.getAdapter(getBaseContext());
-            adapter.setChecked(textView.getText().toString());
-            gridView.setAdapter(adapter);
+            if (provinceAdapter == null) {
+                provinceAdapter = PopupWindowAdapter.getAdapter(getBaseContext());
+            }
+            gridView.setAdapter(provinceAdapter);
             /** 设置网格布局的菜单项点击时候的Listener */
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -427,6 +433,9 @@ public class CouponGivingRecordActivity extends BaseActivity {
                     }
                 }
             });
+        }
+        if (provinceAdapter != null) {
+            provinceAdapter.setChecked(textView.getText().toString());
         }
         carNoPopupWindow.showAtLocation(textView, Gravity.BOTTOM, 0, 0);
     }
