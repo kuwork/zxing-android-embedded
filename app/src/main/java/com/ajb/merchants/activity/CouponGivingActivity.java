@@ -518,7 +518,6 @@ public class CouponGivingActivity extends BaseActivity {
                                 adapter.setChecked(item.getTitle());
                                 initGridView(item, "", false);
                             }
-
                         }
                     });
                 } else {

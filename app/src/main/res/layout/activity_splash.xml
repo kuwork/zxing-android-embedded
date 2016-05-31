@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/layout_allFilled_style"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="com.ajb.anjubao.intelligent.activity.SplashActivity">
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"

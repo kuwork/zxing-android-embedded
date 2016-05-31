@@ -74,7 +74,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
     private PopupWindow carNoPopupWindow;
     private Pager<Map<String, String>> pager;
     private BaseListAdapter<Map<String, String>> billListAdapter;
-    private int PAGE_SIZE = 10;
+    private int PAGE_SIZE = 20;
     private String carNo;
     private String cardSnId;
     private BaseListAdapter<String> provinceAdapter;
