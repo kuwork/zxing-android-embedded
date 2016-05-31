@@ -40,7 +40,7 @@ public class ResetPasswordActivity extends BaseActivity {
     @ViewInject(R.id.edVerification)
     private EditText edVerification;
     @ViewInject(R.id.btnVerification)
-    private Button btnVerification;
+    private TextView btnVerification;
     @ViewInject(R.id.btnResetPassword)
     private Button btnResetPassword;
 
