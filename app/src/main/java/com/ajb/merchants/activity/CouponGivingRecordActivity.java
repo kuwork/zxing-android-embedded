@@ -249,29 +249,32 @@ public class CouponGivingRecordActivity extends BaseActivity {
                                             tvHeader4.setText(rr.data.headers.get(3).get("title"));
                                         }
                                     }
+
+                                    if (rr.data.pager.page <= 1) {
+                                        billListAdapter
+                                                .update(rr.data.pager.list);
+                                        billListAdapter
+                                                .notifyDataSetChanged();
+                                        if (rr.data.pager.list.size() == 0) {
+                                            billListAdapter.getDataList().clear();
+                                            billListAdapter.notifyDataSetChanged();
+                                            showErrorPage(listView, rr.msg, R.mipmap.no_need_pay);
+                                            showToast(rr.msg);
+                                        }
+                                    } else {
+                                        billListAdapter
+                                                .append(rr.data.pager.list);
+                                        billListAdapter
+                                                .notifyDataSetChanged();
+                                    }
+
                                     if (rr.data.pager.page == rr.data.pager.pageCount) {
-                                        showToast("到达最后一页");
+                                        if (billListAdapter.getCount() > 0) {
+                                            showToast("到达最后一页");
+                                        }
                                         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
                                     } else {
                                         listView.setMode(PullToRefreshBase.Mode.BOTH);
-                                    }
-                                    if (rr.data.pager.list.size() > 0) {
-                                        if (rr.data.pager.page <= 1) {
-                                            billListAdapter
-                                                    .update(rr.data.pager.list);
-                                            billListAdapter
-                                                    .notifyDataSetChanged();
-                                        } else {
-                                            billListAdapter
-                                                    .append(rr.data.pager.list);
-                                            billListAdapter
-                                                    .notifyDataSetChanged();
-                                        }
-                                    } else {
-                                        showToast(getString(R.string.error_no_more));
-                                        if (billListAdapter.getCount() == 0) {
-                                            showErrorPage(listView, R.string.error_no_more, R.mipmap.norecord);
-                                        }
                                     }
                                     pager = rr.data.pager;
                                 } else {
@@ -279,10 +282,12 @@ public class CouponGivingRecordActivity extends BaseActivity {
                                 }
                             } else {
                                 showToast(rr.msg);
+                                showErrorPage(listView, rr.msg, R.mipmap.no_need_pay);
                             }
                         } catch (JsonSyntaxException e) {
                             e.printStackTrace();
                             showToast("刷新列表失败");
+                            showErrorPage(listView, "刷新列表失败", R.mipmap.no_need_pay);
                         } finally {
                             listView.onRefreshComplete();
                         }
@@ -322,7 +327,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
 
     @OnClick(R.id.sure_btn)
     public void onSureClick(View v) {
-
+        super.onErrorPageClick();
         if (tabCarNo.isSelected()) {
             if (TextUtils.isEmpty(edCarno.getText().toString().trim())) {
                 carNo = null;
