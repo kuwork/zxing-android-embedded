@@ -18,6 +18,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvTip"
                 style="@style/item_tv_title_style"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -26,7 +27,7 @@
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/layout_Margin_10"
-                android:text="设置子账户用户名及密码" />
+                android:text="@string/tip_set_account_password" />
 
             <View style="@style/line_style" />
 

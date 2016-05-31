@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ajb.merchants.R;
 import com.ajb.merchants.adapter.BaseListAdapter;
@@ -48,6 +49,8 @@ public class AccountManagementActivity extends BaseActivity {
     private ImageView imgPasswordPass;
     @ViewInject(R.id.edAccountLayout)
     private LinearLayout edAccountLayout;
+    @ViewInject(R.id.tvTip)
+    private TextView tvTip;
     private Dialog mDialog;
     private BaseListAdapter<PermissionInfo> adapter;
     private AccountInfo editAccountInfo;
@@ -118,7 +121,13 @@ public class AccountManagementActivity extends BaseActivity {
                     }
                 });
             }
+            if (tvTip != null) {
+                tvTip.setText(getString(R.string.tip_set_password));
+            }
         } else {
+            if (tvTip != null) {
+                tvTip.setText(getString(R.string.tip_set_account_password));
+            }
             if (edAccountLayout != null) {
                 edAccountLayout.setVisibility(View.VISIBLE);
             }

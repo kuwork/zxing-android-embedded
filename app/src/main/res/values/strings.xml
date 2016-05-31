@@ -82,5 +82,7 @@
     <string name="tip_enter_sub_password">请输入子账户用户密码</string>
     <string name="error_coupon_send_fail">优惠券赠送失败</string>
     <string name="tip_card_input">输入卡号</string>
+    <string name="tip_set_account_password">设置子账户用户名及密码</string>
+    <string name="tip_set_password">设置子账户密码</string>
 
 </resources>
