@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -203,13 +205,22 @@ public class CouponGivingRecordActivity extends BaseActivity {
 
         });
         pager = null;
-        new Handler().postDelayed(new Runnable() {
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler(){
+
             @Override
-            public void run() {
+            public boolean queueIdle() {
                 listView.onRefreshComplete();
                 listView.setRefreshing(true);
+                return false;
             }
-        }, 1000);
+        });
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                listView.onRefreshComplete();
+//                listView.setRefreshing(true);
+//            }
+//        }, 1000);
     }
 
     private void sendLoadLogRequest(int index, int size) {
