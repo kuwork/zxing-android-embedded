@@ -175,7 +175,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
     private UpdateReceiver updateReceiver;
     protected SharedFileUtils sharedFileUtils;
     protected Toolbar toolbar;
-    private TextView headerMenu2, headerMenu3, headerMenu1,headerMenu4;
+    private TextView headerMenu2, headerMenu3, headerMenu1, headerMenu4;
     private String mSDCardPath;
 
     @Override
@@ -554,7 +554,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
         }
     }
 
-    protected void initCloseMenuClick(int resLeft,String textLeft, OnClickListener left) {
+    protected void initCloseMenuClick(int resLeft, String textLeft, OnClickListener left) {
         try {
             headerMenu4 = (TextView) findViewById(R.id.headerMenu4);
             ActionMenuView actionMenuView = (ActionMenuView) findViewById(R.id.action_menu_view_left);
@@ -1647,6 +1647,7 @@ public class BaseActivity extends AppCompatActivity implements OnViewErrorListen
     public void onErrorPageClick() {
         if (errorView != null) {
             ((ViewGroup) errorView.getParent()).removeView(errorView);
+            errorView = null;
         }
     }
 
