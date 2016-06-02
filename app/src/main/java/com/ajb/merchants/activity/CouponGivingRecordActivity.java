@@ -205,7 +205,7 @@ public class CouponGivingRecordActivity extends BaseActivity {
 
         });
         pager = null;
-        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler(){
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
 
             @Override
             public boolean queueIdle() {
@@ -233,7 +233,15 @@ public class CouponGivingRecordActivity extends BaseActivity {
         if (!TextUtils.isEmpty(cardSnId)) {
             params.addQueryStringParameter(Constant.InterfaceParam.CARD_SN_ID, cardSnId);
         }
-        send(Constant.PK_GET_SEND_RECORDS, params,
+        Bundle bundle = getIntent().getExtras();
+        String uri = null;
+        if (bundle != null && bundle.containsKey(Constant.KEY_URI)) {
+            uri = bundle.getString(Constant.KEY_URI);
+        }
+        if (TextUtils.isEmpty(uri)) {
+            uri = Constant.PK_GET_SEND_RECORDS;
+        }
+        send(uri, params,
                 new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {

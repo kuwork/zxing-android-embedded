@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.SpannableString;
@@ -121,12 +123,13 @@ public class MerchantDetailActivity extends BaseActivity {
                 });
             }
         }
-        new Handler().postDelayed(new Runnable() {
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
-            public void run() {
+            public boolean queueIdle() {
                 getMerchantsDetail();
+                return false;
             }
-        }, 1000);
+        });
     }
 
     private void initMenuInfo(ModularMenu modularMenu) {

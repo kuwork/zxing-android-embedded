@@ -52,6 +52,8 @@ public class Constant {
     public static final String PK_GET_CAR_MERCHANT_MSG = "/merchantFunction/getCarAndMerchantMsg";//获取车辆信息以及商户派发权限
     public static final String PK_SEND_COUPON = "/merchantFunction/sendCoupon";
     public static final String PK_GET_SEND_RECORDS = "/couponsLog/getSendRecords";//赠送记录
+    public static final String PK_GET_RECYLE_RECORDS = "/couponsLog/getSendRecords";//回收记录
+    public static final String PK_GET_PURCHASE_RECORDS = "/couponsLog/getSendRecords";//购买记录
     public static final String PK_UPDATEACCOUNT = "merchantLog/updateAccount";//账号管理-账号修改保存接口
     public static final String PK_GETSTOREDETAILS = "merchantStore/getStoreDetails";//获取商户详细信息接口
     public static final String PK_UPDATESTOREDETAIL = "merchantStore/updateStoreDetail";//修改商户详细信息接口
@@ -62,6 +64,7 @@ public class Constant {
     public static final String APP_FOLDER_NAME = "ZTB";
     //Bundle KEY
     public static final String KEY_URL = "URL";
+    public static final String KEY_URI = "URI";
     public static final String KEY_TITLE = "TITLE";
     public static final String KEY_DESC = "DESC";
     public static final String KEY_CARINPARKING = "carInParking";

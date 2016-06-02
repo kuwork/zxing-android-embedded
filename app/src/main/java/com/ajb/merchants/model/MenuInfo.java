@@ -220,6 +220,21 @@ public class MenuInfo implements Serializable {
                     intent = new Intent(context, CouponGivingRecordActivity.class);
                     dealExtras(intent);
                     intent.putExtra(Constant.KEY_TITLE, getTitle());
+                    intent.putExtra(Constant.KEY_URI, Constant.PK_GET_SEND_RECORDS);
+                    context.startActivity(intent);
+                } else if (TO_RECORD_RECYLE.equals(getMenuCode())) {
+                    //回收记录
+                    intent = new Intent(context, CouponGivingRecordActivity.class);
+                    dealExtras(intent);
+                    intent.putExtra(Constant.KEY_TITLE, getTitle());
+                    intent.putExtra(Constant.KEY_URI, Constant.PK_GET_SEND_RECORDS);
+                    context.startActivity(intent);
+                } else if (TO_RECORD_PURCHASE.equals(getMenuCode())) {
+                    //购买记录
+                    intent = new Intent(context, CouponGivingRecordActivity.class);
+                    dealExtras(intent);
+                    intent.putExtra(Constant.KEY_TITLE, getTitle());
+                    intent.putExtra(Constant.KEY_URI, Constant.PK_GET_SEND_RECORDS);
                     context.startActivity(intent);
                 } else if (TO_ACCOUNT_SETTING.equals(getMenuCode())) {
                     //账号管理
