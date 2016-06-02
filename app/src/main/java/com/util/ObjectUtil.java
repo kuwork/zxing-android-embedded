@@ -22,6 +22,9 @@ import java.io.ObjectOutputStream;
  */
 public class ObjectUtil {
 	public static String getBASE64String(Object obj) {
+		if(obj==null){
+			return null;
+		}
 		ByteArrayOutputStream toByte = new ByteArrayOutputStream();
 		ObjectOutputStream oos;
 		try {
