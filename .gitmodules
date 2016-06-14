@@ -1,0 +1,9 @@
+[submodule "modules/Android-PullToRefresh"]
+	path = modules/Android-PullToRefresh
+	url = git@git.coding.net:kuwork/Android-PullToRefresh.git
+[submodule "modules/xUtils"]
+	path = modules/xUtils
+	url = git@git.coding.net:kuwork/xUtils.git
+[submodule "modules/Library"]
+	path = modules/Library
+	url = git@git.coding.net:kuwork/Library.git

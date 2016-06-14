@@ -35,60 +35,270 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dcd9216-8ab2-4d87-81cb-683ef3e32fd1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/MobLogCollector.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/MobTools.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/ShareSDK_Core_2_6_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/ShareSDK_ShortMessage_2_6_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/ShareSDK_Wechat_2_6_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/ShareSDK_Wechat_Core_2_6_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/ShareSDK_Wechat_Moments_2_6_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SocialSDK_WeiXin_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/alipaySdk_20151112.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/core_3_2_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/core_3_2_0_javadoc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/design_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_3_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/httpmime_4_1_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jpush_android_2_1_5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/junit_4_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/locSDK_6_13.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/nineoldandroids_2_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_http_legacy_android_23.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/pinyin4j_2_5_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/subsampling_scale_image_view_3_4_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_23_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/umeng_analytics_v5_5_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/libs/armeabi/libapkpatch.so" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/libs/gson-2.3.1.jar" afterPath="$PROJECT_DIR$/modules/Library/libs/gson-2.3.1.jar" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/model/UpdateContent.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/model/UpdateContent.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/model/UpdateInfo.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/model/UpdateInfo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/model/UpdateResult.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/model/UpdateResult.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/App.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/App.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/Base64.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/Base64.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/BitmapUtil.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/BitmapUtil.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/DensityUtil.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/DensityUtil.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/NumberUtil.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/NumberUtil.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/ObjectUtil.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/ObjectUtil.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/PatchUtils.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/PatchUtils.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/PathManager.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/PathManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/SHA1Util.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/SHA1Util.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/util/UpdateManager.java" afterPath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/UpdateManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/Android-PullToRefresh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/Library" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/xUtils" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitmodules" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/Android-PullToRefresh.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/pom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/project.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/anim/slide_in_from_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/anim/slide_in_from_top.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/anim/slide_out_to_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/anim/slide_out_to_top.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-hdpi/default_ptr_flip.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-hdpi/default_ptr_rotate.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-hdpi/indicator_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-mdpi/default_ptr_flip.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-mdpi/default_ptr_rotate.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-mdpi/indicator_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-xhdpi/default_ptr_flip.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-xhdpi/default_ptr_rotate.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable-xhdpi/indicator_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable/indicator_bg_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/drawable/indicator_bg_top.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/layout/pull_to_refresh_header_horizontal.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/layout/pull_to_refresh_header_vertical.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-ar/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-cs/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-de/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-es/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-fi/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-fr/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-he/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-it/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-iw/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-ja/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-ko/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-nl/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-pl/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-pt-rBR/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-pt/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-ro/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-ru/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values-zh/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values/dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values/ids.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/res/values/pull_refresh_strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/ILoadingLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/IPullToRefresh.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/LoadingLayoutProxy.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/OverscrollHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/PullToRefreshAdapterViewBase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/PullToRefreshBase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/PullToRefreshExpandableListView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/PullToRefreshGridView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/PullToRefreshHorizontalScrollView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/PullToRefreshListView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/PullToRefreshScrollView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/PullToRefreshWebView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/extras/PullToRefreshWebView2.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/extras/SoundPullEventListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/internal/EmptyViewMethodAccessor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/internal/FlipLoadingLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/internal/IndicatorLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/internal/LoadingLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/internal/RotateLoadingLayout.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/internal/Utils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Android-PullToRefresh/src/com/handmark/pulltorefresh/library/internal/ViewCompat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/Library.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/libs/armeabi/libapkpatch.so" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/libs/gson-2.3.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/proguard-rules.pro" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/androidTest/java/com/lib/ApplicationTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/model/UpdateContent.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/model/UpdateInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/model/UpdateResult.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/App.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/Base64.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/BitmapUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/DensityUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/NumberUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/ObjectUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/PatchUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/PathManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/SHA1Util.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/java/com/util/UpdateManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/main/res/values/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/Library/src/test/java/com/lib/ExampleUnitTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/.idea/.name" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/.idea/compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/.idea/gradle.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/gradle/wrapper/gradle-wrapper.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/gradle/wrapper/gradle-wrapper.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/gradlew" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/gradlew.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/BitmapUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/DbUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/HttpUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/ViewUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/BitmapCacheListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/BitmapCommonUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/BitmapDisplayConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/BitmapGlobalConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/PauseOnScrollListener.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/callback/BitmapLoadCallBack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/callback/BitmapLoadFrom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/callback/BitmapSetter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/callback/DefaultBitmapLoadCallBack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/core/AsyncDrawable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/core/BitmapCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/core/BitmapDecoder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/core/BitmapSize.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/download/DefaultDownloader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/download/Downloader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/bitmap/factory/BitmapFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/cache/FileNameGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/cache/KeyExpiryMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/cache/LruDiskCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/cache/LruMemoryCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/cache/MD5FileNameGenerator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/Check.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/Column.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/Finder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/Foreign.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/Id.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/NoAutoIncrement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/NotNull.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/Table.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/Transient.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/annotation/Unique.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/BooleanColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/ByteArrayColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/ByteColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/CharColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/ColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/ColumnConverterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/DateColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/DoubleColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/FloatColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/IntegerColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/LongColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/ShortColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/SqlDateColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/converter/StringColumnConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/ColumnDbType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/CursorUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/DbModelSelector.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/FinderLazyLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/ForeignLazyLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/Selector.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/SqlInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/SqlInfoBuilder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/sqlite/WhereBuilder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/Column.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/ColumnUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/DbModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/Finder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/Foreign.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/Id.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/KeyValue.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/Table.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/db/table/TableUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/exception/BaseException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/exception/DbException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/exception/HttpException.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/HttpCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/HttpHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/RequestParams.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/ResponseInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/ResponseStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/SyncHttpHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/callback/DefaultHttpRedirectHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/callback/FileDownloadHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/callback/HttpRedirectHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/callback/RequestCallBack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/callback/RequestCallBackHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/callback/StringDownloadHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/DefaultSSLSocketFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/HttpRequest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/RetryHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/entity/BodyParamsEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/entity/DecompressingEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/entity/FileUploadEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/entity/GZipDecompressingEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/entity/InputStreamUploadEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/entity/UploadEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/FormBodyPart.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/HttpMultipart.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/HttpMultipartMode.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/MIME.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/MinimalField.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/MinimalFieldHeader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/MultipartEntity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/content/AbstractContentBody.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/content/ByteArrayBody.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/content/ContentBody.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/content/ContentDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/content/FileBody.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/content/InputStreamBody.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/multipart/content/StringBody.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/util/URIBuilder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/http/client/util/URLEncodedUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/task/Priority.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/task/PriorityAsyncTask.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/task/PriorityExecutor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/task/PriorityObject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/task/PriorityObjectBlockingQueue.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/task/PriorityRunnable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/task/TaskHandler.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/util/CharsetUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/util/DoubleKeyValueMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/util/IOUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/util/LogUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/util/MimeTypeUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/util/OtherUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/util/PreferencesCookieStore.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/EventListenerManager.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/ResLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/ResType.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/ViewFinder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/ViewInjectInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/ContentView.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/PreferenceInject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/ResInject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/ViewInject.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/EventBase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnChildClick.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnClick.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnCompoundButtonCheckedChange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnFocusChange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnGroupClick.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnGroupCollapse.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnGroupExpand.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnItemClick.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnItemLongClick.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnItemSelected.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnKey.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnLongClick.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnNothingSelected.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnPreferenceChange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnPreferenceClick.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnProgressChanged.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnRadioGroupCheckedChange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnScroll.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnScrollStateChanged.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnStartTrackingTouch.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnStopTrackingTouch.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnTabChange.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/src/com/lidroid/xutils/view/annotation/event/OnTouch.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modules/xUtils/xUtils.iml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/xUtils/xUtils.iml" afterPath="$PROJECT_DIR$/modules/xUtils/xUtils.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/ShareSDK/ShareSDK.iml" afterPath="$PROJECT_DIR$/modules/ShareSDK/ShareSDK.iml" />
     </list>
     <ignored path="ztb_merchants.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -159,8 +369,8 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71489364">
-              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+            <state vertical-scroll-proportion="-0.40851063">
+              <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -5839,7 +6049,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="10251082980000" />
+        <entry key="$PROJECT_DIR$" value="10254476251000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -7985,7 +8195,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="27" y="23" width="1413" height="877" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298292" sideWeight="0.47991392" order="7" side_tool="false" content_ui="tabs" />
@@ -8002,7 +8212,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28646517" sideWeight="0.50860834" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25309992" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25309992" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964131" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Mirror" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298292" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -8028,6 +8238,13 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/modules/xUtils" />
+      <path value="$PROJECT_DIR$/modules/Library" />
+      <path value="$PROJECT_DIR$/modules/Android-PullToRefresh" />
+    </ignored-roots>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -8515,8 +8732,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71489364">
-          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+        <state vertical-scroll-proportion="-0.40851063">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding />
         </state>
       </provider>
