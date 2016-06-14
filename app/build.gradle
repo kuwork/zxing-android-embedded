@@ -8,8 +8,8 @@ android {
         applicationId "com.ajb.merchants"
         minSdkVersion 8
         targetSdkVersion 23
-        versionCode 1
-        versionName "0.1"
+        versionCode 2
+        versionName "0.2"
     }
     buildTypes {
         release {
@@ -42,12 +42,11 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile project(':modules:xUtils')
     compile project(':modules:ShareSDK')
+    compile project(':modules:Library')
     compile project(':modules:Android-PullToRefresh')
     compile files('libs/umeng-analytics-v5.5.3.jar')
     compile files('libs/core-3.2.0.jar')
-    compile files('libs/gson-2.3.1.jar')
     compile files('libs/SocialSDK_WeiXin_1.jar')
     compile files('libs/nineoldandroids-2.4.0.jar')
     compile 'com.android.support:appcompat-v7:23.+'

@@ -1,4 +1,5 @@
 include ':app'
+include ':modules:Library'
 include ':modules:ShareSDK'
 include ':modules:xUtils'
 include ':modules:Android-PullToRefresh'
