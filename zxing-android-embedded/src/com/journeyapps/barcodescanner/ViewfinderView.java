@@ -42,7 +42,7 @@ import java.util.List;
 public class ViewfinderView extends View {
     protected static final String TAG = ViewfinderView.class.getSimpleName();
 
-    protected static final int[] SCANNER_ALPHA = {0, 64, 128, 192, 255, 192, 128, 64};
+    protected static final int[] SCANNER_ALPHA = {0, 16, 32, 64, 128, 192, 255, 192, 128, 64, 32, 16, 0};
     protected static final long ANIMATION_DELAY = 80L;
     protected static final int CURRENT_POINT_OPACITY = 0xA0;
     protected static final int MAX_RESULT_POINTS = 20;
@@ -53,6 +53,7 @@ public class ViewfinderView extends View {
     protected final int maskColor;
     protected final int resultColor;
     protected final int laserColor;
+    protected final int cornerColor;
     protected final int resultPointColor;
     protected int scannerAlpha;
     protected List<ResultPoint> possibleResultPoints;
@@ -63,6 +64,8 @@ public class ViewfinderView extends View {
     // stopped.
     protected Rect framingRect;
     protected Rect previewFramingRect;
+    private boolean laserLinePortrait = true;
+    int i = 0;
 
     // This constructor is used when the class is built from an XML resource.
     public ViewfinderView(Context context, AttributeSet attrs) {
@@ -84,6 +87,8 @@ public class ViewfinderView extends View {
                 resources.getColor(R.color.zxing_viewfinder_laser));
         this.resultPointColor = attributes.getColor(R.styleable.zxing_finder_zxing_possible_result_points,
                 resources.getColor(R.color.zxing_possible_result_points));
+        this.cornerColor = attributes.getColor(R.styleable.zxing_finder_zxing_viewfinder_corner,
+                resources.getColor(R.color.zxing_custom_viewfinder_corner));
 
         attributes.recycle();
 
@@ -124,12 +129,12 @@ public class ViewfinderView extends View {
     }
 
     protected void refreshSizes() {
-        if(cameraPreview == null) {
+        if (cameraPreview == null) {
             return;
         }
         Rect framingRect = cameraPreview.getFramingRect();
         Rect previewFramingRect = cameraPreview.getPreviewFramingRect();
-        if(framingRect != null && previewFramingRect != null) {
+        if (framingRect != null && previewFramingRect != null) {
             this.framingRect = framingRect;
             this.previewFramingRect = previewFramingRect;
         }
@@ -156,6 +161,27 @@ public class ViewfinderView extends View {
         canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, paint);
         canvas.drawRect(0, frame.bottom + 1, width, height, paint);
 
+        paint.setColor(resultBitmap != null ? resultColor : cornerColor);
+        // 画出四个角
+        canvas.drawRect(frame.left - 10, frame.top - 10, frame.left + 20,
+                frame.top, paint);
+        canvas.drawRect(frame.left - 10, frame.top - 10, frame.left,
+                frame.top + 20, paint);
+        canvas.drawRect(frame.right - 20, frame.top - 10, frame.right + 10,
+                frame.top, paint);
+        canvas.drawRect(frame.right, frame.top - 10, frame.right + 10,
+                frame.top + 20, paint);
+
+        canvas.drawRect(frame.left - 10, frame.bottom, frame.left + 20,
+                frame.bottom + 10, paint);
+        canvas.drawRect(frame.left - 10, frame.bottom - 20, frame.left,
+                frame.bottom, paint);
+
+        canvas.drawRect(frame.right - 20, frame.bottom, frame.right + 10,
+                frame.bottom + 10, paint);
+        canvas.drawRect(frame.right, frame.bottom - 20, frame.right + 10,
+                frame.bottom, paint);
+
         if (resultBitmap != null) {
             // Draw the opaque result bitmap over the scanning rectangle
             paint.setAlpha(CURRENT_POINT_OPACITY);
@@ -164,10 +190,34 @@ public class ViewfinderView extends View {
 
             // Draw a red "laser scanner" line through the middle to show decoding is active
             paint.setColor(laserColor);
-            paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
-            scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
-            int middle = frame.height() / 2 + frame.top;
-            canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1, middle + 2, paint);
+            //扫描线
+            if ((i += 5) < frame.bottom - frame.top) {
+
+
+                int r = 8;
+                canvas.save();
+                if (laserLinePortrait) {
+                    scannerAlpha = i / (frame.height() / SCANNER_ALPHA.length);
+                    paint.setAlpha(SCANNER_ALPHA[scannerAlpha >= SCANNER_ALPHA.length ? SCANNER_ALPHA.length - 1 : scannerAlpha]);
+                    canvas.drawRect(frame.left + 2, frame.top - 3 + i,
+                            frame.right - 1, frame.top + 3 + i, paint);
+                } else {
+                    scannerAlpha = i / (frame.width() / SCANNER_ALPHA.length);
+                    paint.setAlpha(SCANNER_ALPHA[scannerAlpha >= SCANNER_ALPHA.length ? SCANNER_ALPHA.length - 1 : scannerAlpha]);
+                    canvas.drawRect(frame.left + 2 + i, frame.top + 2,
+                            frame.right - 1 + i, frame.top - 2, paint);
+                }
+                canvas.restore();
+                invalidate();
+
+            } else {
+                i = 0;
+            }
+
+            //固定位置
+//            int middle = frame.height() / 2 + frame.top;
+//            canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1, middle + 2, paint);
+
 
             float scaleX = frame.width() / (float) previewFrame.width();
             float scaleY = frame.height() / (float) previewFrame.height();
@@ -242,5 +292,18 @@ public class ViewfinderView extends View {
             // trim it
             points.subList(0, size - MAX_RESULT_POINTS / 2).clear();
         }
+    }
+
+    public boolean isLaserLinePortrait() {
+        return laserLinePortrait;
+    }
+
+    /**
+     * set laserLine orientation
+     *
+     * @param laserLinePortrait is vertical or not
+     */
+    public void setLaserLinePortrait(boolean laserLinePortrait) {
+        this.laserLinePortrait = laserLinePortrait;
     }
 }

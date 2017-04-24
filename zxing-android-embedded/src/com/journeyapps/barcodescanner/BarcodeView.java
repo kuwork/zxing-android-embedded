@@ -15,11 +15,11 @@ import java.util.Map;
 
 /**
  * A view for scanning barcodes.
- *
+ * <p>
  * Two methods MUST be called to manage the state:
  * 1. resume() - initialize the camera and start the preview. Call from the Activity's onResume().
  * 2. pause() - stop the preview and release any resources. Call from the Activity's onPause().
- *
+ * <p>
  * Start decoding with decodeSingle() or decodeContinuous(). Stop decoding with stopDecoding().
  *
  * @see CameraPreview for more details on the preview lifecycle.
@@ -33,6 +33,7 @@ public class BarcodeView extends CameraPreview {
     }
 
     private DecodeMode decodeMode = DecodeMode.NONE;
+    private DecodeMode lastDecodeMode;
     private BarcodeCallback callback = null;
     private DecoderThread decoderThread;
 
@@ -94,7 +95,7 @@ public class BarcodeView extends CameraPreview {
 
     /**
      * Set the DecoderFactory to use. Use this to specify the formats to decode.
-     *
+     * <p>
      * Call this from UI thread only.
      *
      * @param decoderFactory the DecoderFactory creating Decoders.
@@ -122,7 +123,6 @@ public class BarcodeView extends CameraPreview {
     }
 
     /**
-     *
      * @return the current DecoderFactory in use.
      */
     public DecoderFactory getDecoderFactory() {
@@ -131,7 +131,7 @@ public class BarcodeView extends CameraPreview {
 
     /**
      * Decode a single barcode, then stop decoding.
-     *
+     * <p>
      * The callback will only be called on the UI thread.
      *
      * @param callback called with the barcode result, as well as possible ResultPoints
@@ -144,7 +144,7 @@ public class BarcodeView extends CameraPreview {
 
     /**
      * Continuously decode barcodes. The same barcode may be returned multiple times per second.
-     *
+     * <p>
      * The callback will only be called on the UI thread.
      *
      * @param callback called with the barcode result, as well as possible ResultPoints
@@ -159,6 +159,7 @@ public class BarcodeView extends CameraPreview {
      * Stop decoding, but do not stop the preview.
      */
     public void stopDecoding() {
+        this.lastDecodeMode = this.decodeMode;
         this.decodeMode = DecodeMode.NONE;
         this.callback = null;
         stopDecoderThread();
@@ -194,15 +195,24 @@ public class BarcodeView extends CameraPreview {
             decoderThread = null;
         }
     }
+
     /**
      * Stops the live preview and decoding.
-     *
+     * <p>
      * Call from the Activity's onPause() method.
      */
     @Override
     public void pause() {
+        this.lastDecodeMode = this.decodeMode;
         stopDecoderThread();
-
         super.pause();
+    }
+
+
+    @Override
+    public void resume() {
+        super.resume();
+        this.decodeMode = this.lastDecodeMode;
+        startDecoderThread();
     }
 }
