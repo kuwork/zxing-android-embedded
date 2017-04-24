@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         new IntentIntegrator(this).initiateScan();
     }
 
-    public void scanBarcodeInverted(View view){
+    public void scanBarcodeInverted(View view) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.addExtra(Intents.Scan.INVERTED_SCAN, true);
         integrator.initiateScan();
@@ -72,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
         integrator.initiateScan();
     }
 
+    public void scanInsideMarginScanner(View view) {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setOrientationLocked(false);
+        integrator.setCaptureActivity(InsideCaptureActivity.class);
+        integrator.initiateScan();
+    }
+
     public void scanWithTimeout(View view) {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setTimeout(8000);
@@ -81,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Log.d("MainActivity", "Cancelled scan");
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
@@ -130,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void displayToast() {
-            if(getActivity() != null && toast != null) {
+            if (getActivity() != null && toast != null) {
                 Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
                 toast = null;
             }
@@ -139,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-            if(result != null) {
-                if(result.getContents() == null) {
+            if (result != null) {
+                if (result.getContents() == null) {
                     toast = "Cancelled from fragment";
                 } else {
                     toast = "Scanned from fragment: " + result.getContents();

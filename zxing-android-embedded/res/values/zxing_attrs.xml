@@ -8,6 +8,9 @@
   <declare-styleable name="zxing_camera_preview">
     <attr name="zxing_framing_rect_width" format="dimension" />
     <attr name="zxing_framing_rect_height" format="dimension" />
+    <attr name="zxing_framing_rect_margin_top" format="dimension" />
+    <attr name="zxing_framing_rect_margin_left" format="dimension" />
+
     <attr name="zxing_use_texture_view" format="boolean" />
     <attr name="zxing_preview_scaling_strategy" format="enum">
       <enum name="centerCrop" value="1" />
@@ -21,6 +24,7 @@
     <attr name="zxing_result_view" format="color"/>
     <attr name="zxing_viewfinder_laser" format="color"/>
     <attr name="zxing_viewfinder_mask" format="color"/>
+    <attr name="zxing_viewfinder_corner" format="color"/>
   </declare-styleable>
 
 </resources>
